@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Adashima</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/menu2.css">
+</head>
+<body>
+    <div id="menu-component-wrapper">
+        
+        <button class="mobile-toggle" id="menu-toggle-btn" onclick="menuToggle()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        
+        <nav class="sidebar" id="sideMenu">
+            <div class="sidebar-inner">
+
+                <div class="sidebar-box">
+                    <img src="Imagenes/AdaShima_flotante-Photoroom-Photoroom.png"
+                         alt="Adachi to Shimamura"
+                         onerror="this.src='https://via.placeholder.com/250x150/transparent/f06292?text=Adachi+to+Shimamura'">
+                    
+                    <div class="logo-label">
+                        Adachi <span class="to-text">to</span> Shimamura<br>
+                    </div>
+                </div>
+
+                
+                <a href="https://www.facebook.com/p/Adachi-to-Shimamura-Latinoamérica-61551058385796/"
+                   target="_blank" class="fb-btn">
+                    <i class="fab fa-facebook-f"></i>Visit us on Facebook
+                </a>
+
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-book-reader"></i> Novel Status</h4>
+                    <span class="status-badge">Publishing</span>
+                </div>
+
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-heart"></i> Support the Original Work</h4>
+                    <div class="links-grid">
+                        <a href="https://dengekibunko.jp/product/adashima/" target="_blank" class="link-tag">
+                            Light Novel <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://comic-walker.com/detail/KC_004197_S?episodeType=first" target="_blank" class="link-tag">
+                            Manga <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://kakuyomu.jp/works/1177354054897444952" target="_blank" class="link-tag">
+                            Author's Blog <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                
+                <div style="margin-top:12px;">
+                    <a href="index.html" class="menu-btn" id="menu-back-home" title="Back to Home">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+    <script>
+    (function() {
+        
+        function menuToggle() {
+            const sidebar = document.getElementById('sideMenu');
+            const btn     = document.getElementById('menu-toggle-btn');
+            if (!sidebar || !btn) return;
+            sidebar.classList.toggle('active');
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars',  !sidebar.classList.contains('active'));
+                icon.classList.toggle('fa-times',  sidebar.classList.contains('active'));
+            }
+        }
+        window.menuToggle = menuToggle;
+        window.toggleMenu = menuToggle;
+
+        
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sideMenu');
+            const btn     = document.getElementById('menu-toggle-btn');
+            if (!sidebar || !sidebar.classList.contains('active')) return;
+            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+                sidebar.classList.remove('active');
+                const icon = btn && btn.querySelector('i');
+                if (icon) { icon.classList.replace('fa-times', 'fa-bars'); }
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
