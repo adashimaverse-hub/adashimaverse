@@ -1,0 +1,135 @@
+{
+  "pageTitle": "Anime",
+  "selectChannel": "Select a channel",
+  "selectChannelDesc": "Turn on the TV and choose a channel to start enjoying the anime episodes.",
+  "noSignal": "NO SIGNAL",
+  "loadingText": "Tuning channel...",
+  "osdTitle": "YASHONY CHANNELS",
+  "osdSubtitle": "SELECT EPISODE",
+  "osdFooter": "[ MENU ] TO CLOSE",
+  "episode": "Episode",
+  "downloadLabel": "Download",
+  "downloadAllLabel": "Download All",
+  "downloadAllTitle": "Download all episodes",
+  "downloadAllText": "Download of {count} episodes will start. Do you want to continue?",
+  "cancelLabel": "Cancel",
+  "continueLabel": "Continue",
+  "footerText": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+  "floatingLinkTitle": "Click to go to mini-game!",
+  "powerBtnTitle": "Power on / off",
+  "menuBtnTitle": "Channel menu",
+  "playPauseBtnTitle": "Play / Pause",
+  "downloadBtnTitle": "Download current episode",
+  "fullscreenBtnTitle": "Fullscreen",
+  "volKnobTitle": "Volume — drag up/down",
+  "brtKnobTitle": "Brightness — drag up/down",
+  "enjoys": "Enjoy",
+  "del": "of the anime.",
+  "channel": "Channel",
+  "channels": [
+    {
+      "id": 0,
+      "label": "CH 1",
+      "title": "Episode 1",
+      "desc": "Enjoy episode 1 of the anime.",
+      "badge": "Channel 1 · Anime",
+      "sub": "EPISODE 1"
+    },
+    {
+      "id": 1,
+      "label": "CH 2",
+      "title": "Episode 2",
+      "desc": "Enjoy episode 2 of the anime.",
+      "badge": "Channel 2 · Anime",
+      "sub": "EPISODE 2"
+    },
+    {
+      "id": 2,
+      "label": "CH 3",
+      "title": "Episode 3",
+      "desc": "Enjoy episode 3 of the anime.",
+      "badge": "Channel 3 · Anime",
+      "sub": "EPISODE 3"
+    },
+    {
+      "id": 3,
+      "label": "CH 4",
+      "title": "Episode 4",
+      "desc": "Enjoy episode 4 of the anime.",
+      "badge": "Channel 4 · Anime",
+      "sub": "EPISODE 4"
+    },
+    {
+      "id": 4,
+      "label": "CH 5",
+      "title": "Episode 5",
+      "desc": "Enjoy episode 5 of the anime.",
+      "badge": "Channel 5 · Anime",
+      "sub": "EPISODE 5"
+    },
+    {
+      "id": 5,
+      "label": "CH 6",
+      "title": "Episode 6",
+      "desc": "Enjoy episode 6 of the anime.",
+      "badge": "Channel 6 · Anime",
+      "sub": "EPISODE 6"
+    },
+    {
+      "id": 6,
+      "label": "CH 7",
+      "title": "Episode 7",
+      "desc": "Enjoy episode 7 of the anime.",
+      "badge": "Channel 7 · Anime",
+      "sub": "EPISODE 7"
+    },
+    {
+      "id": 7,
+      "label": "CH 8",
+      "title": "Episode 8",
+      "desc": "Enjoy episode 8 of the anime.",
+      "badge": "Channel 8 · Anime",
+      "sub": "EPISODE 8"
+    },
+    {
+      "id": 8,
+      "label": "CH 9",
+      "title": "Episode 9",
+      "desc": "Enjoy episode 9 of the anime.",
+      "badge": "Channel 9 · Anime",
+      "sub": "EPISODE 9"
+    },
+    {
+      "id": 9,
+      "label": "CH 10",
+      "title": "Episode 10",
+      "desc": "Enjoy episode 10 of the anime.",
+      "badge": "Channel 10 · Anime",
+      "sub": "EPISODE 10"
+    },
+    {
+      "id": 10,
+      "label": "CH 11",
+      "title": "Episode 11",
+      "desc": "Enjoy episode 11 of the anime.",
+      "badge": "Channel 11 · Anime",
+      "sub": "EPISODE 11"
+    },
+    {
+      "id": 11,
+      "label": "CH 12",
+      "title": "Episode 12",
+      "desc": "Enjoy episode 12 of the anime.",
+      "badge": "Channel 12 · Anime",
+      "sub": "EPISODE 12"
+    }
+  ],
+  "errorMessages": {
+    "antennaError": "Error connecting to antenna (R2).",
+    "aborted": "Playback aborted by user.",
+    "networkError": "Network error: unable to get video.",
+    "decodeError": "Error decoding video format.",
+    "signalLost": "Signal lost (Error 404). File not found.",
+    "weakSignal": "Network signal too weak."
+  }
+}

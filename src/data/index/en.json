@@ -1,0 +1,51 @@
+{
+  "header": {
+    "title": "Adachi to Shimamura"
+  },
+  "nav": {
+    "timeline": "Timeline",
+    "novels": "Light Novels",
+    "manga": "Manga",
+    "drama": "CD Dramas",
+    "miniAnime": "Mini Anime",
+    "constellation": "Constellation",
+    "anime": "Anime",
+    "others": "Others"
+  },
+  "tooltips": {
+    "timeline": "Follow Adachi and Shimamura's story through their school years.",
+    "novels": "Read the Adachi to Shimamura light novels.",
+    "manga": "Explore the Adachi to Shimamura manga.",
+    "drama": "Listen to the Adachi to Shimamura CD dramas.",
+    "miniAnime": "Enjoy the Adachi to Shimamura Mini Anime episodes.",
+    "constellation": "Form constellations and unlock extra stories.",
+    "anime": "Watch the Adachi to Shimamura anime.",
+    "others": "Interviews, travel guides and additional content."
+  },
+  "release": {
+    "lastUpdate": "Latest Update",
+    "volNum": "Volume 13",
+    "date": "November 2025",
+    "status": "Full translation",
+    "nextLabel": "Next Release",
+    "nextBadge": "New",
+    "nextVol": "Adachi to Shimamura SS3",
+    "nextDate": "Septiembre, 2026",
+    "nextStatus": "TBA"
+  },
+  "about": {
+    "title": "About This Site",
+    "text": [
+      "This is a non-profit fan site dedicated to <strong>Adachi to Shimamura</strong>, created with the goal of bringing together in one place all available content of the work in English.",
+      "Here you will find everything from the story timeline, light novels, manga, CD dramas, mini anime and much more. All content is organized so you can easily enjoy it.",
+      "<strong>Adachi to Shimamura</strong> and all rights belong to <strong>Hitoma Iruma</strong>. This site is not officially affiliated with the creators or publishers.",
+      "Made with ❤️ by fans, for fans."
+    ]
+  },
+  "news": {
+    "text": "Welcome to Adashima Latinoamérica!<br>We are working on new translations and content for you.",
+    "hint": "Click on me for more news"
+  },
+  "footer": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+  "langLabel": "English"
+}

@@ -5,11 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adashima</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./src/css/index.css">
+    <link rel="stylesheet" href="./src/components/styles/menu.css">
 </head>
 <body>
 
     <div class="stars-bg"></div>
+
+    <!-- ===== SPARKLE CONTAINER ===== -->
+    <div class="sparkle-container">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+
+    <!-- ===== SHOOTING STARS ===== -->
+    <div class="shooting-star" style="--rotation: -20deg;"></div>
+    <div class="shooting-star" style="--rotation: -35deg;"></div>
+    <div class="shooting-star" style="--rotation: -15deg;"></div>
+    <div class="shooting-star" style="--rotation: -25deg;"></div>
 
     <div class="clouds-container">
         <div class="cloud cloud-1"></div>
@@ -59,49 +85,49 @@
 
             <div class="glass-box update-box">
                 <div class="update-item">
-                    <a href="./pages/Adashima_Linea.html" data-tooltip="Sigue la historia de Adachi y Shimamura a través de los años escolares.">
+                    <a href="./src/pages/Adashima_Linea.html" data-tooltip="Sigue la historia de Adachi y Shimamura a través de los años escolares.">
                         <span>Línea del Tiempo</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item">
-                    <a href="./pages/Adashima_Novelas.html" data-tooltip="Lee las novelas ligeras de Adachi to Shimamura.">
+                    <a href="./src/pages/Adashima_Novelas.html" data-tooltip="Lee las novelas ligeras de Adachi to Shimamura.">
                         <span>Novelas Ligeras</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item">
-                    <a href="./pages/Adashima_Manga.html" data-tooltip="Explora el manga de Adachi to Shimamura.">
+                    <a href="./src/pages/Adashima_Manga.html" data-tooltip="Explora el manga de Adachi to Shimamura.">
                         <span>Manga</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item">
-                    <a href="./pages/Adashima_Drama.html" data-tooltip="Escucha los CD dramas de Adachi to Shimamura.">
+                    <a href="./src/pages/Adashima_Drama.html" data-tooltip="Escucha los CD dramas de Adachi to Shimamura.">
                         <span>CD Dramas</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item">
-                    <a href="./pages/Adashima_Mini_Anime.html" data-tooltip="Disfruta de los episodios del Mini Anime de Adachi to Shimamura.">
+                    <a href="./src/pages/Adashima_Mini_Anime.html" data-tooltip="Disfruta de los episodios del Mini Anime de Adachi to Shimamura.">
                         <span>Mini Anime</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item">
-                    <a href="./pages/Adashima_Estrella.html" data-tooltip="Forma constelaciones y desbloquea historias extra.">
+                    <a href="./src/pages/Adashima_Estrella.html" data-tooltip="Forma constelaciones y desbloquea historias extra.">
                         <span>Constelación</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item">
-                    <a href="./pages/Anime.html" data-tooltip="Mira el anime de Adachi to Shimamura.">
+                    <a href="./src/pages/Adashima_Anime.html" data-tooltip="Mira el anime de Adachi to Shimamura.">
                         <span>Anime</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
                 <div class="update-item" style="border-bottom: none;">
-                    <a href="./pages/Adashima_Otros.html" data-tooltip="Entrevistas, guías turísticas y contenido adicional.">
+                    <a href="./src/pages/Adashima_Otros.html" data-tooltip="Entrevistas, guías turísticas y contenido adicional.">
                         <span>Otros</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
@@ -171,150 +197,139 @@
     </div>
 
     <script>
+    // Default to Spanish
     let currentLang = localStorage.getItem('lang') || 'es';
     let isSwitching = false;
     let newsVisible = false;
+    let contentData = null;
 
-    const TRANSLATIONS = {
+    // Fallback content in case JSON fails to load
+    const FALLBACK_CONTENT = {
         es: {
-            // Header
-            title: "Adachi to Shimamura",
-            tooltip: "Actualizaciones",
-            
-            // News hints
-            newsHintNext: "Haz clic para continuar...",
-            newsHintClose: "Haz clic para cerrar",
-            newsText: '¡Bienvenidos a Adashima Latinoamérica!<br>Estamos trabajando en nuevas traducciones y contenido para ustedes.',
-            newsHint: 'Haz clic en mí para más noticias',
-            
-            // Navigation links
-            linkNovels: "Novela Ligera en Español <i class=\"fas fa-book-open\"></i>",
-            tipNovels: "Prefiero ser la persona más importante de tu vida.",
-            linkManga: "Manga en Español <i class=\"fas fa-palette\"></i>",
-            tipManga: "Tu color de la suerte es el azul.",
-            linkDrama: "CD drama <i class=\"fas fa-headphones\"></i>",
-            tipDrama: "¿E-esa es mi voz...? Qué vergüenza...",
-            linkShorts: "Cortos de AdaShima <i class=\"fas fa-film\"></i>",
-            tipShorts: "Prefiero saberlo de antemano. Cuando sé que la esperanza es real, me permite creer en ella.",
-            linkAnime: "Anime <i class=\"fas fa-tv\"></i>",
-            tipAnime: "Puedo sentir que estamos unidas por el destino.",
-            linkStars: "Relatos AdaShima publicados en el blog de Iruma <i class=\"fas fa-star\"></i>",
-            tipStars: "Realmente me gustaría visitar el espacio antes de morir.",
-            linkTimeline: "Línea del tiempo de su tiempo en la preparatoria <i class=\"fas fa-layer-group\"></i>",
-            tipTimeline: "Lo que los humanos necesitan no es conocer el futuro, sino desearlo, perseguirlo.",
-            linkOthers: "Otros <i class=\"fas fa-file-alt\"></i>",
-            tipOthers: "Documentos y recursos adicionales.",
-            
-            // About section
-            aboutTitle: "¿Qué es Adachi to Shimamura?",
-            aboutSub: "— Para quienes llegan por primera vez",
-            tagAuthor: "<i class=\"fas fa-pen-nib\"></i> Hitoma Iruma",
-            tagGenre: "<i class=\"fas fa-heart\"></i> Yuri · Slice of Life",
-            tagYear: "<i class=\"fas fa-calendar-alt\"></i> Desde 2013",
-            tagPub: "<i class=\"fas fa-building\"></i> Dengeki Bunko",
-            aboutText1: 'Adachi y Shimamura es una serie de novelas ligeras yuri escrita por Hitoma Iruma. Comenzó su publicación en marzo de 2013 bajo el sello Dengeki Bunko. Originalmente fue ilustrada por Non y actualmente cuenta con ilustraciones de Raemz.',
-            aboutText2: 'La historia sigue a Sakura Adachi y Hougetsu Shimamura, dos estudiantes de preparatoria que se encuentran por primera vez en el gimnasio de su escuela mientras faltan a clase. A medida que pasan más tiempo juntas, desarrollan una peculiar amistad que poco a poco evoluciona hacia algo más.',
-            aboutText3: 'La obra ha recibido dos adaptaciones al manga. La primera, ilustrada por Mani, se publicó entre 2016 y 2017. La segunda, ilustrada por Moke Yuzuhara, comenzó su serialización en 2019 en la revista Dengeki Daioh y continúa adaptando la historia de las novelas. En 2020, la serie recibió una adaptación al anime producida por Tezuka Productions, compuesta por doce episodios emitidos entre octubre y diciembre de ese mismo año. Tanto las novelas ligeras como la segunda adaptación al manga han sido licenciadas para su publicación en Norteamérica.',
-            aboutFooter: 'Hecho con ❤️ por fans, para fans.',
-            
-            // Release section
-            releaseTitle: "<i class=\"fas fa-box-open\"></i> Último Lanzamiento",
-            releaseName: "<strong>Adachi to Shimamura Vol. 13</strong>",
-            releaseType: "Novela Ligera",
-            releaseDate: "8 de Noviembre, 2025",
-            nextReleaseTitle: "<i class=\"fas fa-fire flame-icon\"></i> Próximo Lanzamiento",
-            nextReleaseBadge: "<i class=\"fas fa-bolt\"></i> Anuncio Reciente",
-            nextReleaseName: "<strong>Adachi to Shimamura SS3</strong>",
-            nextReleaseType: "Novela Ligera",
-            nextReleaseDate: "Septiembre, 2026",
-            
-            // Footer
-            footer: 'Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.',
-            
-            // Legacy support 
-            siteTitle: 'Adachi to Shimamura',
-            lastUpdate: 'Última actualización',
-            nextRelease: 'Próximo lanzamiento',
-            tooltipTimeline: 'Sigue la historia de Adachi y Shimamura a través de los años escolares.',
-            tooltipNovels: 'Lee las novelas ligeras de Adachi to Shimamura.',
-            tooltipManga: 'Explora el manga de Adachi to Shimamura.',
-            tooltipCD: 'Escucha los CD dramas de Adachi to Shimamura.',
-            tooltipMiniAnime: 'Disfruta de los episodios del Mini Anime de Adachi to Shimamura.',
-            tooltipConstellation: 'Forma constelaciones y desbloquea historias extra.',
-            tooltipAnime: 'Mira el anime de Adachi to Shimamura.',
-            tooltipOtros: 'Entrevistas, guías turísticas y contenido adicional.'
+            header: { title: "Adachi to Shimamura" },
+            nav: {
+                timeline: "Línea del Tiempo",
+                novels: "Novelas Ligeras",
+                manga: "Manga",
+                drama: "CD Dramas",
+                miniAnime: "Mini Anime",
+                constellation: "Constelación",
+                anime: "Anime",
+                others: "Otros"
+            },
+            tooltips: {
+                timeline: "Sigue la historia de Adachi y Shimamura a través de los años escolares.",
+                novels: "Lee las novelas ligeras de Adachi to Shimamura.",
+                manga: "Explora el manga de Adachi to Shimamura.",
+                drama: "Escucha los CD dramas de Adachi to Shimamura.",
+                miniAnime: "Disfruta de los episodios del Mini Anime de Adachi to Shimamura.",
+                constellation: "Forma constelaciones y desbloquea historias extra.",
+                anime: "Mira el anime de Adachi to Shimamura.",
+                others: "Entrevistas, guías turísticas y contenido adicional."
+            },
+            release: {
+                lastUpdate: "Última actualización",
+                volNum: "Volumen 13",
+                date: "Noviembre 2025",
+                status: "Traducción completa",
+                nextLabel: "Próximo lanzamiento",
+                nextBadge: "Novedad",
+                nextVol: "Volumen 14",
+                nextDate: "Fecha por confirmar",
+                nextStatus: "En traducción"
+            },
+            about: {
+                title: "Sobre este sitio",
+                text: [
+                    "Este es un sitio de fans sin fines de lucro dedicado a <strong>Adachi to Shimamura</strong>, creado con el objetivo de reunir en un solo lugar todo el contenido disponible de la obra en español.",
+                    "Aquí encontrarás desde la línea temporal de la historia, las novelas ligeras, el manga, los CD dramas, el mini anime y mucho más. Todo el contenido está organizado para que puedas disfrutarlo fácilmente.",
+                    "<strong>Adachi to Shimamura</strong> y todos sus derechos pertenecen a <strong>Hitoma Iruma</strong>. Este sitio no tiene afiliación oficial con los creadores o editores.",
+                    "Hecho con ❤️ por fans, para fans."
+                ]
+            },
+            news: {
+                text: "¡Bienvenidos a Adashima Latinoamérica!<br>Estamos trabajando en nuevas traducciones y contenido para ustedes.",
+                hint: "Haz clic en mí para más noticias"
+            },
+            footer: "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
+            langLabel: "Español"
         },
-
         en: {
-            // Header
-            title: "Adachi to Shimamura",
-            tooltip: "Updates",
-            
-            // News hints
-            newsHintNext: "Click to continue...",
-            newsHintClose: "Click to close",
-            newsText: 'Welcome to Adashima Latinoamérica!<br>We are working on new translations and content for you.',
-            newsHint: 'Click on me for more news',
-            
-            // Navigation links
-            linkNovels: "Light Novel in English <i class=\"fas fa-book-open\"></i>",
-            tipNovels: "I'd rather be the most important person in your life.",
-            linkManga: "Manga in English <i class=\"fas fa-palette\"></i>",
-            tipManga: "Your lucky color is blue.",
-            linkDrama: "Drama CD <i class=\"fas fa-headphones\"></i>",
-            tipDrama: "I-is that my voice...? How embarrassing...",
-            linkShorts: "AdaShima Shorts <i class=\"fas fa-film\"></i>",
-            tipShorts: "I'd rather know beforehand. When I know hope is real, it lets me believe in it.",
-            linkAnime: "Anime <i class=\"fas fa-tv\"></i>",
-            tipAnime: "I can feel that we are bound by destiny.",
-            linkStars: "AdaShima stories published on Iruma's blog <i class=\"fas fa-star\"></i>",
-            tipStars: "I would really like to visit space before I die.",
-            linkTimeline: "High school timeline <i class=\"fas fa-layer-group\"></i>",
-            tipTimeline: "What humans need is not to know the future, but to desire and pursue it.",
-            linkOthers: "Others <i class=\"fas fa-file-alt\"></i>",
-            tipOthers: "Additional documents and resources.",
-            
-            // About section
-            aboutTitle: "What is Adachi to Shimamura?",
-            aboutSub: "— For newcomers",
-            tagAuthor: "<i class=\"fas fa-pen-nib\"></i> Hitoma Iruma",
-            tagGenre: "<i class=\"fas fa-heart\"></i> Yuri · Slice of Life",
-            tagYear: "<i class=\"fas fa-calendar-alt\"></i> Since 2013",
-            tagPub: "<i class=\"fas fa-building\"></i> Dengeki Bunko",
-            aboutText1: 'Adachi and Shimamura is a yuri light novel series written by Hitoma Iruma. It began publication in March 2013 under the Dengeki Bunko imprint. Originally illustrated by Non, the series is now illustrated by Raemz.',
-            aboutText2: 'The story follows Sakura Adachi and Hougetsu Shimamura, two high school students who first meet in their school\'s gym while skipping class. As they spend more time together, they develop an unusual friendship that gradually blossoms into something more.',
-            aboutText3: 'The series has received two manga adaptations. The first, illustrated by Mani, was serialized from 2016 to 2017. The second, illustrated by Moke Yuzuhara, began serialization in Dengeki Daioh magazine in 2019 and is still ongoing, continuing to adapt the light novels. In 2020, the series received a twelve-episode anime adaptation produced by Tezuka Productions, which aired from October to December of that year. Both the light novels and the second manga adaptation have been licensed for publication in North America.',
-            aboutFooter: 'Made with ❤️ by fans, for fans.',
-            
-            // Release section
-            releaseTitle: "<i class=\"fas fa-box-open\"></i> Latest Release",
-            releaseName: "<strong>Adachi and Shimamura Vol. 13</strong>",
-            releaseType: "Light Novel",
-            releaseDate: "November 8, 2025",
-            nextReleaseTitle: "<i class=\"fas fa-fire flame-icon\"></i> Upcoming Release",
-            nextReleaseBadge: "<i class=\"fas fa-bolt\"></i> Just Announced",
-            nextReleaseName: "<strong>Adachi and Shimamura SS3</strong>",
-            nextReleaseType: "Light Novel",
-            nextReleaseDate: "September 2026",
-            
-            // Footer
-            footer: 'Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.',
-            
-            // Legacy support (for existing code)
-            siteTitle: 'Adachi to Shimamura',
-            lastUpdate: 'Latest Update',
-            nextRelease: 'Next Release',
-            tooltipTimeline: 'Follow Adachi and Shimamura\'s story through their school years.',
-            tooltipNovels: 'Read the Adachi to Shimamura light novels.',
-            tooltipManga: 'Explore the Adachi to Shimamura manga.',
-            tooltipCD: 'Listen to the Adachi to Shimamura CD dramas.',
-            tooltipMiniAnime: 'Enjoy the Adachi to Shimamura Mini Anime episodes.',
-            tooltipConstellation: 'Form constellations and unlock extra stories.',
-            tooltipAnime: 'Watch the Adachi to Shimamura anime.',
-            tooltipOtros: 'Interviews, travel guides and additional content.'
+            header: { title: "Adachi to Shimamura" },
+            nav: {
+                timeline: "Timeline",
+                novels: "Light Novels",
+                manga: "Manga",
+                drama: "CD Dramas",
+                miniAnime: "Mini Anime",
+                constellation: "Constellation",
+                anime: "Anime",
+                others: "Others"
+            },
+            tooltips: {
+                timeline: "Follow Adachi and Shimamura's story through their school years.",
+                novels: "Read the Adachi to Shimamura light novels.",
+                manga: "Explore the Adachi to Shimamura manga.",
+                drama: "Listen to the Adachi to Shimamura CD dramas.",
+                miniAnime: "Enjoy the Adachi to Shimamura Mini Anime episodes.",
+                constellation: "Form constellations and unlock extra stories.",
+                anime: "Watch the Adachi to Shimamura anime.",
+                others: "Interviews, travel guides and additional content."
+            },
+            release: {
+                lastUpdate: "Latest Update",
+                volNum: "Volume 13",
+                date: "November 2025",
+                status: "Full translation",
+                nextLabel: "Next Release",
+                nextBadge: "New",
+                nextVol: "Volume 14",
+                nextDate: "Date TBD",
+                nextStatus: "In translation"
+            },
+            about: {
+                title: "About This Site",
+                text: [
+                    "This is a non-profit fan site dedicated to <strong>Adachi to Shimamura</strong>, created with the goal of bringing together in one place all available content of the work in English.",
+                    "Here you will find everything from the story timeline, light novels, manga, CD dramas, mini anime and much more. All content is organized so you can easily enjoy it.",
+                    "<strong>Adachi to Shimamura</strong> and all rights belong to <strong>Hitoma Iruma</strong>. This site is not officially affiliated with the creators or publishers.",
+                    "Made with ❤️ by fans, for fans."
+                ]
+            },
+            news: {
+                text: "Welcome to Adashima Latinoamérica!<br>We are working on new translations and content for you.",
+                hint: "Click on me for more news"
+            },
+            footer: "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+            langLabel: "English"
         }
     };
-    
+
+    const navItems = [
+        { key: 'timeline', href: './src/pages/Adashima_Linea.html' },
+        { key: 'novels', href: './src/pages/Adashima_Novelas.html' },
+        { key: 'manga', href: './src/pages/Adashima_Manga.html' },
+        { key: 'drama', href: './src/pages/Adashima_Drama.html' },
+        { key: 'miniAnime', href: './src/pages/Adashima_Mini_Anime.html' },
+        { key: 'constellation', href: './src/pages/Adashima_Estrella.html' },
+        { key: 'anime', href: './src/pages/Adashima_Anime.html' },
+        { key: 'others', href: './src/pages/Adashima_Otros.html' }
+    ];
+
+    async function loadContent(lang) {
+        try {
+            const response = await fetch(`src/data/index/${lang}.json?v=${Date.now()}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (e) {
+            console.warn('Failed to load language file, using fallback content:', e.message);
+            return FALLBACK_CONTENT[lang] || FALLBACK_CONTENT.es;
+        }
+    }
+
     function updateLangDropdownLabel() {
         const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
         const labelEl = document.getElementById('langSelectedLabel');
@@ -325,64 +340,144 @@
         }
     }
 
-    function getString(key) {
-        return TRANSLATIONS[currentLang]?.[key] || TRANSLATIONS.es[key];
-    }
+    function renderApp(data) {
+        if (!data) {
+            data = FALLBACK_CONTENT[currentLang] || FALLBACK_CONTENT.es;
+        }
 
-    function renderApp() {
-        document.querySelector('.update-title').textContent = getString('siteTitle');
-        document.querySelector('#aboutToggle h2').innerHTML = `<i class="fas fa-info-circle"></i> ${getString('aboutTitle')}`;
-        
-        const aboutContent = document.getElementById('aboutContent');
-        aboutContent.innerHTML = `
-            <p>${getString('aboutText1')}</p>
-            <p>${getString('aboutText2')}</p>
-            <p>${getString('aboutText3')}</p>
-            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">${getString('aboutFooter')}</p>
-        `;
+        // Header title
+        const titleEl = document.querySelector('.update-title');
+        if (titleEl) titleEl.textContent = data.header.title;
 
-        document.querySelector('.release-label').innerHTML = `<i class="fas fa-clock" style="color:#ff9d5c;"></i> ${getString('lastUpdate')}`;
-        document.querySelector('.next-release-label').innerHTML = `<i class="fas fa-fire flame-icon"></i> ${getString('nextRelease')}`;
-
-        document.getElementById('newsText').innerHTML = getString('newsText');
-        document.getElementById('newsHint').textContent = getString('newsHint');
-
-        const tooltips = document.querySelectorAll('[data-tooltip]');
-        const tooltipMap = {
-            'Línea del Tiempo': 'tooltipTimeline',
-            'Novelas Ligeras': 'tooltipNovels',
-            'Manga': 'tooltipManga',
-            'CD Dramas': 'tooltipCD',
-            'Mini Anime': 'tooltipMiniAnime',
-            'Constelación': 'tooltipConstellation',
-            'Anime': 'tooltipAnime',
-            'Otros': 'tooltipOtros'
-        };
-        tooltips.forEach(el => {
-            const text = el.querySelector('span')?.textContent?.trim() || el.textContent.trim();
-            const key = tooltipMap[text];
-            if (key) {
-                el.setAttribute('data-tooltip', getString(key));
+        // Navigation items
+        const updateItems = document.querySelectorAll('.update-item a');
+        updateItems.forEach((link, index) => {
+            if (index < navItems.length) {
+                const navKey = navItems[index].key;
+                const span = link.querySelector('span');
+                if (span) {
+                    span.textContent = data.nav[navKey];
+                }
+                link.setAttribute('data-tooltip', data.tooltips[navKey]);
             }
         });
+
+        // About section
+        const aboutToggle = document.querySelector('#aboutToggle h2');
+        if (aboutToggle) {
+            aboutToggle.innerHTML = `<i class="fas fa-info-circle"></i> ${data.about.title}`;
+        }
+        const aboutContent = document.getElementById('aboutContent');
+        if (aboutContent) {
+            aboutContent.innerHTML = data.about.text.map(p => `<p>${p}</p>`).join('');
+        }
+
+        // Release section
+        const releaseLabel = document.querySelector('.release-label');
+        if (releaseLabel) {
+            releaseLabel.innerHTML = `<i class="fas fa-clock" style="color:#ff9d5c;"></i> ${data.release.lastUpdate}`;
+        }
+        const releaseDetails = document.querySelector('.release-card .release-details');
+        if (releaseDetails) {
+            releaseDetails.innerHTML = `
+                <strong>${data.release.volNum}</strong> <span class="release-sep">·</span> ${data.release.date}
+                <span class="release-sep">·</span> <i class="fas fa-check-circle" style="color:#7bcfa6;"></i> ${data.release.status}
+            `;
+        }
+
+        const nextLabel = document.querySelector('.next-release-label');
+        if (nextLabel) {
+            nextLabel.innerHTML = `<i class="fas fa-fire flame-icon"></i> ${data.release.nextLabel}`;
+        }
+        const nextDetails = document.querySelector('.next-release-card .release-details');
+        if (nextDetails) {
+            nextDetails.innerHTML = `
+                <span class="next-badge"><i class="fas fa-sparkles"></i> ${data.release.nextBadge}</span>
+                <strong style="color:#8a4a2a;">${data.release.nextVol}</strong>
+                <span class="release-sep">·</span> <span style="color:#7a4a3a;">${data.release.nextDate}</span>
+                <span class="release-sep">·</span> <i class="fas fa-hourglass-half" style="color:#ffb74d;"></i> ${data.release.nextStatus}
+            `;
+        }
+
+        // News
+        const newsText = document.getElementById('newsText');
+        if (newsText) {
+            newsText.innerHTML = data.news.text;
+        }
+        const newsHint = document.getElementById('newsHint');
+        if (newsHint) {
+            newsHint.textContent = data.news.hint;
+        }
+
+        // Footer - check if footer element exists
+        let footer = document.querySelector('.main-content .footer');
+        if (!footer) {
+            footer = document.createElement('div');
+            footer.className = 'footer';
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.appendChild(footer);
+            }
+        }
+        if (footer) {
+            footer.innerHTML = data.footer;
+        }
+
+        document.documentElement.lang = currentLang;
     }
 
-    function switchLanguage(lang) {
+    async function switchLanguage(lang) {
         if (isSwitching || currentLang === lang) return;
         isSwitching = true;
 
         const langToggle = document.getElementById('langToggle');
         if (langToggle) langToggle.disabled = true;
 
+        closeNews();
+
         currentLang = lang;
         localStorage.setItem('lang', lang);
         document.documentElement.lang = lang;
         updateLangDropdownLabel();
 
-        renderApp();
+        const data = await loadContent(lang);
+        contentData = data;
+        renderApp(data);
+
+        // Update menu language
+        if (typeof window.translateMenu === 'function') {
+            try {
+                await window.translateMenu(lang);
+                console.log('Menu translated to:', lang);
+            } catch (e) {
+                console.warn('Menu translation failed:', e);
+            }
+        } else {
+            // If menu isn't loaded yet, wait for it
+            let attempts = 0;
+            const maxAttempts = 20;
+            const menuCheck = setInterval(() => {
+                attempts++;
+                if (typeof window.translateMenu === 'function') {
+                    window.translateMenu(lang);
+                    clearInterval(menuCheck);
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(menuCheck);
+                    console.warn('Menu translation function not available after waiting');
+                }
+            }, 200);
+        }
 
         if (langToggle) langToggle.disabled = false;
         isSwitching = false;
+    }
+
+    function closeNews() {
+        const dialog = document.getElementById('newsDialog');
+        const indicator = document.getElementById('newsIndicator');
+        if (dialog) dialog.classList.remove('active');
+        if (indicator) indicator.classList.add('show');
+        newsVisible = false;
     }
 
     const langDropdown = document.getElementById('langDropdown');
@@ -423,38 +518,44 @@
     function toggleAbout() {
         const content = document.getElementById('aboutContent');
         const toggle = document.getElementById('aboutToggle');
-        content.classList.toggle('open');
-        toggle.classList.toggle('active');
+        if (content) content.classList.toggle('open');
+        if (toggle) toggle.classList.toggle('active');
     }
 
     function toggleNews() {
         const dialog = document.getElementById('newsDialog');
         const indicator = document.getElementById('newsIndicator');
         newsVisible = !newsVisible;
-        dialog.classList.toggle('active', newsVisible);
-        if (newsVisible) {
-            indicator.classList.remove('show');
-        } else {
-            indicator.classList.add('show');
+        if (dialog) dialog.classList.toggle('active', newsVisible);
+        if (indicator) {
+            if (newsVisible) {
+                indicator.classList.remove('show');
+            } else {
+                indicator.classList.add('show');
+            }
         }
     }
 
     document.addEventListener('click', (e) => {
         const dialog = document.getElementById('newsDialog');
         const widget = document.getElementById('yashiroWidget');
-        if (newsVisible && !dialog.contains(e.target) && !widget.contains(e.target)) {
+        if (newsVisible && dialog && !dialog.contains(e.target) && widget && !widget.contains(e.target)) {
             dialog.classList.remove('active');
             newsVisible = false;
-            document.getElementById('newsIndicator').classList.add('show');
+            const indicator = document.getElementById('newsIndicator');
+            if (indicator) indicator.classList.add('show');
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', async function () {
         updateLangDropdownLabel();
-        renderApp();
+
+        const data = await loadContent(currentLang);
+        contentData = data;
+        renderApp(data);
 
         const menuVer = Math.floor(Date.now() / 86400000);
-        fetch('./pages/menu.html?v=' + menuVer)
+        fetch('./src/components/menu.html?v=' + menuVer)
             .then(response => {
                 if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
                 return response.text();
@@ -463,6 +564,8 @@
                 const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
                 if (!container) return;
                 container.innerHTML = data;
+                
+                // Extract and execute scripts
                 const scripts = container.querySelectorAll('script');
                 scripts.forEach(oldScript => {
                     const newScript = document.createElement('script');
@@ -470,13 +573,29 @@
                     newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
+                
+                // Dispatch event that menu is loaded
+                setTimeout(() => {
+                    document.dispatchEvent(new CustomEvent('menuLoaded'));
+                }, 100);
             })
             .catch(error => console.error('Error cargando menu.html:', error.message));
     });
 
+    document.addEventListener('menuLoaded', function() {
+        // Translate menu to current language when it loads
+        if (typeof window.translateMenu === 'function') {
+            window.translateMenu(currentLang);
+            console.log('Menu auto-translated to:', currentLang);
+        }
+    });
+
+    // Service worker registration - kept but with proper error handling
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(err => console.error('Error al registrar el Service Worker', err));
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log('[SW] Service Worker registered successfully'))
+                .catch(err => console.warn('[SW] Service Worker registration failed:', err));
         });
     }
     </script>

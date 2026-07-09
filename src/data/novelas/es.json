@@ -1,0 +1,188 @@
+{
+  "pageTitle": "Adashima - Novelas Ligeras",
+  "headerTitle": "Novelas Ligeras",
+  "footer": "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
+  "floatingTitle": "Ir al mini-juego",
+  "searchPlaceholder": "Buscar por título, descripción, volumen...",
+  "viewList": "Lista",
+  "viewGrid": "Cuadrícula",
+  "readButton": "Leer",
+  "toastMessages": {
+    "fileNotAvailable": "Archivo no disponible.",
+    "documentNotAvailable": "Documento no disponible.",
+    "loadingDocument": "Cargando documento...",
+    "errorOnPage": "Error en pág.",
+    "retry": "Reintentar"
+  },
+  "pdfControls": {
+    "zoomOut": "Alejar (-)",
+    "zoomIn": "Acercar (+)",
+    "zoomReset": "Restablecer zoom (0)",
+    "prevPage": "Página anterior (←)",
+    "nextPage": "Página siguiente (→)",
+    "page": "Pág.",
+    "goTo": "Ir a",
+    "fullscreen": "Pantalla completa (F)",
+    "downloadPDF": "Descargar PDF"
+  },
+  "modal": {
+    "reading": "Leyendo: ",
+    "closeReader": "Cerrar lector"
+  },
+  "volumes": [
+    {
+      "id": "1",
+      "title": "Volumen 1",
+      "desc": "Publicado el 10 de marzo del 2013. Ilustrado por Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/01/Adachi-and-Shimamura-1-coverFRONT.jpg",
+      "file": "Adachi to Shimamura Volumen 1 Español.pdf"
+    },
+    {
+      "id": "2",
+      "title": "Volumen 2",
+      "desc": "Publicado el 10 de septiembre del 2013.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/03/Adachi-and-Shimamura-LN-2-coverFRONT.jpg",
+      "file": "Adachi to Shimamura Volumen 2 Español.pdf"
+    },
+    {
+      "id": "3",
+      "title": "Volumen 3",
+      "desc": "Publicado el 9 de agosto del 2014. Ilustrado por Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/04/Adachi-and-Shimamura-LN-3-coverFRONT.jpg",
+      "file": "Adachi to Shimamura Volumen 3 Español.pdf"
+    },
+    {
+      "id": "4",
+      "title": "Volumen 4",
+      "desc": "Publicado el 9 de mayo del 2015. Ilustrado por Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/05/Adachi-and-Shimamura-LN-4-coverFRONT.jpg",
+      "file": "Adachi to Shimamura Volumen 4 Español.pdf"
+    },
+    {
+      "id": "5",
+      "title": "Volumen 5",
+      "desc": "Publicado el 10 de noviembre del 2015. Ilustrado por Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/04/Adachi-and-Shimamura-LN-5-coverFRONT.jpg",
+      "file": "Adachi to Shimamura Volumen 5 Español.pdf"
+    },
+    {
+      "id": "6",
+      "title": "Volumen 6",
+      "desc": "Publicado el 10 de mayo del 2016. Ilustrado por Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/06/Adachi-and-Shimamura-LN-6_site.jpg",
+      "file": "Adachi to Shimamura Volumen 6 Español.pdf"
+    },
+    {
+      "id": "7",
+      "title": "Volumen 7",
+      "desc": "Publicado el 10 de noviembre del 2016. Ilustrado por Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/11/Adachi-and-Shimamura-LN-7_siteRecrop.jpg",
+      "file": "Adachi to Shimamura Volumen 7 Español.pdf"
+    },
+    {
+      "id": "8",
+      "title": "Volumen 8",
+      "desc": "Publicado el 10 de mayo del 2019.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/12/Adachi-and-Shimamura-LN-8_site.jpg",
+      "file": "Adachi to Shimamura Volumen 8 Español.pdf"
+    },
+    {
+      "id": "8.5",
+      "title": "Especial Tarumi",
+      "desc": "Publicado en 2019.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/12/Adachi-and-Shimamura-LN-8_site.jpg",
+      "file": "Adachi to Shimamura Especial Tarumi Español.pdf"
+    },
+    {
+      "id": "9",
+      "title": "Volumen 9",
+      "desc": "Publicado el 10 de octubre del 2020.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2022/04/Adachi-and-Shimamura-LN-9_site.jpg",
+      "file": "Adachi to Shimamura Volumen 9 Español.pdf"
+    },
+    {
+      "id": "10",
+      "title": "Volumen 10",
+      "desc": "Publicado el 10 de septiembre del 2021. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2023/02/adachiShimamuraLN10_site-REVISED.jpg",
+      "file": "Adachi to Shimamura Volumen 10 Español.pdf"
+    },
+    {
+      "id": "11",
+      "title": "Volumen 11",
+      "desc": "Publicado el 9 de diciembre del 2022. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2023/07/adachiShimamuraLN11_site.jpg",
+      "file": "Adachi to Shimamura Volumen 11 Español.pdf"
+    },
+    {
+      "id": "12",
+      "title": "Volumen 12",
+      "desc": "Publicado el 8 de noviembre del 2024. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2025/05/adachiShimamuraLN12_site.jpg",
+      "file": "Adachi to Shimamura Volumen 12 Español.pdf"
+    },
+    {
+      "id": "13",
+      "title": "Volumen 13",
+      "desc": "Publicado el 8 de noviembre del 2025. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2026/04/adachiShimamuraLN13_site.jpg",
+      "file": "Adachi to Shimamura Volumen 13 Español.pdf"
+    },
+    {
+      "id": "13.5",
+      "title": "Especiales Volumen 13",
+      "desc": "Publicado el 8 de noviembre del 2025.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2026/04/adachiShimamuraLN13_site.jpg",
+      "file": "Especiales Volumen 13 Español.pdf"
+    },
+    {
+      "id": "E1",
+      "title": "Adachi to Shimamura Especial 1 Español",
+      "desc": "Publicado en 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/3/31/LN99CL3.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164641",
+      "file": "Adachi to Shimamura Especial 1 Español (1).pdf"
+    },
+    {
+      "id": "E2",
+      "title": "Adachi to Shimamura Especial 2 Español",
+      "desc": "Publicado en 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/7/75/LN99CL4.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164726",
+      "file": "Adachi to Shimamura Especial 2 Español (2).pdf"
+    },
+    {
+      "id": "E3",
+      "title": "Adachi to Shimamura Especial 3 Español",
+      "desc": "Publicado en 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/c/cd/LN99CL5.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164826",
+      "file": "Adachi to Shimamura Especial 3 Español (1).pdf"
+    },
+    {
+      "id": "E4",
+      "title": "Adachi to Shimamura Especial 4 Español",
+      "desc": "Publicado en 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/a/a7/LN99CL6.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164902",
+      "file": "Adachi to Shimamura Especial 4 Español (2).pdf"
+    },
+    {
+      "id": "99_9",
+      "title": "Volumen 99.9",
+      "desc": "Publicado el 10 de noviembre del 2023. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2024/10/adachiShimamuraLN99pt9_site.jpg",
+      "file": "Adachi to Shimamura Volumen 99.9 Español.pdf"
+    },
+    {
+      "id": "SS",
+      "title": "Volumen SS",
+      "desc": "Publicado el 10 de noviembre del 2023. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2024/09/adachiShimamuraLNSS_site.jpg",
+      "file": "Adachi to Shimamura Volumen SS Español.pdf"
+    },
+    {
+      "id": "SS2",
+      "title": "Volumen SS2",
+      "desc": "Publicado el 8 de noviembre del 2024. Ilustrado por Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2025/08/adachiShimamuraLNSS2_site.jpg",
+      "file": "Adachi to Shimamura Volumen SS2 Español.pdf"
+    }
+  ]
+}

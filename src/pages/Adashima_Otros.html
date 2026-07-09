@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adashima - Otros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/otros.css">
+    <link rel="stylesheet" href="../css/lang-switch.css">
+    <link rel="stylesheet" href="../components/styles/menu.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="floating-decor decor-1"><img src="../../assets/Imagenes/D_1.png" alt="Decor" onerror="this.style.display='none'"></div>
+    <div class="floating-decor decor-2"><img src="../../assets/Imagenes/D_2.png" alt="Decor" onerror="this.style.display='none'"></div>
+    <div class="floating-decor decor-3"><img src="../../assets/Imagenes/D_3.png" alt="Decor" onerror="this.style.display='none'"></div>
+
+    <div id="menu-container" style="display: contents;"></div>
+
+    <div class="main-content">
+        <div class="header-container">
+            <div class="lang-controls">
+                <div class="lang-wrapper">
+                    <i class="fas fa-globe"></i>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                            <span id="langSelectedLabel">Español</span>
+                            <i class="fas fa-chevron-down lang-caret"></i>
+                        </button>
+                        <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+                            <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+                            <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h1 class="update-title" id="headerTitle">Otros</h1>
+        </div>
+
+        <div class="documents-wrapper" id="documentsWrapper">
+        </div>
+        
+        <div class="footer" id="footerContent">
+            Fan site no oficial de Adachi to Shimamura.<br>
+            Creado por fans, sin fines de lucro.<br>
+            Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.
+        </div>
+
+        <a href="Juego.html" class="floating-adashima" id="floatingLink" title="¡Clickea para ir al mini-juego!">
+            <img src="../../assets/Imagenes/flotanteotros-Photoroom.png" alt="Flotante Otros" onerror="this.style.display='none'">
+        </a>
+
+        <div id="downloadOverlay" class="download-overlay" aria-hidden="true">
+            <div class="download-box">
+                <div class="download-spinner" role="status" aria-hidden="true"></div>
+                <div class="download-text" id="downloadText">Descargando...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let currentLang = localStorage.getItem('lang') || 'es';
+    let isSwitching = false;
+    let translations = null;
+
+    // Fallback translations
+    const FALLBACK_TRANSLATIONS = {
+        es: {
+            pageTitle: "Adashima - Otros",
+            headerTitle: "Otros",
+            footer: "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
+            floatingTitle: "¡Clickea para ir al mini-juego!",
+            downloadOverlayText: "Descargando...",
+            documents: []
+        },
+        en: {
+            pageTitle: "Adashima - Others",
+            headerTitle: "Others",
+            footer: "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+            floatingTitle: "Click to go to the mini-game!",
+            downloadOverlayText: "Downloading...",
+            documents: []
+        }
+    };
+
+    async function loadTranslations(lang) {
+        try {
+            const response = await fetch(`../data/otros/${lang}.json?v=${Date.now()}`);
+            if (!response.ok) throw new Error('Failed to load translations');
+            const data = await response.json();
+            translations = data;
+            return data;
+        } catch (e) {
+            console.warn('Failed to load translations, using fallback:', e);
+            translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
+            return translations;
+        }
+    }
+
+    function getText(key) {
+        if (!translations) return key;
+        const keys = key.split('.');
+        let value = translations;
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) {
+                value = value[k];
+            } else {
+                return key;
+            }
+        }
+        return value || key;
+    }
+
+    function updateLangDropdownLabel() {
+        const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
+        const labelEl = document.getElementById('langSelectedLabel');
+        if (selectedOption && labelEl) {
+            labelEl.textContent = selectedOption.getAttribute('data-label');
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('selected'));
+            selectedOption.classList.add('selected');
+        }
+    }
+
+    async function switchLanguage(lang) {
+        if (isSwitching || currentLang === lang) return;
+        isSwitching = true;
+
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) langToggle.disabled = true;
+
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        document.documentElement.lang = lang;
+        updateLangDropdownLabel();
+
+        await loadTranslations(lang);
+        renderApp();
+        loadMenu();
+
+        if (langToggle) langToggle.disabled = false;
+        isSwitching = false;
+    }
+
+    const langDropdown = document.getElementById('langDropdown');
+    const langToggle = document.getElementById('langToggle');
+
+    if (langDropdown && langToggle) {
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (langToggle.disabled) return;
+            const isOpen = langDropdown.classList.toggle('open');
+            langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                langDropdown.classList.remove('open');
+                langToggle.setAttribute('aria-expanded', 'false');
+                switchLanguage(lang);
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (langDropdown.classList.contains('open') && !langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('open');
+                langToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && langDropdown.classList.contains('open')) {
+                langDropdown.classList.remove('open');
+                langToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    function renderApp() {
+        // Update title
+        document.title = getText('pageTitle');
+        const headerTitle = document.getElementById('headerTitle');
+        if (headerTitle) headerTitle.textContent = getText('headerTitle');
+
+        // Update footer
+        const footer = document.getElementById('footerContent');
+        if (footer) footer.innerHTML = getText('footer');
+
+        // Update floating link
+        const floatingLink = document.getElementById('floatingLink');
+        if (floatingLink) floatingLink.title = getText('floatingTitle');
+
+        // Update download overlay text
+        const downloadText = document.getElementById('downloadText');
+        if (downloadText) downloadText.textContent = getText('downloadOverlayText');
+
+        // Build document cards
+        buildDocumentCards();
+    }
+
+    function buildDocumentCards() {
+        const wrapper = document.getElementById('documentsWrapper');
+        if (!wrapper) return;
+
+        const docs = translations?.documents || [];
+        if (docs.length === 0) {
+            wrapper.innerHTML = '<p style="text-align:center;padding:40px;color:rgba(92,58,107,0.5);">No hay documentos disponibles.</p>';
+            return;
+        }
+
+        wrapper.innerHTML = docs.map(doc => `
+            <a href="${doc.url}" target="_blank" rel="noopener noreferrer" class="document-card" data-doc-id="${doc.id}">
+                <div class="document-icon"><i class="fas ${doc.icon}"></i></div>
+                <div class="document-info">
+                    <h3>${doc.title}</h3>
+                    <p>${doc.description}</p>
+                </div>
+                <div class="document-arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+        `).join('');
+
+        // Re-attach download handlers for media.adashimaverse.com links
+        attachDownloadHandlers();
+    }
+
+    function attachDownloadHandlers() {
+        const downloadOverlay = document.getElementById('downloadOverlay');
+        
+        document.querySelectorAll('a.document-card').forEach(el => {
+            const href = el.href || el.getAttribute('href');
+            if (!href) return;
+            // Only intercept links to media.adashimaverse.com
+            if (href.indexOf('media.adashimaverse.com') === -1) return;
+            
+            el.addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (downloadOverlay) {
+                    downloadOverlay.classList.add('show');
+                    downloadOverlay.setAttribute('aria-hidden', 'false');
+                }
+                try {
+                    const resp = await fetch(href, { mode: 'cors', cache: 'no-store' });
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    const blob = await resp.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    const parts = href.split('/');
+                    a.download = decodeURIComponent(parts[parts.length - 1].split('?')[0]);
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                } catch (err) {
+                    const win = window.open(href, '_blank');
+                    if (!win) location.href = href;
+                } finally {
+                    if (downloadOverlay) {
+                        downloadOverlay.classList.remove('show');
+                        downloadOverlay.setAttribute('aria-hidden', 'true');
+                    }
+                }
+            });
+        });
+    }
+
+    function loadMenu() {
+        const menuVer = Math.floor(Date.now() / 86400000);
+        fetch('../components/menu.html?v=' + menuVer)
+            .then(response => {
+                if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+                return response.text();
+            })
+            .then(data => {
+                const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+                if (!container) return;
+                container.innerHTML = data;
+                
+                const scripts = container.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+                if (window.translateMenu) {
+                    window.translateMenu(currentLang);
+                }
+            })
+            .catch(error => {
+                console.error('Error cargando menu.html:', error.message);
+            });
+    }
+
+    function initParticles() {
+        const particlesContainer = document.getElementById('particles');
+        if (particlesContainer) {
+            particlesContainer.innerHTML = '';
+            for (let i = 0; i < 40; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                star.style.animationDelay = (Math.random() * 5) + 's';
+                particlesContainer.appendChild(star);
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', async function () {
+        await loadTranslations(currentLang);
+        updateLangDropdownLabel();
+        renderApp();
+        initParticles();
+        loadMenu();
+    });
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(err => console.error('Error al registrar el Service Worker', err));
+        });
+    }
+    </script>
+</body>
+</html>
