@@ -6,7 +6,8 @@
     <title>Adashima - Statistics</title>
     <link rel="preconnect" href="https://media.adashimaverse.com" crossorigin>
     <link rel="dns-prefetch" href="https://media.adashimaverse.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Iconify -->
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="../css/stats.css">
 </head>
 <body>
@@ -14,18 +15,18 @@
     <div class="particles" id="particles"></div>
 
     <!-- Floating Decorations (from otros.css) -->
-    <div class="floating-decor decor-1"><i class="fa-regular fa-star"></i></div>
-    <div class="floating-decor decor-2"><i class="fa-regular fa-moon"></i></div>
-    <div class="floating-decor decor-3"><i class="fa-regular fa-snowflake"></i></div>
+    <div class="floating-decor decor-1"><iconify-icon icon="fa6-regular:star"></iconify-icon></div>
+    <div class="floating-decor decor-2"><iconify-icon icon="fa6-regular:moon"></iconify-icon></div>
+    <div class="floating-decor decor-3"><iconify-icon icon="fa6-regular:snowflake"></iconify-icon></div>
 
     <main class="stats-main">
         <!-- Sticky Back Button -->
         <div class="back-button-sticky" onclick="history.back()">
-            <i class="fas fa-arrow-left"></i> Back
+            <iconify-icon icon="fa6-solid:arrow-left"></iconify-icon> Back
         </div>
 
         <div class="stats-header">
-            <h1 class="stats-title"><i class="fa-regular fa-heart"></i> Adachi &amp; Shimamura <i class="fa-regular fa-heart"></i></h1>
+            <h1 class="stats-title"><iconify-icon icon="fa6-regular:heart"></iconify-icon> Adachi &amp; Shimamura <iconify-icon icon="fa6-regular:heart"></iconify-icon></h1>
             <p class="stats-subtitle">An interactive archive exploring the publication history, translation timeline, and structure of the entire series.</p>
         </div>
 
@@ -323,7 +324,7 @@
 
         achievements = [
             {
-                icon: 'fa-solid fa-book-open',
+                icon: 'fa6-solid:book-open',
                 title: 'Largest Volume',
                 value: `${mostPages.page_count} pages`,
                 volume: mostPages.title,
@@ -331,7 +332,7 @@
                 color: '#f9b55d',
             },
             {
-                icon: 'fa-solid fa-book-open',
+                icon: 'fa6-solid:book-open',
                 title: 'Smallest Volume',
                 value: `${leastPages.page_count} pages`,
                 volume: leastPages.title,
@@ -339,7 +340,7 @@
                 color: '#7fc4e0',
             },
             {
-                icon: 'fa-solid fa-rocket',
+                icon: 'fa6-solid:rocket',
                 title: 'Fastest Translation',
                 value: `${fastest.jp_en_gap_days} days`,
                 volume: fastest.title,
@@ -347,7 +348,7 @@
                 color: '#7eb870',
             },
             {
-                icon: 'fa-solid fa-turtle',
+                icon: 'fa6-solid:turtle',
                 title: 'Slowest Translation',
                 value: `${slowest.jp_en_gap_days} days`,
                 volume: slowest.title,
@@ -355,7 +356,7 @@
                 color: '#e06040',
             },
             {
-                icon: 'fa-solid fa-list-ol',
+                icon: 'fa6-solid:list-ol',
                 title: 'Most Chapters',
                 value: `${sortedByChapters[0]?.chapters || 0} chapters`,
                 volume: sortedByChapters[0]?.title || '',
@@ -363,7 +364,7 @@
                 color: '#6366f1',
             },
             {
-                icon: 'fa-solid fa-calendar-range',
+                icon: 'fa6-solid:calendar-range',
                 title: 'Longest Publication Gap',
                 value: `${longestGap} days`,
                 volume: longestGapEntry ? `${longestGapEntry.from} → ${longestGapEntry.to}` : '',
@@ -371,7 +372,7 @@
                 color: '#e06040',
             },
             {
-                icon: 'fa-solid fa-calendar-clock',
+                icon: 'fa6-solid:calendar-clock',
                 title: 'Shortest Publication Gap',
                 value: `${shortestGap} days`,
                 volume: shortestGapEntry ? `${shortestGapEntry.from} → ${shortestGapEntry.to}` : '',
@@ -383,31 +384,31 @@
         // Calculate fun facts
         funFacts = [
             {
-                icon: 'fa-solid fa-percent',
+                icon: 'fa6-solid:percent',
                 label: 'Collection Progress',
                 value: `${Math.round((activeVolumes.length / data.length) * 100)}%`,
                 description: `${activeVolumes.length} of ${data.length} volumes released`,
             },
             {
-                icon: 'fa-solid fa-clock',
+                icon: 'fa6-solid:clock',
                 label: 'Average Translation Delay',
                 value: `${avgTranslationDays} days`,
                 description: `Across ${translated.length} volumes`,
             },
             {
-                icon: 'fa-solid fa-calendar-range',
+                icon: 'fa6-solid:calendar-range',
                 label: 'Total Publication Span',
                 value: `${minDate.getFullYear()} — ${maxDate.getFullYear()}`,
                 description: `${maxDate.getFullYear() - minDate.getFullYear() + 1} years`,
             },
             {
-                icon: 'fa-solid fa-chart-pie',
+                icon: 'fa6-solid:chart-pie',
                 label: 'Average Release Interval',
                 value: `${avgGap} days`,
                 description: 'Between Japanese releases',
             },
             {
-                icon: 'fa-solid fa-arrow-up',
+                icon: 'fa6-solid:arrow-up',
                 label: 'Largest Page Increase',
                 value: (() => {
                     let maxIncrease = 0;
@@ -424,7 +425,7 @@
                 description: 'Biggest jump in page count',
             },
             {
-                icon: 'fa-solid fa-list-ol',
+                icon: 'fa6-solid:list-ol',
                 label: 'Volumes Above Average',
                 value: `${volumesAboveAvgLength} volumes`,
                 description: `Out of ${activeVolumes.length} released volumes`,
@@ -508,56 +509,56 @@
     function renderDashboard() {
         const cards = [
             {
-                icon: 'fa-solid fa-book-open',
+                icon: 'fa6-solid:book-open',
                 title: 'Average Pages',
                 value: `${statsSummary.avgPagesPerVolume} pages`,
                 description: 'Per volume',
                 color: '#6366f1',
             },
             {
-                icon: 'fa-solid fa-list-ol',
+                icon: 'fa6-solid:list-ol',
                 title: 'Average Chapters',
                 value: `${statsSummary.avgChaptersPerVolume} chapters`,
                 description: 'Per volume',
                 color: '#8b5cf6',
             },
             {
-                icon: 'fa-solid fa-rocket',
+                icon: 'fa6-solid:rocket',
                 title: 'Fastest Translation',
                 value: `${statsSummary.fastestTranslationDays} days`,
                 description: statsSummary.fastestTranslationVolume,
                 color: '#7eb870',
             },
             {
-                icon: 'fa-solid fa-turtle',
+                icon: 'fa6-solid:turtle',
                 title: 'Slowest Translation',
                 value: `${statsSummary.slowestTranslationDays} days`,
                 description: statsSummary.slowestTranslationVolume,
                 color: '#e06040',
             },
             {
-                icon: 'fa-solid fa-arrow-up',
+                icon: 'fa6-solid:arrow-up',
                 title: 'Largest Volume',
                 value: `${statsSummary.mostPagesCount} pages`,
                 description: statsSummary.mostPagesVolume,
                 color: '#f9b55d',
             },
             {
-                icon: 'fa-solid fa-arrow-down',
+                icon: 'fa6-solid:arrow-down',
                 title: 'Smallest Volume',
                 value: `${statsSummary.leastPagesCount} pages`,
                 description: statsSummary.leastPagesVolume,
                 color: '#7fc4e0',
             },
             {
-                icon: 'fa-solid fa-chart-line',
+                icon: 'fa6-solid:chart-line',
                 title: 'Avg Translation Delay',
                 value: `${statsSummary.avgTranslationDays} days`,
                 description: 'Across all translated volumes',
                 color: '#818cf8',
             },
             {
-                icon: 'fa-solid fa-calendar-range',
+                icon: 'fa6-solid:calendar-range',
                 title: 'Volumes Above Avg',
                 value: `${statsSummary.volumesAboveAvgLength} volumes`,
                 description: `Out of ${volumes.filter(v => !v.is_upcoming && v.page_count > 0).length} released`,
@@ -568,13 +569,13 @@
         return `
             <section class="section-reveal" data-section="dashboard" id="section-dashboard">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-gem"></i> Overview Dashboard</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:gem"></iconify-icon> Overview Dashboard</h2>
                     <p class="section-subtitle">Key statistics at a glance</p>
                 </div>
                 <div class="dashboard-grid">
                     ${cards.map((card, i) => `
                         <div class="dashboard-card stagger-card" style="--card-color: ${card.color};" data-delay="${i * 50}">
-                            <div class="dashboard-card-icon"><i class="${card.icon}"></i></div>
+                            <div class="dashboard-card-icon"><iconify-icon icon="${card.icon}"></iconify-icon></div>
                             <div class="dashboard-card-content">
                                 <span class="dashboard-card-value">${card.value}</span>
                                 <span class="dashboard-card-title">${card.title}</span>
@@ -623,32 +624,32 @@
                         </div>
                         <div class="timeline-item-details">
                             <div class="timeline-item-detail">
-                                <i class="fa-regular fa-calendar"></i>
+                                <iconify-icon icon="fa6-regular:calendar"></iconify-icon>
                                 <span>JP: ${formatDate(volume.jp_release)}</span>
                             </div>
                             ${volume.en_completion ? `
                                 <div class="timeline-item-detail">
-                                    <i class="fa-regular fa-calendar-check"></i>
+                                    <iconify-icon icon="fa6-regular:calendar-check"></iconify-icon>
                                     <span>EN: ${formatDate(volume.en_completion)}</span>
                                 </div>
                             ` : ''}
                             <div class="timeline-item-detail">
-                                <i class="fa-regular fa-file-lines"></i>
+                                <iconify-icon icon="fa6-regular:file-lines"></iconify-icon>
                                 <span>${volume.page_count} pages</span>
                             </div>
                             <div class="timeline-item-detail">
-                                <i class="fa-solid fa-list-ol"></i>
+                                <iconify-icon icon="fa6-solid:list-ol"></iconify-icon>
                                 <span>${volume.chapters} chapters</span>
                             </div>
                             ${volume.jp_en_gap_days > 0 ? `
                                 <div class="timeline-item-detail">
-                                    <i class="fa-regular fa-clock"></i>
+                                    <iconify-icon icon="fa6-regular:clock"></iconify-icon>
                                     <span>${volume.jp_en_gap_days} days delay</span>
                                 </div>
                             ` : ''}
                             ${gap > 0 ? `
                                 <div class="timeline-item-detail gap">
-                                    <i class="fa-solid fa-arrow-right"></i>
+                                    <iconify-icon icon="fa6-solid:arrow-right"></iconify-icon>
                                     <span>${gap} days since previous</span>
                                 </div>
                             ` : ''}
@@ -661,7 +662,7 @@
         return `
             <section class="section-reveal" data-section="timeline" id="section-timeline">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-clock"></i> Release Timeline</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:clock"></iconify-icon> Release Timeline</h2>
                     <p class="section-subtitle">Every volume as a milestone</p>
                 </div>
                 <div class="timeline-container">
@@ -737,7 +738,7 @@
         return `
             <section class="section-reveal" data-section="translation" id="section-translation">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-language"></i> Translation Delay</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:language"></iconify-icon> Translation Delay</h2>
                     <p class="section-subtitle">Time between JP release and EN completion</p>
                 </div>
                 <div class="translation-controls">
@@ -898,36 +899,36 @@
         return `
             <section class="section-reveal" data-section="charts" id="section-charts">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-chart-bar"></i> Charts</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:chart-bar"></iconify-icon> Charts</h2>
                     <p class="section-subtitle">Visualizing the series structure</p>
                 </div>
                 <div class="charts-grid">
                     <div class="chart-card stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-file-lines"></i> Pages per Volume</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:file-lines"></iconify-icon> Pages per Volume</h3>
                         <div class="chart-bars">${pagesBars}</div>
                         <div class="chart-tooltip-hint">Hover bars for details</div>
                     </div>
 
                     <div class="chart-card stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-list-ol"></i> Chapters per Volume</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:list-ol"></iconify-icon> Chapters per Volume</h3>
                         <div class="chart-bars">${chaptersBars}</div>
                         <div class="chart-tooltip-hint">Hover bars for details</div>
                     </div>
 
                     <div class="chart-card stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-chart-line"></i> Cumulative Pages</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:chart-line"></iconify-icon> Cumulative Pages</h3>
                         <div class="chart-bars chart-bars-cumulative">${cumulativeBars}</div>
                         <div class="chart-tooltip-hint">Running total of pages</div>
                     </div>
 
                     <div class="chart-card stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-clock"></i> Translation Delay Trend</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:clock"></iconify-icon> Translation Delay Trend</h3>
                         <div class="chart-bars chart-bars-horizontal">${trendBars}</div>
                         <div class="chart-tooltip-hint">Translation delay over time</div>
                     </div>
 
                     <div class="chart-card chart-card-full stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-circle-dot"></i> Pages vs Translation Delay</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:circle-dot"></iconify-icon> Pages vs Translation Delay</h3>
                         <div class="scatter-plot">
                             ${scatterPoints}
                             <div class="scatter-labels">
@@ -939,12 +940,12 @@
                     </div>
 
                     <div class="chart-card stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-pie-chart"></i> Category Breakdown</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:pie-chart"></iconify-icon> Category Breakdown</h3>
                         <div class="category-breakdown">${categoryItems}</div>
                     </div>
 
                     <div class="chart-card chart-card-full stagger-card">
-                        <h3 class="chart-title"><i class="fa-regular fa-calendar-range"></i> Publication Gap Analysis</h3>
+                        <h3 class="chart-title"><iconify-icon icon="fa6-regular:calendar-range"></iconify-icon> Publication Gap Analysis</h3>
                         <div class="gap-visualization">${gapItems}</div>
                         <div class="gap-summary-mini">
                             <span>Average: ${gapStats.avg}d</span>
@@ -983,7 +984,7 @@
         } else {
             compareHtml = `
                 <div class="compare-placeholder">
-                    <i class="fa-solid fa-arrows-left-right"></i>
+                    <iconify-icon icon="fa6-solid:arrows-left-right"></iconify-icon>
                     <p>Select two volumes to compare</p>
                 </div>
             `;
@@ -1001,7 +1002,7 @@
         return `
             <section class="section-reveal" data-section="compare" id="section-compare">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-arrows-left-right"></i> Compare Volumes</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:arrows-left-right"></iconify-icon> Compare Volumes</h2>
                     <p class="section-subtitle">Side-by-side comparison of any two volumes</p>
                 </div>
                 <div class="compare-controls">
@@ -1087,7 +1088,7 @@
                             ${delayRank === 'Fastest' ? '<span class="volume-badge rank">Fastest TL</span>' : ''}
                             ${delayRank === 'Slowest' ? '<span class="volume-badge rank">Slowest TL</span>' : ''}
                             <span class="volume-card-pages">${volume.page_count} pages</span>
-                            <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} volume-card-chevron"></i>
+                            <iconify-icon icon="fa6-solid:chevron-${isExpanded ? 'up' : 'down'}" class="volume-card-chevron"></iconify-icon>
                         </div>
                     </div>
                     <div class="volume-card-body ${isExpanded ? 'expanded' : ''}">
@@ -1158,15 +1159,15 @@
         return `
             <section class="section-reveal" data-section="volumes" id="section-volumes">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-book"></i> Volume Explorer</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:book"></iconify-icon> Volume Explorer</h2>
                     <p class="section-subtitle">Explore each volume in detail</p>
                 </div>
                 <div class="volume-controls">
                     <div class="volume-search">
-                        <i class="fa-solid fa-magnifying-glass volume-search-icon"></i>
+                        <iconify-icon icon="fa6-solid:magnifying-glass" class="volume-search-icon"></iconify-icon>
                         <input type="text" id="volumeSearchInput" placeholder="Search by title or volume number..." 
                                value="${searchQuery}" class="volume-search-input">
-                        ${searchQuery ? `<button class="volume-search-clear" id="volumeSearchClear"><i class="fa-solid fa-xmark"></i></button>` : ''}
+                        ${searchQuery ? `<button class="volume-search-clear" id="volumeSearchClear"><iconify-icon icon="fa6-solid:xmark"></iconify-icon></button>` : ''}
                     </div>
                     <div class="volume-filters">
                         <button class="volume-filter-btn ${filterType === 'all' ? 'active' : ''}" data-filter="all">All</button>
@@ -1188,13 +1189,13 @@
         return `
             <section class="section-reveal" data-section="achievements" id="section-achievements">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-trophy"></i> Series Achievements</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:trophy"></iconify-icon> Series Achievements</h2>
                     <p class="section-subtitle">Notable records and milestones</p>
                 </div>
                 <div class="achievements-grid">
                     ${achievements.map((achievement, i) => `
                         <div class="achievement-card stagger-card" style="--achievement-color: ${achievement.color};" data-delay="${i * 60}">
-                            <div class="achievement-card-icon"><i class="${achievement.icon}"></i></div>
+                            <div class="achievement-card-icon"><iconify-icon icon="${achievement.icon}"></iconify-icon></div>
                             <div class="achievement-card-content">
                                 <span class="achievement-card-title">${achievement.title}</span>
                                 <span class="achievement-card-value">${achievement.value}</span>
@@ -1212,42 +1213,42 @@
     function renderFunFacts() {
         const staticFacts = [
             {
-                icon: 'fa-solid fa-book-open',
+                icon: 'fa6-solid:book-open',
                 title: 'Largest Volume',
                 value: `${statsSummary.mostPagesCount} pages`,
                 description: statsSummary.mostPagesVolume,
                 color: '#f9b55d',
             },
             {
-                icon: 'fa-solid fa-book-open',
+                icon: 'fa6-solid:book-open',
                 title: 'Smallest Volume',
                 value: `${statsSummary.leastPagesCount} pages`,
                 description: statsSummary.leastPagesVolume,
                 color: '#7fc4e0',
             },
             {
-                icon: 'fa-solid fa-rocket',
+                icon: 'fa6-solid:rocket',
                 title: 'Fastest Translation',
                 value: `${statsSummary.fastestTranslationDays} days`,
                 description: statsSummary.fastestTranslationVolume,
                 color: '#7eb870',
             },
             {
-                icon: 'fa-solid fa-turtle',
+                icon: 'fa6-solid:turtle',
                 title: 'Slowest Translation',
                 value: `${statsSummary.slowestTranslationDays} days`,
                 description: statsSummary.slowestTranslationVolume,
                 color: '#e06040',
             },
             {
-                icon: 'fa-solid fa-list-ol',
+                icon: 'fa6-solid:list-ol',
                 title: 'Average Chapters',
                 value: `${statsSummary.avgChaptersPerVolume} chapters`,
                 description: 'Per volume',
                 color: '#6366f1',
             },
             {
-                icon: 'fa-solid fa-calendar-range',
+                icon: 'fa6-solid:calendar-range',
                 title: 'Publication Span',
                 value: `${statsSummary.publicationStart} — ${statsSummary.publicationEnd}`,
                 description: `${parseInt(statsSummary.publicationEnd) - parseInt(statsSummary.publicationStart) + 1} years`,
@@ -1258,13 +1259,13 @@
         return `
             <section class="section-reveal" data-section="funfacts" id="section-funfacts">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-regular fa-star"></i> Fun Facts</h2>
+                    <h2 class="section-title"><iconify-icon icon="fa6-regular:star"></iconify-icon> Fun Facts</h2>
                     <p class="section-subtitle">Interesting insights about the series</p>
                 </div>
                 <div class="funfacts-grid">
                     ${staticFacts.map((fact, i) => `
                         <div class="funfact-card stagger-card" style="--fact-color: ${fact.color};" data-delay="${i * 50}">
-                            <div class="funfact-card-icon"><i class="${fact.icon}"></i></div>
+                            <div class="funfact-card-icon"><iconify-icon icon="${fact.icon}"></iconify-icon></div>
                             <div class="funfact-card-content">
                                 <span class="funfact-card-value">${fact.value}</span>
                                 <span class="funfact-card-title">${fact.title}</span>
@@ -1275,11 +1276,11 @@
                     `).join('')}
                 </div>
                 <div class="funfacts-dynamic">
-                    <h3 class="funfacts-dynamic-title"><i class="fa-regular fa-lightbulb"></i> Dynamic Insights</h3>
+                    <h3 class="funfacts-dynamic-title"><iconify-icon icon="fa6-regular:lightbulb"></iconify-icon> Dynamic Insights</h3>
                     <div class="funfacts-dynamic-grid">
                         ${funFacts.map((fact, i) => `
                             <div class="funfact-dynamic stagger-card" data-delay="${i * 40 + 200}">
-                                <i class="${fact.icon}"></i>
+                                <iconify-icon icon="${fact.icon}"></iconify-icon>
                                 <div>
                                     <span class="funfact-dynamic-value">${fact.value}</span>
                                     <span class="funfact-dynamic-label">${fact.label}</span>
