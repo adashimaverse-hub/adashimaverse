@@ -12,7 +12,7 @@
     "anime": "Anime",
     "others": "Otros",
     "stats": "Estadísticas",
-    "acerca de": "Acerca de"
+    "about": "Acerca de"
   },
   "tooltips": {
     "timeline": "Sigue la historia de Adachi y Shimamura a través de los años escolares.",
@@ -24,7 +24,7 @@
     "anime": "Mira el anime de Adachi to Shimamura.",
     "others": "Entrevistas, guías turísticas y contenido adicional.",
     "stats": "Hojas de cálculo, gráficos y volcados de datos para los más devotos.",
-    "acerca de": "Conoce el proyecto, créditos de traducción e historial de versiones."
+    "about": "Conoce el proyecto, créditos de traducción e historial de versiones."
   },
   "release": {
     "lastUpdate": "Última actualización",
