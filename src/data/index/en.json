@@ -10,7 +10,9 @@
     "miniAnime": "Mini Anime",
     "constellation": "Constellation",
     "anime": "Anime",
-    "others": "Others"
+    "others": "Others",
+    "stats": "Stats for Nerds",
+    "about": "About"
   },
   "tooltips": {
     "timeline": "Follow Adachi and Shimamura's story through their school years.",
@@ -20,7 +22,9 @@
     "miniAnime": "Enjoy the Adachi to Shimamura Mini Anime episodes.",
     "constellation": "Form constellations and unlock extra stories.",
     "anime": "Watch the Adachi to Shimamura anime.",
-    "others": "Interviews, travel guides and additional content."
+    "others": "Interviews, travel guides and additional content.",
+    "stats": "Spreadsheets, graphs, and data dumps for the truly devoted.",
+    "about": "Learn about the project, translation credits, and version history."
   },
   "release": {
     "lastUpdate": "Latest Update",

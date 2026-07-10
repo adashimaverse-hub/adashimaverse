@@ -1,0 +1,70 @@
+[
+    {
+    "version": "1.4.0",
+    "build": "20260710",
+    "date": "July 10, 2026",
+    "subtitle": "Statistics & About Update",
+    "changes": {
+        "new": [
+        "Added the Stats for Nerds page with interactive charts and visualizations.",
+        "Added a dedicated About page featuring project information, translation credits, legal notices, version history, and support resources.",
+        "Added a Support the Original Work section with official links for the light novel, manga, author, and related resources.",
+        "Added a Track section with links to popular tracking platforms such as MyAnimeList, AniList, MangaUpdates, Anime-Planet, and Kitsu."
+        ],
+        "improvements": [
+        "Expanded the website with additional reference resources.",
+        "Improved overall navigation and presentation across the site.",
+        "Reorganized the About page by placing the Support the Original Work section before the Legal Notice section.",
+        "Improved the consistency of the Support and Track sections with unified button styles and layouts."
+        ],
+        "fixes": [
+        "Fixed icons that were not displaying correctly in the Support the Original Work section.",
+        "Fixed branding icons across Support and Track buttons for better visual consistency."
+        ],
+        "notes": [
+        "This update focuses on expanding the archive with informational pages and improving the overall user experience."
+        ]
+    }
+    },
+  {
+    "version": "1.3.0",
+    "build": "20260709",
+    "date": "July 9, 2026",
+    "subtitle": "UI/UX & Localization Overhaul",
+    "changes": {
+      "new": [
+        "Added list and grid view options for the Light Novels and Manga pages.",
+        "Added a search bar for faster content discovery.",
+        "Introduced an improved reading interface."
+      ],
+      "improvements": [
+        "Further reorganized the project structure for improved maintainability.",
+        "Separated page data into JSON files for easier management.",
+        "Improved English ↔ Spanish language switching and localization logic.",
+        "Enhanced the UI/UX of the Light Novels and Manga sections."
+      ],
+      "fixes": [],
+      "notes": [
+        "This release lays the foundation for easier future content updates and localization."
+      ]
+    }
+  },
+  {
+    "version": "1.2.0",
+    "build": "20260708",
+    "date": "July 8, 2026",
+    "subtitle": "Project Structure Refactor",
+    "changes": {
+      "new": [],
+      "improvements": [
+        "Reorganized the project's file structure following better separation of concerns.",
+        "Moved embedded CSS into dedicated stylesheet files.",
+        "Improved project organization and maintainability."
+      ],
+      "fixes": [],
+      "notes": [
+        "Internal refactor with no major user-facing changes."
+      ]
+    }
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "version": "1.4.0",
+    "build": "20260710",
+    "date": "10 de Julio de 2026",
+    "subtitle": "Actualización de Estadísticas y Acerca de",
+    "changes": {
+      "new": [
+        "Agregada la página Estadísticas para Nerds con gráficos interactivos y visualizaciones.",
+        "Agregada una página Acerca de con información del proyecto, créditos de traducción, avisos legales, historial de versiones y recursos para apoyar la obra original.",
+        "Agregada una sección Apoya la Obra Original con enlaces oficiales para la novela ligera, el manga, el autor y otros recursos relacionados.",
+        "Agregada una sección Seguimiento con enlaces a plataformas populares como MyAnimeList, AniList, MangaUpdates, Anime-Planet y Kitsu."
+      ],
+      "improvements": [
+        "Ampliado el sitio web con recursos de referencia adicionales.",
+        "Mejorada la navegación y presentación general en todo el sitio.",
+        "Reorganizada la página Acerca de colocando la sección Apoya la Obra Original antes de la sección de Aviso Legal.",
+        "Mejorada la coherencia visual entre las secciones Apoya la Obra Original y Seguimiento con estilos y diseño de botones unificados."
+      ],
+      "fixes": [
+        "Corregidos los iconos que no se mostraban correctamente en la sección Apoya la Obra Original.",
+        "Corregidos los iconos de las marcas en los botones de las secciones Apoya la Obra Original y Seguimiento para lograr una mayor coherencia visual."
+      ],
+      "notes": [
+        "Esta actualización se centra en ampliar el archivo con páginas informativas y mejorar la experiencia general del usuario."
+      ]
+    }
+  },
+  {
+    "version": "1.3.0",
+    "build": "20260709",
+    "date": "9 de Julio, 2026",
+    "subtitle": "Revisión de UI/UX y Localización",
+    "changes": {
+      "new": [
+        "Agregadas opciones de vista de lista y cuadrícula para las páginas de Novelas Ligeras y Manga.",
+        "Agregada una barra de búsqueda para un descubrimiento más rápido de contenido.",
+        "Introducida una interfaz de lectura mejorada."
+      ],
+      "improvements": [
+        "Reorganizada aún más la estructura del proyecto para una mejor mantenibilidad.",
+        "Separados los datos de las páginas en archivos JSON para una gestión más fácil.",
+        "Mejorado el cambio de idioma Español ↔ Inglés y la lógica de localización.",
+        "Mejorada la UI/UX de las secciones de Novelas Ligeras y Manga."
+      ],
+      "fixes": [],
+      "notes": [
+        "Esta versión sienta las bases para futuras actualizaciones de contenido y localización más fáciles."
+      ]
+    }
+  },
+  {
+    "version": "1.2.0",
+    "build": "20260708",
+    "date": "8 de Julio, 2026",
+    "subtitle": "Reestructuración de la Estructura del Proyecto",
+    "changes": {
+      "new": [],
+      "improvements": [
+        "Reorganizada la estructura de archivos del proyecto siguiendo una mejor separación de responsabilidades.",
+        "Movido el CSS incrustado a archivos de hoja de estilo dedicados.",
+        "Mejorada la organización y mantenibilidad del proyecto."
+      ],
+      "fixes": [],
+      "notes": [
+        "Refactorización interna sin cambios importantes visibles para el usuario."
+      ]
+    }
+  }
+]

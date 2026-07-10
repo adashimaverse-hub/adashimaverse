@@ -126,9 +126,22 @@
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
-                <div class="update-item" style="border-bottom: none;">
+                <div class="update-item">
                     <a href="./src/pages/Adashima_Otros.html" data-tooltip="Entrevistas, guías turísticas y contenido adicional.">
                         <span>Otros</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="update-item">
+                    <a href="./src/pages/Adashima_Stats.html" data-tooltip="Explora estadísticas detalladas de la serie: volúmenes, traducciones y más.">
+                        <span>Estadísticas</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                <!-- About page link -->
+                <div class="update-item">
+                    <a href="./src/pages/Adashima_About.html" data-tooltip="Conoce más sobre este proyecto, créditos y la comunidad.">
+                        <span>Acerca de</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
@@ -215,7 +228,9 @@
                 miniAnime: "Mini Anime",
                 constellation: "Constelación",
                 anime: "Anime",
-                others: "Otros"
+                others: "Otros",
+                stats: "Estadísticas",
+                about: "Acerca de"
             },
             tooltips: {
                 timeline: "Sigue la historia de Adachi y Shimamura a través de los años escolares.",
@@ -225,7 +240,9 @@
                 miniAnime: "Disfruta de los episodios del Mini Anime de Adachi to Shimamura.",
                 constellation: "Forma constelaciones y desbloquea historias extra.",
                 anime: "Mira el anime de Adachi to Shimamura.",
-                others: "Entrevistas, guías turísticas y contenido adicional."
+                others: "Entrevistas, guías turísticas y contenido adicional.",
+                stats: "Explora estadísticas detalladas de la serie: volúmenes, traducciones y más.",
+                about: "Conoce más sobre este proyecto, créditos y la comunidad."
             },
             release: {
                 lastUpdate: "Última actualización",
@@ -264,7 +281,9 @@
                 miniAnime: "Mini Anime",
                 constellation: "Constellation",
                 anime: "Anime",
-                others: "Others"
+                others: "Others",
+                stats: "Statistics",
+                about: "About"
             },
             tooltips: {
                 timeline: "Follow Adachi and Shimamura's story through their school years.",
@@ -274,7 +293,9 @@
                 miniAnime: "Enjoy the Adachi to Shimamura Mini Anime episodes.",
                 constellation: "Form constellations and unlock extra stories.",
                 anime: "Watch the Adachi to Shimamura anime.",
-                others: "Interviews, travel guides and additional content."
+                others: "Interviews, travel guides and additional content.",
+                stats: "Explore detailed series statistics: volumes, translations and more.",
+                about: "Learn more about this project, credits and the community."
             },
             release: {
                 lastUpdate: "Latest Update",
@@ -313,7 +334,9 @@
         { key: 'miniAnime', href: './src/pages/Adashima_Mini_Anime.html' },
         { key: 'constellation', href: './src/pages/Adashima_Estrella.html' },
         { key: 'anime', href: './src/pages/Adashima_Anime.html' },
-        { key: 'others', href: './src/pages/Adashima_Otros.html' }
+        { key: 'others', href: './src/pages/Adashima_Otros.html' },
+        { key: 'stats', href: './src/pages/Adashima_Stats.html' },
+        { key: 'about', href: './src/pages/Adashima_About.html' }
     ];
 
     async function loadContent(lang) {
