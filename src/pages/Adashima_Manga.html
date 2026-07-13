@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../components/styles/menu.css">
     <link rel="stylesheet" href="../css/lang-switch.css">
     <link rel="stylesheet" href="../css/reader-modal.css">
+    <link rel="stylesheet" href="./src/components/styles/scrollbar.css" />
 </head>
 <body>
     <div class="particles" id="particles"></div>
@@ -1125,6 +1126,9 @@
         `;
     }
 
+    // ========================================
+    // UPDATED: buildGridVolumeHTML with JSON thumbnail logic
+    // ========================================
     function buildGridVolumeHTML(volume, chapters) {
         const volumeLabel = getText('chapterLabels.volume') || 'Volumen';
         const displayTitle = `${volumeLabel} ${volume}`;
@@ -1137,14 +1141,42 @@
             chaptersHtml += buildGridChapterHTML(ch);
         }
 
-        const firstChapter = chapters.length > 0 ? chapters[0] : null;
-        const thumbUrl = firstChapter && firstChapter.pages.length > 0 ? firstChapter.pages[0] : '';
+        // ========================================
+        // NEW: Get thumbnail from JSON
+        // ========================================
+        let thumbUrl = '';
+        let thumbAlt = displayTitle;
+        
+        // 1. Check for volume thumbnail in JSON
+        if (translations && translations.volumeThumbnails) {
+            const thumbKey = `volume_${volume}`;
+            if (translations.volumeThumbnails[thumbKey]) {
+                thumbUrl = translations.volumeThumbnails[thumbKey];
+            }
+        }
+        
+        // 2. Fallback: check for chapter thumbnail in JSON
+        if (!thumbUrl && translations && translations.chapterThumbnails) {
+            const firstChapterId = chapters.length > 0 ? chapters[0].id : null;
+            if (firstChapterId !== null && translations.chapterThumbnails[String(firstChapterId)]) {
+                thumbUrl = translations.chapterThumbnails[String(firstChapterId)];
+            }
+        }
+        
+        // 3. Final fallback: use first page of first chapter
+        if (!thumbUrl) {
+            const firstChapter = chapters.length > 0 ? chapters[0] : null;
+            if (firstChapter && firstChapter.pages.length > 0) {
+                thumbUrl = firstChapter.pages[0];
+            }
+        }
+
         const desc = chapters.length > 0 ? MANGA_CONFIG.getDescription(chapters[0].id) || '' : '';
 
         return `
             <div class="volume-card" data-volume="${volume}">
                 <div class="card-img-wrap">
-                    ${thumbUrl ? `<img class="card-img" src="${thumbUrl}" alt="${displayTitle}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><i class=\\'fas fa-book-open\\'></i></div>';">` : `<div class="card-img-placeholder"><i class="fas fa-book-open"></i></div>`}
+                    ${thumbUrl ? `<img class="card-img" src="${thumbUrl}" alt="${thumbAlt}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><i class=\\'fas fa-book-open\\'></i></div>';">` : `<div class="card-img-placeholder"><i class="fas fa-book-open"></i></div>`}
                 </div>
                 <div class="card-body">
                     <div class="card-title">${displayTitle}</div>

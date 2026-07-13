@@ -1,31 +1,78 @@
 [
-    {
+  {
+    "version": "2.0.0",
+    "build": "20260712",
+    "date": "July 12, 2026",
+    "subtitle": "Reader & Homepage Redesign",
+    "changes": {
+      "new": [
+        "Added a fully customizable reading experience inspired by modern e-book readers.",
+        "Added Light, Sepia, and Dark reading themes.",
+        "Added adjustable font size, font family, line spacing, and reading width settings.",
+        "Added persistent reader preferences using local storage.",
+        "Added a redesigned reader settings panel accessible directly from the reading view.",
+        "Added a new 'What is Adachi to Shimamura?' expandable information panel for first-time visitors.",
+        "Added informative series tags including the author, genre, publication year, and publisher.",
+        "Added a dedicated Extra Stories page featuring bonus stories, special chapters, and supplementary content.",
+        "Added 41 fully translated English Extra Stories.",
+        "Added support for user feedback submissions."
+      ],
+      "improvements": [
+        "Redesigned the homepage while preserving the original dreamy aesthetic.",
+        "Improved the overall visual hierarchy with better spacing and section balance.",
+        "Refined the glassmorphism throughout the site with softer borders, shadows, and transparency.",
+        "Redesigned the navigation cards with improved typography, spacing, and hover interactions.",
+        "Improved typography across the website with a stronger emphasis on readability.",
+        "Refined the hero section to better showcase the bicycle illustration.",
+        "Enhanced release cards with improved layouts and clearer information hierarchy.",
+        "Replaced the previous About This Site section with a dedicated introduction to the series.",
+        "Improved the language selector with cleaner interactions and visual polish.",
+        "Enhanced background effects including clouds, stars, floating elements, and animations.",
+        "Improved button hover states and microinteractions throughout the interface.",
+        "Increased spacing and consistency across all major sections.",
+        "Standardized border radii, shadows, transitions, and component spacing for a more cohesive design.",
+        "Optimized the reading experience for desktop, tablet, and mobile devices.",
+        "Improved the organization and discoverability of bonus content through the new Extra Stories archive."
+      ],
+      "fixes": [
+        "Fixed inconsistent spacing across multiple homepage components.",
+        "Fixed various alignment inconsistencies in cards and interactive elements.",
+        "Fixed typography inconsistencies throughout the site.",
+        "Fixed visual inconsistencies between different glass panels.",
+        "Improved responsiveness across a variety of screen sizes."
+      ],
+      "notes": [
+        "This update delivers the largest visual refresh since launch, introducing a significantly improved reading experience, a redesigned homepage, and a dedicated Extra Stories archive containing 41 English-translated bonus stories."
+      ]
+    }
+  },
+  {
     "version": "1.4.0",
     "build": "20260710",
     "date": "July 10, 2026",
     "subtitle": "Statistics & About Update",
     "changes": {
-        "new": [
+      "new": [
         "Added the Stats for Nerds page with interactive charts and visualizations.",
         "Added a dedicated About page featuring project information, translation credits, legal notices, version history, and support resources.",
         "Added a Support the Original Work section with official links for the light novel, manga, author, and related resources.",
         "Added a Track section with links to popular tracking platforms such as MyAnimeList, AniList, MangaUpdates, Anime-Planet, and Kitsu."
-        ],
-        "improvements": [
+      ],
+      "improvements": [
         "Expanded the website with additional reference resources.",
         "Improved overall navigation and presentation across the site.",
         "Reorganized the About page by placing the Support the Original Work section before the Legal Notice section.",
         "Improved the consistency of the Support and Track sections with unified button styles and layouts."
-        ],
-        "fixes": [
+      ],
+      "fixes": [
         "Fixed icons that were not displaying correctly in the Support the Original Work section.",
         "Fixed branding icons across Support and Track buttons for better visual consistency."
-        ],
-        "notes": [
+      ],
+      "notes": [
         "This update focuses on expanding the archive with informational pages and improving the overall user experience."
-        ]
+      ]
     }
-    },
+  },
   {
     "version": "1.3.0",
     "build": "20260709",

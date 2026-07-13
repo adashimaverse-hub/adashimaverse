@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extra Stories · Adachi to Shimamura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Quicksand:wght@300;400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=EB+Garamond:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/extra-stories.css" />
+  <link rel="stylesheet" href="../css/lang-switch.css" />
+  <link rel="stylesheet" href="./src/components/styles/scrollbar.css" />
+</head>
+<body>
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <main class="extra-main">
+    <!-- Sticky Back Button -->
+    <div class="back-button-sticky" onclick="history.back()">
+      <i class="fas fa-arrow-left"></i> <span id="backLabel">Back</span>
+    </div>
+
+    <!-- Header with Language Controls -->
+    <div class="extra-header">
+      <div class="header-top-controls">
+        <div class="lang-controls">
+          <div class="lang-wrapper">
+            <i class="fas fa-globe"></i>
+            <div class="lang-dropdown" id="langDropdown">
+              <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                <span id="langSelectedLabel">Español</span>
+                <i class="fas fa-chevron-down lang-caret"></i>
+              </button>
+              <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+                <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+                <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="extra-hero">
+      <div class="extra-hero-content">
+        <h1 class="extra-hero-title"><i class="fas fa-book-open"></i> <span id="pageTitle">Extra Stories</span></h1>
+        <p class="extra-hero-subtitle" id="pageSubtitle">
+          A collection of official side stories, bonus chapters, and special content from the Adachi to Shimamura series.
+        </p>
+      </div>
+    </section>
+
+    <!-- Statistics Bar -->
+    <div class="extra-stats" id="statsBar">
+      <div class="stat-item">
+        <i class="fas fa-book"></i>
+        <span class="stat-number" id="totalStories">0</span>
+        <span id="statsStories">Total Stories</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-layer-group"></i>
+        <span class="stat-number" id="totalVolumes">0</span>
+        <span id="statsVolumes">Volumes Covered</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-language"></i>
+        <span class="stat-number" id="totalTranslated">0</span>
+        <span id="statsTranslated">Translated</span>
+      </div>
+    </div>
+
+    <!-- Search & Controls -->
+    <div class="extra-controls">
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search by title, type, or store..." aria-label="Search stories" />
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
+
+    <!-- Story Grid - Grouped by Volume -->
+    <div class="extra-grid" id="storyGrid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Sources Section -->
+    <section class="extra-sources" id="sourcesSection">
+      <div class="sources-header" id="sourcesToggle">
+        <div class="sources-title-wrapper">
+          <i class="fas fa-archive"></i>
+          <h2 class="sources-title"><span id="sourcesTitle">Sources</span></h2>
+          <span class="sources-badge" id="sourcesCount">0 sources</span>
+        </div>
+        <button class="sources-toggle-btn" id="sourcesToggleBtn" aria-expanded="false">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+      
+      <div class="sources-body" id="sourcesBody">
+        <p class="sources-description" id="sourcesDescription">
+          A complete archive of all extra stories, bonus chapters, and special content from the Adachi to Shimamura series, organized by their original source.
+        </p>
+        
+        <!-- Quick filter badges -->
+        <div class="sources-filter" id="sourcesFilter">
+          <button class="source-filter-btn active" data-filter="all">All</button>
+          <button class="source-filter-btn" data-filter="manga">Manga</button>
+          <button class="source-filter-btn" data-filter="light_novel">Light Novel</button>
+          <button class="source-filter-btn" data-filter="miscellaneous">Misc.</button>
+          <button class="source-filter-btn" data-filter="kakuyomu">Kakuyomu</button>
+        </div>
+
+        <div id="sourcesContainer">
+          <!-- Rendered by JavaScript from sources.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="extra-footer" id="footerContent">
+      <p>Adachi to Shimamura and all related rights belong to Hitoma Iruma</p>
+      <p class="footer-sub">Created with love by fans, for fans · Not affiliated with any official entity</p>
+    </footer>
+  </main>
+
+  <!-- Floating Astronaut -->
+  <div class="floating-adashima">
+    <img src="../../assets/Imagenes/astronauta.png" alt="Adashima Astronauta" loading="lazy" decoding="async" onerror="this.style.display='none'" />
+  </div>
+
+  <!-- ===== READER MODAL ===== -->
+  <div class="reader-overlay" id="readerOverlay">
+    <div class="reader-modal">
+      <!-- Reader Header -->
+      <div class="reader-header">
+        <div class="reader-header-left">
+          <button class="reader-close" id="readerClose" aria-label="Close reader">
+            <i class="fas fa-arrow-left"></i> <span id="readerBackLabel">Back</span>
+          </button>
+        </div>
+        <div class="reader-header-right">
+          <button class="reader-settings-btn" id="readerSettingsBtn" aria-label="Reading settings">
+            <i class="fas fa-sliders-h"></i>
+          </button>
+          <div class="reader-nav">
+            <button class="reader-nav-btn" id="readerPrev" aria-label="Previous story">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="reader-nav-btn" id="readerNext" aria-label="Next story">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reader Progress -->
+      <div class="reader-progress-wrap">
+        <div class="reader-progress-fill" id="readerProgress" style="width:0%"></div>
+      </div>
+
+      <!-- Reader Body -->
+      <div class="reader-body" id="readerBody">
+        <div class="reader-content" id="readerContent">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Settings Panel -->
+      <div class="reader-settings-panel" id="readerSettingsPanel">
+        <div class="settings-header">
+          <span class="settings-title">Reading Settings</span>
+          <button class="settings-close" id="settingsClose" aria-label="Close settings">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="settings-body">
+          <!-- Theme -->
+          <div class="settings-group">
+            <label class="settings-label">Theme</label>
+            <div class="settings-theme-options">
+              <button class="settings-theme-btn active" data-theme="light" aria-label="Light theme">
+                <span class="theme-preview light"></span>
+                Light
+              </button>
+              <button class="settings-theme-btn" data-theme="sepia" aria-label="Sepia theme">
+                <span class="theme-preview sepia"></span>
+                Sepia
+              </button>
+              <button class="settings-theme-btn" data-theme="dark" aria-label="Dark theme">
+                <span class="theme-preview dark"></span>
+                Dark
+              </button>
+            </div>
+          </div>
+
+          <!-- Font Size -->
+          <div class="settings-group">
+            <label class="settings-label">Font Size</label>
+            <div class="settings-font-size">
+              <button class="settings-size-btn" id="fontSizeDecrease" aria-label="Decrease font size">
+                <i class="fas fa-minus"></i>
+              </button>
+              <span class="settings-size-value" id="fontSizeValue">22px</span>
+              <button class="settings-size-btn" id="fontSizeIncrease" aria-label="Increase font size">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Font Family -->
+          <div class="settings-group">
+            <label class="settings-label">Font Family</label>
+            <div class="settings-font-family">
+              <select id="fontFamilySelect" class="settings-select">
+                <option value="'Source Serif 4', Georgia, serif">Source Serif 4</option>
+                <option value="'EB Garamond', Georgia, serif">EB Garamond</option>
+                <option value="'Cormorant Garamond', Georgia, serif">Cormorant Garamond</option>
+                <option value="'Noto Serif', Georgia, serif">Noto Serif</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="serif">System Serif</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Line Height -->
+          <div class="settings-group">
+            <label class="settings-label">Line Height</label>
+            <div class="settings-line-height">
+              <button class="settings-lh-btn" data-lh="1.7">Compact</button>
+              <button class="settings-lh-btn active" data-lh="1.9">Comfortable</button>
+              <button class="settings-lh-btn" data-lh="2.1">Relaxed</button>
+            </div>
+          </div>
+
+          <!-- Reading Width -->
+          <div class="settings-group">
+            <label class="settings-label">Reading Width</label>
+            <div class="settings-width">
+              <button class="settings-width-btn" data-width="620">Narrow</button>
+              <button class="settings-width-btn active" data-width="700">Medium</button>
+              <button class="settings-width-btn" data-width="780">Wide</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-message" class="toast-message"></div>
+
+  <script>
+    // ========================================
+    // EXTRA STORIES - MAIN LOGIC
+    // ========================================
+
+    let currentLang = localStorage.getItem('lang') || 'es';
+    let translations = null;
+    let stories = [];
+    let filteredStoriesCache = [];
+    let currentStoryIndex = -1;
+    let isSwitching = false;
+    let sourcesData = null;
+
+    // ========================================
+    // READER SETTINGS
+    // ========================================
+    const READER_SETTINGS_KEY = 'adashima_reader_settings';
+    
+    const defaultSettings = {
+      theme: 'light',
+      fontSize: 22,
+      fontFamily: "'Source Serif 4', Georgia, serif",
+      lineHeight: 1.9,
+      readingWidth: 700
+    };
+
+    let readerSettings = null;
+
+    function loadReaderSettings() {
+      try {
+        const saved = localStorage.getItem(READER_SETTINGS_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          readerSettings = { ...defaultSettings, ...parsed };
+        } else {
+          readerSettings = { ...defaultSettings };
+        }
+      } catch (e) {
+        readerSettings = { ...defaultSettings };
+      }
+      return readerSettings;
+    }
+
+    function saveReaderSettings() {
+      try {
+        localStorage.setItem(READER_SETTINGS_KEY, JSON.stringify(readerSettings));
+      } catch (e) {
+        // Ignore
+      }
+    }
+
+    function applyReaderSettings() {
+      if (!readerSettings) return;
+      
+      const content = document.getElementById('readerContent');
+      if (!content) return;
+
+      // Apply theme
+      const overlay = document.getElementById('readerOverlay');
+      const modal = document.querySelector('.reader-modal');
+      const body = document.querySelector('.reader-body');
+      
+      // Remove existing theme classes
+      overlay.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
+      modal.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
+      body.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
+      
+      // Add current theme
+      overlay.classList.add(`theme-${readerSettings.theme}`);
+      modal.classList.add(`theme-${readerSettings.theme}`);
+      body.classList.add(`theme-${readerSettings.theme}`);
+
+      // Apply font size to text
+      const textEl = content.querySelector('.reader-text');
+      if (textEl) {
+        textEl.style.fontSize = `${readerSettings.fontSize}px`;
+      }
+
+      // Apply font family to text
+      if (textEl) {
+        textEl.style.fontFamily = readerSettings.fontFamily;
+      }
+
+      // Apply line height to paragraphs
+      const paragraphs = content.querySelectorAll('.reader-text p');
+      paragraphs.forEach(p => {
+        p.style.lineHeight = readerSettings.lineHeight;
+      });
+
+      // Apply reading width
+      if (content) {
+        content.style.maxWidth = `${readerSettings.readingWidth}px`;
+      }
+    }
+
+    function updateSettingsUI() {
+      if (!readerSettings) return;
+
+      // Theme buttons
+      document.querySelectorAll('.settings-theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === readerSettings.theme);
+      });
+
+      // Font size
+      document.getElementById('fontSizeValue').textContent = `${readerSettings.fontSize}px`;
+
+      // Font family
+      document.getElementById('fontFamilySelect').value = readerSettings.fontFamily;
+
+      // Line height
+      document.querySelectorAll('.settings-lh-btn').forEach(btn => {
+        btn.classList.toggle('active', parseFloat(btn.dataset.lh) === readerSettings.lineHeight);
+      });
+
+      // Reading width
+      document.querySelectorAll('.settings-width-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.width) === readerSettings.readingWidth);
+      });
+    }
+
+    function toggleSettingsPanel(show) {
+      const panel = document.getElementById('readerSettingsPanel');
+      if (!panel) return;
+
+      if (show === undefined) {
+        panel.classList.toggle('open');
+      } else if (show) {
+        panel.classList.add('open');
+      } else {
+        panel.classList.remove('open');
+      }
+    }
+
+    // ========================================
+    // FALLBACK TRANSLATIONS
+    // ========================================
+    const FALLBACK_TRANSLATIONS = {
+      es: {
+        pageTitle: "Historias Extra",
+        pageSubtitle: "Una colección de historias secundarias oficiales, capítulos adicionales y contenido especial de la serie Adachi to Shimamura.",
+        searchPlaceholder: "Buscar por título, tipo o tienda...",
+        readButton: "Leer",
+        noResults: "No se encontraron historias.",
+        back: "Volver",
+        loading: "Cargando...",
+        volume: "Volumen",
+        store: "Tienda",
+        translatorNote: "Nota del Traductor",
+        statsStories: "Historias Totales",
+        statsVolumes: "Volúmenes Cubiertos",
+        statsTranslated: "Traducidas",
+        sourcesTitle: "Fuentes",
+        sourcesDescription: "Un archivo completo de todas las historias extra, capítulos de bonificación y contenido especial de la serie Adachi to Shimamura, organizados por su fuente original."
+      },
+      en: {
+        pageTitle: "Extra Stories",
+        pageSubtitle: "A collection of official side stories, bonus chapters, and special content from the Adachi to Shimamura series.",
+        searchPlaceholder: "Search by title, type, or store...",
+        readButton: "Read",
+        noResults: "No stories found.",
+        back: "Back",
+        loading: "Loading...",
+        volume: "Volume",
+        store: "Store",
+        translatorNote: "Translator's Note",
+        statsStories: "Total Stories",
+        statsVolumes: "Volumes Covered",
+        statsTranslated: "Translated",
+        sourcesTitle: "Sources",
+        sourcesDescription: "A complete archive of all extra stories, bonus chapters, and special content from the Adachi to Shimamura series, organized by their original source."
+      }
+    };
+
+    // ========================================
+    // PARTICLES
+    // ========================================
+    function createParticles() {
+      const container = document.getElementById('particles');
+      if (!container) return;
+      for (let i = 0; i < 40; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 10 + 's';
+        star.style.animationDuration = (8 + Math.random() * 8) + 's';
+        star.style.width = (2 + Math.random() * 3) + 'px';
+        star.style.height = star.style.width;
+        container.appendChild(star);
+      }
+    }
+
+    // ========================================
+    // TOAST MESSAGE
+    // ========================================
+    function showMessage(msg) {
+      const t = document.getElementById('toast-message');
+      if (!t) return;
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 3000);
+    }
+
+    // ========================================
+    // LANGUAGE DROPDOWN
+    // ========================================
+    function updateLangDropdownLabel() {
+      const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
+      const labelEl = document.getElementById('langSelectedLabel');
+      if (selectedOption && labelEl) {
+        labelEl.textContent = selectedOption.getAttribute('data-label');
+        document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('selected'));
+        selectedOption.classList.add('selected');
+      }
+    }
+
+    function getText(key) {
+      if (!translations) return key;
+      const keys = key.split('.');
+      let value = translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) value = value[k];
+        else return key;
+      }
+      return value || key;
+    }
+
+    // ========================================
+    // LOAD TRANSLATIONS
+    // ========================================
+    async function loadTranslations(lang) {
+      try {
+        const response = await fetch(`../data/extras/${lang}.json?v=${Date.now()}`);
+        if (!response.ok) throw new Error('Failed to load translations');
+        const data = await response.json();
+        translations = data;
+        return data;
+      } catch (e) {
+        console.warn('Failed to load translations, using fallback:', e);
+        translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
+        return translations;
+      }
+    }
+
+    // ========================================
+    // LOAD STORIES
+    // ========================================
+    async function loadStories(lang) {
+      try {
+        const response = await fetch(`../data/extras/${lang}/index.json?v=${Date.now()}`);
+        if (!response.ok) throw new Error('Failed to load story index');
+        const data = await response.json();
+        stories = data.stories || [];
+        filteredStoriesCache = stories;
+        return stories;
+      } catch (e) {
+        console.warn('Failed to load stories:', e.message);
+        stories = [];
+        filteredStoriesCache = [];
+        return [];
+      }
+    }
+
+    // ========================================
+    // LOAD STORY CONTENT
+    // ========================================
+    async function loadStoryContent(lang, storyId) {
+      try {
+        const response = await fetch(`../data/extras/${lang}/${storyId}.json?v=${Date.now()}`);
+        if (!response.ok) throw new Error('Failed to load story content');
+        return await response.json();
+      } catch (e) {
+        console.warn('Failed to load story content:', e.message);
+        return null;
+      }
+    }
+
+    // ========================================
+    // LOAD SOURCES DATA
+    // ========================================
+    async function loadSources() {
+      try {
+        const response = await fetch(`../data/extras/sources.json?v=${Date.now()}`);
+        if (!response.ok) throw new Error('Failed to load sources');
+        const data = await response.json();
+        sourcesData = data.sources;
+        return sourcesData;
+      } catch (e) {
+        console.warn('Failed to load sources:', e.message);
+        return null;
+      }
+    }
+
+    // ========================================
+    // RENDER SOURCES FROM JSON
+    // ========================================
+    function renderSources(filter = 'all') {
+      if (!sourcesData) return;
+      
+      const container = document.getElementById('sourcesContainer');
+      if (!container) return;
+
+      let totalSources = 0;
+      let html = '';
+
+      const categories = ['manga', 'light_novel', 'miscellaneous', 'kakuyomu'];
+      const activeCategories = filter === 'all' ? categories : [filter];
+
+      if (sourcesData.manga && activeCategories.includes('manga')) {
+        const count = sourcesData.manga.stories.length;
+        totalSources += count;
+        html += `
+          <div class="source-category" data-category="manga">
+            <div class="source-category-header">
+              <span class="source-category-title">
+                <i class="fas ${sourcesData.manga.icon}"></i> ${sourcesData.manga.title}
+                <span class="source-category-count">${count}</span>
+              </span>
+            </div>
+            <div class="source-list">
+              ${sourcesData.manga.stories.map(story => `
+                <div class="source-item">
+                  <span class="source-volume">${story.volume}</span>
+                  <span class="source-story"><i class="fas fa-angle-right"></i> ${story.title}</span>
+                  <span class="source-origin"><i class="fas fa-circle"></i> ${story.origin}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (sourcesData.light_novel && activeCategories.includes('light_novel')) {
+        const ln = sourcesData.light_novel;
+        const volumes = Object.values(ln.volumes);
+        const totalCount = volumes.reduce((sum, v) => sum + v.stories.length, 0);
+        totalSources += totalCount;
+        
+        html += `
+          <div class="source-category" data-category="light_novel">
+            <div class="source-category-header">
+              <span class="source-category-title">
+                <i class="fas ${ln.icon}"></i> ${ln.title}
+                <span class="source-category-count">${totalCount}</span>
+              </span>
+            </div>
+            ${volumes.map(volume => `
+              <div class="source-subcategory">
+                <div class="source-subcategory-title">${volume.title}</div>
+                <div class="source-list">
+                  ${volume.stories.map(story => `
+                    <div class="source-item">
+                      <span class="source-story"><i class="fas fa-angle-right"></i> ${story.title}</span>
+                      <span class="source-origin"><i class="fas fa-circle"></i> ${story.origin}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      if (sourcesData.miscellaneous && activeCategories.includes('miscellaneous')) {
+        const count = sourcesData.miscellaneous.stories.length;
+        totalSources += count;
+        html += `
+          <div class="source-category" data-category="miscellaneous">
+            <div class="source-category-header">
+              <span class="source-category-title">
+                <i class="fas ${sourcesData.miscellaneous.icon}"></i> ${sourcesData.miscellaneous.title}
+                <span class="source-category-count">${count}</span>
+              </span>
+            </div>
+            <div class="source-list">
+              ${sourcesData.miscellaneous.stories.map(story => `
+                <div class="source-item">
+                  <span class="source-story"><i class="fas fa-angle-right"></i> ${story.title}</span>
+                  <span class="source-origin"><i class="fas fa-circle"></i> ${story.origin}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (sourcesData.kakuyomu && activeCategories.includes('kakuyomu')) {
+        const count = sourcesData.kakuyomu.stories.length;
+        totalSources += count;
+        html += `
+          <div class="source-category" data-category="kakuyomu">
+            <div class="source-category-header">
+              <span class="source-category-title">
+                <i class="fas ${sourcesData.kakuyomu.icon}"></i> ${sourcesData.kakuyomu.title}
+                <span class="source-category-count">${count}</span>
+              </span>
+            </div>
+            <div class="source-list source-list-links">
+              ${sourcesData.kakuyomu.stories.map(story => `
+                <div class="source-item">
+                  <span class="source-story"><i class="fas fa-angle-right"></i> ${story.title}</span>
+                  <span class="source-origin"><i class="fas fa-circle"></i> ${story.origin}</span>
+                  ${story.url ? `<a href="${story.url}" target="_blank" rel="noopener noreferrer" class="source-link"><i class="fas fa-external-link-alt"></i> Read</a>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('sourcesCount').textContent = `${totalSources} sources`;
+      container.innerHTML = html || '<p class="sources-empty">No sources found for this filter.</p>';
+    }
+
+    // ========================================
+    // SOURCES TOGGLE
+    // ========================================
+    function initSourcesToggle() {
+      const toggleBtn = document.getElementById('sourcesToggleBtn');
+      const sourcesBody = document.getElementById('sourcesBody');
+      const sourcesHeader = document.getElementById('sourcesToggle');
+      
+      sourcesBody.classList.remove('open');
+      toggleBtn.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+
+      function toggleSources() {
+        const isOpen = sourcesBody.classList.toggle('open');
+        toggleBtn.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+
+      sourcesHeader.addEventListener('click', (e) => {
+        if (e.target.closest('.source-filter-btn') || e.target.closest('.source-link')) return;
+        toggleSources();
+      });
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSources();
+      });
+
+      const filterBtns = document.querySelectorAll('.source-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          renderSources(filter);
+        });
+      });
+    }
+
+    // ========================================
+    // UPDATE STATISTICS
+    // ========================================
+    function updateStats(storyList) {
+      const total = storyList.length;
+      const volumes = new Set(storyList.map(s => s.volume || 'Uncategorized'));
+      const translated = storyList.filter(s => s.language && s.language !== 'Japanese').length;
+
+      document.getElementById('totalStories').textContent = total;
+      document.getElementById('totalVolumes').textContent = volumes.size;
+      document.getElementById('totalTranslated').textContent = translated;
+
+      document.getElementById('statsStories').textContent = getText('statsStories');
+      document.getElementById('statsVolumes').textContent = getText('statsVolumes');
+      document.getElementById('statsTranslated').textContent = getText('statsTranslated');
+    }
+
+    // ========================================
+    // RENDER STORY GRID - GROUPED BY VOLUME
+    // ========================================
+    function renderStories(filter = '') {
+      const grid = document.getElementById('storyGrid');
+      if (!grid) return;
+
+      const searchTerm = filter.toLowerCase().trim();
+
+      // Filter stories and store in cache
+      if (searchTerm) {
+        filteredStoriesCache = stories.filter(story => {
+          const title = (story.title || '').toLowerCase();
+          const type = (story.type || '').toLowerCase();
+          const store = (story.store || '').toLowerCase();
+          const volume = (story.volume || '').toLowerCase();
+          const description = (story.description || '').toLowerCase();
+          const tags = (story.tags || []).join(' ').toLowerCase();
+          return title.includes(searchTerm) || type.includes(searchTerm) || 
+                 store.includes(searchTerm) || volume.includes(searchTerm) ||
+                 description.includes(searchTerm) || tags.includes(searchTerm);
+        });
+      } else {
+        filteredStoriesCache = stories;
+      }
+
+      updateStats(filteredStoriesCache);
+
+      if (filteredStoriesCache.length === 0) {
+        grid.innerHTML = `
+          <div class="extra-empty-state">
+            <i class="fas fa-book-open"></i>
+            <p>${getText('noResults')}</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Group filtered stories by volume
+      const groupedStories = {};
+      filteredStoriesCache.forEach(story => {
+        const volumeKey = story.volume || 'Uncategorized';
+        if (!groupedStories[volumeKey]) {
+          groupedStories[volumeKey] = [];
+        }
+        groupedStories[volumeKey].push(story);
+      });
+
+      const sortedVolumes = Object.keys(groupedStories).sort((a, b) => {
+        if (a === 'Uncategorized') return 1;
+        if (b === 'Uncategorized') return -1;
+        const numA = parseInt(a.replace(/\D/g, '')) || 0;
+        const numB = parseInt(b.replace(/\D/g, '')) || 0;
+        return numA - numB;
+      });
+
+      let html = '';
+      sortedVolumes.forEach(volume => {
+        const storiesInVolume = groupedStories[volume];
+        
+        html += `
+          <div class="volume-group">
+            <div class="volume-header">
+              <div class="volume-cover">
+                <i class="fas fa-book"></i>
+              </div>
+              <h2 class="volume-title">
+                ${volume === 'Uncategorized' ? 'Other Stories' : `${getText('volume')} ${volume}`}
+              </h2>
+              <span class="volume-count">${storiesInVolume.length} ${storiesInVolume.length === 1 ? 'story' : 'stories'}</span>
+            </div>
+            <div class="volume-stories">
+        `;
+
+        storiesInVolume.forEach((story) => {
+          // Find the index in the filtered cache
+          const actualIndex = filteredStoriesCache.indexOf(story);
+          
+          const typeBadge = story.type ? 
+            `<span class="story-type">${story.type}</span>` : '';
+          
+          const storeBadge = story.store ? 
+            `<span class="story-store-badge"><i class="fas fa-store"></i> ${story.store}</span>` : '';
+
+          html += `
+            <div class="story-card" data-index="${actualIndex}">
+              <div class="story-card-body">
+                <div class="story-meta">
+                  ${typeBadge}
+                  ${storeBadge}
+                </div>
+                <h3 class="story-title">${story.title}</h3>
+                <p class="story-description">${story.description || ''}</p>
+                <div class="story-footer">
+                  <button class="story-read-btn" data-story-id="${story.id}" data-index="${actualIndex}">
+                    <i class="fas fa-book-open"></i> ${getText('readButton')}
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+
+      grid.querySelectorAll('.story-read-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = parseInt(btn.dataset.index);
+          openReader(index);
+        });
+      });
+    }
+
+    // ========================================
+    // READER
+    // ========================================
+    async function openReader(index) {
+      // Use filteredStoriesCache instead of stories
+      const story = filteredStoriesCache[index];
+      if (!story) {
+        console.warn('Story not found at index:', index);
+        return;
+      }
+
+      currentStoryIndex = index;
+      const overlay = document.getElementById('readerOverlay');
+      const content = document.getElementById('readerContent');
+      const progress = document.getElementById('readerProgress');
+
+      content.innerHTML = `
+        <div class="reader-loading">
+          <div class="reader-spinner"></div>
+          <p>${getText('loading')}</p>
+        </div>
+      `;
+
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      loadReaderSettings();
+      applyReaderSettings();
+      updateSettingsUI();
+
+      const storyData = await loadStoryContent(currentLang, story.id);
+      
+      if (!storyData) {
+        content.innerHTML = `
+          <div class="reader-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Could not load story content for "${story.title}".</p>
+          </div>
+        `;
+        return;
+      }
+
+      const tagsHtml = (storyData.tags || []).map(tag => 
+        `<span class="reader-tag">${tag}</span>`
+      ).join('');
+
+      const storeHtml = storyData.store ? 
+        `<span class="reader-store"><i class="fas fa-store"></i> ${storyData.store}</span>` : '';
+
+      const translatorNoteHtml = storyData.translatorNote ? `
+        <div class="reader-translator-note">
+          <div class="reader-translator-note-label">
+            <i class="fas fa-pen-fancy"></i> ${getText('translatorNote')}
+          </div>
+          <p>${storyData.translatorNote}</p>
+        </div>
+      ` : '';
+
+      content.innerHTML = `
+        <div class="reader-heading">
+          <h1 class="reader-title">${storyData.title || story.title}</h1>
+          <div class="reader-meta">
+            <span class="reader-language">${storyData.language || story.language || 'English'}</span>
+            ${storeHtml}
+          </div>
+          <div class="reader-tags">${tagsHtml}</div>
+        </div>
+        <div class="reader-text">
+          ${(storyData.content || '').split('\n').map(paragraph => 
+            paragraph.trim() ? `<p>${paragraph}</p>` : ''
+          ).join('')}
+        </div>
+        ${translatorNoteHtml}
+      `;
+
+      applyReaderSettings();
+      progress.style.width = '0%';
+      updateReaderNav();
+      toggleSettingsPanel(false);
+    }
+
+    function updateReaderNav() {
+      const prevBtn = document.getElementById('readerPrev');
+      const nextBtn = document.getElementById('readerNext');
+
+      if (prevBtn) {
+        prevBtn.disabled = currentStoryIndex <= 0;
+        prevBtn.style.opacity = currentStoryIndex <= 0 ? '0.3' : '1';
+      }
+
+      if (nextBtn) {
+        nextBtn.disabled = currentStoryIndex >= filteredStoriesCache.length - 1;
+        nextBtn.style.opacity = currentStoryIndex >= filteredStoriesCache.length - 1 ? '0.3' : '1';
+      }
+    }
+
+    function closeReader() {
+      const overlay = document.getElementById('readerOverlay');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      currentStoryIndex = -1;
+      toggleSettingsPanel(false);
+    }
+
+    function navigateReader(direction) {
+      const newIndex = currentStoryIndex + direction;
+      if (newIndex < 0 || newIndex >= filteredStoriesCache.length) return;
+      openReader(newIndex);
+    }
+
+    // ========================================
+    // READER SETTINGS EVENT BINDING
+    // ========================================
+    function initReaderSettings() {
+      const settingsBtn = document.getElementById('readerSettingsBtn');
+      const settingsClose = document.getElementById('settingsClose');
+      const panel = document.getElementById('readerSettingsPanel');
+
+      settingsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSettingsPanel();
+      });
+
+      settingsClose.addEventListener('click', () => {
+        toggleSettingsPanel(false);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (panel.classList.contains('open') && !panel.contains(e.target) && !settingsBtn.contains(e.target)) {
+          toggleSettingsPanel(false);
+        }
+      });
+
+      document.querySelectorAll('.settings-theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          readerSettings.theme = btn.dataset.theme;
+          saveReaderSettings();
+          applyReaderSettings();
+          updateSettingsUI();
+        });
+      });
+
+      document.getElementById('fontSizeDecrease').addEventListener('click', () => {
+        if (readerSettings.fontSize > 16) {
+          readerSettings.fontSize -= 1;
+          saveReaderSettings();
+          applyReaderSettings();
+          updateSettingsUI();
+        }
+      });
+
+      document.getElementById('fontSizeIncrease').addEventListener('click', () => {
+        if (readerSettings.fontSize < 30) {
+          readerSettings.fontSize += 1;
+          saveReaderSettings();
+          applyReaderSettings();
+          updateSettingsUI();
+        }
+      });
+
+      document.getElementById('fontFamilySelect').addEventListener('change', (e) => {
+        readerSettings.fontFamily = e.target.value;
+        saveReaderSettings();
+        applyReaderSettings();
+        updateSettingsUI();
+      });
+
+      document.querySelectorAll('.settings-lh-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          readerSettings.lineHeight = parseFloat(btn.dataset.lh);
+          saveReaderSettings();
+          applyReaderSettings();
+          updateSettingsUI();
+        });
+      });
+
+      document.querySelectorAll('.settings-width-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          readerSettings.readingWidth = parseInt(btn.dataset.width);
+          saveReaderSettings();
+          applyReaderSettings();
+          updateSettingsUI();
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (panel.classList.contains('open')) {
+            toggleSettingsPanel(false);
+          }
+        }
+      });
+    }
+
+    // ========================================
+    // LANGUAGE SWITCHER
+    // ========================================
+    async function switchLanguage(lang) {
+      if (isSwitching || currentLang === lang) return;
+      isSwitching = true;
+      
+      const langToggle = document.getElementById('langToggle');
+      if (langToggle) langToggle.disabled = true;
+
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+      
+      updateLangDropdownLabel();
+
+      await loadTranslations(lang);
+      await loadStories(lang);
+      renderStories(document.getElementById('searchInput')?.value || '');
+      
+      await loadSources();
+      renderSources(document.querySelector('.source-filter-btn.active')?.dataset.filter || 'all');
+
+      document.getElementById('pageTitle').textContent = getText('pageTitle');
+      document.getElementById('pageSubtitle').textContent = getText('pageSubtitle');
+      document.getElementById('searchInput').placeholder = getText('searchPlaceholder');
+      
+      const backLabel = document.getElementById('backLabel');
+      if (backLabel) backLabel.textContent = getText('back');
+      
+      const readerBackLabel = document.getElementById('readerBackLabel');
+      if (readerBackLabel) readerBackLabel.textContent = getText('back');
+
+      document.getElementById('sourcesTitle').textContent = getText('sourcesTitle');
+      document.getElementById('sourcesDescription').textContent = getText('sourcesDescription');
+
+      if (langToggle) langToggle.disabled = false;
+      isSwitching = false;
+    }
+
+    // ========================================
+    // INIT
+    // ========================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      createParticles();
+
+      await loadTranslations(currentLang);
+      await loadStories(currentLang);
+      await loadSources();
+
+      document.getElementById('pageTitle').textContent = getText('pageTitle');
+      document.getElementById('pageSubtitle').textContent = getText('pageSubtitle');
+      document.getElementById('searchInput').placeholder = getText('searchPlaceholder');
+      
+      const backLabel = document.getElementById('backLabel');
+      if (backLabel) backLabel.textContent = getText('back');
+      
+      const readerBackLabel = document.getElementById('readerBackLabel');
+      if (readerBackLabel) readerBackLabel.textContent = getText('back');
+
+      document.getElementById('sourcesTitle').textContent = getText('sourcesTitle');
+      document.getElementById('sourcesDescription').textContent = getText('sourcesDescription');
+
+      renderStories();
+      renderSources('all');
+      initSourcesToggle();
+      initReaderSettings();
+
+      loadReaderSettings();
+
+      document.getElementById('searchInput').addEventListener('input', function() {
+        renderStories(this.value);
+      });
+
+      document.getElementById('readerClose').addEventListener('click', closeReader);
+      document.getElementById('readerOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeReader();
+      });
+      document.getElementById('readerPrev').addEventListener('click', () => navigateReader(-1));
+      document.getElementById('readerNext').addEventListener('click', () => navigateReader(1));
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const panel = document.getElementById('readerSettingsPanel');
+          if (panel && panel.classList.contains('open')) {
+            return;
+          }
+          closeReader();
+        }
+        if (document.getElementById('readerOverlay').classList.contains('active')) {
+          if (e.key === 'ArrowLeft') navigateReader(-1);
+          if (e.key === 'ArrowRight') navigateReader(1);
+        }
+      });
+
+      const langDropdown = document.getElementById('langDropdown');
+      const langToggle = document.getElementById('langToggle');
+      if (langDropdown && langToggle) {
+        langToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (langToggle.disabled) return;
+          const isOpen = langDropdown.classList.toggle('open');
+          langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+          option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            langDropdown.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+            switchLanguage(lang);
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (langDropdown.classList.contains('open') && !langDropdown.contains(e.target)) {
+            langDropdown.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      updateLangDropdownLabel();
+    });
+  </script>
+</body>
+</html>

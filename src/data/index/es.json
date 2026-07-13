@@ -2,29 +2,99 @@
   "header": {
     "title": "Adachi to Shimamura"
   },
-  "nav": {
-    "timeline": "Línea del Tiempo",
-    "novels": "Novelas Ligeras",
-    "manga": "Manga",
-    "drama": "CD Dramas",
-    "miniAnime": "Mini Anime",
-    "constellation": "Constelación",
-    "anime": "Anime",
-    "others": "Otros",
-    "stats": "Estadísticas",
-    "about": "Acerca de"
+  "hero": {
+    "subtitle": "Una historia de encuentros, estrellas y el calor de un verano eterno."
   },
-  "tooltips": {
-    "timeline": "Sigue la historia de Adachi y Shimamura a través de los años escolares.",
-    "novels": "Lee las novelas ligeras de Adachi to Shimamura.",
-    "manga": "Explora el manga de Adachi to Shimamura.",
-    "drama": "Escucha los CD dramas de Adachi to Shimamura.",
-    "miniAnime": "Disfruta de los episodios del Mini Anime de Adachi to Shimamura.",
-    "constellation": "Forma constelaciones y desbloquea historias extra.",
-    "anime": "Mira el anime de Adachi to Shimamura.",
-    "others": "Entrevistas, guías turísticas y contenido adicional.",
-    "stats": "Hojas de cálculo, gráficos y volcados de datos para los más devotos.",
-    "about": "Conoce el proyecto, créditos de traducción e historial de versiones."
+  "info": {
+    "title": "¿Qué es Adachi to Shimamura?",
+    "subtitle": "Para quienes visitan por primera vez",
+    "chips": ["Hitoma Iruma", "Yuri · Slice of Life", "Desde 2013", "Dengeki Bunko"],
+    "paragraphs": [
+      "<strong>Adachi to Shimamura</strong> es una novela ligera japonesa escrita por <strong>Hitoma Iruma</strong> e ilustrada por <strong>Non</strong>. La historia sigue la relación entre dos chicas de preparatoria: <strong>Adachi</strong>, una solitaria que prefiere pasar el tiempo en el gimnasio, y <strong>Shimamura</strong>, una joven despreocupada que suele faltar a clases.",
+      "Su amistad comienza en el segundo piso del gimnasio, donde se encuentran por casualidad. Poco a poco, lo que empieza como una conexión superficial se convierte en algo más profundo, tierno y complejo.",
+      "La obra ha sido adaptada al manga, al anime y a múltiples CD dramas, ganándose un lugar especial en el corazón de los lectores por su delicada exploración de la intimidad, la soledad y el primer amor."
+    ]
+  },
+  "nav": {
+    "items": [
+      {
+        "key": "timeline",
+        "title": "Línea del Tiempo",
+        "desc": "Recorre los momentos clave",
+        "icon": "fa-clock",
+        "tooltip": "Sigue la historia a través de los años escolares."
+      },
+      {
+        "key": "novels",
+        "title": "Novelas Ligeras",
+        "desc": "Sumérgete en la historia",
+        "icon": "fa-book",
+        "tooltip": "Lee las novelas ligeras completas."
+      },
+      {
+        "key": "manga",
+        "title": "Manga",
+        "desc": "La adaptación ilustrada",
+        "icon": "fa-pencil-alt",
+        "tooltip": "Explora el manga de Adachi to Shimamura."
+      },
+      {
+        "key": "extraStories",
+        "title": "Historias Extra",
+        "desc": "Contenido adicional",
+        "icon": "fa-star",
+        "tooltip": "Historias extra y capítulos especiales."
+      },
+      {
+        "key": "drama",
+        "title": "CD Dramas",
+        "desc": "Voces y música",
+        "icon": "fa-headphones",
+        "tooltip": "Escucha los CD dramas."
+      },
+      {
+        "key": "miniAnime",
+        "title": "Mini Anime",
+        "desc": "Episodios animados",
+        "icon": "fa-film",
+        "tooltip": "Disfruta del Mini Anime."
+      },
+      {
+        "key": "constellation",
+        "title": "Constelación",
+        "desc": "Descubre secretos",
+        "icon": "fa-star-and-crescent",
+        "tooltip": "Forma constelaciones y desbloquea historias."
+      },
+      {
+        "key": "anime",
+        "title": "Anime",
+        "desc": "La serie animada",
+        "icon": "fa-tv",
+        "tooltip": "Mira el anime de Adachi to Shimamura."
+      },
+      {
+        "key": "others",
+        "title": "Otros",
+        "desc": "Contenido variado",
+        "icon": "fa-ellipsis-h",
+        "tooltip": "Entrevistas, guías y más."
+      },
+      {
+        "key": "stats",
+        "title": "Estadísticas para Nerds",
+        "desc": "Datos y cifras",
+        "icon": "fa-chart-bar",
+        "tooltip": "Hojas de cálculo, gráficos y datos para los más devotos."
+      },
+      {
+        "key": "about",
+        "title": "Acerca de",
+        "desc": "Créditos y comunidad",
+        "icon": "fa-info-circle",
+        "tooltip": "Conoce el proyecto, créditos de traducción e historial de versiones."
+      }
+    ]
   },
   "release": {
     "lastUpdate": "Última actualización",
@@ -34,22 +104,38 @@
     "nextLabel": "Próximo lanzamiento",
     "nextBadge": "Novedad",
     "nextVol": "Adachi to Shimamura SS3",
-    "nextDate": "Septiembre, 2026",
-    "nextStatus": "TBA"
-  },
-  "about": {
-    "title": "Sobre este sitio",
-    "text": [
-      "Este es un sitio de fans sin fines de lucro dedicado a <strong>Adachi to Shimamura</strong>, creado con el objetivo de reunir en un solo lugar todo el contenido disponible de la obra en español.",
-      "Aquí encontrarás desde la línea temporal de la historia, las novelas ligeras, el manga, los CD dramas, el mini anime y mucho más. Todo el contenido está organizado para que puedas disfrutarlo fácilmente.",
-      "<strong>Adachi to Shimamura</strong> y todos sus derechos pertenecen a <strong>Hitoma Iruma</strong>. Este sitio no tiene afiliación oficial con los creadores o editores.",
-      "Hecho con ❤️ por fans, para fans."
-    ]
+    "nextDate": "Septiembre 10, 2026",
+    "nextStatus": "Por confirmar"
   },
   "news": {
     "text": "¡Bienvenidos a Adashima Latinoamérica!<br>Estamos trabajando en nuevas traducciones y contenido para ustedes.",
-    "hint": "Haz clic en mí para más noticias"
+    "hint": "Haz clic en mí para más noticias",
+    "tooltip": "¡Noticias!"
   },
   "footer": "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
-  "langLabel": "Español"
+  "langLabel": "Español",
+  "feedback": {
+    "title": "Enviar comentarios",
+    "subtitle": "¿Encontraste un error, una falta de ortografía, contenido faltante o tienes una sugerencia? Nos encantaría saber de ti.",
+    "typeLabel": "Tipo de comentario",
+    "typePlaceholder": "Selecciona un tipo...",
+    "typeBug": "Reporte de error",
+    "typeTranslation": "Corrección de traducción",
+    "typeMissing": "Contenido faltante",
+    "typeBroken": "Enlace roto",
+    "typeFeature": "Solicitud de función",
+    "typeGeneral": "Comentario general",
+    "titleLabel": "Título",
+    "titlePlaceholder": "Resumen breve de tu comentario",
+    "descLabel": "Descripción",
+    "descPlaceholder": "Proporciona detalles sobre tu comentario...",
+    "emailLabel": "Correo electrónico",
+    "emailHint": "Solo lo usaremos para hacer seguimiento si es necesario.",
+    "cancel": "Cancelar",
+    "submit": "Enviar comentario",
+    "sending": "Enviando...",
+    "successTitle": "¡Gracias!",
+    "successText": "Tu comentario se ha enviado correctamente.",
+    "footerBtn": "Enviar comentarios"
+  }
 }
