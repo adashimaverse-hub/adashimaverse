@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adashima · Novelas Ligeras</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../components/styles/menu.css">
+    <link rel="stylesheet" href="../css/lang-switch.css">
+    <link rel="stylesheet" href="../css/novelas.css">
+    <link rel="stylesheet" href="../css/pdf-modal.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+</head>
+<body>
+
+    <div class="particles" id="particles"></div>
+    <div id="menu-container" style="display: contents;"></div>
+
+    <div class="main-content">
+        <div class="header-container">
+            <div class="header-top-controls">
+                <div class="lang-controls">
+                    <div class="lang-wrapper">
+                        <i class="fas fa-globe"></i>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                                <span id="langSelectedLabel">Español</span>
+                                <i class="fas fa-chevron-down lang-caret"></i>
+                            </button>
+                            <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+                                <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+                                <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="update-title" id="page-title">Novelas Ligeras</h1>
+            <div id="general-downloads-container" class="general-downloads"></div>
+        </div>
+
+        <div class="library-controls" id="libraryControls">
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar por título, descripción, volumen..." aria-label="Buscar novelas">
+            </div>
+            <div class="view-toggle-group" role="group" aria-label="Vista de novelas">
+                <button class="view-toggle-btn active" data-view="list" id="viewListBtn"><i class="fas fa-list-ul"></i> Lista</button>
+                <button class="view-toggle-btn" data-view="grid" id="viewGridBtn"><i class="fas fa-th"></i> Cuadrícula</button>
+            </div>
+        </div>
+
+        <div class="update-box" id="novels-container">
+            <!-- dynamic content -->
+        </div>
+
+        <a href="Juego.html" class="floating-adashima" title="Ir al mini-juego" id="floating-link">
+            <img src="../../assets/Imagenes/Adashima_flotante2-Photoroom.png" alt="Adashima Chibi Floating" onerror="this.style.display='none'">
+        </a>
+
+        <div class="footer" id="footer-content">
+            Fan site no oficial de Adachi to Shimamura.<br>
+            Creado por fans, sin fines de lucro.<br>
+            Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.
+        </div>
+    </div>
+
+    <!-- PDF Modal (shared, rendered once) -->
+    <div class="pdf-modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="PDF Viewer">
+        <div class="pdf-modal-backdrop" id="pdfModalBackdrop"></div>
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h2 class="pdf-modal-title">Leyendo: <span id="pdfVolumeTitle">Volumen</span></h2>
+                <button class="pdf-modal-close" id="pdfModalClose" aria-label="Cerrar lector">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="pdf-modal-body">
+                <!-- PDF Viewer (reused) -->
+                <div class="custom-pdf-viewer" id="pdfViewerModal">
+                    <div class="pdf-loading-overlay" id="pdfLoadingModal">
+                        <div class="pdf-spinner"></div>
+                        <span class="pdf-loading-text" id="pdfLoadingTextModal">Cargando documento...</span>
+                    </div>
+                    <div class="pdf-toolbar">
+                        <div class="pdf-controls-group">
+                            <button class="pdf-btn" id="pdfZoomOutModal" title="Alejar (-)"><i class="fas fa-search-minus"></i></button>
+                            <span class="pdf-zoom-display" id="zoomDisplayModal">100%</span>
+                            <button class="pdf-btn" id="pdfZoomInModal" title="Acercar (+)"><i class="fas fa-search-plus"></i></button>
+                            <button class="pdf-btn pdf-btn-reset" id="pdfZoomResetModal" title="Restablecer zoom (0)"><i class="fas fa-sync-alt"></i></button>
+                        </div>
+                        <div class="pdf-controls-group">
+                            <button class="pdf-btn" id="pdfPrevModal" title="Página anterior (←)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="pdf-btn" id="pdfNextModal" title="Página siguiente (→)"><i class="fas fa-chevron-right"></i></button>
+                            <span class="pdf-page-info">Pág. <span id="pageNumModal">-</span> / <span id="pageCountModal">-</span></span>
+                            <input type="number" id="pageInputModal" class="pdf-page-input" min="1" placeholder="Ir a">
+                        </div>
+                        <div class="pdf-controls-group">
+                            <button class="pdf-btn" id="pdfFullscreenModal" title="Pantalla completa (F)"><i class="fas fa-expand" id="fsIconModal"></i></button>
+                            <button class="pdf-btn" id="pdfDownloadModal" title="Descargar PDF"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="pdf-progress-wrap">
+                        <div class="pdf-progress-fill" id="pdfProgressModal" style="width:0%"></div>
+                    </div>
+                    <div class="pdf-body">
+                        <div class="pdf-canvas-container" id="canvasContainerModal">
+                            <div class="pdf-canvas-wrapper" id="canvasWrapperModal">
+                                <canvas id="pdfRenderModal"></canvas>
+                            </div>
+                            <div class="pdf-page-indicator-mobile" id="mobileIndicatorModal" style="display:none">
+                                <span id="mobilePageNumModal">-</span>
+                                <span>/</span>
+                                <span id="mobilePageCountModal">-</span>
+                            </div>
+                            <div class="pdf-error-state" id="pdfErrorModal">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p id="pdfErrorMsgModal">Documento no disponible.</p>
+                                <button class="btn" id="pdfRetryModal" style="margin-top:8px;"><i class="fas fa-redo"></i> Reintentar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-message" class="toast-message"></div>
+
+    <script>
+    // ---- global state ----
+    let currentLang = localStorage.getItem('lang') || 'es';
+    let translations = null;
+    let volumeData = [];
+    let isSwitching = false;
+    let currentRenderVersion = 0;
+    let globalAbortController = new AbortController();
+    const pdfCache = new Map();
+    const PDFJS_VERSION = '2.16.105';
+    const PDFJS_CDN = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}`;
+    try {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `${PDFJS_CDN}/pdf.worker.min.js`;
+    } catch(e) {}
+
+    // ---- modal state ----
+    let modalPdfDoc = null;
+    let modalPageNum = 1;
+    let modalRendering = false;
+    let modalPendingPage = null;
+    let modalScale = 1.0;
+    let modalFitScale = 1.0;
+    let modalCurrentVolume = null;
+    let modalAbortController = new AbortController();
+
+    const FALLBACK_TRANSLATIONS = {
+        es: { 
+            pageTitle: "Adashima - Novelas Ligeras", 
+            headerTitle: "Novelas Ligeras", 
+            footer: "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.", 
+            floatingTitle: "Ir al mini-juego",
+            searchPlaceholder: "Buscar por título, descripción, volumen...",
+            viewList: "Lista",
+            viewGrid: "Cuadrícula",
+            readButton: "Leer",
+            noResults: "No se encontraron resultados",
+            modal: { reading: "Leyendo: ", closeReader: "Cerrar lector" },
+            toastMessages: { fileNotAvailable: "Archivo no disponible.", documentNotAvailable: "Documento no disponible.", loadingDocument: "Cargando documento...", errorOnPage: "Error en pág.", retry: "Reintentar" }, 
+            pdfControls: { zoomOut: "Alejar (-)", zoomIn: "Acercar (+)", zoomReset: "Restablecer zoom (0)", prevPage: "Página anterior (←)", nextPage: "Página siguiente (→)", page: "Pág.", goTo: "Ir a", fullscreen: "Pantalla completa (F)", downloadPDF: "Descargar PDF" }, 
+            volumes: [] 
+        },
+        en: { 
+            pageTitle: "Adashima - Light Novels", 
+            headerTitle: "Light Novels", 
+            footer: "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.", 
+            floatingTitle: "Go to mini-game",
+            searchPlaceholder: "Search by title, description, volume...",
+            viewList: "List",
+            viewGrid: "Grid",
+            readButton: "Read",
+            noResults: "No results found",
+            modal: { reading: "Reading: ", closeReader: "Close reader" },
+            toastMessages: { fileNotAvailable: "File not available.", documentNotAvailable: "Document not available.", loadingDocument: "Loading document...", errorOnPage: "Error on pg.", retry: "Retry" }, 
+            pdfControls: { zoomOut: "Zoom out (-)", zoomIn: "Zoom in (+)", zoomReset: "Reset zoom (0)", prevPage: "Previous page (←)", nextPage: "Next page (→)", page: "Pg.", goTo: "Go to", fullscreen: "Fullscreen (F)", downloadPDF: "Download PDF" }, 
+            volumes: [],
+            generalDownloads: { pdf: "Download PDF Full", epub: "Download EPUB Full" } 
+        }
+    };
+
+    async function loadTranslations(lang) {
+        try {
+            const response = await fetch(`../data/novelas/${lang}.json?v=${Date.now()}`);
+            if (!response.ok) throw new Error('Failed to load translations');
+            const data = await response.json();
+            translations = data;
+            volumeData = data.volumes || [];
+            return data;
+        } catch (e) {
+            console.warn('Failed to load translations, using fallback:', e);
+            translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
+            volumeData = translations.volumes || [];
+            return translations;
+        }
+    }
+
+    function getText(key) {
+        if (!translations) return key;
+        const keys = key.split('.');
+        let value = translations;
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) value = value[k];
+            else return key;
+        }
+        return value || key;
+    }
+
+    function updateLangDropdownLabel() {
+        const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
+        const labelEl = document.getElementById('langSelectedLabel');
+        if (selectedOption && labelEl) {
+            labelEl.textContent = selectedOption.getAttribute('data-label');
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('selected'));
+            selectedOption.classList.add('selected');
+        }
+    }
+
+    function showMessage(msg) {
+        const t = document.getElementById('toast-message');
+        t.textContent = msg;
+        t.style.display = 'block';
+        setTimeout(() => t.style.display = 'none', 3000);
+    }
+
+    async function smartDownload(url, fileName) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) { showMessage(getText('toastMessages.fileNotAvailable')); return; }
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+        } catch (error) {
+            window.open(url, '_blank');
+        }
+    }
+
+    function buildVolumeHTML(vol) {
+        const isEnglish = currentLang === 'en';
+        const isExtraStories = isEnglish && vol.isExtra;
+        const novelItemClass = isExtraStories ? 'novel-item extra-stories-special' : 'novel-item';
+        const translatorCredit = isEnglish && vol.translator && vol.id !== 'ESC'
+            ? `<div class="translator-credit">Translated by <a href="https://sneikkimies.github.io/" target="_blank" rel="noopener noreferrer">${vol.translator}</a></div>`
+            : '';
+
+        return `
+        <details class="${novelItemClass}" id="novel-${vol.id}" data-volume-id="${vol.id}">
+            <summary class="novel-summary">
+                <span><i class="fas fa-book"></i> ${vol.title}</span>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </summary>
+            <div class="novel-content">
+                <div class="novel-description"><p>${vol.desc}</p></div>
+                ${translatorCredit}
+                <div class="novel-actions">
+                    <button class="btn btn-read" data-volume-id="${vol.id}" onclick="openPdfModal('${vol.id}')">
+                        <i class="fas fa-book-open"></i> ${getText('readButton')}
+                    </button>
+                </div>
+            </div>
+        </details>`;
+    }
+
+    function buildCardHTML(vol) {
+        const isExtra = currentLang === 'en' && vol.isExtra;
+        const cardClass = isExtra ? 'novel-card extra-card' : 'novel-card';
+        const thumb = vol.thumbnail || '';
+        const imgHtml = thumb
+            ? `<img class="card-img" src="${thumb}" alt="${vol.title}" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'card-img card-img-placeholder\\'><i class=\\'fas fa-book-open\\'></i></div>';">`
+            : `<div class="card-img card-img-placeholder"><i class="fas fa-book-open"></i></div>`;
+        const badge = isExtra ? '<span class="card-badge">✨ Extra</span>' : '';
+        return `<div class="${cardClass}" data-volume-id="${vol.id}" data-title="${vol.title.toLowerCase()}" data-desc="${(vol.desc||'').toLowerCase()}" data-number="${vol.id}">
+            ${imgHtml}
+            <div class="card-body">
+                <div class="card-title">${vol.title}</div>
+                <div class="card-desc">${vol.desc || ''}</div>
+                ${badge}
+                <button class="btn btn-read btn-read-card" data-volume-id="${vol.id}" onclick="event.stopPropagation(); openPdfModal('${vol.id}')">
+                    <i class="fas fa-book-open"></i> ${getText('readButton')}
+                </button>
+            </div>
+        </div>`;
+    }
+
+    // ---- PDF Modal functions ----
+    function openPdfModal(volumeId) {
+        const vol = volumeData.find(v => v.id === volumeId);
+        if (!vol) return;
+
+        modalCurrentVolume = vol;
+        const volumeTitle = document.getElementById('pdfVolumeTitle');
+        const modalTitle = document.getElementById('pdfModalTitle');
+
+        if (volumeTitle) {
+            volumeTitle.textContent = vol.title;
+        }
+
+        if (modalTitle) {
+            modalTitle.textContent = getText('modal.reading');
+        }
+                
+        // Reset viewer state
+        resetModalViewer();
+        
+        // Show modal
+        const modal = document.getElementById('pdfModal');
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        
+        // Load PDF
+        loadPdfInModal(vol);
+    }
+
+    function closePdfModal() {
+        const modal = document.getElementById('pdfModal');
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        
+        // Destroy PDF instance
+        if (modalPdfDoc) {
+            modalPdfDoc = null;
+        }
+        modalAbortController.abort();
+        modalAbortController = new AbortController();
+        
+        // Reset UI
+        const canvas = document.getElementById('pdfRenderModal');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.style.display = 'none';
+        document.getElementById('pageNumModal').textContent = '-';
+        document.getElementById('pageCountModal').textContent = '-';
+        document.getElementById('pdfProgressModal').style.width = '0%';
+        document.getElementById('pdfLoadingModal').classList.remove('visible');
+        document.getElementById('pdfErrorModal').style.display = 'none';
+        document.getElementById('zoomDisplayModal').textContent = '100%';
+        modalPageNum = 1;
+        modalScale = 1.0;
+        modalFitScale = 1.0;
+    }
+
+    function resetModalViewer() {
+        const canvas = document.getElementById('pdfRenderModal');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.style.display = 'none';
+        document.getElementById('pageNumModal').textContent = '-';
+        document.getElementById('pageCountModal').textContent = '-';
+        document.getElementById('pdfProgressModal').style.width = '0%';
+        document.getElementById('pdfLoadingModal').classList.remove('visible');
+        document.getElementById('pdfErrorModal').style.display = 'none';
+        document.getElementById('zoomDisplayModal').textContent = '100%';
+        modalPageNum = 1;
+    }
+
+    async function loadPdfInModal(vol) {
+        const isEnglish = currentLang === 'en';
+        const baseUrl = isEnglish 
+            ? 'https://media.adashimaverse.com/Novelas/Ingles/' 
+            : 'https://media.adashimaverse.com/Novelas/';
+        const fileTarget = isEnglish ? vol.filePdf : vol.file;
+
+        if (!fileTarget) {
+            document.getElementById('pdfErrorModal').style.display = 'flex';
+            document.getElementById('pdfErrorMsgModal').textContent = getText('toastMessages.documentNotAvailable');
+            return;
+        }
+
+        const url = baseUrl + encodeURIComponent(fileTarget);
+        const loadingEl = document.getElementById('pdfLoadingModal');
+        const errorEl = document.getElementById('pdfErrorModal');
+        const canvas = document.getElementById('pdfRenderModal');
+        
+        loadingEl.classList.add('visible');
+        errorEl.style.display = 'none';
+        canvas.style.display = 'none';
+
+        try {
+            const response = await fetch(url, { signal: modalAbortController.signal });
+            if (!response.ok) throw new Error('Network error');
+            const arrayBuffer = await response.arrayBuffer();
+            const pdfData = new Uint8Array(arrayBuffer);
+
+            modalPdfDoc = await pdfjsLib.getDocument({
+                data: pdfData,
+                cMapUrl: `${PDFJS_CDN}/cmaps/`,
+                cMapPacked: true
+            }).promise;
+
+            document.getElementById('pageCountModal').textContent = modalPdfDoc.numPages;
+            loadingEl.classList.remove('visible');
+            canvas.style.display = 'block';
+            await queueModalRender();
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                errorEl.style.display = 'flex';
+                document.getElementById('pdfErrorMsgModal').textContent = getText('toastMessages.documentNotAvailable');
+            }
+        }
+    }
+
+    let modalRenderQueue = Promise.resolve();
+
+    async function queueModalRender() {
+        modalRenderQueue = modalRenderQueue.then(() => renderModalPage());
+    }
+
+    async function renderModalPage() {
+        if (modalRendering || !modalPdfDoc || modalPageNum < 1 || modalPageNum > modalPdfDoc.numPages) return;
+        
+        try {
+            modalRendering = true;
+            const page = await modalPdfDoc.getPage(modalPageNum);
+            const canvas = document.getElementById('pdfRenderModal');
+            const container = document.getElementById('canvasWrapperModal');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            
+            const viewport = page.getViewport({ scale: 1 });
+            let scale = containerWidth / viewport.width;
+            if (viewport.height * scale > containerHeight) {
+                scale = containerHeight / viewport.height;
+            }
+            
+            const scaledViewport = page.getViewport({ scale });
+            canvas.width = scaledViewport.width * dpr;
+            canvas.height = scaledViewport.height * dpr;
+            canvas.style.width = scaledViewport.width + 'px';
+            canvas.style.height = scaledViewport.height + 'px';
+            
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            ctx.imageSmoothingEnabled = true;
+            
+            await page.render({
+                canvasContext: ctx,
+                viewport: scaledViewport,
+                signal: modalAbortController.signal
+            }).promise;
+            
+            document.getElementById('pageNumModal').textContent = modalPageNum;
+            document.getElementById('mobilePageNumModal').textContent = modalPageNum;
+            
+            const progress = (modalPageNum / modalPdfDoc.numPages) * 100;
+            document.getElementById('pdfProgressModal').style.width = progress + '%';
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.error('Error rendering page:', error);
+            }
+        } finally {
+            modalRendering = false;
+        }
+    }
+
+    function initModalEvents() {
+        document.getElementById('pdfModalClose').addEventListener('click', closePdfModal);
+        document.getElementById('pdfModalBackdrop').addEventListener('click', closePdfModal);
+
+        document.getElementById('pdfPrevModal').addEventListener('click', () => {
+            if (modalPageNum > 1) {
+                modalPageNum--;
+                queueModalRender();
+            }
+        });
+
+        document.getElementById('pdfNextModal').addEventListener('click', () => {
+            if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) {
+                modalPageNum++;
+                queueModalRender();
+            }
+        });
+
+        document.getElementById('pageInputModal').addEventListener('change', (e) => {
+            const page = parseInt(e.target.value, 10);
+            if (page && page > 0 && page <= (modalPdfDoc?.numPages || 1)) {
+                modalPageNum = page;
+                queueModalRender();
+            }
+            e.target.value = '';
+        });
+
+        document.getElementById('pdfZoomInModal').addEventListener('click', () => {
+            modalScale *= 1.1;
+            updateModalCanvasSize();
+        });
+
+        document.getElementById('pdfZoomOutModal').addEventListener('click', () => {
+            modalScale *= 0.9;
+            updateModalCanvasSize();
+        });
+
+        document.getElementById('pdfZoomResetModal').addEventListener('click', () => {
+            modalScale = 1.0;
+            updateModalCanvasSize();
+        });
+
+        function updateModalCanvasSize() {
+            const canvas = document.getElementById('pdfRenderModal');
+            const container = document.getElementById('canvasWrapperModal');
+            if (canvas && container) {
+                const newWidth = canvas.offsetWidth * (modalScale / 1.0);
+                const newHeight = canvas.offsetHeight * (modalScale / 1.0);
+                canvas.style.transform = `scale(${modalScale})`;
+                canvas.style.transformOrigin = 'top center';
+                document.getElementById('zoomDisplayModal').textContent = Math.round(modalScale * 100) + '%';
+            }
+        }
+
+        document.getElementById('pdfFullscreenModal').addEventListener('click', () => {
+            const elem = document.getElementById('pdfViewerModal');
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) elem.requestFullscreen();
+                else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                document.getElementById('fsIconModal').classList.replace('fa-expand', 'fa-compress');
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                else if (document.msExitFullscreen) document.msExitFullscreen();
+                document.getElementById('fsIconModal').classList.replace('fa-compress', 'fa-expand');
+            }
+        });
+
+        document.getElementById('pdfDownloadModal').addEventListener('click', () => {
+            if (modalCurrentVolume) {
+                const isEnglish = currentLang === 'en';
+                const baseUrl = isEnglish 
+                    ? 'https://media.adashimaverse.com/Novelas/Ingles/' 
+                    : 'https://media.adashimaverse.com/Novelas/';
+                const fileTarget = isEnglish ? modalCurrentVolume.filePdf : modalCurrentVolume.file;
+                if (fileTarget) {
+                    smartDownload(baseUrl + encodeURIComponent(fileTarget), fileTarget);
+                }
+            }
+        });
+
+        document.getElementById('pdfRetryModal').addEventListener('click', () => {
+            if (modalCurrentVolume) {
+                loadPdfInModal(modalCurrentVolume);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('pdfModal');
+            if (!modal.classList.contains('open')) return;
+            
+            if (e.key === 'Escape') closePdfModal();
+            else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+                if (modalPageNum > 1) {
+                    modalPageNum--;
+                    queueModalRender();
+                }
+            }
+            else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+                if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) {
+                    modalPageNum++;
+                    queueModalRender();
+                }
+            }
+            else if (e.key === '+' || e.key === '=') {
+                e.preventDefault();
+                modalScale *= 1.1;
+                updateModalCanvasSize();
+            }
+            else if (e.key === '-') {
+                e.preventDefault();
+                modalScale *= 0.9;
+                updateModalCanvasSize();
+            }
+            else if (e.key === '0') {
+                e.preventDefault();
+                modalScale = 1.0;
+                updateModalCanvasSize();
+            }
+            else if (e.key === 'f' || e.key === 'F') {
+                e.preventDefault();
+                document.getElementById('pdfFullscreenModal').click();
+            }
+        });
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+
+        document.getElementById('canvasContainerModal').addEventListener('touchstart', (e) => {
+            const touch = e.touches?.[0];
+            if (!touch) return;
+            if (e.target.closest('.pdf-toolbar') || e.target.closest('button') || e.target.closest('input')) return;
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchStartTime = Date.now();
+        }, { passive: true });
+
+        document.getElementById('canvasContainerModal').addEventListener('touchend', (e) => {
+            const touch = e.changedTouches?.[0];
+            if (!touch) return;
+            const dx = Math.abs(touch.clientX - touchStartX);
+            const dy = Math.abs(touch.clientY - touchStartY);
+            const dt = Date.now() - touchStartTime;
+            if (dt > 350 || dx > 40 || dy > 40) return;
+            if (e.target.closest('.pdf-toolbar') || e.target.closest('button') || e.target.closest('input')) return;
+            const rect = document.getElementById('canvasContainerModal').getBoundingClientRect();
+            const relX = (touch.clientX - rect.left) / rect.width;
+            if (relX <= 0.45) { if (modalPageNum > 1) { modalPageNum--; queueModalRender(); } }
+            else if (relX >= 0.55) { if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) { modalPageNum++; queueModalRender(); } }
+        }, { passive: true });
+    }
+
+    // ---- render functions ----
+    let currentView = 'list';
+    let searchTerm = '';
+
+    function renderVolumes() {
+        const container = document.getElementById('novels-container');
+        if (!container) return;
+        const listHtml = volumeData.map(v => buildVolumeHTML(v)).join('');
+        const gridHtml = volumeData.map(v => buildCardHTML(v)).join('');
+        const noResultsText = getText('noResults');
+        container.innerHTML = `
+            <div id="no-results-message" class="no-results-message" style="display:none;">
+                <div class="no-results-content">
+                    <i class="fas fa-search no-results-icon"></i>
+                    <p class="no-results-text">${noResultsText}</p>
+                </div>
+            </div>
+            <div class="view-list-content" id="listViewContainer">${listHtml}</div>
+            <div class="novels-grid" id="gridViewContainer">${gridHtml}</div>
+        `;
+        applyView(currentView);
+        applySearch(searchTerm);
+        attachAccordion();
+        renderGeneralDownloads();
+    }
+
+    function setView(view) {
+        currentView = view;
+        applyView(view);
+        document.getElementById('viewListBtn').classList.toggle('active', view === 'list');
+        document.getElementById('viewGridBtn').classList.toggle('active', view === 'grid');
+        const container = document.getElementById('novels-container');
+        if (container) {
+            container.classList.toggle('view-list', view === 'list');
+            container.classList.toggle('view-grid', view === 'grid');
+        }
+    }
+
+    function applyView(view) {
+        const container = document.getElementById('novels-container');
+        if (!container) return;
+        container.classList.toggle('view-list', view === 'list');
+        container.classList.toggle('view-grid', view === 'grid');
+        const listView = document.getElementById('listViewContainer');
+        const gridView = document.getElementById('gridViewContainer');
+        if (listView) listView.style.display = (view === 'list') ? '' : 'none';
+        if (gridView) gridView.style.display = (view === 'grid') ? '' : 'none';
+    }
+
+    function applySearch(term) {
+        searchTerm = term.toLowerCase().trim();
+        document.querySelectorAll('.novel-item').forEach(el => {
+            const id = el.dataset.volumeId || '';
+            const title = (el.querySelector('.novel-summary span')?.textContent || '').toLowerCase();
+            const desc = (el.querySelector('.novel-description p')?.textContent || '').toLowerCase();
+            const match = !searchTerm || title.includes(searchTerm) || desc.includes(searchTerm) || id.toLowerCase().includes(searchTerm);
+            el.style.display = match ? '' : 'none';
+        });
+        document.querySelectorAll('.novel-card').forEach(el => {
+            const title = (el.dataset.title || '').toLowerCase();
+            const desc = (el.dataset.desc || '').toLowerCase();
+            const num = (el.dataset.number || '').toLowerCase();
+            const match = !searchTerm || title.includes(searchTerm) || desc.includes(searchTerm) || num.includes(searchTerm);
+            el.style.display = match ? '' : 'none';
+        });
+        
+        const visibleItems = [...document.querySelectorAll('.novel-item')].filter(el => el.style.display !== 'none').length;
+        const visibleCards = [...document.querySelectorAll('.novel-card')].filter(el => el.style.display !== 'none').length;
+        const hasVisibleResults = (visibleItems + visibleCards) > 0;
+        const noResultsMsg = document.getElementById('no-results-message');
+        if (noResultsMsg) {
+            noResultsMsg.style.display = (searchTerm && !hasVisibleResults) ? 'flex' : 'none';
+        }
+    }
+
+    function attachAccordion() {
+        document.querySelectorAll('details.novel-item').forEach(detail => {
+            detail.removeEventListener('toggle', handleToggle);
+            detail.addEventListener('toggle', handleToggle);
+        });
+    }
+
+    function handleToggle(e) {
+        const detail = e.currentTarget;
+        if (detail.open) {
+            const others = document.querySelectorAll('details.novel-item');
+            others.forEach(other => {
+                if (other !== detail && other.open) other.removeAttribute('open');
+            });
+        }
+    }
+
+    function renderGeneralDownloads() {
+        const container = document.getElementById('general-downloads-container');
+        if (currentLang === 'es') {
+            container.style.display = 'none';
+            container.innerHTML = '';
+        } else {
+            container.style.display = 'flex';
+            const pdfLabel = getText('generalDownloads.pdf') || 'Download PDF Full';
+            const epubLabel = getText('generalDownloads.epub') || 'Download EPUB Full';
+            container.innerHTML = `
+                <button class="btn" onclick="smartDownload('https://media.adashimaverse.com/Novelas/Ingles/Adachi%20and%20Shimamura.pdf', 'Adachi and Shimamura Full.pdf')"><i class="fas fa-file-pdf"></i> ${pdfLabel}</button>
+                <button class="btn" onclick="smartDownload('https://media.adashimaverse.com/Novelas/Ingles/Adachi%20and%20Shimamura.epub', 'Adachi and Shimamura Full.epub')"><i class="fas fa-book-open"></i> ${epubLabel}</button>
+            `;
+        }
+    }
+
+    async function loadMenu() {
+        const menuVer = Math.floor(Date.now() / 86400000);
+        try {
+            const response = await fetch(`../components/menu.html?v=${menuVer}`);
+            if (!response.ok) throw new Error('Error HTTP ' + response.status);
+            let data = await response.text();
+            data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../index.html"');
+            const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+            if (!container) return;
+            container.innerHTML = data;
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+            if (window.translateMenu) window.translateMenu(currentLang);
+        } catch (error) { console.warn('Error loading menu:', error); }
+    }
+
+    async function renderApp() {
+        const title = document.getElementById('page-title');
+        title.textContent = getText('headerTitle');
+        const footer = document.getElementById('footer-content');
+        if (footer) footer.innerHTML = getText('footer');
+        const floatingAdashima = document.getElementById('floating-link');
+        if (floatingAdashima) floatingAdashima.title = getText('floatingTitle');
+        
+        // Update search placeholder
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.placeholder = getText('searchPlaceholder');
+        
+        // Update view toggle buttons
+        document.getElementById('viewListBtn').innerHTML = `<i class="fas fa-list-ul"></i> ${getText('viewList')}`;
+        document.getElementById('viewGridBtn').innerHTML = `<i class="fas fa-th"></i> ${getText('viewGrid')}`;
+        
+        // Update modal title
+        document.querySelector('.pdf-modal-title').innerHTML = `${getText('modal.reading')}<span id="pdfVolumeTitle">Volumen</span>`;
+        document.getElementById('pdfModalClose').setAttribute('aria-label', getText('modal.closeReader'));
+        
+        renderGeneralDownloads();
+        renderVolumes();
+        setView('list');
+    }
+
+    async function switchLanguage(lang) {
+        if (isSwitching || currentLang === lang) return;
+        isSwitching = true;
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) langToggle.disabled = true;
+        globalAbortController.abort();
+        globalAbortController = new AbortController();
+        currentRenderVersion++;
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        document.documentElement.lang = lang;
+        updateLangDropdownLabel();
+        pdfCache.clear();
+        await loadTranslations(lang);
+        await renderApp();
+        await loadMenu();
+        if (langToggle) langToggle.disabled = false;
+        isSwitching = false;
+    }
+
+    // ---- init ----
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadTranslations(currentLang);
+        await renderApp();
+        await loadMenu();
+        initModalEvents();
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            applySearch(this.value);
+        });
+
+        document.getElementById('viewListBtn').addEventListener('click', function() {
+            setView('list');
+        });
+        document.getElementById('viewGridBtn').addEventListener('click', function() {
+            setView('grid');
+        });
+
+        const langDropdown = document.getElementById('langDropdown');
+        const langToggle = document.getElementById('langToggle');
+        if (langDropdown && langToggle) {
+            langToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (langToggle.disabled) return;
+                const isOpen = langDropdown.classList.toggle('open');
+                langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const lang = option.getAttribute('data-lang');
+                    langDropdown.classList.remove('open');
+                    langToggle.setAttribute('aria-expanded', 'false');
+                    switchLanguage(lang);
+                });
+            });
+            document.addEventListener('click', (e) => {
+                if (langDropdown.classList.contains('open') && !langDropdown.contains(e.target)) {
+                    langDropdown.classList.remove('open');
+                    langToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && langDropdown.classList.contains('open')) {
+                    langDropdown.classList.remove('open');
+                    langToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+        updateLangDropdownLabel();
+
+        (function() {
+            const c = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                s.style.left = Math.random() * 100 + 'vw';
+                s.style.animationDelay = Math.random() * 12 + 's';
+                s.style.animationDuration = (9 + Math.random() * 5) + 's';
+                c.appendChild(s);
+            }
+        })();
+    });
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+{
+  "header": {
+    "title": "Adachi to Shimamura"
+  },
+  "hero": {
+    "subtitle": "A story of encounters, stars, and the warmth of an eternal summer."
+  },
+  "info": {
+    "title": "What is Adachi to Shimamura?",
+    "subtitle": "For first-time visitors",
+    "chips": ["Hitoma Iruma", "Yuri · Slice of Life", "Since 2013", "Dengeki Bunko"],
+    "paragraphs": [
+      "<strong>Adachi to Shimamura</strong> is a Japanese light novel written by <strong>Hitoma Iruma</strong> and illustrated by <strong>Non</strong>. The story follows the relationship between two high school girls: <strong>Adachi</strong>, a loner who prefers spending time in the gymnasium, and <strong>Shimamura</strong>, a carefree girl who often skips class.",
+      "Their friendship begins on the second floor of the gymnasium, where they meet by chance. Gradually, what starts as a superficial connection becomes something deeper, tender, and more complex.",
+      "The series has been adapted into manga, anime, and multiple CD dramas, earning a special place in readers' hearts for its delicate exploration of intimacy, loneliness, and first love."
+    ]
+  },
+  "nav": {
+    "items": [
+      {
+        "key": "timeline",
+        "title": "Timeline",
+        "desc": "Follow the key moments",
+        "icon": "fa-clock",
+        "tooltip": "Follow the story through the school years."
+      },
+      {
+        "key": "novels",
+        "title": "Light Novels",
+        "desc": "Immerse in the story",
+        "icon": "fa-book",
+        "tooltip": "Read the complete light novels."
+      },
+      {
+        "key": "manga",
+        "title": "Manga",
+        "desc": "The illustrated adaptation",
+        "icon": "fa-pencil-alt",
+        "tooltip": "Explore the Adachi to Shimamura manga."
+      },
+      {
+        "key": "extraStories",
+        "title": "Extra Stories",
+        "desc": "Additional content",
+        "icon": "fa-star",
+        "tooltip": "Extra stories and special chapters."
+      },
+      {
+        "key": "drama",
+        "title": "CD Dramas",
+        "desc": "Voices and music",
+        "icon": "fa-headphones",
+        "tooltip": "Listen to the CD dramas."
+      },
+      {
+        "key": "miniAnime",
+        "title": "Mini Anime",
+        "desc": "Animated episodes",
+        "icon": "fa-film",
+        "tooltip": "Enjoy the Mini Anime."
+      },
+      {
+        "key": "constellation",
+        "title": "Constellation",
+        "desc": "Discover secrets",
+        "icon": "fa-star-and-crescent",
+        "tooltip": "Form constellations and unlock stories."
+      },
+      {
+        "key": "anime",
+        "title": "Anime",
+        "desc": "The animated series",
+        "icon": "fa-tv",
+        "tooltip": "Watch the Adachi to Shimamura anime."
+      },
+      {
+        "key": "others",
+        "title": "Others",
+        "desc": "Varied content",
+        "icon": "fa-ellipsis-h",
+        "tooltip": "Interviews, guides and more."
+      },
+      {
+        "key": "stats",
+        "title": "Stats for Nerds",
+        "desc": "Data and figures",
+        "icon": "fa-chart-bar",
+        "tooltip": "Spreadsheets, graphs, and data dumps for the truly devoted."
+      },
+      {
+        "key": "about",
+        "title": "About",
+        "desc": "Credits and community",
+        "icon": "fa-info-circle",
+        "tooltip": "Learn about the project, translation credits, and version history."
+      }
+    ]
+  },
+  "release": {
+    "lastUpdate": "Latest Update",
+    "volNum": "Volume 13",
+    "date": "November 2025",
+    "status": "Full translation",
+    "nextLabel": "Next Release",
+    "nextBadge": "New",
+    "nextVol": "Adachi to Shimamura SS3",
+    "nextDate": "September 10, 2026",
+    "nextStatus": "TBA"
+  },
+  "news": {
+    "text": "Welcome to Adashima Latinoamérica!<br>We are working on new translations and content for you.",
+    "hint": "Click on me for more news",
+    "tooltip": "News!"
+  },
+  "footer": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+  "langLabel": "English",
+  "feedback": {
+    "title": "Send Feedback",
+    "subtitle": "Found a bug, typo, missing content, or have a suggestion? We'd love to hear from you.",
+    "typeLabel": "Feedback Type",
+    "typePlaceholder": "Select a type...",
+    "typeBug": "Bug Report",
+    "typeTranslation": "Translation Correction",
+    "typeMissing": "Missing Content",
+    "typeBroken": "Broken Link",
+    "typeFeature": "Feature Request",
+    "typeGeneral": "General Feedback",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Brief summary of your feedback",
+    "descLabel": "Description",
+    "descPlaceholder": "Please provide details about your feedback...",
+    "emailLabel": "Email",
+    "emailHint": "We'll only use this to follow up if needed.",
+    "cancel": "Cancel",
+    "submit": "Send Feedback",
+    "sending": "Sending...",
+    "successTitle": "Thank You!",
+    "successText": "Your feedback has been sent successfully.",
+    "footerBtn": "Send Feedback"
+  }
+}

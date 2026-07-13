@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adashima - Mini Anime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/mini_anime.css">
+    <link rel="stylesheet" href="../components/styles/menu.css">
+    <link rel="stylesheet" href="../css/lang-switch.css">
+</head>
+<body>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="floating-decor decor-1"></div>
+    <div class="floating-decor decor-2"></div>
+    <div class="floating-decor decor-3"></div>
+
+    <div id="menu-container" style="display: contents;"></div>
+
+    <div class="main-content">
+
+        <div class="header-container">
+            <div class="lang-controls">
+                <div class="lang-wrapper">
+                    <i class="fas fa-globe"></i>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                            <span id="langSelectedLabel">Español</span>
+                            <i class="fas fa-chevron-down lang-caret"></i>
+                        </button>
+                        <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+                            <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+                            <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h1 class="update-title">Mini Anime</h1>
+        </div>
+
+        <div class="crt-tv-wrapper">
+
+            <div class="crt-tv-body">
+                
+                <div class="tv-screw tv-screw-tl"></div>
+                <div class="tv-screw tv-screw-tr"></div>
+                <div class="tv-screw tv-screw-bl"></div>
+                <div class="tv-screw tv-screw-br"></div>
+
+                <div class="tv-vent-panel">
+                    <div class="tv-vent-slot"></div>
+                    <div class="tv-vent-slot"></div>
+                    <div class="tv-vent-slot"></div>
+                    <div class="tv-vent-slot"></div>
+                    <div class="tv-vent-slot"></div>
+                </div>
+
+                <div class="tv-speaker-grill">
+                    <div class="tv-speaker-slot"></div>
+                    <div class="tv-speaker-slot"></div>
+                    <div class="tv-speaker-slot"></div>
+                    <div class="tv-speaker-slot"></div>
+                    <div class="tv-speaker-slot"></div>
+                    <div class="tv-speaker-slot"></div>
+                    <div class="tv-speaker-slot"></div>
+                </div>
+
+                <div class="tv-led" id="tvLed"></div>
+
+                <div class="tv-brand">YASHONY</div>
+
+                <div class="crt-screen-frame">
+                    <div class="crt-screen" id="crtScreen">
+
+                        <div class="screen-glow" id="screenGlow"></div>
+
+                        <div class="no-signal-screen off-state" id="noSignal">
+                            <div class="no-signal-bar"></div>
+                            <span id="noSignalText">SIN SEÑAL</span>
+                            <div class="no-signal-bar" style="animation-delay:0.4s"></div>
+                        </div>
+
+                        <video class="crt-video" id="crtVideo" preload="metadata" playsinline poster="../../assets/Imagenes/Fondo_mini.jpeg" style="opacity:0;"></video>
+
+                        <div class="channel-indicator" id="channelIndicator">CH 1</div>
+
+                        <div class="scanlines-overlay"></div>
+                        <div class="static-overlay" id="staticOverlay"></div>
+                        <div class="interference-overlay" id="interferenceOverlay"></div>
+                        <div class="power-flash" id="powerFlash"></div>
+
+                        <div class="loading-indicator" id="loadingIndicator">
+                            <div class="loading-dots"><span></span><span></span><span></span></div>
+                            <div class="loading-text" id="loadingText">Sintonizando canal...</div>
+                        </div>
+
+                        <div class="osd-menu" id="osdMenu" role="dialog" aria-label="Selección de canal">
+                            <div class="osd-box">
+                                <div class="osd-title">
+                                    <span id="osdTitle">YASHONY CHANNELS</span>
+                                    <span id="osdSubtitle">SELECCIONAR EPISODIO</span>
+                                </div>
+                                <div class="osd-channel-list" id="osdChannelList"></div>
+                                <div class="osd-footer" id="osdFooter">[ MENU ] PARA CERRAR</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tv-controls-row">
+                    <div class="tv-controls-left">
+                        <div class="btn-labeled">
+                            <button class="power-btn" id="powerBtn" title="Encender / Apagar">
+                                <i class="fas fa-power-off"></i>
+                            </button>
+                            <span class="btn-label-text" id="powerLabel">PWR</span>
+                        </div>
+                        <div class="ctrl-separator"></div>
+                        <div class="btn-labeled">
+                            <button class="menu-btn" id="menuBtn" title="Menú de canales" disabled>MENU</button>
+                            <span class="btn-label-text" id="menuLabel">CH</span>
+                        </div>
+                        <div class="btn-labeled">
+                            <button class="playpause-btn" id="playPauseBtn" title="Reproducir / Pausar" disabled>
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <span class="btn-label-text" id="playLabel">PLAY</span>
+                        </div>
+                    </div>
+
+                    <div class="tv-controls-right">
+                        <div class="tv-knob" id="volKnob" title="Volumen — arrastra arriba/abajo">
+                            <div class="knob-label" id="volLabel">VOL</div>
+                            <div class="knob-ring-wrap">
+                                <svg class="knob-arc-svg" viewBox="0 0 54 54">
+                                    <path class="knob-arc-bg"  id="volArcBg"   d=""/>
+                                    <path class="knob-arc-fill" id="volArcFill" d=""/>
+                                </svg>
+                                <div class="knob-dir-hint knob-dir-hint-left"><span>▲ +</span><span>▼ −</span></div>
+                                <div class="knob-circle" id="volKnobCircle">
+                                    <div class="knob-indicator" id="volIndicator"></div>
+                                </div>
+                                <span class="knob-mark knob-mark-min">−</span>
+                                <span class="knob-mark knob-mark-max">+</span>
+                                <div class="knob-osd" id="volOsd">
+                                    <div class="knob-osd-label" id="volOsdLabel">VOL</div>
+                                    <div class="knob-osd-value" id="volOsdValue">100%</div>
+                                    <div class="knob-osd-bar-wrap"><div class="knob-osd-bar-fill" id="volOsdBar" style="width:100%"></div></div>
+                                </div>
+                            </div>
+                            <div class="knob-value-tip" id="volTip">100%</div>
+                        </div>
+
+                        <div class="tv-knob" id="brtKnob" title="Brillo — arrastra arriba/abajo">
+                            <div class="knob-label" id="brtLabel">BRT</div>
+                            <div class="knob-ring-wrap">
+                                <svg class="knob-arc-svg" viewBox="0 0 54 54">
+                                    <path class="knob-arc-bg"   id="brtArcBg"   d=""/>
+                                    <path class="knob-arc-fill"  id="brtArcFill" d=""/>
+                                </svg>
+                                <div class="knob-dir-hint knob-dir-hint-left"><span>▲ +</span><span>▼ −</span></div>
+                                <div class="knob-circle" id="brtKnobCircle">
+                                    <div class="knob-indicator" id="brtIndicator"></div>
+                                </div>
+                                <span class="knob-mark knob-mark-min">−</span>
+                                <span class="knob-mark knob-mark-max">+</span>
+                                <div class="knob-osd" id="brtOsd">
+                                    <div class="knob-osd-label" id="brtOsdLabel">BRT</div>
+                                    <div class="knob-osd-value" id="brtOsdValue">100%</div>
+                                    <div class="knob-osd-bar-wrap"><div class="knob-osd-bar-fill" id="brtOsdBar" style="width:100%"></div></div>
+                                </div>
+                            </div>
+                            <div class="knob-value-tip" id="brtTip">100%</div>
+                        </div>
+
+                        <button class="download-btn-tv" id="downloadBtn" title="Descargar episodio actual">
+                            <i class="fas fa-download"></i>
+                            <span id="downloadLabel">Descargar</span>
+                        </button>
+
+                        <button class="fullscreen-btn" id="fullscreenBtn" title="Pantalla completa">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tv-bottom-section">
+                <div class="tv-stand-neck"></div>
+                <div class="tv-stand">
+                    <div class="tv-feet">
+                        <div class="tv-foot"></div>
+                        <div class="tv-foot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="channel-info-card" id="channelInfoCard">
+            <div class="channel-info-icon"><i class="fas fa-tv"></i></div>
+            <div class="channel-info-text">
+                <h3 id="channelTitle">Selecciona un canal</h3>
+                <p id="channelDesc">Enciende la televisión y elige un canal para comenzar a disfrutar los episodios de Mini Anime.</p>
+            </div>
+            <div class="channel-badge" id="channelBadge">— / —</div>
+        </div>
+
+        <div class="download-all-wrap">
+            <button class="download-all-btn" id="downloadAllBtn" type="button" title="Descargar todos los episodios">
+                <i class="fas fa-download"></i>
+                <span id="downloadAllLabel">Descargar todos</span>
+            </button>
+        </div>
+
+        <div class="download-modal" id="downloadModal" aria-hidden="true">
+            <div class="download-modal-card" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
+                <div class="download-modal-title" id="downloadModalTitle">
+                    <span class="download-modal-badge"><i class="fas fa-download"></i></span>
+                    <span id="downloadModalTitleText">Descargar todos los episodios</span>
+                </div>
+                <div class="download-modal-text" id="downloadModalText">Se iniciará la descarga de 30 episodios. ¿Quieres continuar?</div>
+                <div class="download-modal-actions">
+                    <button class="download-modal-btn download-modal-cancel" id="downloadModalCancel" type="button">Cancelar</button>
+                    <button class="download-modal-btn download-modal-confirm" id="downloadModalConfirm" type="button">Continuar</button>
+                </div>
+            </div>
+        </div>
+
+        <a href="Juego.html" class="floating-adashima" title="¡Clickea para ir al mini-juego!">
+            <img src="../../assets/Imagenes/Flotante_mini-Photoroom.png" alt="Adashima Chibi Floating">
+        </a>
+
+        <div class="footer" id="footerContent">
+            Fan site no oficial de Adachi to Shimamura.<br>
+            Creado por fans, sin fines de lucro.<br>
+            Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.
+        </div>
+
+    </div>
+
+    <script>
+    let currentLang = localStorage.getItem('lang') || 'es';
+    let isSwitching = false;
+    let translations = null;
+    let CHANNELS = [];
+
+    // Fallback translations with channels
+    const FALLBACK_TRANSLATIONS = {
+        es: {
+            pageTitle: "Adashima - Mini Anime",
+            headerTitle: "Mini Anime",
+            footer: "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
+            floatingTitle: "¡Clickea para ir al mini-juego!",
+            noSignalText: "SIN SEÑAL",
+            channelIndicator: "CH",
+            loadingText: "Sintonizando canal...",
+            osdTitle: "YASHONY CHANNELS",
+            osdSubtitle: "SELECCIONAR EPISODIO",
+            osdFooter: "[ MENU ] PARA CERRAR",
+            powerLabel: "PWR",
+            menuLabel: "CH",
+            playLabel: "PLAY",
+            volumeLabel: "VOL",
+            brightnessLabel: "BRT",
+            downloadLabel: "Descargar",
+            downloadAllLabel: "Descargar todos",
+            downloadModalTitle: "Descargar todos los episodios",
+            downloadModalText: "Se iniciará la descarga de {count} episodios. ¿Quieres continuar?",
+            downloadModalCancel: "Cancelar",
+            downloadModalConfirm: "Continuar",
+            channelInfoDefaultTitle: "Selecciona un canal",
+            channelInfoDefaultDesc: "Enciende la televisión y elige un canal para comenzar a disfrutar los episodios de Mini Anime.",
+            channelInfoDefaultBadge: "— / —",
+            channels: []
+        },
+        en: {
+            pageTitle: "Adashima - Mini Anime",
+            headerTitle: "Mini Anime",
+            footer: "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+            floatingTitle: "Click to go to the mini-game!",
+            noSignalText: "NO SIGNAL",
+            channelIndicator: "CH",
+            loadingText: "Tuning channel...",
+            osdTitle: "YASHONY CHANNELS",
+            osdSubtitle: "SELECT EPISODE",
+            osdFooter: "[ MENU ] TO CLOSE",
+            powerLabel: "PWR",
+            menuLabel: "CH",
+            playLabel: "PLAY",
+            volumeLabel: "VOL",
+            brightnessLabel: "BRT",
+            downloadLabel: "Download",
+            downloadAllLabel: "Download all",
+            downloadModalTitle: "Download all episodes",
+            downloadModalText: "Download will start for {count} episodes. Do you want to continue?",
+            downloadModalCancel: "Cancel",
+            downloadModalConfirm: "Continue",
+            channelInfoDefaultTitle: "Select a channel",
+            channelInfoDefaultDesc: "Turn on the TV and choose a channel to start enjoying the Mini Anime episodes.",
+            channelInfoDefaultBadge: "— / —",
+            channels: []
+        }
+    };
+
+    async function loadTranslations(lang) {
+        try {
+            const response = await fetch(`../data/mini_anime/${lang}.json?v=${Date.now()}`);
+            if (!response.ok) throw new Error('Failed to load translations');
+            const data = await response.json();
+            translations = data;
+            CHANNELS = data.channels || [];
+            return data;
+        } catch (e) {
+            console.warn('Failed to load translations, using fallback:', e);
+            translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
+            CHANNELS = translations.channels || [];
+            return translations;
+        }
+    }
+
+    function getText(key) {
+        if (!translations) return key;
+        const keys = key.split('.');
+        let value = translations;
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) {
+                value = value[k];
+            } else {
+                return key;
+            }
+        }
+        return value || key;
+    }
+
+    function updateLangDropdownLabel() {
+        const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
+        const labelEl = document.getElementById('langSelectedLabel');
+        if (selectedOption && labelEl) {
+            labelEl.textContent = selectedOption.getAttribute('data-label');
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('selected'));
+            selectedOption.classList.add('selected');
+        }
+    }
+
+    async function switchLanguage(lang) {
+        if (isSwitching || currentLang === lang) return;
+        isSwitching = true;
+
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) langToggle.disabled = true;
+
+        // If TV is on, turn it off before switching
+        if (state.powered) {
+            await powerOff();
+        }
+
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        document.documentElement.lang = lang;
+        updateLangDropdownLabel();
+
+        await loadTranslations(lang);
+        renderApp();
+
+        if (langToggle) langToggle.disabled = false;
+        isSwitching = false;
+    }
+
+    const langDropdown = document.getElementById('langDropdown');
+    const langToggle = document.getElementById('langToggle');
+
+    if (langDropdown && langToggle) {
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (langToggle.disabled) return;
+            const isOpen = langDropdown.classList.toggle('open');
+            langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                langDropdown.classList.remove('open');
+                langToggle.setAttribute('aria-expanded', 'false');
+                switchLanguage(lang);
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (langDropdown.classList.contains('open') && !langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('open');
+                langToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && langDropdown.classList.contains('open')) {
+                langDropdown.classList.remove('open');
+                langToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    function renderApp() {
+        // Update title
+        document.title = getText('pageTitle');
+        const headerTitle = document.querySelector('.update-title');
+        if (headerTitle) headerTitle.textContent = getText('headerTitle');
+
+        // Update footer
+        const footer = document.getElementById('footerContent');
+        if (footer) footer.innerHTML = getText('footer');
+
+        // Update floating link
+        const floatingLink = document.querySelector('.floating-adashima');
+        if (floatingLink) floatingLink.title = getText('floatingTitle');
+
+        // Update no signal text
+        const noSignalEl = document.getElementById('noSignalText');
+        if (noSignalEl) noSignalEl.textContent = getText('noSignalText');
+
+        // Update loading text
+        const loadingText = document.getElementById('loadingText');
+        if (loadingText) loadingText.textContent = getText('loadingText');
+
+        // Update OSD
+        const osdTitle = document.getElementById('osdTitle');
+        if (osdTitle) osdTitle.textContent = getText('osdTitle');
+        const osdSubtitle = document.getElementById('osdSubtitle');
+        if (osdSubtitle) osdSubtitle.textContent = getText('osdSubtitle');
+        const osdFooter = document.getElementById('osdFooter');
+        if (osdFooter) osdFooter.textContent = getText('osdFooter');
+
+        // Update control labels
+        const powerLabel = document.getElementById('powerLabel');
+        if (powerLabel) powerLabel.textContent = getText('powerLabel');
+        const menuLabel = document.getElementById('menuLabel');
+        if (menuLabel) menuLabel.textContent = getText('menuLabel');
+        const playLabel = document.getElementById('playLabel');
+        if (playLabel) playLabel.textContent = getText('playLabel');
+        const volLabel = document.getElementById('volLabel');
+        if (volLabel) volLabel.textContent = getText('volumeLabel');
+        const brtLabel = document.getElementById('brtLabel');
+        if (brtLabel) brtLabel.textContent = getText('brightnessLabel');
+        const volOsdLabel = document.getElementById('volOsdLabel');
+        if (volOsdLabel) volOsdLabel.textContent = getText('volumeLabel');
+        const brtOsdLabel = document.getElementById('brtOsdLabel');
+        if (brtOsdLabel) brtOsdLabel.textContent = getText('brightnessLabel');
+
+        // Update download labels
+        const downloadLabel = document.getElementById('downloadLabel');
+        if (downloadLabel) downloadLabel.textContent = getText('downloadLabel');
+        const downloadAllLabel = document.getElementById('downloadAllLabel');
+        if (downloadAllLabel) downloadAllLabel.textContent = getText('downloadAllLabel');
+        const downloadModalTitle = document.getElementById('downloadModalTitleText');
+        if (downloadModalTitle) downloadModalTitle.textContent = getText('downloadModalTitle');
+        const downloadModalCancel = document.getElementById('downloadModalCancel');
+        if (downloadModalCancel) downloadModalCancel.textContent = getText('downloadModalCancel');
+        const downloadModalConfirm = document.getElementById('downloadModalConfirm');
+        if (downloadModalConfirm) downloadModalConfirm.textContent = getText('downloadModalConfirm');
+
+        // Update channel info default text
+        const channelTitle = document.getElementById('channelTitle');
+        if (channelTitle && state.currentChannel < 0) {
+            channelTitle.textContent = getText('channelInfoDefaultTitle');
+        }
+        const channelDesc = document.getElementById('channelDesc');
+        if (channelDesc && state.currentChannel < 0) {
+            channelDesc.textContent = getText('channelInfoDefaultDesc');
+        }
+        const channelBadge = document.getElementById('channelBadge');
+        if (channelBadge && state.currentChannel < 0) {
+            channelBadge.textContent = getText('channelInfoDefaultBadge');
+        }
+
+        // Rebuild OSD menu with channels from JSON
+        buildOsdMenu();
+    }
+
+    async function forceDownload(url, fileName) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+        } catch (error) {
+            console.error('Error forzando la descarga:', error);
+            window.open(url, '_blank');
+        }
+    }
+
+    // CHANNELS is now loaded from JSON
+
+    const state = {
+        powered: false,
+        currentChannel: -1,
+        switching: false,
+        menuOpen: false,
+        playing: false,
+        volume: 1,
+        brightness: 1
+    };
+
+    const crtScreen       = document.getElementById('crtScreen');
+    const crtVideo        = document.getElementById('crtVideo');
+    const noSignal        = document.getElementById('noSignal');
+    const noSignalText    = document.getElementById('noSignalText');
+    const powerBtn        = document.getElementById('powerBtn');
+    const menuBtn         = document.getElementById('menuBtn');
+    const playPauseBtn    = document.getElementById('playPauseBtn');
+    const screenGlow      = document.getElementById('screenGlow');
+    const staticOverlay   = document.getElementById('staticOverlay');
+    const interference    = document.getElementById('interferenceOverlay');
+    const powerFlash      = document.getElementById('powerFlash');
+    const loadingInd      = document.getElementById('loadingIndicator');
+    const downloadBtn     = document.getElementById('downloadBtn');
+    const downloadLabel   = document.getElementById('downloadLabel');
+    const downloadAllBtn  = document.getElementById('downloadAllBtn');
+    const downloadModal   = document.getElementById('downloadModal');
+    const downloadModalText = document.getElementById('downloadModalText');
+    const downloadModalCancel = document.getElementById('downloadModalCancel');
+    const downloadModalConfirm = document.getElementById('downloadModalConfirm');
+    const fullscreenBtn   = document.getElementById('fullscreenBtn');
+    const channelIndicator= document.getElementById('channelIndicator');
+    const channelTitle    = document.getElementById('channelTitle');
+    const channelDesc     = document.getElementById('channelDesc');
+    const channelBadge    = document.getElementById('channelBadge');
+    const osdMenu         = document.getElementById('osdMenu');
+    const osdChannelList  = document.getElementById('osdChannelList');
+    const tvLed           = document.getElementById('tvLed');
+
+    function buildOsdMenu() {
+        osdChannelList.innerHTML = '';
+        CHANNELS.forEach((ch, i) => {
+            const item = document.createElement('div');
+            item.className = 'osd-ch-item';
+            item.dataset.index = i;
+            item.innerHTML = `
+                <div class="osd-ch-num">${ch.label}</div>
+                <div class="osd-ch-info">
+                    <div class="osd-ch-name">${ch.title}</div>
+                    <div class="osd-ch-sub">${ch.sub}</div>
+                </div>
+                <div class="osd-ch-dot"></div>
+            `;
+            item.addEventListener('click', () => {
+                closeMenu();
+                switchChannel(i);
+            });
+            osdChannelList.appendChild(item);
+        });
+    }
+
+    function updateOsdActiveChannel() {
+        osdChannelList.querySelectorAll('.osd-ch-item').forEach((el, i) => {
+            el.classList.toggle('active-ch', i === state.currentChannel);
+        });
+    }
+
+    function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    function showChannelIndicator(text) {
+        channelIndicator.textContent = text;
+        channelIndicator.classList.add('show');
+        clearTimeout(channelIndicator._timer);
+        channelIndicator._timer = setTimeout(() => channelIndicator.classList.remove('show'), 2200);
+    }
+
+    function setStaticIntensity(level) { staticOverlay.style.opacity = level; }
+
+    async function playInterference(duration = 500) {
+        interference.style.opacity = '1';
+        setStaticIntensity(0.8);
+        await wait(duration * 0.3);
+        interference.style.opacity = '0';
+        await wait(duration * 0.2);
+        interference.style.opacity = '0.7';
+        setStaticIntensity(1);
+        await wait(duration * 0.3);
+        interference.style.opacity = '0';
+    }
+
+    function updatePlayPauseBtn() {
+        if (state.playing) {
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            playPauseBtn.classList.add('playing');
+            playPauseBtn.title = 'Pausar';
+        } else {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playPauseBtn.classList.remove('playing');
+            playPauseBtn.title = 'Reproducir';
+        }
+    }
+
+    function togglePlayPause() {
+        if (!state.powered || state.currentChannel < 0 || state.switching) return;
+        if (crtVideo.paused) { crtVideo.play().catch(() => {}); } else { crtVideo.pause(); }
+    }
+
+    crtVideo.addEventListener('play', () => { state.playing = true; updatePlayPauseBtn(); });
+    crtVideo.addEventListener('pause', () => { state.playing = false; updatePlayPauseBtn(); });
+
+    function openMenu() {
+        if (!state.powered) return;
+        state.menuOpen = true;
+        updateOsdActiveChannel();
+        osdMenu.classList.add('visible');
+        menuBtn.classList.add('active');
+        if (isMobile()) document.body.style.overflow = 'hidden';
+        if (state.currentChannel >= 0) {
+            const activeItem = osdChannelList.children[state.currentChannel];
+            if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function closeMenu() {
+        state.menuOpen = false;
+        osdMenu.classList.remove('visible');
+        menuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function toggleMenu() { state.menuOpen ? closeMenu() : openMenu(); }
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && state.menuOpen) closeMenu(); });
+
+    osdMenu.addEventListener('click', (e) => {
+        if (e.target === osdMenu) closeMenu();
+    });
+
+    async function powerOn() {
+        if (state.powered || state.switching) return;
+        state.switching = true;
+        powerFlash.style.transition = 'opacity 0.05s';
+        powerFlash.style.opacity = '1';
+        await wait(60);
+        powerFlash.style.transition = 'opacity 0.3s';
+        powerFlash.style.opacity = '0';
+        noSignal.style.transition = 'opacity 0.3s';
+        noSignal.style.opacity = '0';
+        await wait(300);
+        noSignal.classList.remove('off-state');
+        noSignalText.textContent = getText('noSignalText');
+        noSignal.style.opacity = '0';
+        setStaticIntensity(0.6);
+        await wait(400);
+        noSignal.style.display = 'flex';
+        noSignal.style.transition = 'opacity 0.4s';
+        noSignal.style.opacity = '1';
+        setStaticIntensity(0.25);
+        crtScreen.classList.add('powered-on');
+        screenGlow.classList.add('active');
+        powerBtn.classList.add('on');
+        if (tvLed) tvLed.classList.add('on');
+        state.powered = true;
+        state.switching = false;
+        menuBtn.disabled = false;
+        playPauseBtn.disabled = true;
+        await wait(800);
+        crtScreen.classList.remove('powered-on');
+        setStaticIntensity(0.08);
+    }
+
+    async function powerOff() {
+        if (!state.powered || state.switching) return;
+        state.switching = true;
+        closeMenu();
+        crtVideo.pause();
+        setStaticIntensity(1);
+        await wait(150);
+        crtScreen.classList.add('powered-off');
+        setStaticIntensity(0);
+        await wait(600);
+        crtScreen.classList.remove('powered-off');
+        crtVideo.style.opacity = '0';
+        crtVideo.src = '';
+        noSignal.classList.add('off-state');
+        noSignalText.textContent = '';
+        noSignal.style.display = 'flex';
+        noSignal.style.opacity = '0';
+        await wait(50);
+        noSignal.style.transition = 'opacity 0.5s';
+        noSignal.style.opacity = '1';
+        screenGlow.classList.remove('active');
+        powerBtn.classList.remove('on');
+        if (tvLed) tvLed.classList.remove('on');
+        state.currentChannel = -1;
+        state.playing = false;
+        state.powered = false;
+        state.switching = false;
+        menuBtn.disabled = true;
+        menuBtn.classList.remove('active');
+        playPauseBtn.disabled = true;
+        updatePlayPauseBtn();
+        setTimeout(() => {
+            volKnobCtrl.reset();
+            brtKnobCtrl.reset();
+            state.volume = 1;
+            state.brightness = 1.0;
+            crtVideo.volume = 1;
+            crtScreen.style.filter = '';
+        }, 400);
+        updateInfoCard(null);
+    }
+
+    async function switchChannel(index) {
+        if (!state.powered || state.switching) return;
+        if (index === state.currentChannel) return;
+        const ch = CHANNELS[index];
+        if (!ch) return;
+        state.switching = true;
+        showChannelIndicator(ch.label);
+        setStaticIntensity(1);
+        await playInterference(450);
+        crtVideo.classList.add('channel-switching');
+        if (noSignal.style.display !== 'none') {
+            noSignal.style.transition = 'opacity 0.2s';
+            noSignal.style.opacity = '0';
+            await wait(200);
+            noSignal.style.display = 'none';
+        }
+        loadingInd.classList.add('show');
+        const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(ch.file)}`;
+        if (crtVideo.src !== new URL(videoUrl, location.href).href) {
+            crtVideo.pause();
+            crtVideo.src = videoUrl;
+            crtVideo.load();
+        }
+        crtVideo.style.opacity = '1';
+        await new Promise((resolve) => {
+            if (crtVideo.readyState >= 3) { resolve(); return; }
+            const onCanPlay = () => { crtVideo.removeEventListener('canplay', onCanPlay); crtVideo.removeEventListener('error', onError); resolve(); };
+            const onError = () => { crtVideo.removeEventListener('canplay', onCanPlay); crtVideo.removeEventListener('error', onError); resolve(); };
+            crtVideo.addEventListener('canplay', onCanPlay);
+            crtVideo.addEventListener('error', onError);
+            setTimeout(resolve, 5000);
+        });
+        loadingInd.classList.remove('show');
+        await wait(100);
+        crtVideo.classList.remove('channel-switching');
+        setStaticIntensity(0.06);
+        downloadLabel.textContent = getText('downloadLabel');
+        updateInfoCard(ch);
+        updateOsdActiveChannel();
+        state.currentChannel = index;
+        state.switching = false;
+        playPauseBtn.disabled = false;
+        crtVideo.play().catch(() => {});
+    }
+
+    function updateInfoCard(ch) {
+        const icon = document.querySelector('.channel-info-icon i');
+        if (!ch) {
+            channelTitle.textContent = getText('channelInfoDefaultTitle');
+            channelDesc.textContent = getText('channelInfoDefaultDesc');
+            channelBadge.textContent = getText('channelInfoDefaultBadge');
+            icon.className = 'fas fa-tv';
+            return;
+        }
+        channelTitle.textContent = ch.title;
+        channelDesc.textContent = ch.desc;
+        channelBadge.textContent = ch.badge;
+        icon.className = 'fas fa-film';
+    }
+
+    function showDownloadModal(message) {
+        return new Promise((resolve) => {
+            if (!downloadModal) { resolve(false); return; }
+            downloadModalText.textContent = message;
+            downloadModal.classList.add('show');
+            downloadModal.setAttribute('aria-hidden', 'false');
+            const cleanup = (result) => {
+                downloadModal.classList.remove('show');
+                downloadModal.setAttribute('aria-hidden', 'true');
+                downloadModalCancel.removeEventListener('click', onCancel);
+                downloadModalConfirm.removeEventListener('click', onConfirm);
+                downloadModal.removeEventListener('click', onBackdrop);
+                document.removeEventListener('keydown', onKeydown);
+                resolve(result);
+            };
+            const onCancel = () => cleanup(false);
+            const onConfirm = () => cleanup(true);
+            const onBackdrop = (event) => { if (event.target === downloadModal) cleanup(false); };
+            const onKeydown = (event) => { if (event.key === 'Escape') cleanup(false); };
+            downloadModalCancel.addEventListener('click', onCancel);
+            downloadModalConfirm.addEventListener('click', onConfirm);
+            downloadModal.addEventListener('click', onBackdrop);
+            document.addEventListener('keydown', onKeydown);
+        });
+    }
+
+    async function downloadAllEpisodes() {
+        if (!CHANNELS.length) return;
+        const message = getText('downloadModalText').replace('{count}', CHANNELS.length);
+        const confirmed = await showDownloadModal(message);
+        if (!confirmed) return;
+        const originalHtml = downloadAllBtn.innerHTML;
+        downloadAllBtn.disabled = true;
+        try {
+            for (let i = 0; i < CHANNELS.length; i++) {
+                const ch = CHANNELS[i];
+                downloadAllBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i><span>${getText('downloadLabel')} ${i + 1}/${CHANNELS.length}</span>`;
+                const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(ch.file)}`;
+                await forceDownload(videoUrl, ch.file);
+            }
+        } finally {
+            downloadAllBtn.disabled = false;
+            downloadAllBtn.innerHTML = originalHtml;
+        }
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) { enterFullscreen(); } else { exitFullscreen(); }
+    }
+
+    function enterFullscreen() {
+        crtVideo.controls = true;
+        crtScreen.style.filter = 'none';
+        const req = crtScreen.requestFullscreen || crtScreen.webkitRequestFullscreen;
+        if (req) req.call(crtScreen).catch(() => {});
+        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+    }
+
+    function exitFullscreen() {
+        const ex = document.exitFullscreen || document.webkitExitFullscreen;
+        if (ex) ex.call(document).catch(() => {});
+    }
+
+    function onFullscreenChange() {
+        const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+        } else {
+            crtVideo.controls = false;
+            crtScreen.style.filter = `brightness(${state.brightness})`;
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+        }
+    }
+
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+    const ARC_CX = 27, ARC_CY = 27, ARC_R = 24;
+    const ARC_START_DEG = 225;
+    const ARC_TOTAL_DEG = 270;
+
+    function degToRad(d) { return d * Math.PI / 180; }
+
+    function arcPoint(angleDeg) {
+        const rad = degToRad(angleDeg - 90);
+        return { x: ARC_CX + ARC_R * Math.cos(rad), y: ARC_CY + ARC_R * Math.sin(rad) };
+    }
+
+    function buildArcPath(startDeg, sweepDeg) {
+        if (Math.abs(sweepDeg) < 0.5) return '';
+        const large = sweepDeg > 180 ? 1 : 0;
+        const p1 = arcPoint(startDeg);
+        const p2 = arcPoint(startDeg + sweepDeg);
+        return `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${ARC_R} ${ARC_R} 0 ${large} 1 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
+    }
+
+    function createKnob({ knobEl, indicatorEl, tipEl, knobWrapper, arcBgEl, arcFillEl, osdEl, osdValueEl, osdBarEl, label, min, max, initial, step, formatTip, formatOsd, onChange }) {
+        let value = initial;
+        const KNOB_ANGLE_MIN = -135;
+        const KNOB_ANGLE_MAX =  135;
+        const SVG_START = ARC_START_DEG;
+
+        function valueToKnobAngle(v) {
+            const t = (v - min) / (max - min);
+            return KNOB_ANGLE_MIN + t * (KNOB_ANGLE_MAX - KNOB_ANGLE_MIN);
+        }
+
+        function clamp(v) { return Math.max(min, Math.min(max, v)); }
+
+        function updateArc(v) {
+            const t = (v - min) / (max - min);
+            arcBgEl.setAttribute('d', buildArcPath(SVG_START, ARC_TOTAL_DEG));
+            const sweepFill = t * ARC_TOTAL_DEG;
+            arcFillEl.setAttribute('d', sweepFill > 0.5 ? buildArcPath(SVG_START, sweepFill) : '');
+            const hue = 300 - t * 60;
+            arcFillEl.style.stroke = `hsla(${hue},50%,72%,0.65)`;
+        }
+
+        function applyValue(v, isDragging) {
+            value = clamp(v);
+            const angle = valueToKnobAngle(value);
+            indicatorEl.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+            indicatorEl.style.transformOrigin = 'bottom center';
+            updateArc(value);
+            const txt = formatTip(value);
+            tipEl.textContent = txt;
+            if (osdValueEl) osdValueEl.textContent = formatOsd ? formatOsd(value) : txt;
+            if (osdBarEl) { const pct = ((value - min) / (max - min)) * 100; osdBarEl.style.width = pct + '%'; }
+            onChange(value, isDragging);
+        }
+
+        applyValue(initial, false);
+
+        let dragStartY = null, dragStartVal = null;
+        knobEl.addEventListener('mousedown', (e) => { dragStartY = e.clientY; dragStartVal = value; knobWrapper.classList.add('dragging'); e.preventDefault(); });
+        document.addEventListener('mousemove', (e) => { if (dragStartY === null) return; applyValue(dragStartVal + (dragStartY - e.clientY) * step, true); });
+        document.addEventListener('mouseup', () => { if (dragStartY !== null) { dragStartY = null; knobWrapper.classList.remove('dragging'); } });
+
+        let touchStartY = null, touchStartVal = null;
+        knobEl.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; touchStartVal = value; knobWrapper.classList.add('dragging'); e.preventDefault(); }, { passive: false });
+        knobEl.addEventListener('touchmove', (e) => { if (touchStartY === null) return; applyValue(touchStartVal + (touchStartY - e.touches[0].clientY) * step, true); e.preventDefault(); }, { passive: false });
+        knobEl.addEventListener('touchend', () => { touchStartY = null; knobWrapper.classList.remove('dragging'); });
+
+        knobEl.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const dir = e.deltaY < 0 ? 1 : -1;
+            applyValue(value + dir * step * 18, true);
+            knobWrapper.classList.add('dragging');
+            clearTimeout(knobWrapper._scrollTimer);
+            knobWrapper._scrollTimer = setTimeout(() => knobWrapper.classList.remove('dragging'), 900);
+        }, { passive: false });
+
+        return { reset() { applyValue(initial, false); } };
+    }
+
+    const volKnobCtrl = createKnob({
+        knobEl: document.getElementById('volKnobCircle'), indicatorEl: document.getElementById('volIndicator'),
+        tipEl: document.getElementById('volTip'), knobWrapper: document.getElementById('volKnob'),
+        arcBgEl: document.getElementById('volArcBg'), arcFillEl: document.getElementById('volArcFill'),
+        osdEl: document.getElementById('volOsd'), osdValueEl: document.getElementById('volOsdValue'), osdBarEl: document.getElementById('volOsdBar'),
+        label: 'VOL', min: 0, max: 1, initial: 1, step: 0.008,
+        formatTip: v => Math.round(v * 100) + '%', formatOsd: v => Math.round(v * 100) + '%',
+        onChange: (v) => { state.volume = v; crtVideo.volume = v; }
+    });
+
+    const brtKnobCtrl = createKnob({
+        knobEl: document.getElementById('brtKnobCircle'), indicatorEl: document.getElementById('brtIndicator'),
+        tipEl: document.getElementById('brtTip'), knobWrapper: document.getElementById('brtKnob'),
+        arcBgEl: document.getElementById('brtArcBg'), arcFillEl: document.getElementById('brtArcFill'),
+        osdEl: document.getElementById('brtOsd'), osdValueEl: document.getElementById('brtOsdValue'), osdBarEl: document.getElementById('brtOsdBar'),
+        label: 'BRT', min: 0.3, max: 1.6, initial: 1.0, step: 0.01,
+        formatTip: v => Math.round(((v - 0.3) / 1.3) * 100) + '%', formatOsd: v => Math.round(((v - 0.3) / 1.3) * 100) + '%',
+        onChange: (v) => { state.brightness = v; if (!document.fullscreenElement && !document.webkitFullscreenElement) crtScreen.style.filter = `brightness(${v})`; }
+    });
+
+    powerBtn.addEventListener('click', () => { state.powered ? powerOff() : powerOn(); });
+    menuBtn.addEventListener('click', toggleMenu);
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    downloadAllBtn.addEventListener('click', downloadAllEpisodes);
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+    const osdOriginalParent = crtScreen; 
+
+    function isMobile() { return window.innerWidth <= 768; }
+
+    function portOsdToBody() {
+        if (osdMenu.parentElement !== document.body) {
+            document.body.appendChild(osdMenu);
+            osdMenu.classList.add('osd-portado');
+        }
+    }
+
+    function portOsdToCrt() {
+        if (osdMenu.parentElement !== osdOriginalParent) {
+            osdOriginalParent.appendChild(osdMenu);
+            osdMenu.classList.remove('osd-portado');
+        }
+    }
+
+    function syncOsdPortal() {
+        if (isMobile()) { portOsdToBody(); } else { portOsdToCrt(); }
+    }
+
+    syncOsdPortal();
+    window.addEventListener('resize', syncOsdPortal);
+
+    downloadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (state.currentChannel >= 0) {
+            const ch = CHANNELS[state.currentChannel];
+            const icon = downloadBtn.querySelector('i');
+            icon.className = 'fas fa-spinner fa-spin';
+            const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(ch.file)}`;
+            forceDownload(videoUrl, ch.file).finally(() => { icon.className = 'fas fa-download'; });
+        }
+    });
+
+    crtVideo.addEventListener('waiting', () => { if (state.powered) setStaticIntensity(0.3); });
+    crtVideo.addEventListener('playing', () => { if (state.powered) setStaticIntensity(0.06); });
+
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 22; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.animationDelay = Math.random() * 10 + 's';
+        star.style.animationDuration = (8 + Math.random() * 5) + 's';
+        particlesContainer.appendChild(star);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuVer = Math.floor(Date.now() / 86400000);
+        fetch('../components/menu.html?v=' + menuVer)
+            .then(response => {
+                if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+                return response.text();
+            })
+            .then(data => {
+                data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+                const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+                if (!container) return;
+                container.innerHTML = data;
+                const scripts = container.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+                if (window.translateMenu) {
+                    window.translateMenu(currentLang);
+                }
+            })
+            .catch(error => {
+                console.error('Error cargando menu.html:', error.message);
+            });
+    });
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(err => console.error('Error al registrar el Service Worker', err));
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+        await loadTranslations(currentLang);
+        updateLangDropdownLabel();
+        renderApp();
+    });
+
+    // Expose functions globally
+    window.switchChannel = switchChannel;
+    window.powerOn = powerOn;
+    window.powerOff = powerOff;
+    </script>
+
+</body>
+</html>

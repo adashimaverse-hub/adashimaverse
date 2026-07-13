@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Adachi to Shimamura</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Yanone+Kaffeesatz:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="menu-component-wrapper">
+
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="menu-toggle-btn" onclick="menuToggle()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sideMenu">
+            <div class="sidebar-inner">
+                <!-- Logo -->
+                <div class="sidebar-box">
+                    <img src="./assets/Imagenes/Adashim_Menu.png"
+                         alt="Adachi to Shimamura"
+                         onerror="this.src='https://via.placeholder.com/250x150/transparent/f06292?text=Adachi+to+Shimamura'">
+                    <div class="logo-label" id="menu-logo-label">
+                        Adachi <span class="to-text">to</span> Shimamura<br>
+                        <span class="sub-text" id="menu-logo-sub">Latinoamérica</span>
+                    </div>
+                </div>
+
+                <!-- Facebook Button -->
+                <a href="https://www.facebook.com/p/Adachi-to-Shimamura-Latinoamérica-61551058385796/"
+                   target="_blank" class="fb-btn" id="menu-fb-btn">
+                    <i class="fab fa-facebook-f"></i>
+                    <span id="menu-fb-text">Visítanos en Facebook</span>
+                </a>
+
+                <!-- Novel Status -->
+                <div class="info-card">
+                    <h4 id="menu-status-title"><i class="fas fa-book-reader"></i> Estado de la Novela</h4>
+                    <span class="status-badge" id="menu-status-badge">En Publicación</span>
+                </div>
+
+                <!-- Support Links -->
+                <div class="info-card">
+                    <h4 id="menu-support-title"><i class="fas fa-heart"></i> Apoya la Obra Original</h4>
+                    <div class="links-grid">
+                        <a href="https://dengekibunko.jp/product/adashima/" target="_blank" class="link-tag">
+                            <span id="menu-link-novel">Novela Ligera</span> <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://comic-walker.com/detail/KC_004197_S?episodeType=first" target="_blank" class="link-tag">
+                            <span id="menu-link-manga">Manga</span> <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://kakuyomu.jp/works/1177354054897444952" target="_blank" class="link-tag">
+                            <span id="menu-link-blog">Blog del Autor</span> <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Back to Home -->
+                <div style="margin-top:12px;">
+                    <a href="#" onclick="return false;" data-route="" class="menu-btn" id="menu-back-home" title="Volver al Inicio">
+                        <i class="fas fa-home"></i> <span id="menu-back-text">Volver al Inicio</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+    (function() {
+        // Menu toggle functions
+        function menuToggle() {
+            const sidebar = document.getElementById('sideMenu');
+            const btn     = document.getElementById('menu-toggle-btn');
+            if (!sidebar || !btn) return;
+            sidebar.classList.toggle('active');
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars',  !sidebar.classList.contains('active'));
+                icon.classList.toggle('fa-times',  sidebar.classList.contains('active'));
+            }
+        }
+        window.menuToggle = menuToggle;
+        window.toggleMenu = menuToggle;
+
+        function getSiteRootPath() {
+            const pathname = window.location.pathname.replace(/\/+$/, '');
+            const segments = pathname.split('/').filter(Boolean);
+            if (segments.length === 0) return '/';
+            if (segments[segments.length - 1].includes('.')) {
+                segments.pop();
+            }
+            const srcIndex = segments.indexOf('src');
+            if (srcIndex >= 0) {
+                segments.splice(srcIndex);
+            }
+            return '/' + segments.join('/');
+        }
+
+        document.getElementById('menu-back-home').addEventListener('click', function(e) {
+            e.preventDefault();
+            const route = this.getAttribute('data-route');
+            const homeRoute = route && route !== '#' ? route : `${getSiteRootPath()}/index.html`;
+            window.location.href = homeRoute;
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sideMenu');
+            const btn     = document.getElementById('menu-toggle-btn');
+            if (!sidebar || !sidebar.classList.contains('active')) return;
+            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+                sidebar.classList.remove('active');
+                const icon = btn && btn.querySelector('i');
+                if (icon) { icon.classList.replace('fa-times', 'fa-bars'); }
+            }
+        });
+
+        // Translation function with relative paths
+        window.translateMenu = async function(lang) {
+            try {
+                // Build the path based on language using relative path
+                const jsonPath = `../data/menu/${lang}.json?v=${Date.now()}`;
+                
+                // Fetch the JSON file
+                const response = await fetch(jsonPath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const t = await response.json();
+                
+                // Apply translations to DOM elements
+                const logoSub = document.getElementById('menu-logo-sub');
+                if (logoSub) logoSub.textContent = t.logoSub;
+                
+                const fbText = document.getElementById('menu-fb-text');
+                if (fbText) fbText.textContent = t.fbText;
+                
+                const statusTitle = document.getElementById('menu-status-title');
+                if (statusTitle) statusTitle.innerHTML = '<i class="fas fa-book-reader"></i> ' + t.statusTitle;
+                
+                const statusBadge = document.getElementById('menu-status-badge');
+                if (statusBadge) statusBadge.textContent = t.statusBadge;
+                
+                const supportTitle = document.getElementById('menu-support-title');
+                if (supportTitle) supportTitle.innerHTML = '<i class="fas fa-heart"></i> ' + t.supportTitle;
+                
+                const linkNovel = document.getElementById('menu-link-novel');
+                if (linkNovel) linkNovel.textContent = t.linkNovel;
+                
+                const linkManga = document.getElementById('menu-link-manga');
+                if (linkManga) linkManga.textContent = t.linkManga;
+                
+                const linkBlog = document.getElementById('menu-link-blog');
+                if (linkBlog) linkBlog.textContent = t.linkBlog;
+                
+                const backText = document.getElementById('menu-back-text');
+                if (backText) backText.textContent = t.backText;
+
+                // Store current language
+                window.currentMenuLang = lang;
+                
+            } catch (error) {
+                console.warn('Error loading menu translations, using fallback:', error);
+                // Fallback to embedded translations
+                fallbackTranslate(lang);
+            }
+        };
+
+        // Fallback translations in case JSON fails to load
+        function fallbackTranslate(lang) {
+            const translations = {
+                es: {
+                    logoSub: 'Latinoamérica',
+                    fbText: 'Visítanos en Facebook',
+                    statusTitle: 'Estado de la Novela',
+                    statusBadge: 'En Publicación',
+                    supportTitle: 'Apoya la Obra Original',
+                    linkNovel: 'Novela Ligera',
+                    linkManga: 'Manga',
+                    linkBlog: 'Blog del Autor',
+                    backText: 'Volver al Inicio'
+                },
+                en: {
+                    fbText: 'Visit us on Facebook',
+                    statusTitle: 'Novel Status',
+                    statusBadge: 'Ongoing',
+                    supportTitle: 'Support the Original Work',
+                    linkNovel: 'Light Novel',
+                    linkManga: 'Manga',
+                    linkBlog: 'Author\'s Blog',
+                    backText: 'Back to Home'
+                }
+            };
+
+            const t = translations[lang] || translations.es;
+            
+            const logoSub = document.getElementById('menu-logo-sub');
+            if (logoSub) logoSub.textContent = t.logoSub;
+            
+            const fbText = document.getElementById('menu-fb-text');
+            if (fbText) fbText.textContent = t.fbText;
+            
+            const statusTitle = document.getElementById('menu-status-title');
+            if (statusTitle) statusTitle.innerHTML = '<i class="fas fa-book-reader"></i> ' + t.statusTitle;
+            
+            const statusBadge = document.getElementById('menu-status-badge');
+            if (statusBadge) statusBadge.textContent = t.statusBadge;
+            
+            const supportTitle = document.getElementById('menu-support-title');
+            if (supportTitle) supportTitle.innerHTML = '<i class="fas fa-heart"></i> ' + t.supportTitle;
+            
+            const linkNovel = document.getElementById('menu-link-novel');
+            if (linkNovel) linkNovel.textContent = t.linkNovel;
+            
+            const linkManga = document.getElementById('menu-link-manga');
+            if (linkManga) linkManga.textContent = t.linkManga;
+            
+            const linkBlog = document.getElementById('menu-link-blog');
+            if (linkBlog) linkBlog.textContent = t.linkBlog;
+            
+            const backText = document.getElementById('menu-back-text');
+            if (backText) backText.textContent = t.backText;
+
+            window.currentMenuLang = lang;
+        }
+
+        // Auto-load translations based on page language
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there's a language stored or detected
+            const storedLang = localStorage.getItem('lang') || localStorage.getItem('preferredLanguage');
+            const pageLang = storedLang || 'es';
+            
+            // Load translations with a slight delay to ensure DOM is ready
+            setTimeout(function() {
+                window.translateMenu(pageLang);
+            }, 100);
+        });
+
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+{
+  "pageTitle": "Adashima - Light Novels",
+  "headerTitle": "Light Novels",
+  "footer": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+  "floatingTitle": "Go to mini-game",
+  "searchPlaceholder": "Search by title, description, volume...",
+  "viewList": "List",
+  "viewGrid": "Grid",
+  "readButton": "Read",
+  "noResults": "No results found",
+  "toastMessages": {
+    "fileNotAvailable": "File not available.",
+    "documentNotAvailable": "Document not available.",
+    "loadingDocument": "Loading document...",
+    "errorOnPage": "Error on pg.",
+    "retry": "Retry"
+  },
+  "pdfControls": {
+    "zoomOut": "Zoom out (-)",
+    "zoomIn": "Zoom in (+)",
+    "zoomReset": "Reset zoom (0)",
+    "prevPage": "Previous page (←)",
+    "nextPage": "Next page (→)",
+    "page": "Pg.",
+    "goTo": "Go to",
+    "fullscreen": "Fullscreen (F)",
+    "downloadPDF": "Download PDF"
+  },
+  "modal": {
+    "reading": "Reading: ",
+    "closeReader": "Close reader"
+  },
+  "volumes": [
+    {
+      "id": "1",
+      "title": "Volume 1",
+      "desc": "Published on March 10, 2013. Illustrated by Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/01/Adachi-and-Shimamura-1-coverFRONT.jpg",
+      "filePdf": "Adachi and Shimamura.pdf",
+      "fileEpub": "Adachi and Shimamura.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "2",
+      "title": "Volume 2",
+      "desc": "Published on September 10, 2013.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/03/Adachi-and-Shimamura-LN-2-coverFRONT.jpg",
+      "filePdf": "Adachi and Shimamura 2.pdf",
+      "fileEpub": "Adachi and Shimamura 2.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "3",
+      "title": "Volume 3",
+      "desc": "Published on August 9, 2014. Illustrated by Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/04/Adachi-and-Shimamura-LN-3-coverFRONT.jpg",
+      "filePdf": "Adachi and Shimamura 3.pdf",
+      "fileEpub": "Adachi and Shimamura 3.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "4",
+      "title": "Volume 4",
+      "desc": "Published on May 9, 2015. Illustrated by Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2020/05/Adachi-and-Shimamura-LN-4-coverFRONT.jpg",
+      "filePdf": "Adachi and Shimamura 4.pdf",
+      "fileEpub": "Adachi and Shimamura 4.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "5",
+      "title": "Volume 5",
+      "desc": "Published on November 10, 2015. Illustrated by Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/04/Adachi-and-Shimamura-LN-5-coverFRONT.jpg",
+      "filePdf": "Adachi and Shimamura 5.pdf",
+      "fileEpub": "Adachi and Shimamura 5.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "6",
+      "title": "Volume 6",
+      "desc": "Published on May 10, 2016. Illustrated by Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/06/Adachi-and-Shimamura-LN-6_site.jpg",
+      "filePdf": "Adachi and Shimamura 6.pdf",
+      "fileEpub": "Adachi and Shimamura 6.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "7",
+      "title": "Volume 7",
+      "desc": "Published on November 10, 2016. Illustrated by Non.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/11/Adachi-and-Shimamura-LN-7_siteRecrop.jpg",
+      "filePdf": "Adachi and Shimamura 7.pdf",
+      "fileEpub": "Adachi and Shimamura 7.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "8",
+      "title": "Volume 8",
+      "desc": "Published on May 10, 2019.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2021/12/Adachi-and-Shimamura-LN-8_site.jpg",
+      "filePdf": "Adachi and Shimamura 8.pdf",
+      "fileEpub": "Adachi and Shimamura 8.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "9",
+      "title": "Volume 9",
+      "desc": "Published on October 10, 2020.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2022/04/Adachi-and-Shimamura-LN-9_site.jpg",
+      "filePdf": "Adachi and Shimamura 9.pdf",
+      "fileEpub": "Adachi and Shimamura 9.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "10",
+      "title": "Volume 10",
+      "desc": "Published on September 10, 2021. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2023/02/adachiShimamuraLN10_site-REVISED.jpg",
+      "filePdf": "Adachi and Shimamura 10.pdf",
+      "fileEpub": "Adachi and Shimamura 10.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "11",
+      "title": "Volume 11",
+      "desc": "Published on December 9, 2022. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2023/07/adachiShimamuraLN11_site.jpg",
+      "filePdf": "Adachi and Shimamura 11.pdf",
+      "fileEpub": "Adachi and Shimamura 11.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "12",
+      "title": "Volume 12",
+      "desc": "Published on November 8, 2024. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2025/05/adachiShimamuraLN12_site.jpg",
+      "filePdf": "Adachi and Shimamura 12.pdf",
+      "fileEpub": "Adachi and Shimamura 12.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "13",
+      "title": "Volume 13",
+      "desc": "Published on November 8, 2025. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2026/04/adachiShimamuraLN13_site.jpg",
+      "filePdf": "Adachi and Shimamura 13.pdf",
+      "fileEpub": "Adachi and Shimamura 13.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "E1",
+      "title": "Special 1",
+      "desc": "Published in 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/3/31/LN99CL3.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164641",
+      "filePdf": "Adachi and Shimamura - Anime Special Novel 1.pdf",
+      "fileEpub": "Adachi and Shimamura - Anime Special Novel 1.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "E2",
+      "title": "Special 2",
+      "desc": "Published in 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/7/75/LN99CL4.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164726",
+      "filePdf": "Adachi and Shimamura BD Extra 2.pdf",
+      "fileEpub": "Adachi and Shimamura - Anime Special Novel 2.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "E3",
+      "title": "Special 3",
+      "desc": "Published in 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/c/cd/LN99CL5.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164826",
+      "filePdf": "Adachi and Shimamura BD Extra 3.pdf",
+      "fileEpub": "Adachi and Shimamura - Anime Special Novel 3.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "E4",
+      "title": "Special 4",
+      "desc": "Published in 2020.",
+      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/a/a7/LN99CL6.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164902",
+      "filePdf": "Adachi and Shimamura BD Extra 4.pdf",
+      "fileEpub": "Adachi and Shimamura - Anime Special Novel 4.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "99_9",
+      "title": "Volume 99.9",
+      "desc": "Published on November 10, 2023. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2024/10/adachiShimamuraLN99pt9_site.jpg",
+      "filePdf": "Adachi and Shimamura 99.pdf",
+      "fileEpub": "Adachi and Shimamura 99.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "SS",
+      "title": "Volume SS",
+      "desc": "Published on November 10, 2023. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2024/09/adachiShimamuraLNSS_site.jpg",
+      "filePdf": "Adachi and Shimamura SS.pdf",
+      "fileEpub": "Adachi and Shimamura SS.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "SS2",
+      "title": "Volume SS2",
+      "desc": "Published on November 8, 2024. Illustrated by Raemz.",
+      "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2025/08/adachiShimamuraLNSS2_site.jpg",
+      "filePdf": "Adachi and Shimamura Novel Vol SS2.pdf",
+      "fileEpub": "Adachi and Shimamura SS2.epub",
+      "translator": "Sneikki"
+    },
+    {
+      "id": "ESC",
+      "title": "Extra Stories Collection",
+      "desc": "Extra stories collection.",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_G_2P7mtYJGqau2ZqkzFnlaK7cW23Xgdga-i3i-ZvuQQpKq13hDdOZH9M&s=10",
+      "filePdf": "_Adachi and Shimamura- Extra Stories Collection.pdf",
+      "fileEpub": null,
+      "translator": null,
+      "isExtra": true
+    }
+  ],
+  "generalDownloads": {
+    "pdf": "Download PDF Full",
+    "epub": "Download EPUB Full"
+  }
+}

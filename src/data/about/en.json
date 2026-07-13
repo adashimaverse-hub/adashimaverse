@@ -1,0 +1,212 @@
+{
+  "backLabel": "Back",
+  "heroTitle": "About",
+  "heroSubtitle": "A fan-made archive dedicated to preserving, documenting, and celebrating the Adachi to Shimamura series.",
+  "badgeVolumes": "13+ Volumes",
+  "badgeSince": "2026",
+  "badgeCommunity": "Community Driven",
+  "projectTitle": "About the Project",
+  "projectSubtitle": "Everything you need to explore the world of Adachi to Shimamura.",
+  "projectFeatures": [
+    {
+      "icon": "mdi:information-outline",
+      "title": "About the Project",
+      "desc": "Adachi & Shimamura Latinoamérica is a non-commercial, fan-made archive dedicated to documenting, preserving, and celebrating the Adachi to Shimamura series. Created by fans for fans, the project brings together information, media, timelines, translation history, and other resources into a single, organized hub for both newcomers and longtime fans."
+    },
+    {
+      "icon": "mdi:account-group-outline",
+      "title": "Community",
+      "desc": "This project exists thanks to the passion of fans and the dedication of translators, scanlation groups, and contributors who have helped make the series more accessible around the world."
+    },
+    {
+      "icon": "mdi:heart-outline",
+      "title": "Our Mission",
+      "desc": "To preserve the history of the Adachi to Shimamura series while providing an organized, enjoyable, and accessible resource for fans, both old and new."
+    }
+  ],
+  "translatorTitle": "Translation Credits",
+  "translatorSubtitle": "Translators who made this series accessible",
+  "translators": [
+    {
+      "name": "Sneikkimies",
+      "link": "https://sneikkimies.github.io/",
+      "works": ["Vol.1", "Vol.2", "Vol.3", "Vol.4", "Vol.5", "Vol.6", "Vol.7", "Vol.8", "Vol.9", "Vol.10", "Vol.11", "Vol.12", "Vol.13", "SS", "SS2", "99.9", "BD Specials"],
+      "description": "Translated every currently released Adachi to Shimamura light novel, side story, and bonus content, making the complete English reading experience possible.",
+      "badge": "Lead Translator",
+      "role": "Light Novel Translator"
+    },
+    {
+      "name": "Cuetie Scans",
+      "link": "https://discord.gg/xCRUwzhqyJ",
+      "works": ["Manga"],
+      "description": "Responsible for the English translation of the Adachi to Shimamura manga (Moke adaptation).",
+      "icon": "mdi:image-outline",
+      "badge": "Translation Group",
+      "role": "Manga Translator"
+    },
+    {
+      "name": "BlackSheep",
+      "link": "",
+      "works": ["Extra Stories Collection"],
+      "description": "Translated the Extra Stories Collection into English.",
+      "icon": "mdi:book-open-page-variant",
+      "badge": "Translator",
+      "role": "Extra Stories Translator"
+    },
+    {
+      "name": "Kattxena",
+      "link": "https://www.wattpad.com/story/375135389-adachi-to-shimamura-todos-los-vol%C3%BAmenes",
+      "works": ["Vol.1", "Vol.2", "Vol.3", "Vol.4"],
+      "description": "Translated the Spanish versions of Adachi to Shimamura light novel volumes 2-12, including the SS volumes and 99.9.",
+      "icon": "mdi:translate",
+      "badge": "Spanish Translator",
+      "role": "Light Novel Translator (Spanish)"
+    },
+    {
+      "name": "Ragnarok Semita Translation",
+      "link": "https://ragnaroksemitascanblog.wordpress.com/",
+      "works": ["Vol.1"],
+      "description": "Provided the initial Spanish translation for Volume 1 of the Adachi to Shimamura light novel.",
+      "icon": "mdi:book-open-variant",
+      "badge": "Spanish Translator",
+      "role": "Light Novel Translator (Spanish)"
+    }
+  ],
+  "stats": {
+    "contributors": 5,
+    "volumes": 13,
+    "chapters": "180+",
+    "languages": "English / Spanish"
+  },
+  "versionTitle": "Version Information",
+  "versionItems": [
+    { "label": "Website Version", "value": "v2.5.0" },
+    { "label": "Build Number", "value": "#20260710" },
+    { "label": "Last Updated", "value": "July 10, 2026" },
+    { "label": "Translation Progress", "value": "92%" }
+  ],
+  "changelogBtn": "View Changelog",
+  "supportTitle": "Support the Original Work",
+  "supportSubtitle": "Support the creators by purchasing official releases.",
+  "supportItems": [
+    {
+      "id": "light-novel",
+      "icon": "mdi:book-open-variant",
+      "title": "Light Novel",
+      "regions": [
+        {
+          "label": "🇯🇵 Japanese Sources",
+          "buttons": [
+            { "label": "Dengeki Bunko", "url": "https://dengekibunko.jp/product/adashima/", "icon": "mdi:book-open-variant" },
+            { "label": "Amazon Japan", "url": "https://www.amazon.co.jp/-/en/dp/B075LFSD5L?binding=kindle_edition", "icon": "mdi:amazon" },
+            { "label": "BookWalker JP", "url": "https://bookwalker.jp/series/17875/list/", "icon": "mdi:book" },
+            { "label": "Rakuten Books", "url": "https://books.rakuten.co.jp/series/BW0018AQO0/", "icon": "mdi:cart" }
+          ]
+        },
+        {
+          "label": "🌎 English Sources",
+          "buttons": [
+            { "label": "Seven Seas", "url": "https://sevenseasentertainment.com/series/adachi-and-shimamura-light-novel/", "icon": "mdi:book-open-variant" },
+            { "label": "Amazon", "url": "https://www.amazon.com/dp/B08BWY8VMH", "icon": "mdi:amazon" },
+            { "label": "BookWalker Global", "url": "https://bookwalker.com/series/182107KDXMK0/adachi-and-shimamura", "icon": "mdi:book" },
+            { "label": "Kobo", "url": "https://www.kobo.com/us/en/series/adachi-and-shimamura-light-novel", "icon": "mdi:book-open-page-variant" },
+            { "label": "Barnes & Noble", "url": "https://www.barnesandnoble.com/search?attributes.mfield_bnb__seriesTitle=Adachi%20and%20Shimamura%20(Light%20Novel)%20Series", "icon": "mdi:book-open" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "manga",
+      "icon": "mdi:book-open-page-variant",
+      "title": "Manga",
+      "regions": [
+        {
+          "label": "🇯🇵 Japanese Sources",
+          "buttons": [
+            { "label": "Comic Walker (Raw)", "url": "https://comic-walker.com/detail/KC_004197_S?episodeType=first", "icon": "mdi:book-open-variant" },
+            { "label": "BookWalker JP", "url": "https://bookwalker.jp/series/227797/list/", "icon": "mdi:book" },
+            { "label": "Amazon Japan", "url": "https://www.amazon.co.jp/dp/B08KDDJHNL", "icon": "mdi:amazon" }
+          ]
+        },
+        {
+          "label": "🌎 English Sources",
+          "buttons": [
+            { "label": "Yen Press", "url": "https://yenpress.com/series/adachi-and-shimamura-manga", "icon": "mdi:book-open-variant" },
+            { "label": "Amazon", "url": "https://www.amazon.com/dp/B08G46L3NR", "icon": "mdi:amazon" },
+            { "label": "BookWalker Global", "url": "https://bookwalker.com/series/0XAMHXQPB6VG/adachi-and-shimamura", "icon": "mdi:book" },
+            { "label": "Kobo", "url": "https://www.kobo.com/us/en/series/adachi-and-shimamura-manga", "icon": "mdi:book-open-page-variant" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "author-blog",
+      "icon": "mdi:blog",
+      "title": "Author's Blog",
+      "description": "Follow Hitoma Iruma's official blog on Kakuyomu for updates, insights, and additional content about the series.",
+      "buttons": [
+        { "label": "Author's Blog (Kakuyomu)", "url": "https://kakuyomu.jp/works/1177354054897444952", "icon": "mdi:blog" }
+      ]
+    }
+  ],
+  "trackTitle": "Track the Series",
+  "trackSubtitle": "Follow Adachi to Shimamura on your favorite tracking platforms.",
+  "trackItems": [
+    {
+      "category": "Light Novel",
+      "buttons": [
+        { "label": "AniList", "url": "https://anilist.co/manga/92550/Adachi-to-Shimamura/", "icon": "mdi:star" },
+        { "label": "MyAnimeList", "url": "https://myanimelist.net/manga/77597/Adachi_to_Shimamura", "icon": "mdi:heart" },
+        { "label": "MangaUpdates", "url": "https://www.mangaupdates.com/series/sintmu7/adachi-to-shimamura-novel", "icon": "mdi:book-open" },
+        { "label": "Anime-Planet", "url": "https://www.anime-planet.com/manga/adachi-and-shimamura-light-novel", "icon": "mdi:earth" },
+        { "label": "NovelUpdates", "url": "https://www.novelupdates.com/series/adachi-to-shimamura/", "icon": "mdi:book-open-page-variant" },
+        { "label": "Kitsu", "url": "https://kitsu.app/manga/adachi-to-shimamura", "icon": "mdi:paw" }
+      ]
+    },
+    {
+      "category": "Anime",
+      "buttons": [
+        { "label": "AniList", "url": "https://anilist.co/anime/109287/Adachi-to-Shimamura", "icon": "mdi:star" },
+        { "label": "MyAnimeList", "url": "https://myanimelist.net/anime/39790/Adachi_to_Shimamura", "icon": "mdi:heart" },
+        { "label": "Anime-Planet", "url": "https://www.anime-planet.com/anime/adachi-and-shimamura", "icon": "mdi:earth" },
+        { "label": "Kitsu", "url": "https://kitsu.app/anime/adachi-to-shimamura", "icon": "mdi:paw" }
+      ]
+    },
+    {
+      "category": "Manga (Moke)",
+      "buttons": [
+        { "label": "AniList", "url": "https://anilist.co/manga/109302/Adachi-to-Shimamura/", "icon": "mdi:star" },
+        { "label": "MyAnimeList", "url": "https://myanimelist.net/manga/120071/Adachi_to_Shimamura", "icon": "mdi:heart" },
+        { "label": "MangaUpdates", "url": "https://www.mangaupdates.com/series/u4avteh/adachi-to-shimamura-yuzuhara-moke", "icon": "mdi:book-open" },
+        { "label": "Anime-Planet", "url": "https://www.anime-planet.com/manga/adachi-and-shimamura", "icon": "mdi:earth" },
+        { "label": "Kitsu", "url": "https://kitsu.app/manga/adachi-to-shimamura-2019", "icon": "mdi:paw" }
+      ]
+    }
+  ],
+  "legalTitle": "Copyright & Legal Notice",
+  "legalNotice": "This is an unofficial fan project.",
+  "legalDesc": "This website is a non-commercial fan archive created for educational and preservation purposes. We do not claim ownership of any copyrighted material displayed on this site.",
+  "legalItems": [
+    "All rights belong to their respective owners",
+    "No copyright infringement intended",
+    "Created for educational and preservation purposes",
+    "Translations belong to their respective translators",
+    "Original intellectual property belongs to its owners"
+  ],
+  "disclaimerTitle": "Disclaimer",
+  "disclaimerText": "This website is not affiliated with, endorsed by, or connected to:",
+  "disclaimerItems": [
+    "Hitoma Iruma",
+    "ASCII Media Works",
+    "Seven Seas",
+    "Any official publisher or rights holder"
+  ],
+  "disclaimerNote": "All original content, characters, and story elements are the property of their respective owners. This fan project is a celebration of the series and its community.",
+  "footer": "Adachi to Shimamura and all related rights belong to Hitoma Iruma",
+  "footerSub": "Created with love by fans, for fans · Not affiliated with any official entity",
+  "footerSub2": " ",
+  "modal": {
+    "changelogTitle": "Changelog"
+  },
+  "navVersionsLabel": "Versions"
+}

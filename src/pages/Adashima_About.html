@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Quicksand:wght@300;400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="../components/styles/menu.css" />
+  <link rel="stylesheet" href="../css/about.css" />
+  <link rel="stylesheet" href="../css/lang-switch.css" />
+  <link rel="stylesheet" href="../components/styles/scrollbar.css" />
+</head>
+<body>
+  <div class="about-shell">
+    <div id="sidebar-container"></div>
+    <main class="about-main">
+    <!-- Header with Language Controls -->
+    <div class="about-header">
+      <div class="header-top-controls">
+        <div class="lang-controls">
+          <div class="lang-wrapper">
+            <i class="fas fa-globe"></i>
+            <div class="lang-dropdown" id="langDropdown">
+              <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                <span id="langSelectedLabel">Español</span>
+                <i class="fas fa-chevron-down lang-caret"></i>
+              </button>
+              <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+                <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+                <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="about-hero">
+      <div class="about-hero-content">
+        <h1 class="about-hero-title">
+          <span class="iconify" data-icon="mdi:heart-outline"></span>
+          <span id="heroTitle">About</span>
+          <span class="iconify" data-icon="mdi:heart-outline"></span>
+        </h1>
+        <p class="about-hero-subtitle" id="heroSubtitle">
+          A fan-made archive dedicated to preserving, documenting, and celebrating the Adachi to Shimamura series.
+        </p>
+        <div class="about-hero-badges">
+          <span class="hero-badge"><span class="iconify" data-icon="mdi:clock-outline"></span> <span id="badgeSince">Since 2026</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project -->
+    <section class="about-section">
+      <div class="about-card glass-card">
+        <h2 class="about-section-title"><span class="iconify" data-icon="mdi:compass-outline"></span> <span id="projectTitle">About the Project</span></h2>
+        <p class="about-section-subtitle" id="projectSubtitle">Everything you need to explore the world of Adachi to Shimamura.</p>
+        <div class="about-features-grid" id="projectFeatures"></div>
+      </div>
+    </section>
+
+    <!-- Translation Credits -->
+    <section class="about-section">
+      <div class="about-card glass-card translator-section">
+        <h2 class="about-section-title"><span class="iconify" data-icon="mdi:pen"></span> <span id="translationTitle">Translation Credits</span></h2>
+        <p class="about-section-subtitle" id="translationSubtitle">Translators who made this series accessible</p>
+        <div class="translator-cards" id="translatorCards"></div>
+        <!-- Statistics row -->
+        <div class="translator-stats" id="translatorStats">
+          <div class="stat-item"><span class="iconify" data-icon="mdi:account-group-outline"></span> <span id="statContributors">2</span> <span class="stat-label">Contributors</span></div>
+          <div class="stat-item"><span class="iconify" data-icon="mdi:earth"></span> <span id="statLanguages">English / Spanish</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support the Original Work -->
+    <section class="about-section">
+      <div class="about-card glass-card support-card">
+        <h2 class="about-section-title">
+          <span class="iconify" data-icon="mdi:heart-handshake"></span>
+          <span id="supportTitle">Support the Original Work</span>
+        </h2>
+        <p class="about-section-subtitle" id="supportSubtitle">Support the creators by purchasing official releases.</p>
+        <div class="support-grid" id="supportGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Track Section -->
+    <section class="about-section">
+      <div class="about-card glass-card track-card">
+        <h2 class="about-section-title">
+          <span class="iconify" data-icon="mdi:chart-timeline-variant"></span>
+          <span id="trackTitle">Track the Series</span>
+        </h2>
+        <p class="about-section-subtitle" id="trackSubtitle">Follow Adachi to Shimamura on your favorite tracking platforms.</p>
+        <div class="track-grid" id="trackGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Legal -->
+    <section class="about-section">
+      <div class="about-card glass-card legal-card">
+        <h2 class="about-section-title"><span class="iconify" data-icon="mdi:scale-balance"></span> <span id="legalTitle">Copyright &amp; Legal Notice</span></h2>
+        <div class="legal-content" id="legalContent"></div>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="about-section">
+      <div class="about-card glass-card disclaimer-card">
+        <h2 class="about-section-title"><span class="iconify" data-icon="mdi:alert-outline"></span> <span id="disclaimerTitle">Disclaimer</span></h2>
+        <div class="disclaimer-content" id="disclaimerContent"></div>
+      </div>
+    </section>
+
+    <!-- Version Information -->
+    <section class="about-section">
+      <div class="about-card glass-card version-card">
+        <h2 class="about-section-title"><span class="iconify" data-icon="mdi:source-branch"></span> <span id="versionTitle">Version Information</span></h2>
+        <div class="version-grid" id="versionGrid"></div>
+        <!-- Changelog button -->
+        <div class="changelog-button-wrap">
+          <button class="changelog-btn" id="openChangelogBtn"><span class="iconify" data-icon="mdi:scroll-outline"></span> <span id="changelogBtnLabel">View Changelog</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="about-footer" id="aboutFooter"></footer>
+  </main>
+  </div>
+
+  <div class="page-bg"></div>
+
+  <!-- ===== CHANGELOG MODAL ===== -->
+  <div class="changelog-overlay" id="changelogOverlay">
+    <div class="changelog-modal">
+      <!-- Modal Header -->
+      <div class="changelog-modal-header">
+        <div class="changelog-modal-title">
+          <span class="iconify" data-icon="mdi:scroll-outline"></span>
+          <span id="modalChangelogTitle">Changelog</span>
+        </div>
+        <button class="changelog-modal-close" id="closeChangelogBtn">
+          <span class="iconify" data-icon="mdi:close"></span>
+        </button>
+      </div>
+
+      <!-- Modal Body: Two Panels -->
+      <div class="changelog-modal-body">
+        <!-- Left Panel: Version Navigator -->
+        <div class="changelog-nav" id="changelogNav">
+          <div class="changelog-nav-header">
+            <span class="iconify" data-icon="mdi:tag-outline"></span>
+            <span id="navVersionsLabel">Versions</span>
+          </div>
+          <div class="changelog-nav-list" id="changelogNavList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Right Panel: Release Details -->
+        <div class="changelog-details" id="changelogDetails">
+          <div class="changelog-details-content" id="changelogDetailsContent">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-message" class="toast-message"></div>
+
+  <script>
+    // ========================================
+    // ABOUT PAGE - MAIN LOGIC
+    // ========================================
+
+    let currentLang = localStorage.getItem('lang') || 'es';
+    let translations = null;
+    let isSwitching = false;
+    let changelogData = [];
+    let selectedVersion = null;
+
+    // ========================================
+    // FALLBACK TRANSLATIONS
+    // ========================================
+    const FALLBACK_TRANSLATIONS = {
+      es: {
+        backLabel: "Volver",
+        heroTitle: "Acerca de Adachi &amp; Shimamura",
+        heroSubtitle: "Un archivo hecho por fans dedicado a preservar, documentar y celebrar la serie Adachi to Shimamura.",
+        badgeSince: "Desde 2026",
+        projectTitle: "Sobre el Proyecto",
+        projectSubtitle: "Todo lo que necesitas para explorar el mundo de Adachi to Shimamura.",
+        projectFeatures: [
+          { icon: "mdi:book-open-page-variant-outline", title: "Documentación Completa", desc: "Información detallada sobre la serie, personajes y adaptaciones." },
+          { icon: "mdi:translate", title: "Traducciones", desc: "Acceso a traducciones al español y recursos de la comunidad." },
+          { icon: "mdi:account-group-outline", title: "Comunidad", desc: "Un espacio dedicado a los fans de Adachi to Shimamura." }
+        ],
+        translatorTitle: "Créditos de Traducción",
+        translatorSubtitle: "Traductores que hicieron accesible esta serie",
+        translators: [
+          { icon: "mdi:account-outline", name: "Nombre del Traductor", link: "#", role: "Traductor Principal", badge: "Volúmenes 1-5", description: "Traducción al español de los primeros cinco volúmenes de la serie." },
+          { icon: "mdi:account-outline", name: "Otro Traductor", link: "#", role: "Traductor de Segunda Edición", badge: "Volúmenes 6-10", description: "Traducción y revisión de los volúmenes 6 a 10." }
+        ],
+        stats: { contributors: 2, languages: "Español / Inglés" },
+        legalTitle: "Aviso Legal y Derechos de Autor",
+        legalNotice: "Aviso de Derechos de Autor",
+        legalDesc: "Este sitio web es un proyecto de fans sin fines de lucro. Todos los derechos pertenecen a sus respectivos propietarios.",
+        legalItems: [
+          "Adachi to Shimamura © Hitoma Iruma / ASCII Media Works",
+          "Adaptación al anime © 2020 Studio GOKUMI",
+          "Este sitio no está afiliado con los titulares de derechos",
+          "Todo el contenido se utiliza con fines informativos"
+        ],
+        disclaimerTitle: "Descargo de Responsabilidad",
+        disclaimerText: "Este es un sitio web no oficial creado por fans para fans. No estamos afiliados con los creadores o editores de Adachi to Shimamura.",
+        disclaimerItems: [
+          "La información proporcionada es para fines informativos",
+          "Las traducciones pueden contener errores",
+          "El contenido puede estar sujeto a cambios",
+          "Los enlaces externos son responsabilidad de sus respectivos dueños"
+        ],
+        disclaimerNote: "Si eres titular de derechos y deseas que eliminemos contenido, por favor contáctanos.",
+        versionTitle: "Información de Versión",
+        versionItems: [
+          { label: "Versión del Sitio Web", value: "v2.5.0" },
+          { label: "Número de Compilación", value: "#20260710" },
+          { label: "Última Actualización", value: "Julio 10, 2026" },
+          { label: "Estado", value: "Estable" }
+        ],
+        changelogBtn: "Ver Registro de Cambios",
+        footer: "Adachi &amp; Shimamura Latinoamérica · Un proyecto de fans sin fines de lucro",
+        footerSub: "Hecho con ❤️ por la comunidad",
+        footerSub2: "",
+        modal: { changelogTitle: "Registro de Cambios" },
+        navVersionsLabel: "Versiones",
+        supportTitle: "Apoya la Obra Original",
+        supportSubtitle: "Apoya a los creadores comprando lanzamientos oficiales.",
+        supportItems: [
+          {
+            id: "light-novel",
+            icon: "mdi:book-open-variant",
+            title: "Novela Ligera",
+            regions: [
+              {
+                label: "🇯🇵 Fuentes Japonesas",
+                buttons: [
+                  { label: "Dengeki Bunko", url: "https://dengekibunko.jp/product/adashima/", icon: "mdi:book-open-variant" },
+                  { label: "Amazon Japan", url: "https://www.amazon.co.jp/-/en/dp/B075LFSD5L?binding=kindle_edition", icon: "mdi:amazon" },
+                  { label: "BookWalker JP", url: "https://bookwalker.jp/series/17875/list/", icon: "mdi:book" },
+                  { label: "Rakuten Books", url: "https://books.rakuten.co.jp/series/BW0018AQO0/", icon: "mdi:cart" }
+                ]
+              },
+              {
+                label: "🌎 Fuentes en Inglés",
+                buttons: [
+                  { label: "Seven Seas", url: "https://sevenseasentertainment.com/series/adachi-and-shimamura-light-novel/", icon: "mdi:book-open-variant" },
+                  { label: "Amazon", url: "https://www.amazon.com/dp/B08BWY8VMH", icon: "mdi:amazon" },
+                  { label: "BookWalker Global", url: "https://bookwalker.com/series/182107KDXMK0/adachi-and-shimamura", icon: "mdi:book" },
+                  { label: "Kobo", url: "https://www.kobo.com/us/en/series/adachi-and-shimamura-light-novel", icon: "mdi:book-open-page-variant" },
+                  { label: "Barnes & Noble", url: "https://www.barnesandnoble.com/search?attributes.mfield_bnb__seriesTitle=Adachi%20and%20Shimamura%20(Light%20Novel)%20Series", icon: "mdi:book-open" }
+                ]
+              }
+            ]
+          },
+          {
+            id: "manga",
+            icon: "mdi:book-open-page-variant",
+            title: "Manga",
+            regions: [
+              {
+                label: "🇯🇵 Fuentes Japonesas",
+                buttons: [
+                  { label: "Comic Walker (Raw)", url: "https://comic-walker.com/detail/KC_004197_S?episodeType=first", icon: "mdi:book-open-variant" },
+                  { label: "BookWalker JP", url: "https://bookwalker.jp/series/227797/list/", icon: "mdi:book" },
+                  { label: "Amazon Japan", url: "https://www.amazon.co.jp/dp/B08KDDJHNL", icon: "mdi:amazon" }
+                ]
+              },
+              {
+                label: "🌎 Fuentes en Inglés",
+                buttons: [
+                  { label: "Yen Press", url: "https://yenpress.com/series/adachi-and-shimamura-manga", icon: "mdi:book-open-variant" },
+                  { label: "Amazon", url: "https://www.amazon.com/dp/B08G46L3NR", icon: "mdi:amazon" },
+                  { label: "BookWalker Global", url: "https://bookwalker.com/series/0XAMHXQPB6VG/adachi-and-shimamura", icon: "mdi:book" },
+                  { label: "Kobo", url: "https://www.kobo.com/us/en/series/adachi-and-shimamura-manga", icon: "mdi:book-open-page-variant" }
+                ]
+              }
+            ]
+          },
+          {
+            id: "author-blog",
+            icon: "mdi:blog",
+            title: "Blog del Autor",
+            description: "Sigue el blog oficial de Hitoma Iruma en Kakuyomu para actualizaciones, reflexiones y contenido adicional sobre la serie.",
+            buttons: [
+              { label: "Blog del Autor (Kakuyomu)", url: "https://kakuyomu.jp/works/1177354054897444952", icon: "mdi:blog" }
+            ]
+          }
+        ],
+        trackTitle: "Sigue la Serie",
+        trackSubtitle: "Sigue Adachi to Shimamura en tus plataformas de seguimiento favoritas.",
+        trackItems: [
+          {
+            category: "Novela Ligera",
+            buttons: [
+              { label: "AniList", url: "https://anilist.co/manga/92550/Adachi-to-Shimamura/", icon: "mdi:star" },
+              { label: "MyAnimeList", url: "https://myanimelist.net/manga/77597/Adachi_to_Shimamura", icon: "mdi:heart" },
+              { label: "MangaUpdates", url: "https://www.mangaupdates.com/series/sintmu7/adachi-to-shimamura-novel", icon: "mdi:book-open" },
+              { label: "Anime-Planet", url: "https://www.anime-planet.com/manga/adachi-and-shimamura-light-novel", icon: "mdi:earth" },
+              { label: "NovelUpdates", url: "https://www.novelupdates.com/series/adachi-to-shimamura/", icon: "mdi:book-open-page-variant" },
+              { label: "Kitsu", url: "https://kitsu.app/manga/adachi-to-shimamura", icon: "mdi:paw" }
+            ]
+          },
+          {
+            category: "Anime",
+            buttons: [
+              { label: "AniList", url: "https://anilist.co/anime/109287/Adachi-to-Shimamura", icon: "mdi:star" },
+              { label: "MyAnimeList", url: "https://myanimelist.net/anime/39790/Adachi_to_Shimamura", icon: "mdi:heart" },
+              { label: "Anime-Planet", url: "https://www.anime-planet.com/anime/adachi-and-shimamura", icon: "mdi:earth" },
+              { label: "Kitsu", url: "https://kitsu.app/anime/adachi-to-shimamura", icon: "mdi:paw" }
+            ]
+          },
+          {
+            category: "Manga (Moke)",
+            buttons: [
+              { label: "AniList", url: "https://anilist.co/manga/109302/Adachi-to-Shimamura/", icon: "mdi:star" },
+              { label: "MyAnimeList", url: "https://myanimelist.net/manga/120071/Adachi_to_Shimamura", icon: "mdi:heart" },
+              { label: "MangaUpdates", url: "https://www.mangaupdates.com/series/u4avteh/adachi-to-shimamura-yuzuhara-moke", icon: "mdi:book-open" },
+              { label: "Anime-Planet", url: "https://www.anime-planet.com/manga/adachi-and-shimamura", icon: "mdi:earth" },
+              { label: "Kitsu", url: "https://kitsu.app/manga/adachi-to-shimamura-2019", icon: "mdi:paw" }
+            ]
+          }
+        ]
+      },
+      en: {
+        backLabel: "Back",
+        heroTitle: "About Adachi &amp; Shimamura",
+        heroSubtitle: "A fan-made archive dedicated to preserving, documenting, and celebrating the Adachi to Shimamura series.",
+        badgeSince: "Since 2026",
+        projectTitle: "About the Project",
+        projectSubtitle: "Everything you need to explore the world of Adachi to Shimamura.",
+        projectFeatures: [
+          { icon: "mdi:book-open-page-variant-outline", title: "Complete Documentation", desc: "Detailed information about the series, characters, and adaptations." },
+          { icon: "mdi:translate", title: "Translations", desc: "Access to Spanish translations and community resources." },
+          { icon: "mdi:account-group-outline", title: "Community", desc: "A dedicated space for Adachi to Shimamura fans." }
+        ],
+        translatorTitle: "Translation Credits",
+        translatorSubtitle: "Translators who made this series accessible",
+        translators: [
+          { icon: "mdi:account-outline", name: "Translator Name", link: "#", role: "Lead Translator", badge: "Volumes 1-5", description: "Spanish translation of the first five volumes of the series." },
+          { icon: "mdi:account-outline", name: "Another Translator", link: "#", role: "Second Edition Translator", badge: "Volumes 6-10", description: "Translation and revision of volumes 6 through 10." }
+        ],
+        stats: { contributors: 2, languages: "English / Spanish" },
+        legalTitle: "Copyright &amp; Legal Notice",
+        legalNotice: "Copyright Notice",
+        legalDesc: "This website is a non-profit fan project. All rights belong to their respective owners.",
+        legalItems: [
+          "Adachi to Shimamura © Hitoma Iruma / ASCII Media Works",
+          "Anime adaptation © 2020 Studio GOKUMI",
+          "This site is not affiliated with rights holders",
+          "All content is used for informational purposes"
+        ],
+        disclaimerTitle: "Disclaimer",
+        disclaimerText: "This is an unofficial fan website created by fans for fans. We are not affiliated with the creators or publishers of Adachi to Shimamura.",
+        disclaimerItems: [
+          "Information provided is for informational purposes",
+          "Translations may contain errors",
+          "Content may be subject to change",
+          "External links are the responsibility of their respective owners"
+        ],
+        disclaimerNote: "If you are a rights holder and wish us to remove content, please contact us.",
+        versionTitle: "Version Information",
+        versionItems: [
+          { label: "Website Version", value: "v2.5.0" },
+          { label: "Build Number", value: "#20260710" },
+          { label: "Last Updated", value: "July 10, 2026" },
+          { label: "Status", value: "Stable" }
+        ],
+        changelogBtn: "View Changelog",
+        footer: "Adachi &amp; Shimamura Latinoamérica · A non-profit fan project",
+        footerSub: "Made with ❤️ by the community",
+        footerSub2: "",
+        modal: { changelogTitle: "Changelog" },
+        navVersionsLabel: "Versions",
+        supportTitle: "Support the Original Work",
+        supportSubtitle: "Support the creators by purchasing official releases.",
+        supportItems: [
+          {
+            id: "light-novel",
+            icon: "mdi:book-open-variant",
+            title: "Light Novel",
+            regions: [
+              {
+                label: "🇯🇵 Japanese Sources",
+                buttons: [
+                  { label: "Dengeki Bunko", url: "https://dengekibunko.jp/product/adashima/", icon: "mdi:book-open-variant" },
+                  { label: "Amazon Japan", url: "https://www.amazon.co.jp/-/en/dp/B075LFSD5L?binding=kindle_edition", icon: "mdi:amazon" },
+                  { label: "BookWalker JP", url: "https://bookwalker.jp/series/17875/list/", icon: "mdi:book" },
+                  { label: "Rakuten Books", url: "https://books.rakuten.co.jp/series/BW0018AQO0/", icon: "mdi:cart" }
+                ]
+              },
+              {
+                label: "🌎 English Sources",
+                buttons: [
+                  { label: "Seven Seas", url: "https://sevenseasentertainment.com/series/adachi-and-shimamura-light-novel/", icon: "mdi:book-open-variant" },
+                  { label: "Amazon", url: "https://www.amazon.com/dp/B08BWY8VMH", icon: "mdi:amazon" },
+                  { label: "BookWalker Global", url: "https://bookwalker.com/series/182107KDXMK0/adachi-and-shimamura", icon: "mdi:book" },
+                  { label: "Kobo", url: "https://www.kobo.com/us/en/series/adachi-and-shimamura-light-novel", icon: "mdi:book-open-page-variant" },
+                  { label: "Barnes & Noble", url: "https://www.barnesandnoble.com/search?attributes.mfield_bnb__seriesTitle=Adachi%20and%20Shimamura%20(Light%20Novel)%20Series", icon: "mdi:book-open" }
+                ]
+              }
+            ]
+          },
+          {
+            id: "manga",
+            icon: "mdi:book-open-page-variant",
+            title: "Manga",
+            regions: [
+              {
+                label: "🇯🇵 Japanese Sources",
+                buttons: [
+                  { label: "Comic Walker (Raw)", url: "https://comic-walker.com/detail/KC_004197_S?episodeType=first", icon: "mdi:book-open-variant" },
+                  { label: "BookWalker JP", url: "https://bookwalker.jp/series/227797/list/", icon: "mdi:book" },
+                  { label: "Amazon Japan", url: "https://www.amazon.co.jp/dp/B08KDDJHNL", icon: "mdi:amazon" }
+                ]
+              },
+              {
+                label: "🌎 English Sources",
+                buttons: [
+                  { label: "Yen Press", url: "https://yenpress.com/series/adachi-and-shimamura-manga", icon: "mdi:book-open-variant" },
+                  { label: "Amazon", url: "https://www.amazon.com/dp/B08G46L3NR", icon: "mdi:amazon" },
+                  { label: "BookWalker Global", url: "https://bookwalker.com/series/0XAMHXQPB6VG/adachi-and-shimamura", icon: "mdi:book" },
+                  { label: "Kobo", url: "https://www.kobo.com/us/en/series/adachi-and-shimamura-manga", icon: "mdi:book-open-page-variant" }
+                ]
+              }
+            ]
+          },
+          {
+            id: "author-blog",
+            icon: "mdi:blog",
+            title: "Author's Blog",
+            description: "Follow Hitoma Iruma's official blog on Kakuyomu for updates, insights, and additional content about the series.",
+            buttons: [
+              { label: "Author's Blog (Kakuyomu)", url: "https://kakuyomu.jp/works/1177354054897444952", icon: "mdi:blog" }
+            ]
+          }
+        ],
+        trackTitle: "Track the Series",
+        trackSubtitle: "Follow Adachi to Shimamura on your favorite tracking platforms.",
+        trackItems: [
+          {
+            category: "Light Novel",
+            buttons: [
+              { label: "AniList", url: "https://anilist.co/manga/92550/Adachi-to-Shimamura/", icon: "mdi:star" },
+              { label: "MyAnimeList", url: "https://myanimelist.net/manga/77597/Adachi_to_Shimamura", icon: "mdi:heart" },
+              { label: "MangaUpdates", url: "https://www.mangaupdates.com/series/sintmu7/adachi-to-shimamura-novel", icon: "mdi:book-open" },
+              { label: "Anime-Planet", url: "https://www.anime-planet.com/manga/adachi-and-shimamura-light-novel", icon: "mdi:earth" },
+              { label: "NovelUpdates", url: "https://www.novelupdates.com/series/adachi-to-shimamura/", icon: "mdi:book-open-page-variant" },
+              { label: "Kitsu", url: "https://kitsu.app/manga/adachi-to-shimamura", icon: "mdi:paw" }
+            ]
+          },
+          {
+            category: "Anime",
+            buttons: [
+              { label: "AniList", url: "https://anilist.co/anime/109287/Adachi-to-Shimamura", icon: "mdi:star" },
+              { label: "MyAnimeList", url: "https://myanimelist.net/anime/39790/Adachi_to_Shimamura", icon: "mdi:heart" },
+              { label: "Anime-Planet", url: "https://www.anime-planet.com/anime/adachi-and-shimamura", icon: "mdi:earth" },
+              { label: "Kitsu", url: "https://kitsu.app/anime/adachi-to-shimamura", icon: "mdi:paw" }
+            ]
+          },
+          {
+            category: "Manga (Moke)",
+            buttons: [
+              { label: "AniList", url: "https://anilist.co/manga/109302/Adachi-to-Shimamura/", icon: "mdi:star" },
+              { label: "MyAnimeList", url: "https://myanimelist.net/manga/120071/Adachi_to_Shimamura", icon: "mdi:heart" },
+              { label: "MangaUpdates", url: "https://www.mangaupdates.com/series/u4avteh/adachi-to-shimamura-yuzuhara-moke", icon: "mdi:book-open" },
+              { label: "Anime-Planet", url: "https://www.anime-planet.com/manga/adachi-and-shimamura", icon: "mdi:earth" },
+              { label: "Kitsu", url: "https://kitsu.app/manga/adachi-to-shimamura-2019", icon: "mdi:paw" }
+            ]
+          }
+        ]
+      }
+    };
+
+    // ========================================
+    // TOAST MESSAGE
+    // ========================================
+    function showMessage(msg) {
+      const t = document.getElementById('toast-message');
+      if (!t) return;
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 3000);
+    }
+
+    // ========================================
+    // LANGUAGE DROPDOWN
+    // ========================================
+    function updateLangDropdownLabel() {
+      const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
+      const labelEl = document.getElementById('langSelectedLabel');
+      if (selectedOption && labelEl) {
+        labelEl.textContent = selectedOption.getAttribute('data-label');
+        document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('selected'));
+        selectedOption.classList.add('selected');
+      }
+    }
+
+    // ========================================
+    // TRANSLATIONS
+    // ========================================
+    async function loadTranslations(lang) {
+      try {
+        const response = await fetch(`../data/about/${lang}.json?v=${Date.now()}`);
+        if (!response.ok) throw new Error('Failed to load translations');
+        const data = await response.json();
+        translations = data;
+        return data;
+      } catch (e) {
+        console.warn('Failed to load translations, using fallback:', e);
+        translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
+        return translations;
+      }
+    }
+
+    function getText(key) {
+      if (!translations) return key;
+      const keys = key.split('.');
+      let value = translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) value = value[k];
+        else return key;
+      }
+      return value || key;
+    }
+
+    // ========================================
+    // RENDER PAGE
+    // ========================================
+    function renderPage(data) {
+      if (!data) {
+        console.error('No translation data available');
+        return;
+      }
+
+      // Hero
+      document.getElementById('heroTitle').innerHTML = getText('heroTitle');
+      document.getElementById('heroSubtitle').textContent = getText('heroSubtitle');
+      document.getElementById('badgeSince').textContent = getText('badgeSince');
+
+      // Project
+      document.getElementById('projectTitle').textContent = getText('projectTitle');
+      document.getElementById('projectSubtitle').textContent = getText('projectSubtitle');
+      const pf = document.getElementById('projectFeatures');
+      if (pf) {
+        const features = getText('projectFeatures');
+        if (Array.isArray(features)) {
+          pf.innerHTML = features.map(f => `
+            <div class="about-feature">
+              <div class="about-feature-icon"><span class="iconify" data-icon="${f.icon || 'mdi:circle-outline'}"></span></div>
+              <div class="about-feature-content"><h4>${f.title || ''}</h4><p>${f.desc || ''}</p></div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Translation Credits
+      document.getElementById('translationTitle').textContent = getText('translatorTitle');
+      document.getElementById('translationSubtitle').textContent = getText('translatorSubtitle');
+      const tc = document.getElementById('translatorCards');
+      if (tc) {
+        const translators = getText('translators');
+        if (Array.isArray(translators)) {
+          tc.innerHTML = translators.map(t => {
+            const hasLink = t.link && t.link !== '#' && t.link.trim() !== '';
+            
+            if (hasLink) {
+              return `
+                <div class="translator-card">
+                  <div class="translator-icon"><span class="iconify" data-icon="${t.icon || 'mdi:account-outline'}"></span></div>
+                  <div class="translator-info">
+                    <h4>
+                      <a href="${t.link}" target="_blank" rel="noopener noreferrer" class="translator-link">
+                        ${t.name || 'Unknown'}
+                        <span class="link-icon"><span class="iconify" data-icon="mdi:open-in-new"></span></span>
+                      </a>
+                    </h4>
+                    <div class="translator-role">${t.role || ''}</div>
+                    ${t.badge ? `<span class="translator-badge">${t.badge}</span>` : ''}
+                    <p class="translator-desc">${t.description || ''}</p>
+                  </div>
+                </div>
+              `;
+            } else {
+              return `
+                <div class="translator-card">
+                  <div class="translator-icon"><span class="iconify" data-icon="${t.icon || 'mdi:account-outline'}"></span></div>
+                  <div class="translator-info">
+                    <h4>${t.name || 'Unknown'}</h4>
+                    <div class="translator-role">${t.role || ''}</div>
+                    ${t.badge ? `<span class="translator-badge">${t.badge}</span>` : ''}
+                    <p class="translator-desc">${t.description || ''}</p>
+                  </div>
+                </div>
+              `;
+            }
+          }).join('');
+        }
+      }
+
+      // Statistics
+      const stats = getText('stats') || { contributors: 2, languages: "English / Spanish" };
+      document.getElementById('statContributors').textContent = stats.contributors || 2;
+      document.getElementById('statLanguages').textContent = stats.languages || 'English / Spanish';
+
+      // Version Information
+      document.getElementById('versionTitle').textContent = getText('versionTitle');
+      const vg = document.getElementById('versionGrid');
+      if (vg) {
+        const versionItems = getText('versionItems');
+        if (Array.isArray(versionItems)) {
+          vg.innerHTML = versionItems.map(v => `
+            <div class="version-item">
+              <span class="version-label">${v.label || ''}</span>
+              <span class="version-value">${v.value || ''}</span>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Changelog button
+      document.getElementById('changelogBtnLabel').textContent = getText('changelogBtn');
+
+      // Footer
+      const af = document.getElementById('aboutFooter');
+      if (af) {
+        af.innerHTML = `
+          <p>${getText('footer') || ''}</p>
+          <p class="footer-sub">${getText('footerSub') || ''}</p>
+          <p class="footer-sub">${getText('footerSub2') || ''}</p>
+        `;
+      }
+
+      // Modal title
+      const modalTitle = document.getElementById('modalChangelogTitle');
+      if (modalTitle) modalTitle.textContent = getText('modal.changelogTitle') || getText('changelogBtn');
+
+      // Nav versions label
+      const navLabel = document.getElementById('navVersionsLabel');
+      if (navLabel) navLabel.textContent = getText('navVersionsLabel') || 'Versions';
+
+      // Support the Original Work
+      renderSupportSection();
+
+      // Track Section
+      renderTrackSection();
+
+      // Legal
+      renderLegalSection();
+
+      // Disclaimer
+      renderDisclaimerSection();
+
+      // Refresh Iconify icons
+      if (window.Iconify) {
+        window.Iconify.scan();
+      }
+
+      // Animate
+      setTimeout(() => {
+        document.querySelectorAll('.translator-card, .about-card').forEach(el => el.classList.add('visible'));
+      }, 100);
+    }
+
+    // ========================================
+    // RENDER SUPPORT SECTION
+    // ========================================
+    function renderSupportSection() {
+      document.getElementById('supportTitle').textContent = getText('supportTitle');
+      document.getElementById('supportSubtitle').textContent = getText('supportSubtitle');
+
+      const supportGrid = document.getElementById('supportGrid');
+      if (!supportGrid) return;
+
+      const supportItems = getText('supportItems');
+      if (!Array.isArray(supportItems)) return;
+
+      supportGrid.innerHTML = supportItems.map(item => {
+        // Handle author-blog item
+        if (item.id === 'author-blog') {
+          return `
+            <div class="support-item">
+              <div class="support-item-header">
+                <span class="iconify" data-icon="${item.icon || 'mdi:blog'}"></span>
+                <span>${item.title}</span>
+              </div>
+              ${item.description ? `<div class="support-item-description">${item.description}</div>` : ''}
+              <div class="support-button-group">
+                ${(item.buttons || []).map(btn => `
+                  <a href="${btn.url}" target="_blank" rel="noopener noreferrer" class="support-btn">
+                    <span class="iconify" data-icon="${btn.icon || 'mdi:link'}"></span>
+                    ${btn.label}
+                  </a>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // Handle items with regions (light novel, manga)
+        if (item.regions && Array.isArray(item.regions)) {
+          let regionsHtml = '';
+          item.regions.forEach(region => {
+            regionsHtml += `
+              <div class="support-region-label">${region.label}</div>
+              <div class="support-button-group">
+                ${(region.buttons || []).map(btn => `
+                  <a href="${btn.url}" target="_blank" rel="noopener noreferrer" class="support-btn">
+                    <span class="iconify" data-icon="${btn.icon || 'mdi:link'}"></span>
+                    ${btn.label}
+                  </a>
+                `).join('')}
+              </div>
+            `;
+          });
+
+          return `
+            <div class="support-item">
+              <div class="support-item-header">
+                <span class="iconify" data-icon="${item.icon || 'mdi:book-open-variant'}"></span>
+                <span>${item.title}</span>
+              </div>
+              ${regionsHtml}
+            </div>
+          `;
+        }
+
+        return '';
+      }).join('');
+    }
+
+    // ========================================
+    // RENDER TRACK SECTION
+    // ========================================
+    function renderTrackSection() {
+      document.getElementById('trackTitle').textContent = getText('trackTitle');
+      document.getElementById('trackSubtitle').textContent = getText('trackSubtitle');
+
+      const trackGrid = document.getElementById('trackGrid');
+      if (!trackGrid) return;
+
+      const trackItems = getText('trackItems');
+      if (!Array.isArray(trackItems)) return;
+
+      trackGrid.innerHTML = trackItems.map(category => `
+        <div class="track-item">
+          <div class="track-item-header">
+            <span class="iconify" data-icon="mdi:chart-timeline-variant"></span>
+            <span>${category.category}</span>
+          </div>
+          <div class="support-button-group">
+            ${(category.buttons || []).map(btn => `
+              <a href="${btn.url}" target="_blank" rel="noopener noreferrer" class="support-btn">
+                <span class="iconify" data-icon="${btn.icon || 'mdi:link'}"></span>
+                ${btn.label}
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ========================================
+    // RENDER LEGAL SECTION
+    // ========================================
+    function renderLegalSection() {
+      document.getElementById('legalTitle').textContent = getText('legalTitle');
+      const lc = document.getElementById('legalContent');
+      if (lc) {
+        const legalItems = getText('legalItems');
+        if (Array.isArray(legalItems)) {
+          lc.innerHTML = `
+            <div class="legal-notice">
+              <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+              <div><strong>${getText('legalNotice') || ''}</strong><p>${getText('legalDesc') || ''}</p></div>
+            </div>
+            <div class="legal-list">${legalItems.map(item => `<div class="legal-item"><span class="iconify" data-icon="mdi:check"></span><span>${item || ''}</span></div>`).join('')}</div>
+          `;
+        }
+      }
+    }
+
+    // ========================================
+    // RENDER DISCLAIMER SECTION
+    // ========================================
+    function renderDisclaimerSection() {
+      document.getElementById('disclaimerTitle').textContent = getText('disclaimerTitle');
+      const dc = document.getElementById('disclaimerContent');
+      if (dc) {
+        const disclaimerItems = getText('disclaimerItems');
+        if (Array.isArray(disclaimerItems)) {
+          dc.innerHTML = `
+            <p>${getText('disclaimerText') || ''}</p>
+            <ul>${disclaimerItems.map(item => `<li><span class="iconify" data-icon="mdi:pen"></span> ${item || ''}</li>`).join('')}</ul>
+            <p class="disclaimer-note">${getText('disclaimerNote') || ''}</p>
+          `;
+        }
+      }
+    }
+
+    // ========================================
+    // CHANGELOG MANAGER
+    // ========================================
+    class ChangelogManager {
+      constructor(lang) {
+        this.lang = lang || 'es';
+        this.changelogData = [];
+        this.selectedVersion = null;
+        this.overlay = document.getElementById('changelogOverlay');
+        this.navList = document.getElementById('changelogNavList');
+        this.detailsContent = document.getElementById('changelogDetailsContent');
+        this.openBtn = document.getElementById('openChangelogBtn');
+        this.closeBtn = document.getElementById('closeChangelogBtn');
+      }
+
+      init() {
+        if (!this.overlay) return;
+
+        this.openBtn?.addEventListener('click', () => this.open());
+        this.closeBtn?.addEventListener('click', () => this.close());
+        this.overlay.addEventListener('click', (e) => {
+          if (e.target === this.overlay) this.close();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') this.close();
+        });
+      }
+
+      async loadChangelog() {
+        try {
+          const response = await fetch(`../data/changelog/${this.lang}.json?v=${Date.now()}`);
+          if (!response.ok) throw new Error('Failed to load changelog');
+          const data = await response.json();
+          this.changelogData = data;
+          return data;
+        } catch (e) {
+          console.warn('Failed to load changelog:', e.message);
+          return [];
+        }
+      }
+
+      renderNav(versions) {
+        if (!this.navList) return;
+
+        if (!versions || versions.length === 0) {
+          this.navList.innerHTML = `
+            <div class="changelog-nav-empty">
+              <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+              <span>No versions available</span>
+            </div>
+          `;
+          return;
+        }
+
+        this.navList.innerHTML = versions.map((entry, index) => {
+          const isNew = index === 0;
+          const isSelected = this.selectedVersion === entry.version;
+          return `
+            <div class="changelog-nav-item ${isSelected ? 'selected' : ''}" 
+                 data-version="${entry.version}"
+                 onclick="changelogInstance.selectVersion('${entry.version}')">
+              <div class="changelog-nav-item-version">${entry.version}</div>
+              <div class="changelog-nav-item-date">${entry.date}</div>
+              ${isNew ? `<span class="changelog-nav-item-badge">New</span>` : ''}
+            </div>
+          `;
+        }).join('');
+
+        const selectedEl = this.navList.querySelector('.changelog-nav-item.selected');
+        if (selectedEl) {
+          selectedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+
+      renderDetails(entry) {
+        if (!this.detailsContent) return;
+
+        if (!entry) {
+          this.detailsContent.innerHTML = `
+            <div class="changelog-details-empty">
+              <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+              <span>Select a version to view details</span>
+            </div>
+          `;
+          return;
+        }
+
+        const changes = entry.changes || {};
+        const categories = [
+          { key: 'new', icon: 'mdi:star-outline', label: 'New' },
+          { key: 'improvements', icon: 'mdi:brush-outline', label: 'Improvements' },
+          { key: 'fixes', icon: 'mdi:bug-outline', label: 'Fixes' },
+          { key: 'notes', icon: 'mdi:note-text-outline', label: 'Notes' }
+        ];
+
+        let changesHtml = '';
+        categories.forEach(cat => {
+          if (changes[cat.key] && changes[cat.key].length > 0) {
+            changesHtml += `
+              <div class="changelog-details-category">
+                <div class="changelog-details-category-header">
+                  <span class="iconify" data-icon="${cat.icon}"></span>
+                  <span class="changelog-details-category-label">${cat.label}</span>
+                </div>
+                <ul class="changelog-details-category-list">
+                  ${changes[cat.key].map(item => `<li>${item}</li>`).join('')}
+                </ul>
+              </div>
+            `;
+          }
+        });
+
+        this.detailsContent.innerHTML = `
+          <div class="changelog-details-header">
+            <div class="changelog-details-version">${entry.version}</div>
+            <div class="changelog-details-meta">
+              <span class="changelog-details-build">Build ${entry.build || 'N/A'}</span>
+              <span class="changelog-details-date">${entry.date}</span>
+            </div>
+            ${entry.subtitle ? `<div class="changelog-details-subtitle">${entry.subtitle}</div>` : ''}
+          </div>
+          <div class="changelog-details-body">
+            ${changesHtml || '<p class="changelog-details-empty-changes">No changes documented for this version.</p>'}
+          </div>
+        `;
+      }
+
+      selectVersion(version) {
+        this.selectedVersion = version;
+        const entry = this.changelogData.find(e => e.version === version);
+        if (entry) {
+          this.renderNav(this.changelogData);
+          this.renderDetails(entry);
+        }
+      }
+
+      async open() {
+        if (!this.overlay) return;
+
+        if (this.changelogData.length === 0) {
+          const data = await this.loadChangelog();
+          if (data && data.length > 0) {
+            this.changelogData = data;
+            this.selectedVersion = data[0].version;
+            this.renderNav(data);
+            this.renderDetails(data[0]);
+          }
+        }
+
+        window.changelogInstance = this;
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      close() {
+        if (this.overlay) {
+          this.overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      async updateLanguage(lang) {
+        this.lang = lang;
+        this.changelogData = [];
+        this.selectedVersion = null;
+        if (this.overlay.classList.contains('active')) {
+          await this.open();
+        }
+      }
+    }
+
+    // ========================================
+    // LANGUAGE SWITCHER
+    // ========================================
+    async function switchLanguage(lang) {
+      if (isSwitching || currentLang === lang) return;
+      isSwitching = true;
+      
+      const langToggle = document.getElementById('langToggle');
+      if (langToggle) langToggle.disabled = true;
+
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+      
+      updateLangDropdownLabel();
+
+      const data = await loadTranslations(lang);
+      if (data) {
+        renderPage(data);
+        // Update changelog language
+        if (window.changelogInstance) {
+          await window.changelogInstance.updateLanguage(lang);
+        }
+      }
+
+      if (langToggle) langToggle.disabled = false;
+      isSwitching = false;
+    }
+
+    // ========================================
+    // INIT
+    // ========================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Load translations
+      const data = await loadTranslations(currentLang);
+      if (data) {
+        renderPage(data);
+      } else {
+        console.error('Failed to load translations, please check JSON files');
+        document.querySelector('.about-main').innerHTML = `
+          <div style="text-align:center;padding:4rem 2rem;background:rgba(255,255,255,0.4);border-radius:2rem;backdrop-filter:blur(8px);">
+            <span class="iconify" data-icon="mdi:alert" style="font-size:3rem;color:var(--dusty-rose);"></span>
+            <h2 style="color:var(--plum);margin:1rem 0;">Translation files not found</h2>
+            <p style="color:#5f4b6b;opacity:0.7;">Please ensure the JSON files exist at <code>../data/about/es.json</code> and <code>../data/about/en.json</code></p>
+          </div>
+        `;
+      }
+
+      // Intersection Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+      document.querySelectorAll('.about-card, .translator-card').forEach(el => observer.observe(el));
+
+      // Initialize Changelog
+      const changelog = new ChangelogManager(currentLang);
+      changelog.init();
+      window.changelogInstance = changelog;
+
+      // Language Dropdown
+      const langDropdown = document.getElementById('langDropdown');
+      const langToggle = document.getElementById('langToggle');
+      if (langDropdown && langToggle) {
+        langToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (langToggle.disabled) return;
+          const isOpen = langDropdown.classList.toggle('open');
+          langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+          option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            langDropdown.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+            switchLanguage(lang);
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (langDropdown.classList.contains('open') && !langDropdown.contains(e.target)) {
+            langDropdown.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && langDropdown.classList.contains('open')) {
+            langDropdown.classList.remove('open');
+            langToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      updateLangDropdownLabel();
+
+      // Load menu
+      const menuVer = Math.floor(Date.now() / 86400000);
+      fetch('../components/menu.html?v=' + menuVer)
+        .then(response => {
+          if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+          return response.text();
+        })
+        .then(data => {
+          const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+          if (!container) return;
+          const normalizedData = data
+            .replace(/src="\.\/(assets\/)/g, 'src="../../$1')
+            .replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+          const doc = new DOMParser().parseFromString(normalizedData, 'text/html');
+          const frag = document.createDocumentFragment();
+          [...doc.head.childNodes, ...doc.body.childNodes].forEach(node => {
+            if (node.nodeName.toLowerCase() === 'script') {
+              const s = document.createElement('script');
+              if (node.src) s.src = node.src; else s.textContent = node.textContent;
+              frag.appendChild(s);
+            } else {
+              frag.appendChild(node.cloneNode(true));
+            }
+          });
+          container.innerHTML = '';
+          container.appendChild(frag);
+          setTimeout(() => {
+            document.dispatchEvent(new CustomEvent('menuLoaded'));
+          }, 100);
+        })
+        .catch(e => console.warn('menu.html no disponible:', e.message));
+
+      document.addEventListener('menuLoaded', function() {
+        if (typeof window.translateMenu === 'function') {
+          window.translateMenu(currentLang);
+        }
+      });
+    });
+
+
+
+  </script>
+</body>
+</html>

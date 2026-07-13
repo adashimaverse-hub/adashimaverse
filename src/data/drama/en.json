@@ -1,0 +1,57 @@
+{
+  "pageTitle": "CD Dramas",
+  "selectChannel": "Select a channel",
+  "selectChannelDesc": "Turn on the TV and choose a channel to start enjoying the CD Dramas.",
+  "noSignal": "NO SIGNAL",
+  "loadingText": "Tuning channel...",
+  "osdTitle": "YASHONY CHANNELS",
+  "osdSubtitle": "SELECT CHANNEL",
+  "osdFooter": "[ MENU ] TO CLOSE",
+  "downloadLabel": "Download",
+  "downloadingLabel": "Downloading...",
+  "powerBtnTitle": "Power on / off",
+  "menuBtnTitle": "Channel menu",
+  "playBtnTitle": "Play",
+  "pauseBtnTitle": "Pause",
+  "downloadBtnTitle": "Download current episode",
+  "fullscreenBtnTitle": "Fullscreen",
+  "volKnobTitle": "Volume — drag up/down",
+  "brtKnobTitle": "Brightness — drag up/down",
+  "footerText": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+  "floatingLinkTitle": "Click to go to mini-game!",
+  "enjoys": "Enjoy",
+  "del": "of the anime.",
+  "channel": "Channel",
+  "channels": [
+    {
+      "id": 0,
+      "label": "CH 1",
+      "title": "CD DRAMA — 2nd YEAR",
+      "desc": "Enjoy this audio story that expands the character interactions during their second year, with the original cast voices.",
+      "badge": "Channel 1 · Drama",
+      "sub": "2nd YEAR",
+      "src": "https://media.adashimaverse.com/CD%20DRAMAS/CD%20DRAMA%202%C2%B0%20A%C3%91O.mp4",
+      "download": "CD DRAMA 2nd YEAR.mp4"
+    },
+    {
+      "id": 1,
+      "label": "CH 2",
+      "title": "SHIMAMURA SWORD",
+      "desc": "The most awkward moment in history. Listen to the iconic \"Shimamura Sword\".",
+      "badge": "Channel 2 · Extra",
+      "sub": "SHIMAMURA SWORD",
+      "src": "https://media.adashimaverse.com/CD%20DRAMAS/SHIMAMURA%20SWORD.mp4",
+      "download": "SHIMAMURA SWORD.mp4"
+    },
+    {
+      "id": 2,
+      "label": "CH 3",
+      "title": "CD DRAMA — VOLUME 13",
+      "desc": "Exclusive audio content accompanying Volume 13 of the light novels. An unmissable moment in the story of Adachi and Shimamura.",
+      "badge": "Channel 3 · Vol. 13",
+      "sub": "VOLUME 13",
+      "src": "https://media.adashimaverse.com/CD%20DRAMAS/CD%20DRAMA%20VOL%2013.mp4",
+      "download": "CD DRAMA VOL 13.mp4"
+    }
+  ]
+}
