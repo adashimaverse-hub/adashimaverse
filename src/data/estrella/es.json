@@ -9,7 +9,7 @@
   "resetConfirm": "¿Reiniciar las estrellas? Los desbloqueos se mantendrán.",
   "resetCancel": "Cancelar",
   "resetConfirmBtn": "Reiniciar",
-  "toastReset": "Estrellas reiniciadas",
+  "toastReset": "Las estrellas se han reiniciado",
   "finalTitle": "El cielo de Adashima<br>está completo",
   "finalClose": "Cerrar",
   "sidebarLogo": "Latinoamérica",
@@ -26,7 +26,7 @@
   "sidebarLinkBlog": "Blog del autor",
   "sidebarBackHome": "Volver al Inicio",
   "hudHelp": "Ayuda",
-  "hudReset": "Reset",
+  "hudReset": "Reiniciar",
   "soundTitle": "Sonido",
   "rewardTitle": "¡Recompensa desbloqueada!",
   "downloadProfile": "Descargar perfil",
@@ -74,5 +74,8 @@
   "profileLabelType": "¿Cuál es tu tipo?",
   "profileLabelCall": "¿Cómo quieres que te llame tu pareja?",
   "profileLabelHeart": "¿Qué gesto acelera tu corazón?",
-  "profileLabelDate": "¿A dónde te gustaría ir en una cita?"
+  "profileLabelDate": "¿A dónde te gustaría ir en una cita?",
+  "sidebarUnlocksEmpty": "Completa constelaciones para desbloquear recompensas...",
+  "downloadStoryPdf": "Descargar historia en PDF",
+  "tapReward": "toca para ver recompensa"
 }

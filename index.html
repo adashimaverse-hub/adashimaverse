@@ -827,7 +827,7 @@
         const toggle = document.getElementById('langToggle');
         if (toggle) toggle.disabled = true;
         
-        closeNewsDialog();
+        closeNewsDialog(true);
         
         currentLang = lang;
         localStorage.setItem('lang', lang);
@@ -968,7 +968,7 @@
         typeNextMessage();
     }
 
-    function closeNewsDialog() {
+    function closeNewsDialog(preserveUnread = false) {
         const dialog = document.getElementById('newsDialog');
         const overlay = document.querySelector('.news-dialog-overlay');
         if (dialog) {
@@ -976,8 +976,10 @@
             if (overlay) overlay.style.pointerEvents = 'none';
         }
         clearTimeout(typingTimeout);
-        markNewsAsRead();
-        updateNewsIndicator();
+        if (!preserveUnread) {
+            markNewsAsRead();
+            updateNewsIndicator();
+        }
     }
 
     function toggleNews() {
