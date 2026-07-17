@@ -6,12 +6,14 @@
     <title>Yashiro Game</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/juegos.css">
+    <link rel="stylesheet" href="../css/lang-switch.css">
+    <link rel="stylesheet" href="../components/styles/menu.css">
 </head>
 <body>
 
     
-    <audio id="bgMusic" loop preload="none">
-        <source src="../assets/Sound/ada8bit.mp3" type="audio/mp3">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="../../assets/Sound/ada8bit.mp3" type="audio/mp3">
     </audio>
 
     
@@ -25,7 +27,22 @@
 
     <div class="main-content">        
         <div class="header-container">
-            <h1 class="update-title">Yashiro Game</h1>
+            <div class="lang-controls">
+                <div class="lang-wrapper">
+                    <i class="fas fa-globe"></i>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+                            <span id="langSelectedLabel">English</span>
+                            <i class="fas fa-chevron-down lang-caret"></i>
+                        </button>
+                        <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+                            <li class="lang-option selected" data-lang="en" data-label="English" role="option">English</li>
+                            <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h1 class="update-title" id="pageTitle" data-es="Yashiro Game" data-en="Yashiro Game">Yashiro Game</h1>
         </div>
 
         
@@ -42,36 +59,36 @@
 
             
             <div class="mechanics-panel" id="mechanicsPanel">
-                <span class="mechanic-tip">Lluvia cada 50s · dura 15s</span>
-                <span class="mechanic-tip">Dona a partir de los 100s (cada 30s)</span>
-                <span class="mechanic-tip">Velocidad sube naturalmente</span>
-                <span class="mechanic-tip">ESPACIO saltar · ↓ boomerang</span>
+                <span class="mechanic-tip" data-es="Lluvia cada 50s · dura 15s" data-en="Rain every 50s · lasts 15s">Rain every 50s · lasts 15s</span>
+                <span class="mechanic-tip" data-es="Dona a partir de los 100s (cada 30s)" data-en="Donut from 100s (every 30s)">Donut from 100s (every 30s)</span>
+                <span class="mechanic-tip" data-es="Velocidad sube naturalmente" data-en="Speed rises naturally">Speed rises naturally</span>
+                <span class="mechanic-tip" data-es="ESPACIO saltar · ↓ boomerang" data-en="SPACE jump · ↓ boomerang">SPACE jump · ↓ boomerang</span>
             </div>
 
             
             <div id="mobileControls">
                 <div class="mobile-controls-row">
-                    <button class="btn-jump" id="btnJump" aria-label="Saltar">
-                        <span class="btn-label">SALTAR</span>
+                    <button class="btn-jump" id="btnJump" aria-label="Jump">
+                        <span class="btn-label" data-es="SALTAR" data-en="JUMP">JUMP</span>
                     </button>
-                    <button class="btn-shoot" id="btnShoot" aria-label="Disparar boomerang">
-                        <span class="btn-label">BOOMERANG</span>
+                    <button class="btn-shoot" id="btnShoot" aria-label="Shoot boomerang">
+                        <span class="btn-label" data-es="BOOMERANG" data-en="BOOMERANG">BOOMERANG</span>
                     </button>
                 </div>
-                <p class="mobile-hint">Toca SALTAR para reiniciar cuando pierdas</p>
+                <p class="mobile-hint" data-es="Toca SALTAR para reiniciar cuando pierdas" data-en="Tap JUMP to restart when you lose">Tap JUMP to restart when you lose</p>
             </div>
 
             
             <div class="instructions" id="desktopInstructions">
-                <h2>Presiona ESPACIO o haz clic para saltar</h2>
+                <h2 data-es="Presiona ESPACIO o haz clic para saltar" data-en="Press SPACE or click to jump">Press SPACE or click to jump</h2>
             </div>
 
         </div>
 
         <div class="footer">
-            Fan site no oficial de Adachi to Shimamura.<br>
-            Creado por fans, sin fines de lucro.<br>
-            Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.
+            <span data-es="Fan site no oficial de Adachi to Shimamura." data-en="Unofficial fan site of Adachi to Shimamura.">Unofficial fan site of Adachi to Shimamura.</span><br>
+            <span data-es="Creado por fans, sin fines de lucro." data-en="Created by fans, for non-profit purposes.">Created by fans, for non-profit purposes.</span><br>
+            <span data-es="Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma." data-en="Adachi to Shimamura and all rights belong to Hitoma Iruma.">Adachi to Shimamura and all rights belong to Hitoma Iruma.</span>
         </div>
     </div>
 
@@ -107,6 +124,13 @@
                         newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                         oldScript.parentNode.replaceChild(newScript, oldScript);
                     });
+
+                    const preferredLang = localStorage.getItem('lang') || localStorage.getItem('preferredLanguage') || 'es';
+                    setTimeout(() => {
+                        if (window.translateMenu) {
+                            window.translateMenu(preferredLang);
+                        }
+                    }, 100);
                 })
                 .catch(error => console.error('Error cargando menu.html:', error.message));
         });
@@ -169,24 +193,36 @@
         const bgMusic = document.getElementById('bgMusic');
         const musicToggle = document.getElementById('musicToggle');
         const musicIcon = musicToggle.querySelector('i');
+        const langDropdown = document.getElementById('langDropdown');
+        const langToggle = document.getElementById('langToggle');
+        const langOptions = Array.from(document.querySelectorAll('.lang-option'));
+        const langSelectedLabel = document.getElementById('langSelectedLabel');
+        const languageElements = Array.from(document.querySelectorAll('[data-es][data-en]'));
+        let currentLang = localStorage.getItem('lang') || localStorage.getItem('preferredLanguage') || 'es';
         let isMusicPlaying = false;
+
+        function updateMusicButton(playing) {
+            musicIcon.className = playing ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+            musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+            musicToggle.setAttribute('aria-label', currentLang === 'es' ? 'Alternar música' : 'Toggle music');
+        }
 
         function toggleMusic() {
             if (isMusicPlaying) {
                 bgMusic.pause();
-                musicIcon.className = 'fas fa-volume-mute';
                 isMusicPlaying = false;
+                updateMusicButton(false);
             } else {
-                initAudioContext(); 
+                initAudioContext();
                 bgMusic.play().then(() => {
-                    musicIcon.className = 'fas fa-volume-up';
                     isMusicPlaying = true;
-                }).catch(err => console.log("Autoplay bloqueado:", err));
+                    updateMusicButton(true);
+                }).catch(err => console.log('Autoplay bloqueado:', err));
             }
         }
 
         musicToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); 
+            e.stopPropagation();
             toggleMusic();
         });
 
@@ -196,6 +232,52 @@
             }
             document.body.removeEventListener('click', initAudio);
         }, { once: true });
+
+        function applyLanguage(lang) {
+            const selectedLang = lang === 'es' ? 'es' : 'en';
+            currentLang = selectedLang;
+            localStorage.setItem('lang', selectedLang);
+            document.documentElement.lang = selectedLang;
+            languageElements.forEach(element => {
+                element.textContent = selectedLang === 'es' ? element.getAttribute('data-es') : element.getAttribute('data-en');
+            });
+            langSelectedLabel.textContent = selectedLang === 'es' ? 'Español' : 'English';
+            langOptions.forEach(option => {
+                const isSelected = option.getAttribute('data-lang') === selectedLang;
+                option.classList.toggle('selected', isSelected);
+            });
+            updateMusicButton(isMusicPlaying);
+            if (window.translateMenu) {
+                window.translateMenu(selectedLang);
+            } else {
+                setTimeout(() => {
+                    if (window.translateMenu) {
+                        window.translateMenu(selectedLang);
+                    }
+                }, 150);
+            }
+        }
+
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const selectedLang = option.getAttribute('data-lang');
+                applyLanguage(selectedLang);
+                langDropdown.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('open');
+            }
+        });
+
+        applyLanguage(currentLang);
 
 
         
@@ -277,13 +359,13 @@
         let donutSpawnActive = false; 
 
         
-        const imgYashiro = new Image(); imgYashiro.src = 'Imagenes/Yashiro_flotante_pixel-Photoroom.png';
-        const imgmeteoro = new Image(); imgmeteoro.src = 'Imagenes/meteoro-Photoroom.png';
-        const imgEstrella = new Image(); imgEstrella.src = 'Imagenes/Estrella-Photoroom.png';
-        const imgEstrellaAzul = new Image(); imgEstrellaAzul.src = 'Imagenes/Estrella_Azul-Photoroom.png';
-        const imgFondo = new Image(); imgFondo.src = 'Imagenes/Fondo_pixel.png';
-        const imgBoomerang = new Image(); imgBoomerang.src = 'Imagenes/boomerang-Photoroom.png';
-        const imgDona = new Image(); imgDona.src = 'Imagenes/dona_pixel-Photoroom.png';
+        const imgYashiro = new Image(); imgYashiro.src = '../../assets/Imagenes/Yashiro_flotante_pixel-Photoroom.png';
+        const imgmeteoro = new Image(); imgmeteoro.src = '../../assets/Imagenes/meteoro-Photoroom.png';
+        const imgEstrella = new Image(); imgEstrella.src = '../../assets/Imagenes/Estrella-Photoroom.png';
+        const imgEstrellaAzul = new Image(); imgEstrellaAzul.src = '../../assets/Imagenes/Estrella_Azul-Photoroom.png';
+        const imgFondo = new Image(); imgFondo.src = '../../assets/Imagenes/Fondo_pixel.png';
+        const imgBoomerang = new Image(); imgBoomerang.src = '../../assets/Imagenes/boomerang-Photoroom.png';
+        const imgDona = new Image(); imgDona.src = '../../assets/Imagenes/dona_pixel-Photoroom.png';
 
         
         const yashiro = {
@@ -451,17 +533,48 @@
         }
 
         
+        function getGameText(key) {
+            const texts = {
+                es: {
+                    gameOver: 'GAME OVER',
+                    score: 'Puntos',
+                    record: 'Récord',
+                    restartTouch: 'Toca SALTAR para reiniciar',
+                    restartDesktop: 'Presiona ESPACIO o toca para reiniciar',
+                    invulnerable: 'INVULNERABLE',
+                    rain: 'LLUVIA DE ESTRELLAS',
+                    nextRain: 'Próx. Lluvia',
+                    points: 'Puntos',
+                    recordLabel: 'Récord'
+                },
+                en: {
+                    gameOver: 'GAME OVER',
+                    score: 'Score',
+                    record: 'Record',
+                    restartTouch: 'Tap JUMP to restart',
+                    restartDesktop: 'Press SPACE or tap to restart',
+                    invulnerable: 'INVULNERABLE',
+                    rain: 'STAR RAIN',
+                    nextRain: 'Next Rain',
+                    points: 'Score',
+                    recordLabel: 'Record'
+                }
+            };
+            const langTexts = texts[currentLang === 'es' ? 'es' : 'en'];
+            return langTexts[key] || key;
+        }
+
         function animate() {
             if (isGameOver) {
                 ctx.fillStyle = "rgba(0,0,0,0.7)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = "rgba(255,255,255,0.15)"; ctx.fillRect(canvas.width/2 - 180, canvas.height/2 - 90, 360, 180);
                 ctx.strokeStyle = "rgba(255,255,255,0.4)"; ctx.lineWidth = 2; ctx.strokeRect(canvas.width/2 - 180, canvas.height/2 - 90, 360, 180);
-                ctx.fillStyle = "#ff6b6b"; ctx.font = "bold 48px Quicksand"; ctx.textAlign = "center"; ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2 - 35);
-                ctx.fillStyle = "white"; ctx.font = "22px Quicksand"; ctx.fillText(`Puntos: ${score}`, canvas.width/2, canvas.height/2 + 10);
-                ctx.fillStyle = "#ffd700"; ctx.font = "22px Quicksand"; ctx.fillText(`Récord: ${highScore}`, canvas.width/2, canvas.height/2 + 40);
+                ctx.fillStyle = "#ff6b6b"; ctx.font = "bold 48px Quicksand"; ctx.textAlign = "center"; ctx.fillText(getGameText('gameOver'), canvas.width/2, canvas.height/2 - 35);
+                ctx.fillStyle = "white"; ctx.font = "22px Quicksand"; ctx.fillText(`${getGameText('score')}: ${score}`, canvas.width/2, canvas.height/2 + 10);
+                ctx.fillStyle = "#ffd700"; ctx.font = "22px Quicksand"; ctx.fillText(`${getGameText('record')}: ${highScore}`, canvas.width/2, canvas.height/2 + 40);
                 
                 ctx.fillStyle = "rgba(255,255,255,0.8)"; ctx.font = "16px Quicksand";
-                const restartMsg = isTouchDevice ? "Toca SALTAR para reiniciar" : "Presiona ESPACIO o toca para reiniciar";
+                const restartMsg = isTouchDevice ? getGameText('restartTouch') : getGameText('restartDesktop');
                 ctx.fillText(restartMsg, canvas.width/2, canvas.height/2 + 75);
                 return;
             }
@@ -598,17 +711,17 @@
 
             
             ctx.fillStyle = "rgba(0,0,0,0.4)"; ctx.font = "20px Quicksand";
-            ctx.textAlign = "left"; ctx.fillText(`Puntos: ${score}`, 22, 42);
-            ctx.textAlign = "right"; ctx.fillText(`Récord: ${highScore}`, canvas.width - 18, 42);
+            ctx.textAlign = "left"; ctx.fillText(`${getGameText('points')}: ${score}`, 22, 42);
+            ctx.textAlign = "right"; ctx.fillText(`${getGameText('recordLabel')}: ${highScore}`, canvas.width - 18, 42);
 
             ctx.fillStyle = "rgb(255,255,255)"; ctx.font = "bold 20px Quicksand";
-            ctx.textAlign = "left"; ctx.fillText(`Puntos: ${score}`, 20, 40);
-            ctx.textAlign = "right"; ctx.fillText(`Récord: ${highScore}`, canvas.width - 20, 40);
+            ctx.textAlign = "left"; ctx.fillText(`${getGameText('points')}: ${score}`, 20, 40);
+            ctx.textAlign = "right"; ctx.fillText(`${getGameText('recordLabel')}: ${highScore}`, canvas.width - 20, 40);
 
             if (isInvulnerable) {
                 let invulPercent = Math.ceil((invulnerabilityTime / 300) * 100);
                 ctx.fillStyle = "rgba(255,215,0,0.6)"; ctx.font = "bold 24px Quicksand"; ctx.textAlign = "center";
-                ctx.fillText(`🛡️ INVULNERABLE ${invulPercent}%`, canvas.width/2, canvas.height - 30);
+                ctx.fillText(`🛡️ ${getGameText('invulnerable')} ${invulPercent}%`, canvas.width/2, canvas.height - 30);
                 ctx.strokeStyle = `rgba(255,215,0,${0.5 - (300 - invulnerabilityTime) / 1200})`;
                 ctx.lineWidth = 3; ctx.beginPath();
                 ctx.arc(yashiro.x + yashiro.width/2, yashiro.y + yashiro.height/2, yashiro.width/2 + 15, 0, Math.PI * 2); ctx.stroke();
@@ -617,11 +730,11 @@
             if (starRainActive) {
                 let timeRemainingInRain = 15 - (gameTimeSeconds - lastStarRainTime);
                 ctx.fillStyle = "rgba(100,200,255,0.7)"; ctx.font = "bold 32px Quicksand"; ctx.textAlign = "center";
-                ctx.fillText(`🌧️ LLUVIA DE ESTRELLAS - ${timeRemainingInRain}s`, canvas.width/2, 90);
+                ctx.fillText(`🌧️ ${getGameText('rain')} - ${timeRemainingInRain}s`, canvas.width/2, 90);
             } else {
                 let timeToNextEvent = 50 - (gameTimeSeconds % 50);
                 ctx.fillStyle = "rgba(255,255,255,0.5)"; ctx.font = "14px Quicksand"; ctx.textAlign = "center";
-                ctx.fillText(`Próx. Lluvia: ${timeToNextEvent}s`, canvas.width/2, 270);
+                ctx.fillText(`${getGameText('nextRain')}: ${timeToNextEvent}s`, canvas.width/2, 270);
             }
 
             for (let i = powerUpParticles.length - 1; i >= 0; i--) {

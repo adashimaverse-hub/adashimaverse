@@ -8,12 +8,13 @@
   "viewGrid": "Cuadrícula",
   "readButton": "Leer",
   "noResults": "No se encontraron resultados",
-  "toastMessages": {
-    "fileNotAvailable": "Archivo no disponible.",
-    "documentNotAvailable": "Documento no disponible.",
-    "loadingDocument": "Cargando documento...",
-    "errorOnPage": "Error en pág.",
-    "retry": "Reintentar"
+  "chapterLabels": {
+    "chapter": "Capítulo",
+    "volume": "Volumen"
+  },
+  "modal": {
+    "reading": "Leyendo:",
+    "closeReader": "Cerrar lector"
   },
   "pdfControls": {
     "zoomOut": "Alejar (-)",
@@ -22,13 +23,22 @@
     "prevPage": "Página anterior (←)",
     "nextPage": "Página siguiente (→)",
     "page": "Pág.",
-    "goTo": "Ir a",
+    "goTo": "Ir a página",
     "fullscreen": "Pantalla completa (F)",
-    "downloadPDF": "Descargar PDF"
+    "downloadPDF": "Descargar PDF",
+    "thumbnails": "Miniaturas",
+    "loadingDocument": "Cargando documento..."
   },
-  "modal": {
-    "reading": "Leyendo: ",
-    "closeReader": "Cerrar lector"
+  "toastMessages": {
+    "fileNotAvailable": "Archivo no disponible.",
+    "documentNotAvailable": "Documento no disponible.",
+    "loadingDocument": "Cargando documento...",
+    "errorOnPage": "Error en pág.",
+    "retry": "Reintentar"
+  },
+  "generalDownloads": {
+    "pdf": "Descargar PDF Completo",
+    "epub": "Descargar EPUB Completo"
   },
   "volumes": [
     {
@@ -184,6 +194,14 @@
       "desc": "Publicado el 8 de noviembre del 2024. Ilustrado por Raemz.",
       "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2025/08/adachiShimamuraLNSS2_site.jpg",
       "file": "Adachi to Shimamura Volumen SS2 Español.pdf"
+    },
+    {
+      "id": "ESC",
+      "title": "Extra Stories Collection",
+      "desc": "Colección de historias extras.",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_G_2P7mtYJGqau2ZqkzFnlaK7cW23Xgdga-i3i-ZvuQQpKq13hDdOZH9M&s=10",
+      "file": "_Adachi and Shimamura- Extra Stories Collection.pdf",
+      "isExtra": true
     }
   ]
 }

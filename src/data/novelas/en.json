@@ -8,6 +8,10 @@
   "viewGrid": "Grid",
   "readButton": "Read",
   "noResults": "No results found",
+  "chapterLabels": {
+    "chapter": "Chapter",
+    "volume": "Volume"
+  },
   "toastMessages": {
     "fileNotAvailable": "File not available.",
     "documentNotAvailable": "Document not available.",
@@ -22,12 +26,14 @@
     "prevPage": "Previous page (←)",
     "nextPage": "Next page (→)",
     "page": "Pg.",
-    "goTo": "Go to",
+    "goTo": "Go to page",
     "fullscreen": "Fullscreen (F)",
-    "downloadPDF": "Download PDF"
+    "downloadPDF": "Download PDF",
+    "thumbnails": "Thumbnails",
+    "loadingDocument": "Loading document..."
   },
   "modal": {
-    "reading": "Reading: ",
+    "reading": "Reading:",
     "closeReader": "Close reader"
   },
   "volumes": [

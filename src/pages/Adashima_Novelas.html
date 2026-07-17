@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../components/styles/menu.css">
     <link rel="stylesheet" href="../css/lang-switch.css">
     <link rel="stylesheet" href="../css/novelas.css">
-    <link rel="stylesheet" href="../css/pdf-modal.css">
+    <link rel="stylesheet" href="../components/styles/pdf-reader.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
@@ -70,53 +70,78 @@
         <div class="pdf-modal-backdrop" id="pdfModalBackdrop"></div>
         <div class="pdf-modal-content">
             <div class="pdf-modal-header">
-                <h2 class="pdf-modal-title">Leyendo: <span id="pdfVolumeTitle">Volumen</span></h2>
+                <h2 class="pdf-modal-title" id="pdfModalTitle">Leyendo: <span id="pdfVolumeTitle">Volumen</span></h2>
                 <button class="pdf-modal-close" id="pdfModalClose" aria-label="Cerrar lector">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="pdf-modal-body">
-                <!-- PDF Viewer (reused) -->
+                <!-- Enhanced PDF Viewer -->
                 <div class="custom-pdf-viewer" id="pdfViewerModal">
+                    <!-- Loading Overlay -->
                     <div class="pdf-loading-overlay" id="pdfLoadingModal">
                         <div class="pdf-spinner"></div>
                         <span class="pdf-loading-text" id="pdfLoadingTextModal">Cargando documento...</span>
                     </div>
+
+                    <!-- Toolbar -->
                     <div class="pdf-toolbar">
-                        <div class="pdf-controls-group">
+                        <div class="pdf-controls-group pdf-toolbar-left">
+                            <!-- Thumbnail Toggle -->
+                            <button class="pdf-btn pdf-btn-thumbnails" id="pdfThumbnailToggle" title="Miniaturas">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <span class="pdf-toolbar-divider"></span>
+                            <button class="pdf-btn" id="pdfPrevModal" title="Página anterior (←)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="pdf-btn" id="pdfNextModal" title="Página siguiente (→)"><i class="fas fa-chevron-right"></i></button>
+                            <span class="pdf-page-info" id="pdfPageInfo"><span id="pdfPageLabel">Pág.</span> <span id="pageNumModal">-</span> / <span id="pageCountModal">-</span></span>
+                            <input type="number" id="pageInputModal" class="pdf-page-input" min="1" placeholder="Ir a">
+                        </div>
+
+                        <div class="pdf-controls-group pdf-toolbar-right">
                             <button class="pdf-btn" id="pdfZoomOutModal" title="Alejar (-)"><i class="fas fa-search-minus"></i></button>
                             <span class="pdf-zoom-display" id="zoomDisplayModal">100%</span>
                             <button class="pdf-btn" id="pdfZoomInModal" title="Acercar (+)"><i class="fas fa-search-plus"></i></button>
                             <button class="pdf-btn pdf-btn-reset" id="pdfZoomResetModal" title="Restablecer zoom (0)"><i class="fas fa-sync-alt"></i></button>
-                        </div>
-                        <div class="pdf-controls-group">
-                            <button class="pdf-btn" id="pdfPrevModal" title="Página anterior (←)"><i class="fas fa-chevron-left"></i></button>
-                            <button class="pdf-btn" id="pdfNextModal" title="Página siguiente (→)"><i class="fas fa-chevron-right"></i></button>
-                            <span class="pdf-page-info">Pág. <span id="pageNumModal">-</span> / <span id="pageCountModal">-</span></span>
-                            <input type="number" id="pageInputModal" class="pdf-page-input" min="1" placeholder="Ir a">
-                        </div>
-                        <div class="pdf-controls-group">
+                            <span class="pdf-toolbar-divider"></span>
                             <button class="pdf-btn" id="pdfFullscreenModal" title="Pantalla completa (F)"><i class="fas fa-expand" id="fsIconModal"></i></button>
                             <button class="pdf-btn" id="pdfDownloadModal" title="Descargar PDF"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
+
                     <div class="pdf-progress-wrap">
                         <div class="pdf-progress-fill" id="pdfProgressModal" style="width:0%"></div>
                     </div>
-                    <div class="pdf-body">
-                        <div class="pdf-canvas-container" id="canvasContainerModal">
-                            <div class="pdf-canvas-wrapper" id="canvasWrapperModal">
-                                <canvas id="pdfRenderModal"></canvas>
+
+                    <!-- Main Body with Thumbnails Sidebar -->
+                    <div class="pdf-body-wrapper">
+                        <!-- Thumbnails Sidebar -->
+                        <div class="pdf-thumbnails-sidebar" id="pdfThumbnailsSidebar">
+                            <div class="pdf-thumbnails-header">
+                                <span id="pdfThumbnailsTitle">Miniaturas</span>
+                                <button class="pdf-btn pdf-thumbnails-close" id="pdfThumbnailsClose"><i class="fas fa-times"></i></button>
                             </div>
-                            <div class="pdf-page-indicator-mobile" id="mobileIndicatorModal" style="display:none">
-                                <span id="mobilePageNumModal">-</span>
-                                <span>/</span>
-                                <span id="mobilePageCountModal">-</span>
+                            <div class="pdf-thumbnails-list" id="pdfThumbnailsList">
+                                <!-- Thumbnails rendered here -->
                             </div>
-                            <div class="pdf-error-state" id="pdfErrorModal">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <p id="pdfErrorMsgModal">Documento no disponible.</p>
-                                <button class="btn" id="pdfRetryModal" style="margin-top:8px;"><i class="fas fa-redo"></i> Reintentar</button>
+                        </div>
+
+                        <!-- Canvas Container -->
+                        <div class="pdf-body">
+                            <div class="pdf-canvas-container" id="canvasContainerModal">
+                                <div class="pdf-canvas-wrapper" id="canvasWrapperModal">
+                                    <canvas id="pdfRenderModal"></canvas>
+                                </div>
+                                <div class="pdf-page-indicator-mobile" id="mobileIndicatorModal" style="display:none">
+                                    <span id="mobilePageNumModal">-</span>
+                                    <span>/</span>
+                                    <span id="mobilePageCountModal">-</span>
+                                </div>
+                                <div class="pdf-error-state" id="pdfErrorModal">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p id="pdfErrorMsgModal">Documento no disponible.</p>
+                                    <button class="btn" id="pdfRetryModal" style="margin-top:8px;"><i class="fas fa-redo"></i> <span id="pdfRetryText">Reintentar</span></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -151,6 +176,10 @@
     let modalFitScale = 1.0;
     let modalCurrentVolume = null;
     let modalAbortController = new AbortController();
+    let modalRenderTask = null;
+    let modalThumbnails = [];
+    let modalThumbnailsVisible = false;
+    let modalThumbnailsRendered = false;
 
     const FALLBACK_TRANSLATIONS = {
         es: { 
@@ -164,8 +193,20 @@
             readButton: "Leer",
             noResults: "No se encontraron resultados",
             modal: { reading: "Leyendo: ", closeReader: "Cerrar lector" },
-            toastMessages: { fileNotAvailable: "Archivo no disponible.", documentNotAvailable: "Documento no disponible.", loadingDocument: "Cargando documento...", errorOnPage: "Error en pág.", retry: "Reintentar" }, 
-            pdfControls: { zoomOut: "Alejar (-)", zoomIn: "Acercar (+)", zoomReset: "Restablecer zoom (0)", prevPage: "Página anterior (←)", nextPage: "Página siguiente (→)", page: "Pág.", goTo: "Ir a", fullscreen: "Pantalla completa (F)", downloadPDF: "Descargar PDF" }, 
+            toastMessages: { fileNotAvailable: "Archivo no disponible.", documentNotAvailable: "Documento no disponible.", loadingDocument: "Cargando documento...", errorOnPage: "Error en pág.", retry: "Reintentar" },
+            pdfControls: { 
+                zoomOut: "Alejar (-)", 
+                zoomIn: "Acercar (+)", 
+                zoomReset: "Restablecer zoom (0)", 
+                prevPage: "Página anterior (←)", 
+                nextPage: "Página siguiente (→)", 
+                page: "Pág.", 
+                goTo: "Ir a página", 
+                fullscreen: "Pantalla completa (F)", 
+                downloadPDF: "Descargar PDF", 
+                thumbnails: "Miniaturas",
+                loadingDocument: "Cargando documento..."
+            },
             volumes: [] 
         },
         en: { 
@@ -179,8 +220,20 @@
             readButton: "Read",
             noResults: "No results found",
             modal: { reading: "Reading: ", closeReader: "Close reader" },
-            toastMessages: { fileNotAvailable: "File not available.", documentNotAvailable: "Document not available.", loadingDocument: "Loading document...", errorOnPage: "Error on pg.", retry: "Retry" }, 
-            pdfControls: { zoomOut: "Zoom out (-)", zoomIn: "Zoom in (+)", zoomReset: "Reset zoom (0)", prevPage: "Previous page (←)", nextPage: "Next page (→)", page: "Pg.", goTo: "Go to", fullscreen: "Fullscreen (F)", downloadPDF: "Download PDF" }, 
+            toastMessages: { fileNotAvailable: "File not available.", documentNotAvailable: "Document not available.", loadingDocument: "Loading document...", errorOnPage: "Error on pg.", retry: "Retry" },
+            pdfControls: { 
+                zoomOut: "Zoom out (-)", 
+                zoomIn: "Zoom in (+)", 
+                zoomReset: "Reset zoom (0)", 
+                prevPage: "Previous page (←)", 
+                nextPage: "Next page (→)", 
+                page: "Pg.", 
+                goTo: "Go to page", 
+                fullscreen: "Fullscreen (F)", 
+                downloadPDF: "Download PDF", 
+                thumbnails: "Thumbnails",
+                loadingDocument: "Loading document..."
+            },
             volumes: [],
             generalDownloads: { pdf: "Download PDF Full", epub: "Download EPUB Full" } 
         }
@@ -227,7 +280,67 @@
         const t = document.getElementById('toast-message');
         t.textContent = msg;
         t.style.display = 'block';
-        setTimeout(() => t.style.display = 'none', 3000);
+        t.style.opacity = '1';
+        clearTimeout(t._hideTimeout);
+        t._hideTimeout = setTimeout(() => {
+            t.style.opacity = '0';
+            setTimeout(() => t.style.display = 'none', 300);
+        }, 3000);
+    }
+
+    // ---- Update UI translations ----
+    function updateUITranslations() {
+        // Update modal title
+        const modalTitle = document.getElementById('pdfModalTitle');
+        if (modalTitle) {
+            modalTitle.innerHTML = `${getText('modal.reading')} <span id="pdfVolumeTitle">${modalCurrentVolume ? modalCurrentVolume.title : 'Volumen'}</span>`;
+        }
+        
+        // Update page label
+        const pageLabel = document.getElementById('pdfPageLabel');
+        if (pageLabel) {
+            pageLabel.textContent = getText('pdfControls.page');
+        }
+        
+        // Update page input placeholder
+        const pageInput = document.getElementById('pageInputModal');
+        if (pageInput) {
+            pageInput.placeholder = getText('pdfControls.goTo');
+        }
+        
+        // Update thumbnails title
+        const thumbnailsTitle = document.getElementById('pdfThumbnailsTitle');
+        if (thumbnailsTitle) {
+            thumbnailsTitle.textContent = getText('pdfControls.thumbnails');
+        }
+        
+        // Update loading text
+        const loadingText = document.getElementById('pdfLoadingTextModal');
+        if (loadingText) {
+            loadingText.textContent = getText('pdfControls.loadingDocument');
+        }
+        
+        // Update error messages
+        const errorMsg = document.getElementById('pdfErrorMsgModal');
+        if (errorMsg) {
+            errorMsg.textContent = getText('toastMessages.documentNotAvailable');
+        }
+        
+        const retryText = document.getElementById('pdfRetryText');
+        if (retryText) {
+            retryText.textContent = getText('toastMessages.retry');
+        }
+        
+        // Update tooltips
+        document.getElementById('pdfThumbnailToggle').title = getText('pdfControls.thumbnails');
+        document.getElementById('pdfPrevModal').title = getText('pdfControls.prevPage');
+        document.getElementById('pdfNextModal').title = getText('pdfControls.nextPage');
+        document.getElementById('pdfZoomOutModal').title = getText('pdfControls.zoomOut');
+        document.getElementById('pdfZoomInModal').title = getText('pdfControls.zoomIn');
+        document.getElementById('pdfZoomResetModal').title = getText('pdfControls.zoomReset');
+        document.getElementById('pdfFullscreenModal').title = getText('pdfControls.fullscreen');
+        document.getElementById('pdfDownloadModal').title = getText('pdfControls.downloadPDF');
+        document.getElementById('pdfModalClose').setAttribute('aria-label', getText('modal.closeReader'));
     }
 
     async function smartDownload(url, fileName) {
@@ -310,7 +423,7 @@
         }
 
         if (modalTitle) {
-            modalTitle.textContent = getText('modal.reading');
+            modalTitle.innerHTML = `${getText('modal.reading')} <span id="pdfVolumeTitle">${vol.title}</span>`;
         }
                 
         // Reset viewer state
@@ -321,6 +434,9 @@
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
         
+        // Update UI translations
+        updateUITranslations();
+        
         // Load PDF
         loadPdfInModal(vol);
     }
@@ -329,6 +445,12 @@
         const modal = document.getElementById('pdfModal');
         modal.classList.remove('open');
         document.body.style.overflow = '';
+        
+        // Cancel any ongoing render
+        if (modalRenderTask) {
+            modalRenderTask.cancel();
+            modalRenderTask = null;
+        }
         
         // Destroy PDF instance
         if (modalPdfDoc) {
@@ -351,6 +473,10 @@
         modalPageNum = 1;
         modalScale = 1.0;
         modalFitScale = 1.0;
+        modalThumbnails = [];
+        modalThumbnailsRendered = false;
+        document.getElementById('pdfThumbnailsSidebar').classList.remove('open');
+        modalThumbnailsVisible = false;
     }
 
     function resetModalViewer() {
@@ -365,6 +491,9 @@
         document.getElementById('pdfErrorModal').style.display = 'none';
         document.getElementById('zoomDisplayModal').textContent = '100%';
         modalPageNum = 1;
+        document.getElementById('pdfThumbnailsList').innerHTML = '';
+        modalThumbnails = [];
+        modalThumbnailsRendered = false;
     }
 
     async function loadPdfInModal(vol) {
@@ -398,13 +527,18 @@
             modalPdfDoc = await pdfjsLib.getDocument({
                 data: pdfData,
                 cMapUrl: `${PDFJS_CDN}/cmaps/`,
-                cMapPacked: true
+                cMapPacked: true,
+                useSystemFonts: true
             }).promise;
 
             document.getElementById('pageCountModal').textContent = modalPdfDoc.numPages;
+            document.getElementById('mobilePageCountModal').textContent = modalPdfDoc.numPages;
             loadingEl.classList.remove('visible');
             canvas.style.display = 'block';
+            
+            renderThumbnails();
             await queueModalRender();
+            
         } catch (error) {
             if (error.name !== 'AbortError') {
                 errorEl.style.display = 'flex';
@@ -413,6 +547,108 @@
         }
     }
 
+    // ---- Thumbnail functions ----
+    async function renderThumbnails() {
+        if (!modalPdfDoc || modalThumbnailsRendered) return;
+        
+        const list = document.getElementById('pdfThumbnailsList');
+        list.innerHTML = '';
+        modalThumbnails = [];
+        
+        const totalPages = modalPdfDoc.numPages;
+        const thumbnailContainer = document.createElement('div');
+        thumbnailContainer.className = 'pdf-thumbnails-grid';
+        
+        const batchSize = 10;
+        for (let start = 1; start <= totalPages; start += batchSize) {
+            const end = Math.min(start + batchSize - 1, totalPages);
+            const batchPromises = [];
+            
+            for (let pageNum = start; pageNum <= end; pageNum++) {
+                batchPromises.push(renderThumbnail(pageNum));
+            }
+            
+            const thumbnails = await Promise.all(batchPromises);
+            thumbnails.forEach(thumb => {
+                if (thumb) {
+                    thumbnailContainer.appendChild(thumb);
+                    modalThumbnails.push(thumb);
+                }
+            });
+        }
+        
+        list.appendChild(thumbnailContainer);
+        modalThumbnailsRendered = true;
+        updateThumbnailSelection();
+    }
+
+    async function renderThumbnail(pageNum) {
+        try {
+            const page = await modalPdfDoc.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 0.3 });
+            
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            canvas.className = 'pdf-thumbnail';
+            canvas.dataset.page = pageNum;
+            
+            await page.render({
+                canvasContext: ctx,
+                viewport: viewport
+            }).promise;
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'pdf-thumbnail-wrapper';
+            wrapper.dataset.page = pageNum;
+            
+            const pageLabel = document.createElement('span');
+            pageLabel.className = 'pdf-thumbnail-label';
+            pageLabel.textContent = pageNum;
+            
+            wrapper.appendChild(canvas);
+            wrapper.appendChild(pageLabel);
+            
+            wrapper.addEventListener('click', () => {
+                goToPage(pageNum);
+            });
+            
+            return wrapper;
+        } catch (e) {
+            console.warn('Failed to render thumbnail for page', pageNum, e);
+            return null;
+        }
+    }
+
+    function updateThumbnailSelection() {
+        const wrappers = document.querySelectorAll('.pdf-thumbnail-wrapper');
+        wrappers.forEach(w => {
+            w.classList.toggle('active', parseInt(w.dataset.page) === modalPageNum);
+            if (w.classList.contains('active')) {
+                w.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+        });
+    }
+
+    function toggleThumbnails() {
+        const sidebar = document.getElementById('pdfThumbnailsSidebar');
+        modalThumbnailsVisible = !modalThumbnailsVisible;
+        sidebar.classList.toggle('open', modalThumbnailsVisible);
+        
+        if (modalThumbnailsVisible && !modalThumbnailsRendered && modalPdfDoc) {
+            renderThumbnails();
+        }
+    }
+
+    function goToPage(pageNum) {
+        if (!modalPdfDoc || pageNum < 1 || pageNum > modalPdfDoc.numPages) return;
+        modalPageNum = pageNum;
+        updateThumbnailSelection();
+        queueModalRender();
+    }
+
+    // ---- Rendering functions ----
     let modalRenderQueue = Promise.resolve();
 
     async function queueModalRender() {
@@ -420,10 +656,16 @@
     }
 
     async function renderModalPage() {
-        if (modalRendering || !modalPdfDoc || modalPageNum < 1 || modalPageNum > modalPdfDoc.numPages) return;
+        if (modalRenderTask) {
+            modalRenderTask.cancel();
+            modalRenderTask = null;
+        }
+        
+        if (!modalPdfDoc || modalPageNum < 1 || modalPageNum > modalPdfDoc.numPages) return;
+        
+        setNavButtonsDisabled(true);
         
         try {
-            modalRendering = true;
             const page = await modalPdfDoc.getPage(modalPageNum);
             const canvas = document.getElementById('pdfRenderModal');
             const container = document.getElementById('canvasWrapperModal');
@@ -437,6 +679,7 @@
             if (viewport.height * scale > containerHeight) {
                 scale = containerHeight / viewport.height;
             }
+            scale = scale * modalScale;
             
             const scaledViewport = page.getViewport({ scale });
             canvas.width = scaledViewport.width * dpr;
@@ -448,39 +691,62 @@
             ctx.scale(dpr, dpr);
             ctx.imageSmoothingEnabled = true;
             
-            await page.render({
+            canvas.style.opacity = '0.5';
+            
+            modalRenderTask = page.render({
                 canvasContext: ctx,
                 viewport: scaledViewport,
                 signal: modalAbortController.signal
-            }).promise;
+            });
+            
+            await modalRenderTask.promise;
+            modalRenderTask = null;
+            
+            canvas.style.opacity = '1';
+            canvas.style.transition = 'opacity 0.2s ease';
             
             document.getElementById('pageNumModal').textContent = modalPageNum;
             document.getElementById('mobilePageNumModal').textContent = modalPageNum;
             
             const progress = (modalPageNum / modalPdfDoc.numPages) * 100;
             document.getElementById('pdfProgressModal').style.width = progress + '%';
+            
+            updateThumbnailSelection();
+            
         } catch (error) {
-            if (error.name !== 'AbortError') {
+            if (error.name !== 'AbortError' && error.name !== 'RenderingCancelledException') {
                 console.error('Error rendering page:', error);
+                const canvas = document.getElementById('pdfRenderModal');
+                canvas.style.opacity = '0.3';
             }
         } finally {
+            setNavButtonsDisabled(false);
             modalRendering = false;
         }
     }
 
+    function setNavButtonsDisabled(disabled) {
+        const buttons = ['pdfPrevModal', 'pdfNextModal'];
+        buttons.forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) btn.disabled = disabled;
+        });
+    }
+
+    // ---- Modal event initialization ----
     function initModalEvents() {
         document.getElementById('pdfModalClose').addEventListener('click', closePdfModal);
         document.getElementById('pdfModalBackdrop').addEventListener('click', closePdfModal);
 
         document.getElementById('pdfPrevModal').addEventListener('click', () => {
-            if (modalPageNum > 1) {
+            if (modalPageNum > 1 && !document.getElementById('pdfPrevModal').disabled) {
                 modalPageNum--;
                 queueModalRender();
             }
         });
 
         document.getElementById('pdfNextModal').addEventListener('click', () => {
-            if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) {
+            if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages && !document.getElementById('pdfNextModal').disabled) {
                 modalPageNum++;
                 queueModalRender();
             }
@@ -489,37 +755,31 @@
         document.getElementById('pageInputModal').addEventListener('change', (e) => {
             const page = parseInt(e.target.value, 10);
             if (page && page > 0 && page <= (modalPdfDoc?.numPages || 1)) {
-                modalPageNum = page;
-                queueModalRender();
+                goToPage(page);
             }
             e.target.value = '';
         });
 
         document.getElementById('pdfZoomInModal').addEventListener('click', () => {
-            modalScale *= 1.1;
-            updateModalCanvasSize();
+            modalScale = Math.min(modalScale * 1.1, 3.0);
+            updateZoomDisplay();
+            queueModalRender();
         });
 
         document.getElementById('pdfZoomOutModal').addEventListener('click', () => {
-            modalScale *= 0.9;
-            updateModalCanvasSize();
+            modalScale = Math.max(modalScale * 0.9, 0.3);
+            updateZoomDisplay();
+            queueModalRender();
         });
 
         document.getElementById('pdfZoomResetModal').addEventListener('click', () => {
             modalScale = 1.0;
-            updateModalCanvasSize();
+            updateZoomDisplay();
+            queueModalRender();
         });
 
-        function updateModalCanvasSize() {
-            const canvas = document.getElementById('pdfRenderModal');
-            const container = document.getElementById('canvasWrapperModal');
-            if (canvas && container) {
-                const newWidth = canvas.offsetWidth * (modalScale / 1.0);
-                const newHeight = canvas.offsetHeight * (modalScale / 1.0);
-                canvas.style.transform = `scale(${modalScale})`;
-                canvas.style.transformOrigin = 'top center';
-                document.getElementById('zoomDisplayModal').textContent = Math.round(modalScale * 100) + '%';
-            }
+        function updateZoomDisplay() {
+            document.getElementById('zoomDisplayModal').textContent = Math.round(modalScale * 100) + '%';
         }
 
         document.getElementById('pdfFullscreenModal').addEventListener('click', () => {
@@ -556,44 +816,79 @@
             }
         });
 
+        document.getElementById('pdfThumbnailToggle').addEventListener('click', toggleThumbnails);
+        document.getElementById('pdfThumbnailsClose').addEventListener('click', () => {
+            document.getElementById('pdfThumbnailsSidebar').classList.remove('open');
+            modalThumbnailsVisible = false;
+        });
+
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             const modal = document.getElementById('pdfModal');
             if (!modal.classList.contains('open')) return;
             
-            if (e.key === 'Escape') closePdfModal();
-            else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-                if (modalPageNum > 1) {
-                    modalPageNum--;
-                    queueModalRender();
+            if (e.target.tagName === 'INPUT') {
+                if (e.key === 'Enter' && e.target.id === 'pageInputModal') {
+                    e.target.dispatchEvent(new Event('change'));
                 }
+                return;
             }
-            else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-                if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) {
-                    modalPageNum++;
+            
+            switch(e.key) {
+                case 'Escape':
+                    closePdfModal();
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    e.preventDefault();
+                    if (modalPageNum > 1) {
+                        modalPageNum--;
+                        queueModalRender();
+                    }
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    e.preventDefault();
+                    if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) {
+                        modalPageNum++;
+                        queueModalRender();
+                    }
+                    break;
+                case '+':
+                case '=':
+                    e.preventDefault();
+                    modalScale = Math.min(modalScale * 1.1, 3.0);
+                    updateZoomDisplay();
                     queueModalRender();
-                }
-            }
-            else if (e.key === '+' || e.key === '=') {
-                e.preventDefault();
-                modalScale *= 1.1;
-                updateModalCanvasSize();
-            }
-            else if (e.key === '-') {
-                e.preventDefault();
-                modalScale *= 0.9;
-                updateModalCanvasSize();
-            }
-            else if (e.key === '0') {
-                e.preventDefault();
-                modalScale = 1.0;
-                updateModalCanvasSize();
-            }
-            else if (e.key === 'f' || e.key === 'F') {
-                e.preventDefault();
-                document.getElementById('pdfFullscreenModal').click();
+                    break;
+                case '-':
+                    e.preventDefault();
+                    modalScale = Math.max(modalScale * 0.9, 0.3);
+                    updateZoomDisplay();
+                    queueModalRender();
+                    break;
+                case '0':
+                    e.preventDefault();
+                    modalScale = 1.0;
+                    updateZoomDisplay();
+                    queueModalRender();
+                    break;
+                case 'f':
+                case 'F':
+                    e.preventDefault();
+                    document.getElementById('pdfFullscreenModal').click();
+                    break;
+                case 't':
+                case 'T':
+                    e.preventDefault();
+                    toggleThumbnails();
+                    break;
             }
         });
 
+        // Touch navigation
         let touchStartX = 0;
         let touchStartY = 0;
         let touchStartTime = 0;
@@ -617,9 +912,39 @@
             if (e.target.closest('.pdf-toolbar') || e.target.closest('button') || e.target.closest('input')) return;
             const rect = document.getElementById('canvasContainerModal').getBoundingClientRect();
             const relX = (touch.clientX - rect.left) / rect.width;
-            if (relX <= 0.45) { if (modalPageNum > 1) { modalPageNum--; queueModalRender(); } }
-            else if (relX >= 0.55) { if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) { modalPageNum++; queueModalRender(); } }
+            if (relX <= 0.45) { 
+                if (modalPageNum > 1) { 
+                    modalPageNum--; 
+                    queueModalRender(); 
+                } 
+            } else if (relX >= 0.55) { 
+                if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) { 
+                    modalPageNum++; 
+                    queueModalRender(); 
+                } 
+            }
         }, { passive: true });
+
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (modalPdfDoc && document.getElementById('pdfModal').classList.contains('open')) {
+                    queueModalRender();
+                }
+            }, 200);
+        });
+
+        // Handle fullscreen change
+        document.addEventListener('fullscreenchange', () => {
+            const isFullscreen = document.fullscreenElement !== null;
+            const icon = document.getElementById('fsIconModal');
+            if (icon) {
+                icon.classList.toggle('fa-expand', !isFullscreen);
+                icon.classList.toggle('fa-compress', isFullscreen);
+            }
+        });
     }
 
     // ---- render functions ----
@@ -759,17 +1084,22 @@
         const floatingAdashima = document.getElementById('floating-link');
         if (floatingAdashima) floatingAdashima.title = getText('floatingTitle');
         
-        // Update search placeholder
         const searchInput = document.getElementById('searchInput');
         if (searchInput) searchInput.placeholder = getText('searchPlaceholder');
         
-        // Update view toggle buttons
         document.getElementById('viewListBtn').innerHTML = `<i class="fas fa-list-ul"></i> ${getText('viewList')}`;
         document.getElementById('viewGridBtn').innerHTML = `<i class="fas fa-th"></i> ${getText('viewGrid')}`;
         
-        // Update modal title
-        document.querySelector('.pdf-modal-title').innerHTML = `${getText('modal.reading')}<span id="pdfVolumeTitle">Volumen</span>`;
+        // Update modal translations
+        document.getElementById('pdfModalTitle').innerHTML = `${getText('modal.reading')} <span id="pdfVolumeTitle">Volumen</span>`;
         document.getElementById('pdfModalClose').setAttribute('aria-label', getText('modal.closeReader'));
+        document.getElementById('pdfThumbnailToggle').title = getText('pdfControls.thumbnails');
+        document.getElementById('pdfPageLabel').textContent = getText('pdfControls.page');
+        document.getElementById('pageInputModal').placeholder = getText('pdfControls.goTo');
+        document.getElementById('pdfThumbnailsTitle').textContent = getText('pdfControls.thumbnails');
+        document.getElementById('pdfLoadingTextModal').textContent = getText('pdfControls.loadingDocument');
+        document.getElementById('pdfErrorMsgModal').textContent = getText('toastMessages.documentNotAvailable');
+        document.getElementById('pdfRetryText').textContent = getText('toastMessages.retry');
         
         renderGeneralDownloads();
         renderVolumes();

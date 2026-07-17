@@ -1,10 +1,5 @@
-/* ===== novelas.css ===== */
-/* Combined & optimized - All styles for Adashima Light Novels page */
-
-/* ---------- imports ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Quicksand:wght@300;400;600&display=swap');
 
-/* ---------- root variables ---------- */
 :root {
     --rose: #d1a3c6;
     --rose-light: #e8c8df;
@@ -20,7 +15,6 @@
     --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---------- reset & base ---------- */
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +30,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ---------- particles ---------- */
 .particles {
     position: fixed;
     top: 0;
@@ -71,7 +64,6 @@ body {
     50% { box-shadow: 0 0 12px 3px rgba(255,200,255,0.8); }
 }
 
-/* ---------- sidebar ---------- */
 .sidebar {
     width: 300px;
     background-color: rgba(209, 163, 198, 0.88);
@@ -112,7 +104,6 @@ body {
 .sidebar::-webkit-scrollbar { width: 5px; }
 .sidebar::-webkit-scrollbar-thumb { background: rgba(92,58,107,0.25); border-radius: 10px; }
 
-/* ---------- main content ---------- */
 .main-content {
     flex: 1;
     position: relative;
@@ -136,7 +127,6 @@ body {
     pointer-events: none;
 }
 
-/* ---------- header ---------- */
 h1.update-title {
     font-family: 'Noto Serif JP', serif;
     font-size: 3.2rem;
@@ -168,7 +158,6 @@ h1.update-title {
     z-index: 10;
 }
 
-/* ---------- language controls ---------- */
 .lang-controls {
     position: absolute;
     top: 20px;
@@ -302,7 +291,6 @@ h1.update-title {
     font-weight: 700;
 }
 
-/* ---------- general downloads ---------- */
 .general-downloads {
     display: none;
     justify-content: center;
@@ -310,7 +298,6 @@ h1.update-title {
     margin-top: 14px;
 }
 
-/* ---------- library controls (search + view toggle) ---------- */
 .library-controls {
     display: flex;
     flex-wrap: wrap;
@@ -345,23 +332,27 @@ h1.update-title {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.8rem;
     border-radius: 40px;
-    border: 1px solid rgba(209,163,198,0.25);
-    background: rgba(255,255,255,0.8);
+    border: 1.5px solid rgba(209, 163, 198, 0.3);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
     font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
     font-size: 0.95rem;
     color: #4a3b52;
     transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(92, 58, 107, 0.06);
 }
 
 .search-wrapper input:focus {
     outline: none;
-    border-color: rgba(209,163,198,0.5);
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 4px 16px rgba(92,58,107,0.1);
+    border-color: var(--rose, #d1a3c6);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 24px rgba(92, 58, 107, 0.10);
 }
 
 .search-wrapper input::placeholder {
-    color: rgba(92,58,107,0.5);
+    color: rgba(92, 58, 107, 0.45);
+    font-weight: 400;
 }
 
 .search-wrapper:focus-within i {
@@ -370,53 +361,67 @@ h1.update-title {
 
 .view-toggle-group {
     display: flex;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 40px;
+    border: 1.5px solid rgba(209, 163, 198, 0.25);
+    padding: 4px;
+    box-shadow: 0 4px 12px rgba(92, 58, 107, 0.05);
+    flex-shrink: 0;
     gap: 0.5rem;
     flex-wrap: wrap;
     justify-content: flex-end;
 }
 
 .view-toggle-btn {
-    padding: 0.6rem 1.2rem;
-    border: 1px solid rgba(209,163,198,0.3);
-    border-radius: 24px;
-    background: rgba(255,255,255,0.7);
-    color: #5c3a6b;
-    font-family: 'Quicksand', sans-serif;
+    background: transparent;
+    border: none;
+    border-radius: 30px;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    color: #7b5e8c;
     cursor: pointer;
     transition: all 0.25s ease;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 8px;
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: 0.01em;
 }
 
-.view-toggle-btn:hover {
-    background: rgba(255,255,255,0.9);
-    border-color: rgba(209,163,198,0.5);
+.view-toggle-btn:hover:not(.active) {
+    background: rgba(209, 163, 198, 0.12);
     transform: translateY(-1px);
 }
 
 .view-toggle-btn.active {
-    background: linear-gradient(135deg, rgba(209,163,198,0.5), rgba(232,200,223,0.4));
-    border-color: rgba(209,163,198,0.6);
-    box-shadow: 0 4px 12px rgba(92,58,107,0.15);
+    background: linear-gradient(135deg, #d1a3c6, #b88ab0);
+    color: white;
+    box-shadow: 0 4px 12px rgba(209, 163, 198, 0.35);
 }
 
 .view-toggle-btn i {
-    font-size: 0.95rem;
+    font-size: 1rem;
+    opacity: 0.7;
 }
 
-/* ---------- novels container ---------- */
+.view-toggle-btn.active i {
+    opacity: 1;
+}
+
 .update-box {
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 28px;
+    border: 1.5px solid var(--glass-border);
     width: 100%;
     max-width: 920px;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(209,163,198,0.25);
-    border-radius: 24px;
-    padding: 28px;
-    box-shadow: 0 8px 32px rgba(92,58,107,0.08);
+    padding: 32px;
+    box-shadow: var(--shadow-soft);
+    max-height: 76vh;
+    overflow-y: auto;
     position: relative;
     min-height: 200px;
     display: flex;
@@ -425,11 +430,63 @@ h1.update-title {
 }
 
 @keyframes box-in {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: none; }
 }
 
-/* ---------- no results message ---------- */
+.update-box::-webkit-scrollbar { width: 5px; }
+.update-box::-webkit-scrollbar-thumb { background: rgba(209,163,198,0.5); border-radius: 10px; }
+
+.view-grid .novel-item {
+    display: none !important;
+}
+
+.view-grid .novels-grid {
+    display: grid !important;
+}
+
+.view-list .novels-grid {
+    display: none !important;
+}
+
+.view-list .novel-item {
+    display: block !important;
+}
+
+.novel-item.hidden-by-search {
+    display: none !important;
+}
+
+.update-box.view-grid {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.update-box.view-grid .novels-grid {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    border: 1.5px solid rgba(209, 163, 198, 0.25);
+    padding: 1.8rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(92, 58, 107, 0.06);
+}
+
+.update-box.view-list {
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    border-radius: 28px;
+    border: 1.5px solid var(--glass-border);
+    padding: 32px;
+    box-shadow: var(--shadow-soft);
+    max-height: 76vh;
+    overflow-y: auto;
+}
+
 .no-results-message {
     display: none;
     flex-direction: column;
@@ -483,7 +540,6 @@ h1.update-title {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- view content containers ---------- */
 .view-list-content {
     display: flex;
     flex-direction: column;
@@ -494,49 +550,71 @@ h1.update-title {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1.5rem;
-    padding: 0;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0.5rem 0;
 }
 
-/* ---------- novel list item (accordion) ---------- */
 .novel-item {
-    border: 1px solid rgba(209,163,198,0.15);
-    border-radius: 16px;
-    background: rgba(255,255,255,0.6);
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.55);
+    border-radius: 18px;
+    border: 1.5px solid rgba(209,163,198,0.22);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
 }
+
+.novel-item:last-child { margin-bottom: 0; }
 
 .novel-item:hover {
-    border-color: rgba(209,163,198,0.3);
-    box-shadow: 0 6px 20px rgba(92,58,107,0.12);
+    box-shadow: 0 6px 24px rgba(92,58,107,0.09);
+    border-color: rgba(209,163,198,0.4);
 }
 
-.novel-item.hidden-by-search {
-    display: none;
+details[open].novel-item {
+    border-color: rgba(209,163,198,0.5);
+    box-shadow: 0 8px 28px rgba(92,58,107,0.12);
+}
+
+.novel-item.extra-stories-special {
+    background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(232,200,223,0.55));
+    border: 2px solid rgba(209,163,198,0.5);
+    box-shadow: 0 0 20px rgba(209,163,198,0.25), 0 8px 28px rgba(92,58,107,0.12);
+}
+
+.novel-item.extra-stories-special:hover {
+    box-shadow: 0 0 30px rgba(209,163,198,0.35), 0 12px 36px rgba(92,58,107,0.15);
+    border-color: rgba(209,163,198,0.7);
 }
 
 .novel-item.extra-stories-special summary.novel-summary {
-    background: linear-gradient(135deg, rgba(255,200,100,0.08), rgba(255,220,150,0.08));
+    background: linear-gradient(135deg, rgba(209,163,198,0.15), rgba(140,90,150,0.1));
     border-bottom-color: rgba(255,200,100,0.2);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 summary.novel-summary {
     list-style: none;
-    padding: 18px 20px;
+    padding: 18px 22px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: #5c3a6b;
     font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.25s ease;
+    font-size: 1.05rem;
+    transition: background var(--transition);
     border-bottom: 1px solid rgba(209,163,198,0.1);
     user-select: none;
 }
 
+summary.novel-summary::-webkit-details-marker { display: none; }
+
 summary.novel-summary:hover {
-    background: rgba(209,163,198,0.08);
+    background: rgba(255,255,255,0.7);
 }
 
 summary.novel-summary:focus {
@@ -547,6 +625,10 @@ summary.novel-summary:focus-visible {
     background: rgba(209,163,198,0.12);
 }
 
+.extra-stories-special summary.novel-summary:hover {
+    background: linear-gradient(135deg, rgba(209,163,198,0.25), rgba(140,90,150,0.15));
+}
+
 summary.novel-summary span {
     display: flex;
     align-items: center;
@@ -554,19 +636,43 @@ summary.novel-summary span {
     flex: 1;
 }
 
-summary.novel-summary i:first-child {
-    color: rgba(140,90,150,0.6);
+.extra-stories-special summary.novel-summary span {
+    background: linear-gradient(135deg, #d1a3c6, #8c5a96);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+summary.novel-summary i:first-child,
+summary.novel-summary i.fa-book {
+    color: var(--rose);
     font-size: 1.1rem;
     flex-shrink: 0;
+    margin-right: 12px;
+    transition: color var(--transition);
+}
+
+summary.novel-summary:hover i.fa-book { color: var(--purple); }
+
+.extra-stories-special summary.novel-summary i.fa-book {
+    color: #8c5a96;
+    animation: icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
 
 .chevron-icon {
-    color: rgba(140,90,150,0.5);
+    color: var(--rose);
     font-size: 0.85rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
     flex-shrink: 0;
 }
 
+details[open] summary.novel-summary .chevron-icon,
 .novel-item[open] summary.novel-summary .chevron-icon {
     transform: rotate(180deg);
 }
@@ -577,53 +683,66 @@ summary.novel-summary i:first-child {
 }
 
 .novel-content {
-    padding: 18px 20px;
+    padding: 0 22px 22px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
 }
 
+.novel-description,
 .novel-description p {
     margin: 0;
-    color: rgba(92,58,107,0.75);
+    color: #7b5e8c;
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.65;
+    padding-top: 2px;
 }
 
 .translator-credit {
+    display: block;
     font-size: 0.8rem;
-    color: rgba(92,58,107,0.6);
-    margin-top: -8px;
+    color: rgba(92,58,107,0.55);
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(209,163,198,0.15);
+    text-align: center;
 }
 
 .translator-credit a {
-    color: rgba(140,90,150,0.8);
+    color: rgba(209,163,198,0.8);
     text-decoration: none;
-    transition: color 0.2s ease;
-    font-weight: 500;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 1px dashed rgba(209,163,198,0.4);
 }
 
 .translator-credit a:hover {
     color: #8c5a96;
-    text-decoration: underline;
+    border-bottom-color: rgba(209,163,198,0.7);
 }
 
 .novel-actions {
+    margin-top: 12px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
 }
 
-/* ---------- novel grid card ---------- */
+.novel-content .custom-pdf-viewer {
+    display: none !important;
+}
+
 .novel-card {
     display: flex;
     flex-direction: column;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.8);
-    border: 1px solid rgba(209,163,198,0.2);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(209, 163, 198, 0.25);
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    transition: all 0.25s ease;
     cursor: pointer;
+    box-shadow: 0 6px 20px rgba(92, 58, 107, 0.06);
     animation: card-appear 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
@@ -634,13 +753,13 @@ summary.novel-summary i:first-child {
 
 .novel-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(209,163,198,0.4);
-    box-shadow: 0 12px 32px rgba(92,58,107,0.15);
+    border-color: var(--rose, #d1a3c6);
+    box-shadow: 0 16px 40px rgba(92, 58, 107, 0.12);
 }
 
 .novel-card.extra-card {
-    background: linear-gradient(135deg, rgba(255,250,240,0.9), rgba(255,245,220,0.85));
-    border-color: rgba(255,200,100,0.3);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(232, 200, 223, 0.35));
+    border: 2px solid rgba(209, 163, 198, 0.5);
 }
 
 .novel-card.extra-card:hover {
@@ -648,42 +767,53 @@ summary.novel-summary i:first-child {
     border-color: rgba(255,200,100,0.5);
 }
 
-.card-img {
+.card-img,
+.novel-card .card-img {
     width: 100%;
-    aspect-ratio: 2/3;
+    aspect-ratio: 3/4;
     object-fit: cover;
-    background: linear-gradient(135deg, rgba(209,163,198,0.1), rgba(232,200,223,0.1));
+    background: #e8dce8;
+    display: block;
 }
 
 .card-img-placeholder {
     width: 100%;
-    aspect-ratio: 2/3;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #dcc8d8, #b8a0b8);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(209,163,198,0.15), rgba(232,200,223,0.15));
-    color: rgba(140,90,150,0.3);
-    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 2.8rem;
 }
 
-.card-body {
-    padding: 0.8rem 1rem 1.1rem;
+.card-img-placeholder i {
+    opacity: 0.5;
+}
+
+.card-body,
+.novel-card .card-body {
+    padding: 0.9rem 1rem 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 8px;
     flex: 1;
 }
 
-.card-title {
+.card-title,
+.novel-card .card-title {
     font-weight: 700;
-    font-size: 0.95rem;
-    color: #5c3a6b;
+    font-size: 1rem;
+    color: #4a3b52;
     line-height: 1.3;
+    margin-bottom: 0.25rem;
 }
 
-.card-desc {
+.card-desc,
+.novel-card .card-desc {
     font-size: 0.75rem;
-    color: rgba(92,58,107,0.65);
+    color: #7b5e8c;
+    opacity: 0.75;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -692,42 +822,46 @@ summary.novel-summary i:first-child {
     margin: 4px 0 0 0;
 }
 
-.card-badge {
+.card-badge,
+.novel-card .card-badge {
     display: inline-block;
-    background: linear-gradient(135deg, rgba(255,200,100,0.2), rgba(255,180,80,0.15));
-    color: rgba(255,140,0,0.8);
+    background: rgba(209, 163, 198, 0.15);
+    color: var(--purple, #8c5a96);
     border: 1px solid rgba(255,180,80,0.3);
-    padding: 0.25rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.7rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.65rem;
     font-weight: 600;
-    margin-top: 4px;
+    margin-top: 0.6rem;
     width: fit-content;
+    align-self: flex-start;
 }
 
-/* ---------- buttons ---------- */
 .btn {
-    padding: 0.7rem 1.4rem;
-    border: 1px solid rgba(209,163,198,0.3);
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(209,163,198,0.25), rgba(232,200,223,0.2));
+    background: rgba(255,255,255,0.8);
     color: #5c3a6b;
-    font-family: 'Quicksand', sans-serif;
+    padding: 9px 20px;
+    border-radius: 20px;
+    text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    font-size: 0.88rem;
+    transition: all var(--transition);
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    border: 1.5px solid rgba(209,163,198,0.4);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    font-family: 'Quicksand', sans-serif;
     white-space: nowrap;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, rgba(209,163,198,0.4), rgba(232,200,223,0.3));
-    border-color: rgba(209,163,198,0.5);
+    background: linear-gradient(135deg, #d1a3c6 0%, #c993b8 100%);
+    color: white;
+    box-shadow: 0 6px 18px rgba(209,163,198,0.38);
+    border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(92,58,107,0.12);
 }
 
 .btn:active {
@@ -736,33 +870,58 @@ summary.novel-summary i:first-child {
 }
 
 .btn-read {
+    background: linear-gradient(135deg, #d1a3c6, #b88ab0);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 4px 16px rgba(209, 163, 198, 0.3);
     width: 100%;
     justify-content: center;
-    font-size: 0.85rem;
+}
+
+.btn-read:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(209, 163, 198, 0.4);
+    background: linear-gradient(135deg, #c993b8, #a87aa0);
+}
+
+.btn-read:active {
+    transform: translateY(0);
 }
 
 .btn-read-card {
+    margin-top: 10px;
     width: 100%;
-    padding: 0.65rem 1rem;
-    font-size: 0.8rem;
-    margin-top: auto;
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.9rem;
 }
 
-/* ---------- floating adashima ---------- */
 .floating-adashima {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 100px;
-    z-index: 50;
+    width: 180px;
+    animation: float-astronaut 8s ease-in-out infinite;
+    z-index: 100;
+    filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.18));
+    transition: filter 0.3s, transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: float-astronaut 4s ease-in-out infinite;
-    transition: transform 0.3s ease;
 }
 
 .floating-adashima:hover {
+    filter: drop-shadow(0px 10px 20px rgba(140,90,150,0.4));
     transform: scale(1.1);
 }
 
@@ -770,7 +929,7 @@ summary.novel-summary i:first-child {
     width: 100%;
     height: auto;
     max-width: 100%;
-    filter: drop-shadow(0 6px 16px rgba(92,58,107,0.2));
+    border-radius: 50%;
 }
 
 @keyframes float-astronaut {
@@ -780,16 +939,17 @@ summary.novel-summary i:first-child {
     100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* ---------- footer ---------- */
 .footer {
     margin-top: 32px;
     padding: 20px 24px;
     text-align: center;
-    font-size: 0.85rem;
-    color: rgba(92,58,107,0.65);
+    font-size: 0.78rem;
+    color: rgba(92,58,107,0.5);
     border-top: 1px solid rgba(209,163,198,0.15);
     width: 100%;
     max-width: 920px;
+    z-index: 5;
+    line-height: 1.7;
 }
 
 .footer a {
@@ -803,7 +963,6 @@ summary.novel-summary i:first-child {
     text-decoration: underline;
 }
 
-/* ---------- toast message ---------- */
 .toast-message {
     display: none;
     position: fixed;
@@ -829,7 +988,6 @@ summary.novel-summary i:first-child {
     to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* ---------- responsive ---------- */
 @media (max-width: 992px) {
     .novels-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

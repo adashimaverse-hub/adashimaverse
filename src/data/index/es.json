@@ -3,139 +3,144 @@
     "title": "Adachi to Shimamura"
   },
   "hero": {
-    "subtitle": "Una historia de encuentros, estrellas y el calor de un verano eterno."
+    "subtitle": "Una historia de encuentros fortuitos, momentos silenciosos y un vínculo que trasciende las estrellas."
   },
   "info": {
     "title": "¿Qué es Adachi to Shimamura?",
-    "subtitle": "Para quienes visitan por primera vez",
-    "chips": ["Hitoma Iruma", "Yuri · Slice of Life", "Desde 2013", "Dengeki Bunko"],
+    "subtitle": "Para quienes lo descubren por primera vez",
+    "chips": [
+      "Hitoma Iruma",
+      "Yuri · Recuentos de la vida",
+      "Desde 2013",
+      "Dengeki Bunko"
+    ],
     "paragraphs": [
-      "<strong>Adachi to Shimamura</strong> es una novela ligera japonesa escrita por <strong>Hitoma Iruma</strong> e ilustrada por <strong>Non</strong>. La historia sigue la relación entre dos chicas de preparatoria: <strong>Adachi</strong>, una solitaria que prefiere pasar el tiempo en el gimnasio, y <strong>Shimamura</strong>, una joven despreocupada que suele faltar a clases.",
-      "Su amistad comienza en el segundo piso del gimnasio, donde se encuentran por casualidad. Poco a poco, lo que empieza como una conexión superficial se convierte en algo más profundo, tierno y complejo.",
-      "La obra ha sido adaptada al manga, al anime y a múltiples CD dramas, ganándose un lugar especial en el corazón de los lectores por su delicada exploración de la intimidad, la soledad y el primer amor."
+      "<strong>Adachi to Shimamura</strong> es una serie de novelas ligeras japonesas escrita por <strong>Hitoma Iruma</strong> e ilustrada por <strong>Non</strong>. Narra la historia de dos estudiantes de secundaria cuyo encuentro casual da inicio a uno de los romances de desarrollo más pausado y queridos de las novelas ligeras modernas.",
+      "Su relación comienza en el segundo piso del gimnasio escolar, donde <strong>Adachi</strong>, una chica reservada y solitaria, y <strong>Shimamura</strong>, una estudiante despreocupada que suele faltar a clases, pasan las tardes juntas. Lo que empieza como una amistad casual evoluciona poco a poco en un viaje íntimo de autodescubrimiento, afecto y aprendizaje mutuo.",
+      "Reconocida por su prosa introspectiva, el delicado desarrollo de sus personajes y su atmósfera serena, la serie ha inspirado múltiples adaptaciones al manga, un anime y varios CD Dramas. Más que una historia de romance, es un relato sobre la soledad, las conexiones humanas y esos pequeños momentos que terminan marcando toda una vida."
     ]
   },
   "nav": {
     "items": [
       {
         "key": "timeline",
-        "title": "Línea del Tiempo",
-        "desc": "Recorre los momentos clave",
+        "title": "Cronología",
+        "desc": "Recorre cada momento",
         "icon": "fa-clock",
-        "tooltip": "Sigue la historia a través de los años escolares."
+        "tooltip": "Explora la cronología completa, desde el primer encuentro de las chicas hasta el futuro lejano."
       },
       {
         "key": "novels",
         "title": "Novelas Ligeras",
-        "desc": "Sumérgete en la historia",
+        "desc": "La historia original",
         "icon": "fa-book",
-        "tooltip": "Lee las novelas ligeras completas."
+        "tooltip": "Consulta todos los volúmenes, historias paralelas, ediciones especiales y capítulos extra."
       },
       {
         "key": "manga",
         "title": "Manga",
-        "desc": "La adaptación ilustrada",
+        "desc": "Una adaptación ilustrada",
         "icon": "fa-pencil-alt",
-        "tooltip": "Explora el manga de Adachi to Shimamura."
+        "tooltip": "Descubre todas las adaptaciones al manga y disfruta la historia a través de sus ilustraciones."
       },
       {
         "key": "extraStories",
         "title": "Historias Extra",
-        "desc": "Contenido adicional",
+        "desc": "Más allá de los volúmenes",
         "icon": "fa-star",
-        "tooltip": "Historias extra y capítulos especiales."
+        "tooltip": "Lee relatos cortos, capítulos especiales, contenido promocional y material adicional."
       },
       {
         "key": "drama",
         "title": "CD Dramas",
-        "desc": "Voces y música",
+        "desc": "Escucha la historia",
         "icon": "fa-headphones",
-        "tooltip": "Escucha los CD dramas."
+        "tooltip": "Disfruta de los CD Dramas oficiales con las voces del elenco."
       },
       {
-        "key": "miniAnime",
-        "title": "Mini Anime",
-        "desc": "Episodios animados",
-        "icon": "fa-film",
-        "tooltip": "Disfruta del Mini Anime."
+        "key": "music",
+        "title": "OST · Música",
+        "desc": "La música de Adashima",
+        "icon": "fa-music",
+        "tooltip": "Escucha la banda sonora del anime, los temas de apertura y cierre, canciones de personajes y más."
       },
       {
         "key": "constellation",
         "title": "Constelación",
-        "desc": "Descubre secretos",
+        "desc": "Descubre cada secreto",
         "icon": "fa-star-and-crescent",
-        "tooltip": "Forma constelaciones y desbloquea historias."
+        "tooltip": "Forma constelaciones, encuentra secretos ocultos y desbloquea contenido exclusivo."
       },
       {
         "key": "anime",
         "title": "Anime",
-        "desc": "La serie animada",
+        "desc": "La adaptación animada",
         "icon": "fa-tv",
-        "tooltip": "Mira el anime de Adachi to Shimamura."
+        "tooltip": "Explora el anime, sus episodios, producción, elenco de voces y curiosidades."
       },
       {
         "key": "others",
         "title": "Otros",
-        "desc": "Contenido variado",
+        "desc": "Todo lo demás por descubrir",
         "icon": "fa-ellipsis-h",
-        "tooltip": "Entrevistas, guías y más."
+        "tooltip": "Encuentra entrevistas, ilustraciones oficiales, mercancía, guías, preguntas frecuentes y mucho más."
       },
       {
         "key": "stats",
         "title": "Estadísticas para Nerds",
-        "desc": "Datos y cifras",
+        "desc": "Cada detalle documentado",
         "icon": "fa-chart-bar",
-        "tooltip": "Hojas de cálculo, gráficos y datos para los más devotos."
+        "tooltip": "Sumérgete en cronologías, hojas de cálculo, estadísticas, gráficos y análisis exhaustivos."
       },
       {
         "key": "about",
         "title": "Acerca de",
-        "desc": "Créditos y comunidad",
+        "desc": "Detrás del proyecto",
         "icon": "fa-info-circle",
-        "tooltip": "Conoce el proyecto, créditos de traducción e historial de versiones."
+        "tooltip": "Conoce la misión del sitio, a sus colaboradores, los créditos de traducción y el historial de versiones."
       }
     ]
   },
   "release": {
-    "lastUpdate": "Última actualización",
+    "lastUpdate": "Última Actualización",
     "volNum": "Volumen 13",
-    "date": "Noviembre 2025",
-    "status": "Traducción completa",
-    "nextLabel": "Próximo lanzamiento",
-    "nextBadge": "Novedad",
+    "date": "Noviembre de 2025",
+    "status": "Traducción Completa",
+    "nextLabel": "Próximo Lanzamiento",
+    "nextBadge": "Próximamente",
     "nextVol": "Adachi to Shimamura SS3",
-    "nextDate": "Septiembre 10, 2026",
-    "nextStatus": "Por confirmar"
+    "nextDate": "10 de septiembre de 2026",
+    "nextStatus": "Por Anunciar"
   },
   "news": {
-    "text": "¡Bienvenidos a Adashima Latinoamérica!<br>Estamos trabajando en nuevas traducciones y contenido para ustedes.",
-    "hint": "Haz clic en mí para más noticias",
-    "tooltip": "¡Noticias!"
+    "text": "¡Bienvenido a Adashima Latinoamérica!<br>Seguimos añadiendo nuevas traducciones, guías, contenido multimedia y recursos para la comunidad.",
+    "hint": "Haz clic para leer las últimas novedades",
+    "tooltip": "Últimas Noticias"
   },
-  "footer": "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
+  "footer": "Sitio web no oficial y sin fines de lucro dedicado a <strong>Adachi to Shimamura</strong>.<br>Creado por fans, para fans.<br>Todos los derechos de Adachi to Shimamura pertenecen a Hitoma Iruma, Non, ASCII Media Works, Kadokawa y sus respectivos propietarios.",
   "langLabel": "Español",
   "feedback": {
-    "title": "Enviar comentarios",
-    "subtitle": "¿Encontraste un error, una falta de ortografía, contenido faltante o tienes una sugerencia? Nos encantaría saber de ti.",
-    "typeLabel": "Tipo de comentario",
-    "typePlaceholder": "Selecciona un tipo...",
-    "typeBug": "Reporte de error",
-    "typeTranslation": "Corrección de traducción",
-    "typeMissing": "Contenido faltante",
-    "typeBroken": "Enlace roto",
-    "typeFeature": "Solicitud de función",
-    "typeGeneral": "Comentario general",
+    "title": "Enviar Comentarios",
+    "subtitle": "¿Encontraste un error, un enlace roto, contenido faltante o tienes alguna sugerencia? Nos encantaría conocer tu opinión.",
+    "typeLabel": "Tipo de Comentario",
+    "typePlaceholder": "Selecciona una categoría...",
+    "typeBug": "Reportar un Error",
+    "typeTranslation": "Corrección de Traducción",
+    "typeMissing": "Contenido Faltante",
+    "typeBroken": "Enlace Roto",
+    "typeFeature": "Sugerencia de Función",
+    "typeGeneral": "Comentario General",
     "titleLabel": "Título",
-    "titlePlaceholder": "Resumen breve de tu comentario",
+    "titlePlaceholder": "Resume brevemente tu comentario",
     "descLabel": "Descripción",
-    "descPlaceholder": "Proporciona detalles sobre tu comentario...",
-    "emailLabel": "Correo electrónico",
-    "emailHint": "Solo lo usaremos para hacer seguimiento si es necesario.",
+    "descPlaceholder": "Proporciona todos los detalles posibles para ayudarnos a comprender tu reporte o sugerencia.",
+    "emailLabel": "Correo Electrónico",
+    "emailHint": "Opcional. Solo lo utilizaremos si necesitamos comunicarnos contigo.",
     "cancel": "Cancelar",
-    "submit": "Enviar comentario",
+    "submit": "Enviar Comentario",
     "sending": "Enviando...",
-    "successTitle": "¡Gracias!",
-    "successText": "Tu comentario se ha enviado correctamente.",
-    "footerBtn": "Enviar comentarios"
+    "successTitle": "¡Muchas Gracias!",
+    "successText": "Tu comentario se ha enviado correctamente. Gracias por ayudarnos a mejorar el sitio.",
+    "footerBtn": "Enviar Comentarios"
   }
 }

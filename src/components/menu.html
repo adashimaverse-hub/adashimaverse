@@ -228,17 +228,18 @@
             window.currentMenuLang = lang;
         }
 
-        // Auto-load translations based on page language
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if there's a language stored or detected
-            const storedLang = localStorage.getItem('lang') || localStorage.getItem('preferredLanguage');
-            const pageLang = storedLang || 'es';
-            
-            // Load translations with a slight delay to ensure DOM is ready
+        function initMenuTranslations() {
+            const storedLang = localStorage.getItem('lang') || localStorage.getItem('preferredLanguage') || 'es';
             setTimeout(function() {
-                window.translateMenu(pageLang);
+                window.translateMenu(storedLang);
             }, 100);
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMenuTranslations, { once: true });
+        } else {
+            initMenuTranslations();
+        }
 
     })();
     </script>

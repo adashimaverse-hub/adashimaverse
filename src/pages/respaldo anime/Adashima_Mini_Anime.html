@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/mini_anime.css">
     <link rel="stylesheet" href="../components/styles/menu.css">
-    <link rel="stylesheet" href="../css/lang-switch.css">
 </head>
 <body>
 
@@ -22,28 +21,13 @@
     <div class="main-content">
 
         <div class="header-container">
-            <div class="lang-controls">
-                <div class="lang-wrapper">
-                    <i class="fas fa-globe"></i>
-                    <div class="lang-dropdown" id="langDropdown">
-                        <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
-                            <span id="langSelectedLabel">Español</span>
-                            <i class="fas fa-chevron-down lang-caret"></i>
-                        </button>
-                        <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
-                            <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
-                            <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <h1 class="update-title">Mini Anime</h1>
         </div>
 
         <div class="crt-tv-wrapper">
 
             <div class="crt-tv-body">
-                
+
                 <div class="tv-screw tv-screw-tl"></div>
                 <div class="tv-screw tv-screw-tr"></div>
                 <div class="tv-screw tv-screw-bl"></div>
@@ -93,17 +77,17 @@
 
                         <div class="loading-indicator" id="loadingIndicator">
                             <div class="loading-dots"><span></span><span></span><span></span></div>
-                            <div class="loading-text" id="loadingText">Sintonizando canal...</div>
+                            <div class="loading-text">Sintonizando canal...</div>
                         </div>
 
                         <div class="osd-menu" id="osdMenu" role="dialog" aria-label="Selección de canal">
                             <div class="osd-box">
                                 <div class="osd-title">
-                                    <span id="osdTitle">YASHONY CHANNELS</span>
-                                    <span id="osdSubtitle">SELECCIONAR EPISODIO</span>
+                                    YASHONY CHANNELS
+                                    <span>SELECCIONAR EPISODIO</span>
                                 </div>
                                 <div class="osd-channel-list" id="osdChannelList"></div>
-                                <div class="osd-footer" id="osdFooter">[ MENU ] PARA CERRAR</div>
+                                <div class="osd-footer">[ MENU ] PARA CERRAR</div>
                             </div>
                         </div>
 
@@ -116,24 +100,24 @@
                             <button class="power-btn" id="powerBtn" title="Encender / Apagar">
                                 <i class="fas fa-power-off"></i>
                             </button>
-                            <span class="btn-label-text" id="powerLabel">PWR</span>
+                            <span class="btn-label-text">PWR</span>
                         </div>
                         <div class="ctrl-separator"></div>
                         <div class="btn-labeled">
                             <button class="menu-btn" id="menuBtn" title="Menú de canales" disabled>MENU</button>
-                            <span class="btn-label-text" id="menuLabel">CH</span>
+                            <span class="btn-label-text">CH</span>
                         </div>
                         <div class="btn-labeled">
                             <button class="playpause-btn" id="playPauseBtn" title="Reproducir / Pausar" disabled>
                                 <i class="fas fa-play"></i>
                             </button>
-                            <span class="btn-label-text" id="playLabel">PLAY</span>
+                            <span class="btn-label-text">PLAY</span>
                         </div>
                     </div>
 
                     <div class="tv-controls-right">
                         <div class="tv-knob" id="volKnob" title="Volumen — arrastra arriba/abajo">
-                            <div class="knob-label" id="volLabel">VOL</div>
+                            <div class="knob-label">VOL</div>
                             <div class="knob-ring-wrap">
                                 <svg class="knob-arc-svg" viewBox="0 0 54 54">
                                     <path class="knob-arc-bg"  id="volArcBg"   d=""/>
@@ -146,7 +130,7 @@
                                 <span class="knob-mark knob-mark-min">−</span>
                                 <span class="knob-mark knob-mark-max">+</span>
                                 <div class="knob-osd" id="volOsd">
-                                    <div class="knob-osd-label" id="volOsdLabel">VOL</div>
+                                    <div class="knob-osd-label">VOL</div>
                                     <div class="knob-osd-value" id="volOsdValue">100%</div>
                                     <div class="knob-osd-bar-wrap"><div class="knob-osd-bar-fill" id="volOsdBar" style="width:100%"></div></div>
                                 </div>
@@ -155,7 +139,7 @@
                         </div>
 
                         <div class="tv-knob" id="brtKnob" title="Brillo — arrastra arriba/abajo">
-                            <div class="knob-label" id="brtLabel">BRT</div>
+                            <div class="knob-label">BRT</div>
                             <div class="knob-ring-wrap">
                                 <svg class="knob-arc-svg" viewBox="0 0 54 54">
                                     <path class="knob-arc-bg"   id="brtArcBg"   d=""/>
@@ -168,7 +152,7 @@
                                 <span class="knob-mark knob-mark-min">−</span>
                                 <span class="knob-mark knob-mark-max">+</span>
                                 <div class="knob-osd" id="brtOsd">
-                                    <div class="knob-osd-label" id="brtOsdLabel">BRT</div>
+                                    <div class="knob-osd-label">BRT</div>
                                     <div class="knob-osd-value" id="brtOsdValue">100%</div>
                                     <div class="knob-osd-bar-wrap"><div class="knob-osd-bar-fill" id="brtOsdBar" style="width:100%"></div></div>
                                 </div>
@@ -211,7 +195,7 @@
         <div class="download-all-wrap">
             <button class="download-all-btn" id="downloadAllBtn" type="button" title="Descargar todos los episodios">
                 <i class="fas fa-download"></i>
-                <span id="downloadAllLabel">Descargar todos</span>
+                <span>Descargar todos</span>
             </button>
         </div>
 
@@ -219,7 +203,7 @@
             <div class="download-modal-card" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
                 <div class="download-modal-title" id="downloadModalTitle">
                     <span class="download-modal-badge"><i class="fas fa-download"></i></span>
-                    <span id="downloadModalTitleText">Descargar todos los episodios</span>
+                    <span>Descargar todos los episodios</span>
                 </div>
                 <div class="download-modal-text" id="downloadModalText">Se iniciará la descarga de 30 episodios. ¿Quieres continuar?</div>
                 <div class="download-modal-actions">
@@ -233,7 +217,7 @@
             <img src="../../assets/Imagenes/Flotante_mini-Photoroom.png" alt="Adashima Chibi Floating">
         </a>
 
-        <div class="footer" id="footerContent">
+        <div class="footer">
             Fan site no oficial de Adachi to Shimamura.<br>
             Creado por fans, sin fines de lucro.<br>
             Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.
@@ -242,244 +226,6 @@
     </div>
 
     <script>
-    let currentLang = localStorage.getItem('lang') || 'es';
-    let isSwitching = false;
-    let translations = null;
-    let CHANNELS = [];
-
-    // Fallback translations with channels
-    const FALLBACK_TRANSLATIONS = {
-        es: {
-            pageTitle: "Adashima - Mini Anime",
-            headerTitle: "Mini Anime",
-            footer: "Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.",
-            floatingTitle: "¡Clickea para ir al mini-juego!",
-            noSignalText: "SIN SEÑAL",
-            channelIndicator: "CH",
-            loadingText: "Sintonizando canal...",
-            osdTitle: "YASHONY CHANNELS",
-            osdSubtitle: "SELECCIONAR EPISODIO",
-            osdFooter: "[ MENU ] PARA CERRAR",
-            powerLabel: "PWR",
-            menuLabel: "CH",
-            playLabel: "PLAY",
-            volumeLabel: "VOL",
-            brightnessLabel: "BRT",
-            downloadLabel: "Descargar",
-            downloadAllLabel: "Descargar todos",
-            downloadModalTitle: "Descargar todos los episodios",
-            downloadModalText: "Se iniciará la descarga de {count} episodios. ¿Quieres continuar?",
-            downloadModalCancel: "Cancelar",
-            downloadModalConfirm: "Continuar",
-            channelInfoDefaultTitle: "Selecciona un canal",
-            channelInfoDefaultDesc: "Enciende la televisión y elige un canal para comenzar a disfrutar los episodios de Mini Anime.",
-            channelInfoDefaultBadge: "— / —",
-            channels: []
-        },
-        en: {
-            pageTitle: "Adashima - Mini Anime",
-            headerTitle: "Mini Anime",
-            footer: "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
-            floatingTitle: "Click to go to the mini-game!",
-            noSignalText: "NO SIGNAL",
-            channelIndicator: "CH",
-            loadingText: "Tuning channel...",
-            osdTitle: "YASHONY CHANNELS",
-            osdSubtitle: "SELECT EPISODE",
-            osdFooter: "[ MENU ] TO CLOSE",
-            powerLabel: "PWR",
-            menuLabel: "CH",
-            playLabel: "PLAY",
-            volumeLabel: "VOL",
-            brightnessLabel: "BRT",
-            downloadLabel: "Download",
-            downloadAllLabel: "Download all",
-            downloadModalTitle: "Download all episodes",
-            downloadModalText: "Download will start for {count} episodes. Do you want to continue?",
-            downloadModalCancel: "Cancel",
-            downloadModalConfirm: "Continue",
-            channelInfoDefaultTitle: "Select a channel",
-            channelInfoDefaultDesc: "Turn on the TV and choose a channel to start enjoying the Mini Anime episodes.",
-            channelInfoDefaultBadge: "— / —",
-            channels: []
-        }
-    };
-
-    async function loadTranslations(lang) {
-        try {
-            const response = await fetch(`../data/mini_anime/${lang}.json?v=${Date.now()}`);
-            if (!response.ok) throw new Error('Failed to load translations');
-            const data = await response.json();
-            translations = data;
-            CHANNELS = data.channels || [];
-            return data;
-        } catch (e) {
-            console.warn('Failed to load translations, using fallback:', e);
-            translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
-            CHANNELS = translations.channels || [];
-            return translations;
-        }
-    }
-
-    function getText(key) {
-        if (!translations) return key;
-        const keys = key.split('.');
-        let value = translations;
-        for (const k of keys) {
-            if (value && typeof value === 'object' && k in value) {
-                value = value[k];
-            } else {
-                return key;
-            }
-        }
-        return value || key;
-    }
-
-    function updateLangDropdownLabel() {
-        const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
-        const labelEl = document.getElementById('langSelectedLabel');
-        if (selectedOption && labelEl) {
-            labelEl.textContent = selectedOption.getAttribute('data-label');
-            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('selected'));
-            selectedOption.classList.add('selected');
-        }
-    }
-
-    async function switchLanguage(lang) {
-        if (isSwitching || currentLang === lang) return;
-        isSwitching = true;
-
-        const langToggle = document.getElementById('langToggle');
-        if (langToggle) langToggle.disabled = true;
-
-        // If TV is on, turn it off before switching
-        if (state.powered) {
-            await powerOff();
-        }
-
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        document.documentElement.lang = lang;
-        updateLangDropdownLabel();
-
-        await loadTranslations(lang);
-        renderApp();
-
-        if (langToggle) langToggle.disabled = false;
-        isSwitching = false;
-    }
-
-    const langDropdown = document.getElementById('langDropdown');
-    const langToggle = document.getElementById('langToggle');
-
-    if (langDropdown && langToggle) {
-        langToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (langToggle.disabled) return;
-            const isOpen = langDropdown.classList.toggle('open');
-            langToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-
-        document.querySelectorAll('.lang-option').forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang');
-                langDropdown.classList.remove('open');
-                langToggle.setAttribute('aria-expanded', 'false');
-                switchLanguage(lang);
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (langDropdown.classList.contains('open') && !langDropdown.contains(e.target)) {
-                langDropdown.classList.remove('open');
-                langToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && langDropdown.classList.contains('open')) {
-                langDropdown.classList.remove('open');
-                langToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    }
-
-    function renderApp() {
-        // Update title
-        document.title = getText('pageTitle');
-        const headerTitle = document.querySelector('.update-title');
-        if (headerTitle) headerTitle.textContent = getText('headerTitle');
-
-        // Update footer
-        const footer = document.getElementById('footerContent');
-        if (footer) footer.innerHTML = getText('footer');
-
-        // Update floating link
-        const floatingLink = document.querySelector('.floating-adashima');
-        if (floatingLink) floatingLink.title = getText('floatingTitle');
-
-        // Update no signal text
-        const noSignalEl = document.getElementById('noSignalText');
-        if (noSignalEl) noSignalEl.textContent = getText('noSignalText');
-
-        // Update loading text
-        const loadingText = document.getElementById('loadingText');
-        if (loadingText) loadingText.textContent = getText('loadingText');
-
-        // Update OSD
-        const osdTitle = document.getElementById('osdTitle');
-        if (osdTitle) osdTitle.textContent = getText('osdTitle');
-        const osdSubtitle = document.getElementById('osdSubtitle');
-        if (osdSubtitle) osdSubtitle.textContent = getText('osdSubtitle');
-        const osdFooter = document.getElementById('osdFooter');
-        if (osdFooter) osdFooter.textContent = getText('osdFooter');
-
-        // Update control labels
-        const powerLabel = document.getElementById('powerLabel');
-        if (powerLabel) powerLabel.textContent = getText('powerLabel');
-        const menuLabel = document.getElementById('menuLabel');
-        if (menuLabel) menuLabel.textContent = getText('menuLabel');
-        const playLabel = document.getElementById('playLabel');
-        if (playLabel) playLabel.textContent = getText('playLabel');
-        const volLabel = document.getElementById('volLabel');
-        if (volLabel) volLabel.textContent = getText('volumeLabel');
-        const brtLabel = document.getElementById('brtLabel');
-        if (brtLabel) brtLabel.textContent = getText('brightnessLabel');
-        const volOsdLabel = document.getElementById('volOsdLabel');
-        if (volOsdLabel) volOsdLabel.textContent = getText('volumeLabel');
-        const brtOsdLabel = document.getElementById('brtOsdLabel');
-        if (brtOsdLabel) brtOsdLabel.textContent = getText('brightnessLabel');
-
-        // Update download labels
-        const downloadLabel = document.getElementById('downloadLabel');
-        if (downloadLabel) downloadLabel.textContent = getText('downloadLabel');
-        const downloadAllLabel = document.getElementById('downloadAllLabel');
-        if (downloadAllLabel) downloadAllLabel.textContent = getText('downloadAllLabel');
-        const downloadModalTitle = document.getElementById('downloadModalTitleText');
-        if (downloadModalTitle) downloadModalTitle.textContent = getText('downloadModalTitle');
-        const downloadModalCancel = document.getElementById('downloadModalCancel');
-        if (downloadModalCancel) downloadModalCancel.textContent = getText('downloadModalCancel');
-        const downloadModalConfirm = document.getElementById('downloadModalConfirm');
-        if (downloadModalConfirm) downloadModalConfirm.textContent = getText('downloadModalConfirm');
-
-        // Update channel info default text
-        const channelTitle = document.getElementById('channelTitle');
-        if (channelTitle && state.currentChannel < 0) {
-            channelTitle.textContent = getText('channelInfoDefaultTitle');
-        }
-        const channelDesc = document.getElementById('channelDesc');
-        if (channelDesc && state.currentChannel < 0) {
-            channelDesc.textContent = getText('channelInfoDefaultDesc');
-        }
-        const channelBadge = document.getElementById('channelBadge');
-        if (channelBadge && state.currentChannel < 0) {
-            channelBadge.textContent = getText('channelInfoDefaultBadge');
-        }
-
-        // Rebuild OSD menu with channels from JSON
-        buildOsdMenu();
-    }
-
     async function forceDownload(url, fileName) {
         try {
             const response = await fetch(url);
@@ -500,7 +246,20 @@
         }
     }
 
-    // CHANNELS is now loaded from JSON
+    const CHANNELS = [];
+    for (let i = 1; i <= 30; i++) {
+        CHANNELS.push({
+            id: i - 1,
+            label: `CH ${i}`,
+            src: `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/adashima%20chibi%20${i}%20subs.mp4`,
+            downloadSrc: `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/adashima%20chibi%20${i}%20subs.mp4`,
+            download: `adashima chibi ${i} subs.mp4`,
+            title: `Adashima Chibi — Episodio ${i}`,
+            desc: `Disfruta del mini episodio ${i} protagonizado por las versiones chibi de Adachi y Shimamura.`,
+            badge: `Canal ${i} · Mini Anime`,
+            sub: `EPISODIO ${i}`
+        });
+    }
 
     const state = {
         powered: false,
@@ -561,6 +320,7 @@
             osdChannelList.appendChild(item);
         });
     }
+    buildOsdMenu();
 
     function updateOsdActiveChannel() {
         osdChannelList.querySelectorAll('.osd-ch-item').forEach((el, i) => {
@@ -651,7 +411,7 @@
         noSignal.style.opacity = '0';
         await wait(300);
         noSignal.classList.remove('off-state');
-        noSignalText.textContent = getText('noSignalText');
+        noSignalText.textContent = 'SIN SEÑAL';
         noSignal.style.opacity = '0';
         setStaticIntensity(0.6);
         await wait(400);
@@ -731,10 +491,9 @@
             noSignal.style.display = 'none';
         }
         loadingInd.classList.add('show');
-        const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(ch.file)}`;
-        if (crtVideo.src !== new URL(videoUrl, location.href).href) {
+        if (crtVideo.src !== new URL(ch.src, location.href).href) {
             crtVideo.pause();
-            crtVideo.src = videoUrl;
+            crtVideo.src = ch.src;
             crtVideo.load();
         }
         crtVideo.style.opacity = '1';
@@ -750,7 +509,7 @@
         await wait(100);
         crtVideo.classList.remove('channel-switching');
         setStaticIntensity(0.06);
-        downloadLabel.textContent = getText('downloadLabel');
+        downloadLabel.textContent = 'Descargar';
         updateInfoCard(ch);
         updateOsdActiveChannel();
         state.currentChannel = index;
@@ -762,9 +521,9 @@
     function updateInfoCard(ch) {
         const icon = document.querySelector('.channel-info-icon i');
         if (!ch) {
-            channelTitle.textContent = getText('channelInfoDefaultTitle');
-            channelDesc.textContent = getText('channelInfoDefaultDesc');
-            channelBadge.textContent = getText('channelInfoDefaultBadge');
+            channelTitle.textContent = 'Selecciona un canal';
+            channelDesc.textContent = 'Enciende la televisión, presiona MENU y elige un canal para comenzar a disfrutar los episodios de Mini Anime.';
+            channelBadge.textContent = '— / —';
             icon.className = 'fas fa-tv';
             return;
         }
@@ -802,17 +561,15 @@
 
     async function downloadAllEpisodes() {
         if (!CHANNELS.length) return;
-        const message = getText('downloadModalText').replace('{count}', CHANNELS.length);
-        const confirmed = await showDownloadModal(message);
+        const confirmed = await showDownloadModal(`Se iniciará la descarga de ${CHANNELS.length} episodios. ¿Quieres continuar?`);
         if (!confirmed) return;
         const originalHtml = downloadAllBtn.innerHTML;
         downloadAllBtn.disabled = true;
         try {
             for (let i = 0; i < CHANNELS.length; i++) {
                 const ch = CHANNELS[i];
-                downloadAllBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i><span>${getText('downloadLabel')} ${i + 1}/${CHANNELS.length}</span>`;
-                const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(ch.file)}`;
-                await forceDownload(videoUrl, ch.file);
+                downloadAllBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i><span>Descargando ${i + 1}/${CHANNELS.length}</span>`;
+                await forceDownload(ch.downloadSrc || ch.src, ch.download || `${ch.label}.mp4`);
             }
         } finally {
             downloadAllBtn.disabled = false;
@@ -955,7 +712,7 @@
     downloadAllBtn.addEventListener('click', downloadAllEpisodes);
     fullscreenBtn.addEventListener('click', toggleFullscreen);
 
-    const osdOriginalParent = crtScreen; 
+    const osdOriginalParent = crtScreen;
 
     function isMobile() { return window.innerWidth <= 768; }
 
@@ -986,8 +743,7 @@
             const ch = CHANNELS[state.currentChannel];
             const icon = downloadBtn.querySelector('i');
             icon.className = 'fas fa-spinner fa-spin';
-            const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(ch.file)}`;
-            forceDownload(videoUrl, ch.file).finally(() => { icon.className = 'fas fa-download'; });
+            forceDownload(ch.downloadSrc || ch.src, ch.download || `${ch.label}.mp4`).finally(() => { icon.className = 'fas fa-download'; });
         }
     });
 
@@ -1023,9 +779,6 @@
                     newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
-                if (window.translateMenu) {
-                    window.translateMenu(currentLang);
-                }
             })
             .catch(error => {
                 console.error('Error cargando menu.html:', error.message);
@@ -1037,17 +790,6 @@
             navigator.serviceWorker.register('./sw.js').catch(err => console.error('Error al registrar el Service Worker', err));
         });
     }
-
-    document.addEventListener('DOMContentLoaded', async function() {
-        await loadTranslations(currentLang);
-        updateLangDropdownLabel();
-        renderApp();
-    });
-
-    // Expose functions globally
-    window.switchChannel = switchChannel;
-    window.powerOn = powerOn;
-    window.powerOff = powerOff;
     </script>
 
 </body>

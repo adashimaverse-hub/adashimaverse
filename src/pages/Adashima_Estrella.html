@@ -621,15 +621,7 @@ async function switchLanguage(lang) {
     try {
         currentLang = lang;
         localStorage.setItem('lang', lang);
-        document.documentElement.lang = lang;
-        updateLangDropdownLabel();
-
-        await loadAllData(lang);
-        renderUI();
-        buildConstellationPanel();
-        updateProgress();
-        await translateMenuContent(lang);
-        refreshUnlockedLocalizedContent();
+        window.location.reload();
     } finally {
         if (langToggle) langToggle.disabled = false;
         isSwitching = false;
@@ -719,7 +711,7 @@ function init() {
     drawLoop();
 }
 
-//mov
+
 function restoreProgress() {
     
     const saved = loadProgress();
@@ -774,7 +766,7 @@ function restoreProgress() {
         });
     });
 }
-//mov
+
 function resizeCanvas() {
     const rect = canvas.parentElement.getBoundingClientRect();
     canvas.width = rect.width || window.innerWidth;
