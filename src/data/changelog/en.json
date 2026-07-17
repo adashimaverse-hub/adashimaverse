@@ -1,5 +1,32 @@
 [
   {
+    "version": "2.1.0",
+    "build": "20260717",
+    "date": "July 17, 2026",
+    "subtitle": "Anime & Music Expansion",
+    "changes": {
+      "new": [
+        "Added a dedicated Music page featuring official soundtrack releases and related music.",
+        "Added the first three official Adachi to Shimamura OST albums to the music archive.",
+        "Expanded the English Manga section by adding Volumes 1 through 9.",
+        "Unified the Mini Anime and Anime sections into a single, comprehensive Anime page."
+      ],
+      "improvements": [
+        "Completely redesigned the Anime page with a cleaner layout, improved navigation, and better content organization.",
+        "Refactored the Anime section internally for easier maintenance and future content updates.",
+        "Enhanced the overall UI/UX of the Anime page with improved spacing, typography, and visual hierarchy.",
+        "Improved the built-in PDF reader with a smoother reading experience and better usability."
+      ],
+      "fixes": [
+        "Fixed untranslated interface elements that remained in the English Manga section.",
+        "Resolved various localization inconsistencies across manga-related pages."
+      ],
+      "notes": [
+        "This update expands the archive with dedicated music content, significantly improves the Anime section through a complete redesign and consolidation, and continues expanding the English manga collection."
+      ]
+    }
+  },
+  {
     "version": "2.0.0",
     "build": "20260712",
     "date": "July 12, 2026",

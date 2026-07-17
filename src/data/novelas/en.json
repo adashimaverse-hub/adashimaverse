@@ -7,6 +7,32 @@
   "viewList": "List",
   "viewGrid": "Grid",
   "readButton": "Read",
+  "noResults": "No results found",
+  
+  "chapterLabels": {
+    "chapter": "Chapter",
+    "volume": "Volume"
+  },
+  
+  "modal": {
+    "reading": "Reading:",
+    "closeReader": "Close reader"
+  },
+  
+  "pdfControls": {
+      "zoomOut": "Zoom out (-)",
+      "zoomIn": "Zoom in (+)",
+      "zoomReset": "Reset zoom (0)",
+      "prevPage": "Previous page (←)",
+      "nextPage": "Next page (→)",
+      "page": "Pg.",
+      "goTo": "Go to page",
+      "fullscreen": "Fullscreen (F)",
+      "downloadPDF": "Download PDF",
+      "thumbnails": "Thumbnails",
+      "loadingDocument": "Loading document..."
+  },
+  
   "toastMessages": {
     "fileNotAvailable": "File not available.",
     "documentNotAvailable": "Document not available.",
@@ -14,21 +40,12 @@
     "errorOnPage": "Error on pg.",
     "retry": "Retry"
   },
-  "pdfControls": {
-    "zoomOut": "Zoom out (-)",
-    "zoomIn": "Zoom in (+)",
-    "zoomReset": "Reset zoom (0)",
-    "prevPage": "Previous page (←)",
-    "nextPage": "Next page (→)",
-    "page": "Pg.",
-    "goTo": "Go to",
-    "fullscreen": "Fullscreen (F)",
-    "downloadPDF": "Download PDF"
+  
+  "generalDownloads": {
+    "pdf": "Download PDF Full",
+    "epub": "Download EPUB Full"
   },
-  "modal": {
-    "reading": "Reading: ",
-    "closeReader": "Close reader"
-  },
+  
   "volumes": [
     {
       "id": "1",
@@ -220,9 +237,5 @@
       "translator": null,
       "isExtra": true
     }
-  ],
-  "generalDownloads": {
-    "pdf": "Download PDF Full",
-    "epub": "Download EPUB Full"
-  }
+  ]
 }

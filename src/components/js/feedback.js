@@ -1,5 +1,3 @@
-// src/components/feedback.js
-
 import { FEEDBACK_CONFIG } from '../config/feedback-config.js';
 
 class FeedbackManager {

@@ -3,16 +3,21 @@
     "title": "Adachi to Shimamura"
   },
   "hero": {
-    "subtitle": "A story of encounters, stars, and the warmth of an eternal summer."
+    "subtitle": "A story of chance encounters, quiet moments, and a bond that reaches beyond the stars."
   },
   "info": {
     "title": "What is Adachi to Shimamura?",
     "subtitle": "For first-time visitors",
-    "chips": ["Hitoma Iruma", "Yuri · Slice of Life", "Since 2013", "Dengeki Bunko"],
+    "chips": [
+      "Hitoma Iruma",
+      "Yuri · Slice of Life",
+      "Since 2013",
+      "Dengeki Bunko"
+    ],
     "paragraphs": [
-      "<strong>Adachi to Shimamura</strong> is a Japanese light novel written by <strong>Hitoma Iruma</strong> and illustrated by <strong>Non</strong>. The story follows the relationship between two high school girls: <strong>Adachi</strong>, a loner who prefers spending time in the gymnasium, and <strong>Shimamura</strong>, a carefree girl who often skips class.",
-      "Their friendship begins on the second floor of the gymnasium, where they meet by chance. Gradually, what starts as a superficial connection becomes something deeper, tender, and more complex.",
-      "The series has been adapted into manga, anime, and multiple CD dramas, earning a special place in readers' hearts for its delicate exploration of intimacy, loneliness, and first love."
+      "<strong>Adachi to Shimamura</strong> is a Japanese light novel series written by <strong>Hitoma Iruma</strong> and illustrated by <strong>Non</strong>. It tells the story of two high school girls whose chance meeting blossoms into one of the most beloved slow-burn romances in modern light novels.",
+      "Their relationship begins on the second floor of the school gymnasium, where <strong>Adachi</strong>, a reserved loner, and <strong>Shimamura</strong>, a carefree truant, spend their afternoons skipping class together. What starts as a casual friendship gradually develops into an intimate journey of self-discovery, affection, and learning how to understand another person.",
+      "Celebrated for its introspective prose, subtle character development, and gentle atmosphere, the series has inspired multiple manga adaptations, an anime, and several drama CDs. More than a romance, it is a coming-of-age story about loneliness, connection, and the quiet moments that shape a lifetime."
     ]
   },
   "nav": {
@@ -20,79 +25,79 @@
       {
         "key": "timeline",
         "title": "Timeline",
-        "desc": "Follow the key moments",
+        "desc": "Journey through every moment",
         "icon": "fa-clock",
-        "tooltip": "Follow the story through the school years."
+        "tooltip": "Explore the complete chronology, from the girls' first meeting to the far future."
       },
       {
         "key": "novels",
         "title": "Light Novels",
-        "desc": "Immerse in the story",
+        "desc": "The original story",
         "icon": "fa-book",
-        "tooltip": "Read the complete light novels."
+        "tooltip": "Browse every light novel volume, side story, special edition, and bonus chapter."
       },
       {
         "key": "manga",
         "title": "Manga",
-        "desc": "The illustrated adaptation",
+        "desc": "A visual retelling",
         "icon": "fa-pencil-alt",
-        "tooltip": "Explore the Adachi to Shimamura manga."
+        "tooltip": "Discover every manga adaptation and see the story brought to life through illustration."
       },
       {
         "key": "extraStories",
         "title": "Extra Stories",
-        "desc": "Additional content",
+        "desc": "Beyond the main volumes",
         "icon": "fa-star",
-        "tooltip": "Extra stories and special chapters."
+        "tooltip": "Read exclusive short stories, bonus content, special chapters, and promotional extras."
       },
       {
         "key": "drama",
         "title": "CD Dramas",
-        "desc": "Voices and music",
+        "desc": "Hear the story unfold",
         "icon": "fa-headphones",
-        "tooltip": "Listen to the CD dramas."
+        "tooltip": "Experience the official drama CDs featuring the voices of Adachi, Shimamura, and the rest of the cast."
       },
       {
-        "key": "miniAnime",
-        "title": "Mini Anime",
-        "desc": "Animated episodes",
-        "icon": "fa-film",
-        "tooltip": "Enjoy the Mini Anime."
+        "key": "music",
+        "title": "OST · Music",
+        "desc": "The sound of Adashima",
+        "icon": "fa-music",
+        "tooltip": "Listen to the anime soundtrack, opening and ending themes, character songs, and other official music."
       },
       {
         "key": "constellation",
         "title": "Constellation",
-        "desc": "Discover secrets",
+        "desc": "Find every hidden star",
         "icon": "fa-star-and-crescent",
-        "tooltip": "Form constellations and unlock stories."
+        "tooltip": "Discover hidden secrets across the site by forming constellations and unlocking exclusive content."
       },
       {
         "key": "anime",
         "title": "Anime",
-        "desc": "The animated series",
+        "desc": "Watch the story come alive",
         "icon": "fa-tv",
-        "tooltip": "Watch the Adachi to Shimamura anime."
+        "tooltip": "Explore the anime adaptation, episode guides, production details, staff, and voice cast."
       },
       {
         "key": "others",
         "title": "Others",
-        "desc": "Varied content",
+        "desc": "Everything else worth discovering",
         "icon": "fa-ellipsis-h",
-        "tooltip": "Interviews, guides and more."
+        "tooltip": "Browse interviews, official artwork, event reports, merchandise, guides, FAQs, and more."
       },
       {
         "key": "stats",
         "title": "Stats for Nerds",
-        "desc": "Data and figures",
+        "desc": "Every detail, documented",
         "icon": "fa-chart-bar",
-        "tooltip": "Spreadsheets, graphs, and data dumps for the truly devoted."
+        "tooltip": "Dive into timelines, spreadsheets, character statistics, graphs, release data, and obsessive analyses."
       },
       {
         "key": "about",
         "title": "About",
-        "desc": "Credits and community",
+        "desc": "Behind the project",
         "icon": "fa-info-circle",
-        "tooltip": "Learn about the project, translation credits, and version history."
+        "tooltip": "Learn about the site's mission, contributors, translation credits, acknowledgements, and version history."
       }
     ]
   },
@@ -100,25 +105,25 @@
     "lastUpdate": "Latest Update",
     "volNum": "Volume 13",
     "date": "November 2025",
-    "status": "Full translation",
+    "status": "Full Translation",
     "nextLabel": "Next Release",
-    "nextBadge": "New",
+    "nextBadge": "Upcoming",
     "nextVol": "Adachi to Shimamura SS3",
     "nextDate": "September 10, 2026",
-    "nextStatus": "TBA"
+    "nextStatus": "To Be Announced"
   },
   "news": {
-    "text": "Welcome to Adashima Latinoamérica!<br>We are working on new translations and content for you.",
-    "hint": "Click on me for more news",
-    "tooltip": "News!"
+    "text": "Welcome to Adashima Latinoamérica!<br>We're continuously adding new translations, guides, media, and community resources.",
+    "hint": "Click to read the latest updates",
+    "tooltip": "Latest News"
   },
-  "footer": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
+  "footer": "An unofficial, non-profit fan site dedicated to <strong>Adachi to Shimamura</strong>.<br>Created by fans, for fans.<br>All rights to Adachi to Shimamura belong to Hitoma Iruma, Non, ASCII Media Works, Kadokawa, and their respective copyright holders.",
   "langLabel": "English",
   "feedback": {
     "title": "Send Feedback",
-    "subtitle": "Found a bug, typo, missing content, or have a suggestion? We'd love to hear from you.",
+    "subtitle": "Found a typo, broken link, missing content, translation issue, or have an idea to improve the site? We'd love to hear from you.",
     "typeLabel": "Feedback Type",
-    "typePlaceholder": "Select a type...",
+    "typePlaceholder": "Choose a category...",
     "typeBug": "Bug Report",
     "typeTranslation": "Translation Correction",
     "typeMissing": "Missing Content",
@@ -126,16 +131,16 @@
     "typeFeature": "Feature Request",
     "typeGeneral": "General Feedback",
     "titleLabel": "Title",
-    "titlePlaceholder": "Brief summary of your feedback",
+    "titlePlaceholder": "Briefly summarize your feedback",
     "descLabel": "Description",
-    "descPlaceholder": "Please provide details about your feedback...",
+    "descPlaceholder": "Provide as much detail as possible to help us understand your report or suggestion.",
     "emailLabel": "Email",
-    "emailHint": "We'll only use this to follow up if needed.",
+    "emailHint": "Optional. We'll only use it if we need to follow up regarding your submission.",
     "cancel": "Cancel",
     "submit": "Send Feedback",
     "sending": "Sending...",
     "successTitle": "Thank You!",
-    "successText": "Your feedback has been sent successfully.",
+    "successText": "Your feedback has been sent successfully. We appreciate your help in making the site better.",
     "footerBtn": "Send Feedback"
   }
 }

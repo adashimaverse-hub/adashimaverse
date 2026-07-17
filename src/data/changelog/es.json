@@ -1,116 +1,143 @@
 [
   {
-    "version": "2.0.0",
-    "build": "20260712",
-    "date": "12 de julio de 2026",
-    "subtitle": "Rediseño del Lector y la Página Principal",
+    "version": "2.1.0",
+    "build": "20260717",
+    "date": "July 17, 2026",
+    "subtitle": "Anime & Music Expansion",
     "changes": {
       "new": [
-        "Se añadió una experiencia de lectura totalmente personalizable inspirada en los lectores de libros electrónicos modernos.",
-        "Se añadieron los temas de lectura Claro, Sepia y Oscuro.",
-        "Se añadieron opciones para ajustar el tamaño de fuente, la familia tipográfica, el interlineado y el ancho de lectura.",
-        "Se añadieron preferencias de lectura persistentes mediante almacenamiento local (localStorage).",
-        "Se añadió un panel de configuración del lector accesible directamente desde la vista de lectura.",
-        "Se añadió un nuevo panel desplegable «¿Qué es Adachi to Shimamura?» para los visitantes que llegan por primera vez.",
-        "Se añadieron etiquetas informativas de la serie, incluyendo autor, género, año de publicación y editorial.",
-        "Se añadió una página dedicada a las Historias Extra con historias adicionales, capítulos especiales y contenido complementario.",
-        "Se añadieron 41 Historias Extra completamente traducidas al inglés.",
-        "Se añadió soporte para el envío de comentarios por parte de los usuarios."
+        "Added a dedicated Music page featuring official soundtrack releases and related music.",
+        "Added the first three official Adachi to Shimamura OST albums to the music archive.",
+        "Expanded the English Manga section by adding Volumes 1 through 9.",
+        "Unified the Mini Anime and Anime sections into a single, comprehensive Anime page."
       ],
       "improvements": [
-        "Se rediseñó la página principal manteniendo la estética soñadora original.",
-        "Se mejoró la jerarquía visual con una mejor distribución del espacio y un equilibrio más claro entre secciones.",
-        "Se refinó el efecto glassmorphism con bordes, sombras y transparencias más suaves.",
-        "Se rediseñaron las tarjetas de navegación con mejor tipografía, espaciado e interacciones al pasar el cursor.",
-        "Se mejoró la tipografía en todo el sitio para ofrecer una experiencia de lectura más cómoda.",
-        "Se refinó la sección principal para destacar mejor la ilustración de la bicicleta.",
-        "Se mejoraron las tarjetas de actualizaciones con una jerarquía visual y una presentación de información más claras.",
-        "Se reemplazó la sección «Sobre este sitio» por una introducción dedicada a la serie.",
-        "Se mejoró el selector de idioma con interacciones y un diseño más pulidos.",
-        "Se mejoraron los efectos de fondo, incluyendo nubes, estrellas, elementos flotantes y animaciones.",
-        "Se mejoraron los efectos al pasar el cursor y las microinteracciones en toda la interfaz.",
-        "Se incrementó el espaciado y la consistencia entre las distintas secciones del sitio.",
-        "Se unificaron los radios de borde, sombras, transiciones y espaciados para lograr un diseño más coherente.",
-        "Se optimizó la experiencia de lectura para computadoras, tabletas y dispositivos móviles.",
-        "Se mejoró la organización y accesibilidad del contenido adicional mediante el nuevo archivo de Historias Extra."
+        "Completely redesigned the Anime page with a cleaner layout, improved navigation, and better content organization.",
+        "Refactored the Anime section internally for easier maintenance and future content updates.",
+        "Enhanced the overall UI/UX of the Anime page with improved spacing, typography, and visual hierarchy.",
+        "Improved the built-in PDF reader with a smoother reading experience and better usability."
       ],
       "fixes": [
-        "Se corrigieron inconsistencias de espaciado en varios componentes de la página principal.",
-        "Se corrigieron problemas de alineación en tarjetas y elementos interactivos.",
-        "Se corrigieron inconsistencias tipográficas en distintas secciones del sitio.",
-        "Se corrigieron diferencias visuales entre los distintos paneles de cristal.",
-        "Se mejoró la adaptabilidad en distintos tamaños de pantalla."
+        "Fixed untranslated interface elements that remained in the English Manga section.",
+        "Resolved various localization inconsistencies across manga-related pages."
       ],
       "notes": [
-        "Esta actualización representa la mayor renovación visual del sitio desde su lanzamiento, incorporando una experiencia de lectura significativamente mejorada, una página principal rediseñada y un archivo dedicado de Historias Extra con 41 historias traducidas al inglés."
+        "This update expands the archive with dedicated music content, significantly improves the Anime section through a complete redesign and consolidation, and continues expanding the English manga collection."
+      ]
+    }
+  },
+  {
+    "version": "2.0.0",
+    "build": "20260712",
+    "date": "July 12, 2026",
+    "subtitle": "Reader & Homepage Redesign",
+    "changes": {
+      "new": [
+        "Added a fully customizable reading experience inspired by modern e-book readers.",
+        "Added Light, Sepia, and Dark reading themes.",
+        "Added adjustable font size, font family, line spacing, and reading width settings.",
+        "Added persistent reader preferences using local storage.",
+        "Added a redesigned reader settings panel accessible directly from the reading view.",
+        "Added a new 'What is Adachi to Shimamura?' expandable information panel for first-time visitors.",
+        "Added informative series tags including the author, genre, publication year, and publisher.",
+        "Added a dedicated Extra Stories page featuring bonus stories, special chapters, and supplementary content.",
+        "Added 41 fully translated English Extra Stories.",
+        "Added support for user feedback submissions."
+      ],
+      "improvements": [
+        "Redesigned the homepage while preserving the original dreamy aesthetic.",
+        "Improved the overall visual hierarchy with better spacing and section balance.",
+        "Refined the glassmorphism throughout the site with softer borders, shadows, and transparency.",
+        "Redesigned the navigation cards with improved typography, spacing, and hover interactions.",
+        "Improved typography across the website with a stronger emphasis on readability.",
+        "Refined the hero section to better showcase the bicycle illustration.",
+        "Enhanced release cards with improved layouts and clearer information hierarchy.",
+        "Replaced the previous About This Site section with a dedicated introduction to the series.",
+        "Improved the language selector with cleaner interactions and visual polish.",
+        "Enhanced background effects including clouds, stars, floating elements, and animations.",
+        "Improved button hover states and microinteractions throughout the interface.",
+        "Increased spacing and consistency across all major sections.",
+        "Standardized border radii, shadows, transitions, and component spacing for a more cohesive design.",
+        "Optimized the reading experience for desktop, tablet, and mobile devices.",
+        "Improved the organization and discoverability of bonus content through the new Extra Stories archive."
+      ],
+      "fixes": [
+        "Fixed inconsistent spacing across multiple homepage components.",
+        "Fixed various alignment inconsistencies in cards and interactive elements.",
+        "Fixed typography inconsistencies throughout the site.",
+        "Fixed visual inconsistencies between different glass panels.",
+        "Improved responsiveness across a variety of screen sizes."
+      ],
+      "notes": [
+        "This update delivers the largest visual refresh since launch, introducing a significantly improved reading experience, a redesigned homepage, and a dedicated Extra Stories archive containing 41 English-translated bonus stories."
       ]
     }
   },
   {
     "version": "1.4.0",
     "build": "20260710",
-    "date": "10 de julio de 2026",
-    "subtitle": "Actualización de Estadísticas y Acerca de",
+    "date": "July 10, 2026",
+    "subtitle": "Statistics & About Update",
     "changes": {
       "new": [
-        "Se añadió la página Estadísticas para Nerds con gráficos y visualizaciones interactivas.",
-        "Se añadió una página dedicada Acerca de con información del proyecto, créditos de traducción, avisos legales, historial de versiones y recursos de apoyo.",
-        "Se añadió una sección Apoya la Obra Original con enlaces oficiales a la novela ligera, el manga, el autor y otros recursos relacionados.",
-        "Se añadió una sección Sigue la Serie con enlaces a plataformas como MyAnimeList, AniList, MangaUpdates, Anime-Planet y Kitsu."
+        "Added the Stats for Nerds page with interactive charts and visualizations.",
+        "Added a dedicated About page featuring project information, translation credits, legal notices, version history, and support resources.",
+        "Added a Support the Original Work section with official links for the light novel, manga, author, and related resources.",
+        "Added a Track section with links to popular tracking platforms such as MyAnimeList, AniList, MangaUpdates, Anime-Planet, and Kitsu."
       ],
       "improvements": [
-        "Se amplió el sitio web con nuevos recursos de referencia.",
-        "Se mejoró la navegación y la presentación general del sitio.",
-        "Se reorganizó la página Acerca de colocando la sección Apoya la Obra Original antes del Aviso Legal.",
-        "Se mejoró la consistencia de las secciones Apoya y Sigue la Serie con botones y diseños unificados."
+        "Expanded the website with additional reference resources.",
+        "Improved overall navigation and presentation across the site.",
+        "Reorganized the About page by placing the Support the Original Work section before the Legal Notice section.",
+        "Improved the consistency of the Support and Track sections with unified button styles and layouts."
       ],
       "fixes": [
-        "Se corrigieron los iconos que no se mostraban correctamente en la sección Apoya la Obra Original.",
-        "Se corrigieron los iconos de marca en los botones de Apoya y Sigue la Serie para una mayor consistencia visual."
+        "Fixed icons that were not displaying correctly in the Support the Original Work section.",
+        "Fixed branding icons across Support and Track buttons for better visual consistency."
       ],
       "notes": [
-        "Esta actualización se centra en ampliar el archivo con nuevas páginas informativas y mejorar la experiencia general del usuario."
+        "This update focuses on expanding the archive with informational pages and improving the overall user experience."
       ]
     }
   },
   {
     "version": "1.3.0",
     "build": "20260709",
-    "date": "9 de julio de 2026",
-    "subtitle": "Renovación de la Interfaz y Localización",
+    "date": "July 9, 2026",
+    "subtitle": "UI/UX & Localization Overhaul",
     "changes": {
       "new": [
-        "Se añadieron vistas en lista y cuadrícula para las páginas de Novelas Ligeras y Manga.",
-        "Se añadió una barra de búsqueda para facilitar la navegación del contenido.",
-        "Se introdujo una interfaz de lectura mejorada."
+        "Added list and grid view options for the Light Novels and Manga pages.",
+        "Added a search bar for faster content discovery.",
+        "Introduced an improved reading interface."
       ],
       "improvements": [
-        "Se reorganizó aún más la estructura del proyecto para facilitar su mantenimiento.",
-        "Se separaron los datos de las páginas en archivos JSON para simplificar su gestión.",
-        "Se mejoró la lógica de cambio de idioma y localización entre inglés y español.",
-        "Se mejoró la interfaz y experiencia de usuario de las secciones de Novelas Ligeras y Manga."
+        "Further reorganized the project structure for improved maintainability.",
+        "Separated page data into JSON files for easier management.",
+        "Improved English ↔ Spanish language switching and localization logic.",
+        "Enhanced the UI/UX of the Light Novels and Manga sections."
       ],
       "fixes": [],
       "notes": [
-        "Esta versión sienta las bases para futuras actualizaciones de contenido y mejoras en la localización."
+        "This release lays the foundation for easier future content updates and localization."
       ]
     }
   },
   {
     "version": "1.2.0",
     "build": "20260708",
-    "date": "8 de julio de 2026",
-    "subtitle": "Refactorización de la Estructura del Proyecto",
+    "date": "July 8, 2026",
+    "subtitle": "Project Structure Refactor",
     "changes": {
       "new": [],
       "improvements": [
-        "Se reorganizó la estructura de archivos del proyecto siguiendo una mejor separación de responsabilidades.",
-        "Se movieron los estilos CSS incrustados a archivos de estilos dedicados.",
-        "Se mejoró la organización y el mantenimiento del proyecto."
+        "Reorganized the project's file structure following better separation of concerns.",
+        "Moved embedded CSS into dedicated stylesheet files.",
+        "Improved project organization and maintainability."
       ],
       "fixes": [],
       "notes": [
-        "Refactorización interna sin cambios importantes visibles para el usuario."
+        "Internal refactor with no major user-facing changes."
       ]
     }
   }

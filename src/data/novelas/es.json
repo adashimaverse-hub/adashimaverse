@@ -7,6 +7,26 @@
   "viewList": "Lista",
   "viewGrid": "Cuadrícula",
   "readButton": "Leer",
+  
+  "chapterLabels": {
+    "chapter": "Capítulo",
+    "volume": "Volumen"
+  },
+  
+  "pdfControls": {
+      "zoomOut": "Alejar (-)",
+      "zoomIn": "Acercar (+)",
+      "zoomReset": "Restablecer zoom (0)",
+      "prevPage": "Página anterior (←)",
+      "nextPage": "Página siguiente (→)",
+      "page": "Pág.",
+      "goTo": "Ir a página",
+      "fullscreen": "Pantalla completa (F)",
+      "downloadPDF": "Descargar PDF",
+      "thumbnails": "Miniaturas",
+      "loadingDocument": "Cargando documento..."
+  },
+  
   "toastMessages": {
     "fileNotAvailable": "Archivo no disponible.",
     "documentNotAvailable": "Documento no disponible.",
@@ -14,21 +34,7 @@
     "errorOnPage": "Error en pág.",
     "retry": "Reintentar"
   },
-  "pdfControls": {
-    "zoomOut": "Alejar (-)",
-    "zoomIn": "Acercar (+)",
-    "zoomReset": "Restablecer zoom (0)",
-    "prevPage": "Página anterior (←)",
-    "nextPage": "Página siguiente (→)",
-    "page": "Pág.",
-    "goTo": "Ir a",
-    "fullscreen": "Pantalla completa (F)",
-    "downloadPDF": "Descargar PDF"
-  },
-  "modal": {
-    "reading": "Leyendo: ",
-    "closeReader": "Cerrar lector"
-  },
+  
   "volumes": [
     {
       "id": "1",
