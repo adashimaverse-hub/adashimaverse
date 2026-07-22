@@ -14,8 +14,41 @@
   <link rel="stylesheet" href="../css/anime.css">
   <link rel="stylesheet" href="../css/lang-switch.css">
   <link rel="stylesheet" href="./src/components/styles/scrollbar.css" />
+  <link rel="stylesheet" href="../components/styles/menu.css">
+  <style>
+    @media (min-width: 901px) {
+      #menu-component-wrapper .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+      }
+      .main-content {
+        margin-left: 300px;
+        width: calc(100% - 300px);
+      }
+    }
+    @media (max-width: 900px) {
+      #menu-component-wrapper .mobile-toggle {
+        left: 15px !important;
+        right: auto !important;
+      }
+      #menu-component-wrapper .sidebar {
+        left: 0 !important;
+        right: auto !important;
+        transform: translateX(-110%) !important;
+        border-radius: 0 30px 30px 0 !important;
+        border-right: none !important;
+      }
+      #menu-component-wrapper .sidebar.active {
+        transform: translateX(0) !important;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <div id="sidebar-container" style="display: contents;"></div>
 
   <!-- PARTICLES -->
   <div class="particles" id="particles"></div>
@@ -285,7 +318,7 @@
                 <div class="ctrl-separator"></div>
 
                 <div class="btn-labeled">
-                  <button class="menu-btn physical-btn" id="menuBtn" title="Menú de canales" disabled aria-label="Menú de canales">
+                  <button class="tv-menu-btn physical-btn" id="menuBtn" title="Menú de canales" disabled aria-label="Menú de canales">
                     <span class="iconify" data-icon="mdi:view-list" data-inline="false"></span>
                   </button>
                   <span class="btn-label-text">CHANNEL</span>
@@ -762,7 +795,7 @@
 
       if (miniData && miniData.channels && currentLang === 'es') {
         miniData.channels.forEach((ch, index) => {
-          const exists = channels.some(c => c.id === ch.id || c.label === ch.label);
+          const exists = channels.some(c => c.season === 'mini' && (c.file === ch.file || (c.label === ch.label && c.title === ch.title)));
           if (!exists) {
             const fileName = ch.file || `adashima chibi ${index + 1} subs.mp4`;
             const videoUrl = `https://media.adashimaverse.com/Mini%20Anime%20sub%20espa/${encodeURIComponent(fileName)}`;
@@ -1926,24 +1959,30 @@
     }
 
     // ===== DOWNLOAD =====
-    async function forceDownload(url, fileName) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
-        const blob = await response.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = blobUrl;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(blobUrl);
-        document.body.removeChild(a);
-      } catch (error) {
-        console.error('Error forzando la descarga:', error);
-        window.open(url, '_blank');
+    async function forceDownload(url, fileName, onProgress) {
+      const response = await fetch(url);
+      if (!response.ok || !response.body) throw new Error('Network response was not ok');
+      const total = Number(response.headers.get('Content-Length')) || 0;
+      const reader = response.body.getReader();
+      const chunks = [];
+      let received = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        received += value.length;
+        if (onProgress) onProgress(total ? Math.round((received / total) * 100) : null);
       }
+      const blob = new Blob(chunks);
+      const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = blobUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(a);
     }
 
     function showDownloadModal(message) {
@@ -1982,8 +2021,12 @@
       try {
         for (let i = 0; i < CHANNELS.length; i++) {
           const ch = CHANNELS[i];
-          downloadAllBtn.innerHTML = `<span class="iconify" data-icon="mdi:loading" data-inline="false" style="animation:spin 1s linear infinite;"></span><span>${currentLang === 'es' ? 'Descargando' : 'Downloading'} ${i+1}/${CHANNELS.length}</span>`;
-          await forceDownload(ch.downloadSrc || ch.src, ch.download || `${ch.label || 'episode'}.mp4`);
+          const setLabel = (pct) => {
+            const pctText = pct !== null && pct !== undefined ? ` ${pct}%` : '';
+            downloadAllBtn.innerHTML = `<span class="iconify" data-icon="mdi:loading" data-inline="false" style="animation:spin 1s linear infinite;"></span><span>${currentLang === 'es' ? 'Descargando' : 'Downloading'} ${i+1}/${CHANNELS.length}${pctText}</span>`;
+          };
+          setLabel(null);
+          await forceDownload(ch.downloadSrc || ch.src, ch.download || `${ch.label || 'episode'}.mp4`, setLabel);
         }
       } finally {
         downloadAllBtn.disabled = false;
@@ -2182,12 +2225,20 @@
 
       closeMenu();
 
+      if (state.powered) {
+        await powerOff();
+      }
+
       currentLang = lang;
       localStorage.setItem('lang', lang);
       document.documentElement.lang = lang;
 
       // Update dropdown label
       updateLangDropdownLabel();
+
+      if (typeof window.translateMenu === 'function') {
+        window.translateMenu(lang);
+      }
 
       const data = await loadContent(lang);
       if (data) {
@@ -2259,14 +2310,24 @@
 
     downloadBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (state.currentChannel >= 0) {
+      if (state.currentChannel >= 0 && !downloadBtn.disabled) {
         const ch = CHANNELS[state.currentChannel];
         const icon = downloadBtn.querySelector('.iconify');
+        const originalLabel = downloadLabel.textContent;
+        downloadBtn.disabled = true;
+        downloadBtn.classList.add('downloading');
         icon.setAttribute('data-icon', 'mdi:loading');
         icon.style.animation = 'spin 1s linear infinite';
-        forceDownload(ch.downloadSrc || ch.src, ch.download || `${ch.label || 'episode'}.mp4`).finally(() => {
+        forceDownload(ch.downloadSrc || ch.src, ch.download || `${ch.label || 'episode'}.mp4`, (pct) => {
+          downloadLabel.textContent = pct !== null && pct !== undefined ? `${pct}%` : (currentLang === 'es' ? 'Descargando...' : 'Downloading...');
+        }).catch((error) => {
+          console.error('Error forzando la descarga:', error);
+        }).finally(() => {
           icon.setAttribute('data-icon', 'mdi:download');
           icon.style.animation = 'none';
+          downloadLabel.textContent = originalLabel;
+          downloadBtn.classList.remove('downloading');
+          downloadBtn.disabled = false;
         });
       }
     });
@@ -2478,6 +2539,38 @@
         case 'F':
           toggleFullscreen();
           break;
+      }
+    });
+
+    // ===== LOAD MENU WITH TRANSLATION SUPPORT =====
+    const menuVer = Math.floor(Date.now() / 86400000);
+    fetch('../components/menu.html?v=' + menuVer)
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP error ' + response.status + ' loading menu');
+        return response.text();
+      })
+      .then(data => {
+        data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+        const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+        if (!container) return;
+        container.innerHTML = data;
+
+        container.querySelectorAll('script').forEach(oldScript => {
+          const s = document.createElement('script');
+          Array.from(oldScript.attributes).forEach(a => s.setAttribute(a.name, a.value));
+          s.appendChild(document.createTextNode(oldScript.innerHTML));
+          oldScript.parentNode.replaceChild(s, oldScript);
+        });
+
+        setTimeout(() => {
+          document.dispatchEvent(new CustomEvent('menuLoaded'));
+        }, 100);
+      })
+      .catch(e => console.warn('menu.html not available:', e.message));
+
+    document.addEventListener('menuLoaded', function () {
+      if (typeof window.translateMenu === 'function') {
+        window.translateMenu(currentLang);
       }
     });
 

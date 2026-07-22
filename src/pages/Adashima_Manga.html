@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Adashima - Manga</title>
     <link rel="preconnect" href="https://media.adashimaverse.com" crossorigin>
     <link rel="dns-prefetch" href="https://media.adashimaverse.com">
@@ -42,7 +45,6 @@
 
         <h1 class="update-title">Manga</h1>
 
-        <!-- Sticky Library Controls -->
         <div class="library-controls-sticky" id="libraryControlsSticky">
             <div class="library-controls" id="libraryControls">
                 <div class="search-wrapper">
@@ -64,21 +66,7 @@
             </div>
         </div>
 
-        <div class="update-box" id="chapters-container">
-            <div id="global-loading-screen">
-                <div class="global-spinner-wrap">
-                    <div class="global-spinner-ring"></div>
-                    <div class="global-spinner-ring"></div>
-                    <div class="global-spinner-ring"></div>
-                </div>
-                <div class="global-loading-title" id="global-loading-title">Preparando los capítulos…</div>
-                <div class="global-loading-sub" id="global-loading-sub">Este proceso puede tardar algunos minutos la primera vez debido a la gran cantidad de imágenes.<br>Una vez completado, no tendrás que esperar nuevamente y la navegación será mucho más rápida.</div>
-                <div class="global-progress-track">
-                    <div class="global-progress-fill" id="global-progress-fill"></div>
-                </div>
-                <span id="global-progress-label">0 / 0 capítulos</span>
-            </div>
-        </div>
+        <div class="update-box" id="chapters-container"></div>
 
         <a href="https://drive.google.com/file/d/1VBytoVY6anATqYVKECD6afmYMd2hY90H/view?usp=drive_link"
            target="_blank" class="download-all-btn">
@@ -96,7 +84,6 @@
         <img src="../../assets/Imagenes/astronauta.png" alt="Adashima Astronauta" loading="lazy" decoding="async" onerror="this.style.display='none'">
     </div>
 
-    <!-- PDF Modal (shared with Novelas page) -->
     <div class="pdf-modal" id="pdfModal" role="dialog" aria-modal="true" aria-label="PDF Viewer">
         <div class="pdf-modal-backdrop" id="pdfModalBackdrop"></div>
         <div class="pdf-modal-content">
@@ -115,6 +102,15 @@
 
                     <div class="pdf-toolbar">
                         <div class="pdf-controls-group pdf-toolbar-left">
+                            <div class="pdf-reading-mode-toggle" id="pdfReadingModeToggle">
+                                <button class="pdf-btn pdf-btn-mode active" id="pdfModeSingle" title="Modo página">
+                                    <i class="fas fa-file"></i>
+                                </button>
+                                <button class="pdf-btn pdf-btn-mode" id="pdfModeCascade" title="Lectura en cascada">
+                                    <i class="fas fa-stream"></i>
+                                </button>
+                            </div>
+                            <span class="pdf-toolbar-divider"></span>
                             <button class="pdf-btn pdf-btn-thumbnails" id="pdfThumbnailToggle" title="Miniaturas">
                                 <i class="fas fa-th"></i>
                             </button>
@@ -154,6 +150,7 @@
                                 <div class="pdf-canvas-wrapper" id="canvasWrapperModal">
                                     <canvas id="pdfRenderModal"></canvas>
                                 </div>
+                                <div id="pdfCascadeContainer" style="display:none"></div>
                                 <div class="pdf-page-indicator-mobile" id="mobileIndicatorModal" style="display:none">
                                     <span id="mobilePageNumModal">-</span>
                                     <span>/</span>
@@ -176,9 +173,6 @@
     <div id="toast-message" class="toast-message"></div>
 
     <script>
-    // ========================================
-    // PDF READER ENGINE (shared)
-    // ========================================
     const PDFJS_VERSION = '2.16.105';
     const PDFJS_CDN = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}`;
     try {
@@ -195,6 +189,23 @@
     let modalThumbnails = [];
     let modalThumbnailsVisible = false;
     let modalThumbnailsRendered = false;
+    let modalReadingMode = localStorage.getItem('adashima_pdf_mode') || 'single';
+    let cascadeObserver = null;
+    let cascadeScrollObserver = null;
+    let cascadeRendering = new Set();
+    let cascadeRenderedPages = new Set();
+    let cascadeBuilt = false;
+
+    function showToast(message) {
+        const el = document.getElementById('toast-message');
+        if (!el) return;
+        el.textContent = message;
+        el.classList.remove('visible');
+        void el.offsetWidth;
+        el.classList.add('visible');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => el.classList.remove('visible'), 2500);
+    }
 
     function getPdfText(key) {
         if (window.getText) {
@@ -229,6 +240,10 @@
         if (retryText) retryText.textContent = getPdfText('toastMessages.retry') || 'Reintentar';
         
         document.getElementById('pdfThumbnailToggle').title = getPdfText('pdfControls.thumbnails') || 'Miniaturas';
+        const modeSingleBtn = document.getElementById('pdfModeSingle');
+        const modeCascadeBtn = document.getElementById('pdfModeCascade');
+        if (modeSingleBtn) modeSingleBtn.title = getPdfText('pdfControls.modeSingle') || 'Modo página';
+        if (modeCascadeBtn) modeCascadeBtn.title = getPdfText('pdfControls.modeCascade') || 'Lectura en cascada';
         document.getElementById('pdfPrevModal').title = getPdfText('pdfControls.prevPage') || 'Página anterior (←)';
         document.getElementById('pdfNextModal').title = getPdfText('pdfControls.nextPage') || 'Página siguiente (→)';
         document.getElementById('pdfZoomOutModal').title = getPdfText('pdfControls.zoomOut') || 'Alejar (-)';
@@ -292,6 +307,7 @@
         document.getElementById('pdfThumbnailsSidebar').classList.remove('open');
         modalThumbnailsVisible = false;
         document.getElementById('pdfThumbnailsList').innerHTML = '';
+        teardownCascadeView();
     }
 
     function resetPdfViewer() {
@@ -309,6 +325,53 @@
         document.getElementById('pdfThumbnailsList').innerHTML = '';
         modalThumbnails = [];
         modalThumbnailsRendered = false;
+        teardownCascadeView();
+        applyReadingModeUI();
+    }
+
+    function teardownCascadeView() {
+        if (cascadeObserver) {
+            cascadeObserver.disconnect();
+            cascadeObserver = null;
+        }
+        if (cascadeScrollObserver) {
+            cascadeScrollObserver.disconnect();
+            cascadeScrollObserver = null;
+        }
+        cascadeRendering.clear();
+        cascadeRenderedPages.clear();
+        cascadeBuilt = false;
+        const cascadeContainer = document.getElementById('pdfCascadeContainer');
+        if (cascadeContainer) cascadeContainer.innerHTML = '';
+    }
+
+    function applyReadingModeUI() {
+        const singleBtn = document.getElementById('pdfModeSingle');
+        const cascadeBtn = document.getElementById('pdfModeCascade');
+        const canvasWrapper = document.getElementById('canvasWrapperModal');
+        const cascadeContainer = document.getElementById('pdfCascadeContainer');
+        const isCascade = modalReadingMode === 'cascade';
+
+        if (singleBtn) singleBtn.classList.toggle('active', !isCascade);
+        if (cascadeBtn) cascadeBtn.classList.toggle('active', isCascade);
+        if (canvasWrapper) canvasWrapper.style.display = isCascade ? 'none' : 'flex';
+        if (cascadeContainer) cascadeContainer.style.display = isCascade ? 'block' : 'none';
+    }
+
+    function setReadingMode(mode) {
+        if (mode === modalReadingMode) return;
+        modalReadingMode = mode;
+        localStorage.setItem('adashima_pdf_mode', mode);
+        applyReadingModeUI();
+
+        if (!modalPdfDoc) return;
+
+        if (mode === 'cascade') {
+            renderCascadeView();
+        } else {
+            teardownCascadeView();
+            renderPdfPage();
+        }
     }
 
     async function loadPdfFromUrl(url) {
@@ -336,10 +399,14 @@
             document.getElementById('pageCountModal').textContent = modalPdfDoc.numPages;
             document.getElementById('mobilePageCountModal').textContent = modalPdfDoc.numPages;
             loadingEl.classList.remove('visible');
-            canvas.style.display = 'block';
+            canvas.style.display = modalReadingMode === 'cascade' ? 'none' : 'block';
             
             renderPdfThumbnails();
-            await renderPdfPage();
+            if (modalReadingMode === 'cascade') {
+                renderCascadeView();
+            } else {
+                await renderPdfPage();
+            }
             
         } catch (error) {
             if (error.name !== 'AbortError') {
@@ -446,7 +513,144 @@
         if (!modalPdfDoc || pageNum < 1 || pageNum > modalPdfDoc.numPages) return;
         modalPageNum = pageNum;
         updatePdfThumbnailSelection();
-        renderPdfPage();
+        if (modalReadingMode === 'cascade') {
+            const pageEl = document.querySelector(`.pdf-cascade-page[data-page="${pageNum}"]`);
+            if (pageEl) {
+                pageEl.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            }
+            updatePdfPageIndicators();
+        } else {
+            renderPdfPage();
+        }
+    }
+
+    function updatePdfPageIndicators() {
+        document.getElementById('pageNumModal').textContent = modalPageNum;
+        document.getElementById('mobilePageNumModal').textContent = modalPageNum;
+        const progress = (modalPageNum / modalPdfDoc.numPages) * 100;
+        document.getElementById('pdfProgressModal').style.width = progress + '%';
+    }
+
+    function renderCascadeView() {
+        if (!modalPdfDoc) return;
+        const container = document.getElementById('pdfCascadeContainer');
+        if (!container) return;
+
+        teardownCascadeView();
+        container.style.display = 'block';
+
+        const totalPages = modalPdfDoc.numPages;
+        const fragment = document.createDocumentFragment();
+
+        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+            const pageWrapper = document.createElement('div');
+            pageWrapper.className = 'pdf-cascade-page';
+            pageWrapper.dataset.page = pageNum;
+
+            const pageCanvas = document.createElement('canvas');
+            pageCanvas.className = 'pdf-cascade-canvas';
+            pageCanvas.dataset.page = pageNum;
+
+            const label = document.createElement('span');
+            label.className = 'pdf-cascade-page-label';
+            label.textContent = `${pageNum} / ${totalPages}`;
+
+            pageWrapper.appendChild(pageCanvas);
+            pageWrapper.appendChild(label);
+            fragment.appendChild(pageWrapper);
+        }
+
+        container.appendChild(fragment);
+        cascadeBuilt = true;
+
+        cascadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const pageNum = parseInt(entry.target.dataset.page, 10);
+                    renderCascadePage(pageNum);
+                }
+            });
+        }, {
+            root: document.getElementById('canvasContainerModal'),
+            rootMargin: '600px 0px 600px 0px'
+        });
+
+        cascadeScrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    const pageNum = parseInt(entry.target.dataset.page, 10);
+                    modalPageNum = pageNum;
+                    updatePdfPageIndicators();
+                    updatePdfThumbnailSelection();
+                }
+            });
+        }, {
+            root: document.getElementById('canvasContainerModal'),
+            threshold: [0.5]
+        });
+
+        document.querySelectorAll('.pdf-cascade-page').forEach(pageEl => {
+            cascadeObserver.observe(pageEl);
+            cascadeScrollObserver.observe(pageEl);
+        });
+
+        updatePdfPageIndicators();
+    }
+
+    async function renderCascadePage(pageNum) {
+        if (cascadeRenderedPages.has(pageNum) || cascadeRendering.has(pageNum)) return;
+        if (!modalPdfDoc) return;
+        cascadeRendering.add(pageNum);
+
+        try {
+            const page = await modalPdfDoc.getPage(pageNum);
+            const canvas = document.querySelector(`.pdf-cascade-canvas[data-page="${pageNum}"]`);
+            if (!canvas) {
+                cascadeRendering.delete(pageNum);
+                return;
+            }
+
+            const dpr = window.devicePixelRatio || 1;
+            const container = document.getElementById('pdfCascadeContainer');
+            const containerWidth = Math.min(container.clientWidth - 48, 1000);
+
+            const baseViewport = page.getViewport({ scale: 1 });
+            const scale = (containerWidth / baseViewport.width) * modalScale;
+            const scaledViewport = page.getViewport({ scale });
+
+            canvas.width = scaledViewport.width * dpr;
+            canvas.height = scaledViewport.height * dpr;
+            canvas.style.width = scaledViewport.width + 'px';
+            canvas.style.height = scaledViewport.height + 'px';
+
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            await page.render({
+                canvasContext: ctx,
+                viewport: scaledViewport
+            }).promise;
+
+            cascadeRenderedPages.add(pageNum);
+        } catch (e) {
+            if (e.name !== 'RenderingCancelledException') {
+                console.warn('Failed to render cascade page', pageNum, e);
+            }
+        } finally {
+            cascadeRendering.delete(pageNum);
+        }
+    }
+
+    function rerenderCascadeVisible() {
+        if (modalReadingMode !== 'cascade' || !cascadeBuilt) return;
+        cascadeRenderedPages.clear();
+        document.querySelectorAll('.pdf-cascade-page').forEach(pageEl => {
+            const rect = pageEl.getBoundingClientRect();
+            const containerRect = document.getElementById('canvasContainerModal').getBoundingClientRect();
+            if (rect.bottom > containerRect.top - 600 && rect.top < containerRect.bottom + 600) {
+                renderCascadePage(parseInt(pageEl.dataset.page, 10));
+            }
+        });
     }
 
     let pdfRenderQueue = Promise.resolve();
@@ -534,15 +738,13 @@
 
         document.getElementById('pdfPrevModal').addEventListener('click', () => {
             if (modalPageNum > 1 && !document.getElementById('pdfPrevModal').disabled) {
-                modalPageNum--;
-                renderPdfPage();
+                goToPdfPage(modalPageNum - 1);
             }
         });
 
         document.getElementById('pdfNextModal').addEventListener('click', () => {
             if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages && !document.getElementById('pdfNextModal').disabled) {
-                modalPageNum++;
-                renderPdfPage();
+                goToPdfPage(modalPageNum + 1);
             }
         });
 
@@ -557,19 +759,19 @@
         document.getElementById('pdfZoomInModal').addEventListener('click', () => {
             modalScale = Math.min(modalScale * 1.1, 3.0);
             updatePdfZoomDisplay();
-            renderPdfPage();
+            if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
         });
 
         document.getElementById('pdfZoomOutModal').addEventListener('click', () => {
             modalScale = Math.max(modalScale * 0.9, 0.3);
             updatePdfZoomDisplay();
-            renderPdfPage();
+            if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
         });
 
         document.getElementById('pdfZoomResetModal').addEventListener('click', () => {
             modalScale = 1.0;
             updatePdfZoomDisplay();
-            renderPdfPage();
+            if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
         });
 
         function updatePdfZoomDisplay() {
@@ -591,14 +793,43 @@
             }
         });
 
-        document.getElementById('pdfDownloadModal').addEventListener('click', () => {
-            if (modalCurrentUrl) {
+        document.getElementById('pdfDownloadModal').addEventListener('click', async () => {
+            if (!modalCurrentUrl) return;
+            const btn = document.getElementById('pdfDownloadModal');
+            if (btn.classList.contains('downloading')) return;
+            const icon = btn.querySelector('i');
+            const originalClass = icon.className;
+            btn.classList.add('downloading');
+            btn.disabled = true;
+            icon.className = 'fas fa-spinner fa-spin';
+            try {
+                const response = await fetch(modalCurrentUrl);
+                if (!response.ok) throw new Error('Network error');
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.href = modalCurrentUrl;
+                a.href = blobUrl;
                 a.download = modalCurrentUrl.split('/').pop() || 'document.pdf';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+                icon.className = 'fas fa-check';
+                btn.classList.add('download-success');
+                setTimeout(() => {
+                    icon.className = originalClass;
+                    btn.classList.remove('downloading', 'download-success');
+                    btn.disabled = false;
+                }, 1200);
+            } catch (error) {
+                icon.className = 'fas fa-exclamation-triangle';
+                btn.classList.add('download-error');
+                showToast(getPdfText('toastMessages.documentNotAvailable') || 'Documento no disponible.');
+                setTimeout(() => {
+                    icon.className = originalClass;
+                    btn.classList.remove('downloading', 'download-error');
+                    btn.disabled = false;
+                }, 1500);
             }
         });
 
@@ -614,7 +845,9 @@
             modalThumbnailsVisible = false;
         });
 
-        // Keyboard shortcuts
+        document.getElementById('pdfModeSingle').addEventListener('click', () => setReadingMode('single'));
+        document.getElementById('pdfModeCascade').addEventListener('click', () => setReadingMode('cascade'));
+
         document.addEventListener('keydown', (e) => {
             const modal = document.getElementById('pdfModal');
             if (!modal.classList.contains('open')) return;
@@ -635,8 +868,7 @@
                 case 'A':
                     e.preventDefault();
                     if (modalPageNum > 1) {
-                        modalPageNum--;
-                        renderPdfPage();
+                        goToPdfPage(modalPageNum - 1);
                     }
                     break;
                 case 'ArrowRight':
@@ -644,8 +876,7 @@
                 case 'D':
                     e.preventDefault();
                     if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) {
-                        modalPageNum++;
-                        renderPdfPage();
+                        goToPdfPage(modalPageNum + 1);
                     }
                     break;
                 case '+':
@@ -653,19 +884,19 @@
                     e.preventDefault();
                     modalScale = Math.min(modalScale * 1.1, 3.0);
                     updatePdfZoomDisplay();
-                    renderPdfPage();
+                    if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
                     break;
                 case '-':
                     e.preventDefault();
                     modalScale = Math.max(modalScale * 0.9, 0.3);
                     updatePdfZoomDisplay();
-                    renderPdfPage();
+                    if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
                     break;
                 case '0':
                     e.preventDefault();
                     modalScale = 1.0;
                     updatePdfZoomDisplay();
-                    renderPdfPage();
+                    if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
                     break;
                 case 'f':
                 case 'F':
@@ -680,7 +911,6 @@
             }
         });
 
-        // Touch navigation
         let touchStartX = 0;
         let touchStartY = 0;
         let touchStartTime = 0;
@@ -702,33 +932,30 @@
             const dt = Date.now() - touchStartTime;
             if (dt > 350 || dx > 40 || dy > 40) return;
             if (e.target.closest('.pdf-toolbar') || e.target.closest('button') || e.target.closest('input')) return;
+            if (modalReadingMode === 'cascade') return;
             const rect = document.getElementById('canvasContainerModal').getBoundingClientRect();
             const relX = (touch.clientX - rect.left) / rect.width;
             if (relX <= 0.45) { 
                 if (modalPageNum > 1) { 
-                    modalPageNum--; 
-                    renderPdfPage(); 
+                    goToPdfPage(modalPageNum - 1);
                 } 
             } else if (relX >= 0.55) { 
                 if (modalPdfDoc && modalPageNum < modalPdfDoc.numPages) { 
-                    modalPageNum++; 
-                    renderPdfPage(); 
+                    goToPdfPage(modalPageNum + 1);
                 } 
             }
         }, { passive: true });
 
-        // Handle window resize
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 if (modalPdfDoc && document.getElementById('pdfModal').classList.contains('open')) {
-                    renderPdfPage();
+                    if (modalReadingMode === 'cascade') rerenderCascadeVisible(); else renderPdfPage();
                 }
             }, 200);
         });
 
-        // Handle fullscreen change
         document.addEventListener('fullscreenchange', () => {
             const isFullscreen = document.fullscreenElement !== null;
             const icon = document.getElementById('fsIconModal');
@@ -739,82 +966,63 @@
         });
     }
 
-    // ========================================
-    // BASE URLS
-    // ========================================
-    const R2_BASE_URL_ES = 'https://media.adashimaverse.com/Manga/';
+    const R2_BASE_URL_ES = 'https://media.adashimaverse.com/Manga_descarga/';
     const R2_BASE_URL_EN = 'https://pub-669d8b8b8b7c4f8d92985f2a8392663d.r2.dev/manga/';
 
-    const CACHE_PREFIX  = 'adashima_manga_';
-    const CACHE_VERSION = 'v11';
-    const DEPLOY_ID     = '20250608-0009';
-
-    // ========================================
-    // CHAPTER LIST
-    // ========================================
     const CHAPTER_VOLUMES = {
-        1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 5.5: 1,
-        6: 2, 7: 2, 8: 2, 9: 2, 10: 2, 11: 2, 12: 2, 12.5: 2,
-        13: 3, 14: 3, 15: 3, 15.5: 3, 16: 3, 16.5: 3, 17: 3, 18: 3, 18.5: 3,
-        19: 4, 19.5: 4, 20: 4, 21: 4, 22: 4, 23: 4, 24: 4, 25: 4, 25.5: 4,
-        26: 5, 27.1: 5, 27.2: 5, 28: 5, 29: 5, 30: 5,
-        31.1: 6, 31.2: 6, 32: 6, 33.1: 6, 33.2: 6, 33.5: 6, 34: 6, 35.1: 6, 35.2: 6, 36.1: 6, 36.2: 6, 36.3: 6, 37.1: 6, 37.2: 6, 37.3: 6, 38.1: 6, 38.2: 6, 38.5: 6,
-        39: 7, 40: 7, 41: 7, 42: 7, 43: 7, 45: 7, 46: 7, 46.1: 7, 46.2: 7,
-        47: 8, 48: 8, 49: 8, 50: 8, 51: 8, 52: 8, 53: 8, 54: 8, 54.1: 8,
+        1: 1, 2: 1, 3: 1, 4: 1, 5.5: 1, 5: 1,
+        6: 2, 7: 2, 8: 2, 9: 2, 10: 2, 11: 2, 12.5: 2, 12: 2,
+        13: 3, 14: 3, 15.2: 3, 15: 3, 16.2: 3, 16: 3, 17.2: 3, 17: 3, 18.2: 3,
+        19.2: 4, 19: 4, 20: 4, 21: 4, 22: 4, 23: 4, 24: 4, 25: 4,
+        26: 5, 27.2: 5, 27.3: 5, 27.4: 5, 27: 5, 28: 5, 29.1: 5, 29.2: 5, 29.3: 5, 30.2: 5, 30.5: 5, 30: 5,
+        31: 6, 32: 6, 33: 6, 34.2: 6, 34: 6, 35: 6, 36.2: 6, 36: 6, 37: 6, 38.2: 6, 38: 6,
+        39: 7, 40: 7, 41: 7, 42: 7, 43: 7, 44: 7, 45: 7, 46: 7,
+        47: 8, 48: 8, 49: 8, 50: 8, 51: 8, 52: 8, 53: 8, 54.5: 8, 54: 8,
         55: 9, 56: 9, 57: 9
     };
 
-    // ========================================
-    // MANGA CONFIG
-    // ========================================
     const MANGA_CONFIG = {
         get chapters() {
-            return Object.keys(CHAPTER_VOLUMES).map(Number).sort((a, b) => {
-                const volA = CHAPTER_VOLUMES[a] || 999;
-                const volB = CHAPTER_VOLUMES[b] || 999;
+            let baseIds = Object.keys(CHAPTER_VOLUMES).map(Number);
+            if (translations && translations.chapterPdfMap) {
+                baseIds = Object.keys(translations.chapterPdfMap).map(Number).filter(n => !isNaN(n));
+            }
+            return baseIds.sort((a, b) => {
+                const volA = MANGA_CONFIG.getVolume(a) || 999;
+                const volB = MANGA_CONFIG.getVolume(b) || 999;
                 if (volA !== volB) return volA - volB;
                 return a - b;
             });
         },
         maxPagesPerChapter: 150,
         
-        getBaseUrl() {
-            const lang = currentLang || 'es';
-            return lang === 'en' ? R2_BASE_URL_EN : R2_BASE_URL_ES;
-        },
-        
-        getFolderName(chapter) {
-            const lang = currentLang || 'es';
-            const folderMap = translations?.chapterFolderMap || {};
-            const chapterKey = String(chapter);
-            
-            if (chapter === 'Antologia') {
-                return lang === 'en' ? 'Anthology' : 'Antologia';
-            }
-            
-            if (lang === 'es' && !folderMap[chapterKey]) {
-                const num = parseFloat(chapter);
-                const useAccent = num >= 40 && num <= 55;
-                return (useAccent ? 'Cap\u00edtulo ' : 'Capitulo ') + chapter;
-            }
-            
-            return folderMap[chapterKey] || `Ch.${chapter}`;
-        },
-        
         getPdfUrl(chapter) {
             const lang = currentLang || 'es';
+            const pdfMap = translations?.chapterPdfMap || {};
+            const chapterKey = String(chapter);
             
             if (lang === 'en') {
-                const chapterKey = String(chapter);
-                return `${R2_BASE_URL_EN}Ch.%20${chapterKey}.pdf`;
+                const fileName = pdfMap[chapterKey] || `Ch.${chapter}.pdf`;
+                return `${R2_BASE_URL_EN}${fileName}`;
             }
             
-            const folderName = this.getFolderName(chapter);
-            return `${R2_BASE_URL_ES}${encodeURIComponent(folderName)}.pdf`;
+            const fileName = pdfMap[chapterKey] || `Capitulo_${chapter}.pdf`;
+            return `${R2_BASE_URL_ES}${fileName}`;
         },
         
         getVolume(chapter) {
-            return CHAPTER_VOLUMES[chapter] || null;
+            if (CHAPTER_VOLUMES[chapter] !== undefined) {
+                return CHAPTER_VOLUMES[chapter];
+            }
+            if (chapter <= 5.5) return 1;
+            if (chapter <= 12.5) return 2;
+            if (chapter <= 18.2) return 3;
+            if (chapter <= 25) return 4;
+            if (chapter <= 30.5) return 5;
+            if (chapter <= 38.2) return 6;
+            if (chapter <= 46) return 7;
+            if (chapter <= 54.5) return 8;
+            return 9;
         },
         
         getDescription(chapter) {
@@ -828,16 +1036,20 @@
         }
     };
 
-    // ========================================
-    // TRANSLATIONS
-    // ========================================
     let currentLang = localStorage.getItem('lang') || 'es';
     let isSwitching = false;
     let translations = null;
 
     async function loadTranslations(lang) {
         try {
-            const response = await fetch(`../data/manga/${lang}.json?v=${Date.now()}`);
+            const response = await fetch(`../data/manga/${lang}.json?v=${Date.now()}`, {
+                cache: 'no-store',
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
             if (!response.ok) throw new Error('Failed to load translations');
             const data = await response.json();
             translations = data;
@@ -863,7 +1075,6 @@
         return value || key;
     }
 
-    // Language switcher
     function updateLangDropdownLabel() {
         const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
         const labelEl = document.getElementById('langSelectedLabel');
@@ -874,149 +1085,11 @@
         }
     }
 
-    // ========================================
-    // OPEN PDF READER (for manga chapters)
-    // ========================================
     function openPdfReader(chapterId) {
         const url = MANGA_CONFIG.getPdfUrl(chapterId);
         openPdfModal(chapterId, url);
     }
 
-    // ========================================
-    // CACHE FUNCTIONS
-    // ========================================
-    function _parseCacheEntry(raw) {
-        try { return raw ? JSON.parse(raw) : null; } catch { return null; }
-    }
-
-    function getCachedPages(ch) {
-        const key = CACHE_PREFIX + currentLang + '_' + ch;
-        const entry = _parseCacheEntry(localStorage.getItem(key));
-        if (!entry) return null;
-        const { version, pages, deployId } = entry;
-        if (version !== CACHE_VERSION || deployId !== DEPLOY_ID || !Array.isArray(pages) || pages.length === 0) return null;
-        return pages;
-    }
-
-    function setCachedPages(ch, pages) {
-        const key = CACHE_PREFIX + currentLang + '_' + ch;
-        const entry = JSON.stringify({ version: CACHE_VERSION, deployId: DEPLOY_ID, pages, ts: Date.now() });
-        try {
-            localStorage.setItem(key, entry);
-        } catch(e) {
-            pruneOldCache();
-            try { localStorage.setItem(key, entry); } catch {}
-        }
-    }
-
-    function pruneOldCache() {
-        try {
-            Object.keys(localStorage).filter(k => k.startsWith(CACHE_PREFIX)).forEach(k => {
-                const entry = _parseCacheEntry(localStorage.getItem(k));
-                if (!entry || entry.version !== CACHE_VERSION || entry.deployId !== DEPLOY_ID)
-                    localStorage.removeItem(k);
-            });
-        } catch {}
-    }
-
-    window.clearMangaCache = function() {
-        const keys = Object.keys(localStorage).filter(k => k.startsWith(CACHE_PREFIX));
-        keys.forEach(k => localStorage.removeItem(k));
-        localStorage.removeItem('adashima_deploy_id');
-        localStorage.removeItem('adashima_page_format');
-        pruneOldCache();
-        return `Eliminadas ${keys.length} entradas de cach\u00e9.`;
-    };
-
-    (function invalidateOnDeploy() {
-        try {
-            if (localStorage.getItem('adashima_deploy_id') === DEPLOY_ID) return;
-            Object.keys(localStorage).filter(k => k.startsWith(CACHE_PREFIX)).forEach(k => localStorage.removeItem(k));
-            localStorage.removeItem('adashima_page_format');
-            localStorage.setItem('adashima_deploy_id', DEPLOY_ID);
-        } catch(e) {}
-    })();
-
-    // ========================================
-    // FAST FORMAT DETECTION (for Spanish images)
-    // ========================================
-    async function detectFormatFast(ch) {
-        const baseUrl = MANGA_CONFIG.getBaseUrl();
-        const folderName = MANGA_CONFIG.getFolderName(ch);
-        const encodedFolder = encodeURIComponent(folderName);
-        
-        const testUrls = [
-            `${baseUrl}${encodedFolder}/001.jpg`,
-            `${baseUrl}${encodedFolder}/001.png`,
-            `${baseUrl}${encodedFolder}/01.jpg`,
-            `${baseUrl}${encodedFolder}/01.png`
-        ];
-        
-        const results = await Promise.all(testUrls.map(async (url) => {
-            try {
-                const response = await fetch(url, { method: 'HEAD' });
-                return { url, ok: response.ok };
-            } catch {
-                return { url, ok: false };
-            }
-        }));
-        
-        for (const result of results) {
-            if (result.ok) {
-                const fileName = result.url.split('/').pop();
-                const is3Digit = /^\d{3}\./.test(fileName);
-                const isPng = fileName.endsWith('.png');
-                return {
-                    digit: is3Digit ? '3digit' : '2digit',
-                    ext: isPng ? 'png' : 'jpg'
-                };
-            }
-        }
-        
-        return { digit: '3digit', ext: 'jpg' };
-    }
-
-    // ========================================
-    // DETECT CHAPTER PAGES (for Spanish images)
-    // ========================================
-    async function detectChapterPages(ch) {
-        const cached = getCachedPages(ch);
-        if (cached && cached.length > 0) {
-            return cached;
-        }
-
-        const lang = currentLang || 'es';
-        
-        if (lang === 'en') {
-            return [];
-        }
-        
-        const pageCount = MANGA_CONFIG.getPageCount(ch);
-        if (pageCount && pageCount > 0) {
-            const pages = [];
-            const baseUrl = MANGA_CONFIG.getBaseUrl();
-            const folderName = MANGA_CONFIG.getFolderName(ch);
-            const encodedFolder = encodeURIComponent(folderName);
-            
-            const format = await detectFormatFast(ch);
-            
-            for (let i = 1; i <= pageCount; i++) {
-                const pageStr = format.digit === '2digit' 
-                    ? String(i).padStart(2, '0') 
-                    : String(i).padStart(3, '0');
-                const url = `${baseUrl}${encodedFolder}/${pageStr}.${format.ext}`;
-                pages.push(url);
-            }
-            setCachedPages(ch, pages);
-            return pages;
-        }
-
-        return [];
-    }
-
-    // ========================================
-    // UI FUNCTIONS
-    // ========================================
     let currentView = 'list';
     let searchTerm = '';
 
@@ -1108,11 +1181,10 @@
         }
     }
 
-    function groupChaptersByVolume(allIds, resultMap) {
+    function groupChaptersByVolume(allIds) {
         const volumeGroups = new Map();
         
         for (const ch of allIds) {
-            const pages = resultMap.get(String(ch)) || [];
             const volume = MANGA_CONFIG.getVolume(ch);
             if (volume === null) continue;
             
@@ -1121,7 +1193,6 @@
             }
             volumeGroups.get(volume).push({
                 id: ch,
-                pages: pages,
                 volume: volume
             });
         }
@@ -1204,17 +1275,8 @@
                 thumbUrl = translations.chapterThumbnails[String(firstChapterId)];
             }
         }
-        
-        if (!thumbUrl) {
-            const firstChapter = chapters.length > 0 ? chapters[0] : null;
-            if (firstChapter && firstChapter.pages && firstChapter.pages.length > 0) {
-                const firstPage = typeof firstChapter.pages[0] === 'string' ? firstChapter.pages[0] : firstChapter.pages[0].url || firstChapter.pages[0];
-                thumbUrl = firstPage;
-            }
-        }
 
         const desc = chapters.length > 0 ? MANGA_CONFIG.getDescription(chapters[0].id) || '' : '';
-        const readLabel = currentLang === 'en' ? 'Read' : 'Leer';
 
         return `
             <div class="volume-card" data-volume="${volume}">
@@ -1280,37 +1342,10 @@
         });
     }
 
-    // ========================================
-    // READER FUNCTION
-    // ========================================
     function openReader(chapterId) {
-        const lang = currentLang || 'es';
-        
-        if (lang === 'en') {
-            openPdfReader(chapterId);
-            return;
-        }
-        
-        const folderName = MANGA_CONFIG.getFolderName(chapterId);
-        const baseUrl = MANGA_CONFIG.getBaseUrl();
-        const testUrl = `${baseUrl}${encodeURIComponent(folderName)}/001.jpg`;
-        
-        fetch(testUrl, { method: 'HEAD' })
-            .then(response => {
-                if (response.ok) {
-                    openPdfReader(chapterId);
-                } else {
-                    openPdfReader(chapterId);
-                }
-            })
-            .catch(() => {
-                openPdfReader(chapterId);
-            });
+        openPdfReader(chapterId);
     }
 
-    // ========================================
-    // SWITCH LANGUAGE
-    // ========================================
     async function switchLanguage(lang) {
         if (isSwitching || currentLang === lang) return;
         isSwitching = true;
@@ -1334,11 +1369,6 @@
         listBtn.innerHTML = `<i class="fas fa-list-ul"></i> ${getText('viewList') || 'Lista'}`;
         gridBtn.innerHTML = `<i class="fas fa-th"></i> ${getText('viewGrid') || 'Cuadrícula'}`;
         
-        const loadingTitle = document.getElementById('global-loading-title');
-        if (loadingTitle) loadingTitle.textContent = getText('loadingTitle') || 'Preparando los capítulos…';
-        const loadingSub = document.getElementById('global-loading-sub');
-        if (loadingSub) loadingSub.innerHTML = getText('loadingSub') || 'Este proceso puede tardar algunos minutos la primera vez debido a la gran cantidad de imágenes.<br>Una vez completado, no tendrás que esperar nuevamente y la navegación será mucho más rápida.';
-        
         const downloadBtn = document.querySelector('.download-all-btn');
         if (downloadBtn) {
             const icon = downloadBtn.querySelector('i');
@@ -1357,45 +1387,24 @@
             updatePdfUITranslations();
         }
 
-        localStorage.removeItem('adashima_page_format');
+        if (typeof window.translateMenu === 'function') {
+            try {
+                await window.translateMenu(lang);
+            } catch (e) {
+                console.warn('Menu translation failed:', e);
+            }
+        }
         
-        await initAllChapters();
+        initAllChapters();
 
         if (langToggle) langToggle.disabled = false;
         isSwitching = false;
     }
 
-    // ========================================
-    // INIT ALL CHAPTERS
-    // ========================================
-    async function initAllChapters() {
-        const container  = document.getElementById('chapters-container');
-        const fillEl     = document.getElementById('global-progress-fill');
-        const labelEl    = document.getElementById('global-progress-label');
-        const allIds     = MANGA_CONFIG.chapters;
-        const total      = allIds.length;
-
-        function setProgress(done) {
-            const pct = total > 0 ? Math.round(done / total * 100) : 0;
-            if (fillEl)  fillEl.style.width = pct + '%';
-            if (labelEl) labelEl.textContent = `${done} / ${total} capítulos`;
-        }
-        setProgress(0);
-
-        const resultMap = new Map();
-        let doneCount   = 0;
-
-        const CAP_BATCH = 5;
-        for (let i = 0; i < allIds.length; i += CAP_BATCH) {
-            const batch   = allIds.slice(i, i + CAP_BATCH);
-            const results = await Promise.all(batch.map(ch => detectChapterPages(ch).then(pages => ({ ch, pages }))));
-            for (const { ch, pages } of results) {
-                if (pages && pages.length > 0) { resultMap.set(String(ch), pages); doneCount++; }
-            }
-            setProgress(doneCount);
-        }
-
-        const volumeGroups = groupChaptersByVolume(allIds, resultMap);
+    function initAllChapters() {
+        const container = document.getElementById('chapters-container');
+        const allIds = MANGA_CONFIG.chapters;
+        const volumeGroups = groupChaptersByVolume(allIds);
         
         let listHtml = '';
         for (const [volume, chapters] of volumeGroups) {
@@ -1421,9 +1430,6 @@
         attachAccordionListeners();
     }
 
-    // ========================================
-    // PARTICLE EFFECTS
-    // ========================================
     (function() {
         const c = document.getElementById('particles');
         const frag = document.createDocumentFragment();
@@ -1436,9 +1442,6 @@
         c.appendChild(frag);
     })();
 
-    // ========================================
-    // DOM CONTENT LOADED
-    // ========================================
     document.addEventListener('DOMContentLoaded', async function() {
         await loadTranslations(currentLang);
         updateLangDropdownLabel();
@@ -1451,11 +1454,6 @@
         const gridBtn = document.getElementById('viewGridBtn');
         listBtn.innerHTML = `<i class="fas fa-list-ul"></i> ${getText('viewList') || 'Lista'}`;
         gridBtn.innerHTML = `<i class="fas fa-th"></i> ${getText('viewGrid') || 'Cuadrícula'}`;
-        
-        const loadingTitle = document.getElementById('global-loading-title');
-        if (loadingTitle) loadingTitle.textContent = getText('loadingTitle') || 'Preparando los capítulos…';
-        const loadingSub = document.getElementById('global-loading-sub');
-        if (loadingSub) loadingSub.innerHTML = getText('loadingSub') || 'Este proceso puede tardar algunos minutos la primera vez debido a la gran cantidad de imágenes.<br>Una vez completado, no tendrás que esperar nuevamente y la navegación será mucho más rápida.';
         
         const downloadBtn = document.querySelector('.download-all-btn');
         if (downloadBtn) {
@@ -1471,37 +1469,49 @@
         const footer = document.querySelector('.footer');
         if (footer) footer.innerHTML = getText('footer') || 'Fan site no oficial de Adachi to Shimamura.<br>Creado por fans, sin fines de lucro.<br>Adachi to Shimamura y todos sus derechos pertenecen a Hitoma Iruma.';
 
-        // Load menu
-        const menuVer = Math.floor(Date.now() / 86400000);
-        fetch('../components/menu.html?v=' + menuVer)
-            .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-            .then(data => {
-                const mc = document.getElementById('menu-container');
-                if (!mc) return;
-                const doc  = new DOMParser().parseFromString(data, 'text/html');
-                const frag = document.createDocumentFragment();
-                [...doc.head.childNodes,...doc.body.childNodes].forEach(node => {
-                    if (node.nodeName.toLowerCase() === 'script') {
-                        const s = document.createElement('script');
-                        if (node.src) s.src = node.src; else s.textContent = node.textContent;
-                        frag.appendChild(s);
-                    } else { frag.appendChild(node.cloneNode(true)); }
-                });
-                mc.innerHTML = '';
-                mc.appendChild(frag);
-                
-                if (window.translateMenu) {
-                    window.translateMenu(currentLang);
-                }
+        const menuVer = Date.now();
+        fetch('../components/menu.html?v=' + menuVer, {
+            cache: 'no-store',
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+                return response.text();
             })
-            .catch(e => console.error('Error cargando menu.html:', e.message));
-        
-        // Initialize PDF reader events
+            .then(data => {
+                data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+                const container = document.getElementById('menu-container');
+                if (!container) return;
+                container.innerHTML = data;
+                
+                container.querySelectorAll('script').forEach(oldScript => {
+                    const s = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(a => s.setAttribute(a.name, a.value));
+                    s.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(s, oldScript);
+                });
+                
+                setTimeout(() => {
+                    document.dispatchEvent(new CustomEvent('menuLoaded'));
+                }, 100);
+            })
+            .catch(e => console.warn('menu.html no disponible:', e.message));
+
+        document.addEventListener('menuLoaded', function() {
+            if (typeof window.translateMenu === 'function') {
+                window.translateMenu(currentLang);
+                console.log('Menu auto-translated to:', currentLang);
+            }
+        });
+
         initPdfEvents();
         
-        await initAllChapters();
+        initAllChapters();
 
-        // Search
         const searchInput = document.getElementById('searchInput');
         const clearBtn = document.getElementById('searchClearBtn');
         
@@ -1518,7 +1528,6 @@
             searchInput.focus();
         });
 
-        // View toggle
         const viewListBtn = document.getElementById('viewListBtn');
         const viewGridBtn = document.getElementById('viewGridBtn');
         const slider = document.getElementById('viewToggleSlider');
@@ -1532,7 +1541,6 @@
             slider.classList.add('grid-active');
         });
 
-        // Sticky controls
         const stickyEl = document.getElementById('libraryControlsSticky');
         window.addEventListener('scroll', function() {
             if (window.scrollY > 10) {
@@ -1542,18 +1550,15 @@
             }
         });
 
-        // Expose functions globally
         window.openReader = openReader;
         window.openPdfReader = openPdfReader;
         window.openPdfModal = openPdfModal;
         window.closePdfModal = closePdfModal;
-        window.clearMangaCache = clearMangaCache;
         window.switchLanguage = switchLanguage;
         window.MANGA_CONFIG = MANGA_CONFIG;
         window.getText = getText;
         window.updatePdfUITranslations = updatePdfUITranslations;
 
-        // Language dropdown
         const langDropdown = document.getElementById('langDropdown');
         const langToggle = document.getElementById('langToggle');
         const langMenu = document.getElementById('langMenu');
@@ -1587,7 +1592,9 @@
 
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(() => {});
+            navigator.serviceWorker.register('./sw.js').then(reg => {
+                reg.update();
+            }).catch(() => {});
         });
     }
     </script>

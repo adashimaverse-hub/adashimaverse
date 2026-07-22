@@ -36,7 +36,6 @@
                 </div>
             </div>
             <h1 class="update-title" id="page-title">Novelas Ligeras</h1>
-            <div id="general-downloads-container" class="general-downloads"></div>
         </div>
 
         <div class="library-controls" id="libraryControls">
@@ -106,6 +105,7 @@
                             <span class="pdf-toolbar-divider"></span>
                             <button class="pdf-btn" id="pdfFullscreenModal" title="Pantalla completa (F)"><i class="fas fa-expand" id="fsIconModal"></i></button>
                             <button class="pdf-btn" id="pdfDownloadModal" title="Descargar PDF"><i class="fas fa-download"></i></button>
+                            <button class="pdf-btn" id="epubDownloadModal" title="Descargar EPUB" style="display:none;"><i class="fas fa-book"></i></button>
                         </div>
                     </div>
 
@@ -340,25 +340,51 @@
         document.getElementById('pdfZoomResetModal').title = getText('pdfControls.zoomReset');
         document.getElementById('pdfFullscreenModal').title = getText('pdfControls.fullscreen');
         document.getElementById('pdfDownloadModal').title = getText('pdfControls.downloadPDF');
+        const epubBtnTitle = document.getElementById('epubDownloadModal');
+        if (epubBtnTitle) epubBtnTitle.title = getText('pdfControls.downloadEPUB') || 'Download EPUB';
         document.getElementById('pdfModalClose').setAttribute('aria-label', getText('modal.closeReader'));
     }
 
     async function smartDownload(url, fileName) {
         try {
-            const response = await fetch(url);
-            if (!response.ok) { showMessage(getText('toastMessages.fileNotAvailable')); return; }
+            const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
+            if (!response.ok) {
+                console.error('smartDownload: respuesta no OK', response.status, url);
+                forceDownloadFallback(url, fileName);
+                return;
+            }
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = blobUrl;
             a.download = fileName;
+            a.rel = 'noopener';
             document.body.appendChild(a);
             a.click();
-            window.URL.revokeObjectURL(blobUrl);
             document.body.removeChild(a);
+            window.URL.revokeObjectURL(blobUrl);
         } catch (error) {
-            window.open(url, '_blank');
+            console.error('smartDownload: fetch falló (probable CORS)', error, url);
+            forceDownloadFallback(url, fileName);
+        }
+    }
+
+    function forceDownloadFallback(url, fileName) {
+        try {
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = fileName;
+            a.rel = 'noopener';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showMessage(getText('toastMessages.fileNotAvailable'));
+        } catch (fallbackError) {
+            console.error('forceDownloadFallback: error', fallbackError, url);
+            showMessage(getText('toastMessages.fileNotAvailable'));
         }
     }
 
@@ -428,6 +454,11 @@
                 
         // Reset viewer state
         resetModalViewer();
+
+        const epubBtn = document.getElementById('epubDownloadModal');
+        if (epubBtn) {
+            epubBtn.style.display = (currentLang === 'en' && vol.fileEpub) ? '' : 'none';
+        }
         
         // Show modal
         const modal = document.getElementById('pdfModal');
@@ -810,6 +841,16 @@
             }
         });
 
+        document.getElementById('epubDownloadModal').addEventListener('click', () => {
+            if (modalCurrentVolume && currentLang === 'en') {
+                const baseUrl = 'https://media.adashimaverse.com/Novelas/Ingles/';
+                const fileTarget = modalCurrentVolume.fileEpub;
+                if (fileTarget) {
+                    smartDownload(baseUrl + encodeURIComponent(fileTarget), fileTarget);
+                }
+            }
+        });
+
         document.getElementById('pdfRetryModal').addEventListener('click', () => {
             if (modalCurrentVolume) {
                 loadPdfInModal(modalCurrentVolume);
@@ -970,7 +1011,6 @@
         applyView(currentView);
         applySearch(searchTerm);
         attachAccordion();
-        renderGeneralDownloads();
     }
 
     function setView(view) {
@@ -1039,22 +1079,6 @@
         }
     }
 
-    function renderGeneralDownloads() {
-        const container = document.getElementById('general-downloads-container');
-        if (currentLang === 'es') {
-            container.style.display = 'none';
-            container.innerHTML = '';
-        } else {
-            container.style.display = 'flex';
-            const pdfLabel = getText('generalDownloads.pdf') || 'Download PDF Full';
-            const epubLabel = getText('generalDownloads.epub') || 'Download EPUB Full';
-            container.innerHTML = `
-                <button class="btn" onclick="smartDownload('https://media.adashimaverse.com/Novelas/Ingles/Adachi%20and%20Shimamura.pdf', 'Adachi and Shimamura Full.pdf')"><i class="fas fa-file-pdf"></i> ${pdfLabel}</button>
-                <button class="btn" onclick="smartDownload('https://media.adashimaverse.com/Novelas/Ingles/Adachi%20and%20Shimamura.epub', 'Adachi and Shimamura Full.epub')"><i class="fas fa-book-open"></i> ${epubLabel}</button>
-            `;
-        }
-    }
-
     async function loadMenu() {
         const menuVer = Math.floor(Date.now() / 86400000);
         try {
@@ -1101,7 +1125,6 @@
         document.getElementById('pdfErrorMsgModal').textContent = getText('toastMessages.documentNotAvailable');
         document.getElementById('pdfRetryText').textContent = getText('toastMessages.retry');
         
-        renderGeneralDownloads();
         renderVolumes();
         setView('list');
     }

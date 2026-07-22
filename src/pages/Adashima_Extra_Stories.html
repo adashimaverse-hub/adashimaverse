@@ -12,39 +12,29 @@
   <link rel="stylesheet" href="../css/extra-stories.css" />
   <link rel="stylesheet" href="../css/lang-switch.css" />
   <link rel="stylesheet" href="./src/components/styles/scrollbar.css" />
+  <link rel="stylesheet" href="../components/styles/menu.css" />
 </head>
 <body>
-  <!-- Particles -->
+  <div id="sidebar-container" style="display: contents;"></div>
   <div class="particles" id="particles"></div>
 
-  <main class="extra-main">
-    <!-- Sticky Back Button -->
-    <div class="back-button-sticky" onclick="history.back()">
-      <i class="fas fa-arrow-left"></i> <span id="backLabel">Back</span>
-    </div>
-
-    <!-- Header with Language Controls -->
-    <div class="extra-header">
-      <div class="header-top-controls">
-        <div class="lang-controls">
-          <div class="lang-wrapper">
-            <i class="fas fa-globe"></i>
-            <div class="lang-dropdown" id="langDropdown">
-              <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
-                <span id="langSelectedLabel">Español</span>
-                <i class="fas fa-chevron-down lang-caret"></i>
-              </button>
-              <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
-                <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
-                <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+  <div class="fixed-lang-controls">
+    <div class="lang-wrapper">
+      <i class="fas fa-globe"></i>
+      <div class="lang-dropdown" id="langDropdown">
+        <button type="button" class="lang-dropdown-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">
+          <span id="langSelectedLabel">Español</span>
+          <i class="fas fa-chevron-down lang-caret"></i>
+        </button>
+        <ul class="lang-dropdown-menu" id="langMenu" role="listbox">
+          <li class="lang-option" data-lang="es" data-label="Español" role="option">Español</li>
+          <li class="lang-option" data-lang="en" data-label="English" role="option">English</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <!-- Hero Section -->
+  <main class="extra-main">
     <section class="extra-hero">
       <div class="extra-hero-content">
         <h1 class="extra-hero-title"><i class="fas fa-book-open"></i> <span id="pageTitle">Extra Stories</span></h1>
@@ -54,7 +44,6 @@
       </div>
     </section>
 
-    <!-- Statistics Bar -->
     <div class="extra-stats" id="statsBar">
       <div class="stat-item">
         <i class="fas fa-book"></i>
@@ -73,7 +62,6 @@
       </div>
     </div>
 
-    <!-- Search & Controls -->
     <div class="extra-controls">
       <div class="search-wrapper">
         <input type="text" id="searchInput" placeholder="Search by title, type, or store..." aria-label="Search stories" />
@@ -81,12 +69,9 @@
       </div>
     </div>
 
-    <!-- Story Grid - Grouped by Volume -->
     <div class="extra-grid" id="storyGrid">
-      <!-- Rendered by JS -->
     </div>
 
-    <!-- Sources Section -->
     <section class="extra-sources" id="sourcesSection">
       <div class="sources-header" id="sourcesToggle">
         <div class="sources-title-wrapper">
@@ -104,7 +89,6 @@
           A complete archive of all extra stories, bonus chapters, and special content from the Adachi to Shimamura series, organized by their original source.
         </p>
         
-        <!-- Quick filter badges -->
         <div class="sources-filter" id="sourcesFilter">
           <button class="source-filter-btn active" data-filter="all">All</button>
           <button class="source-filter-btn" data-filter="manga">Manga</button>
@@ -114,27 +98,22 @@
         </div>
 
         <div id="sourcesContainer">
-          <!-- Rendered by JavaScript from sources.json -->
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="extra-footer" id="footerContent">
       <p>Adachi to Shimamura and all related rights belong to Hitoma Iruma</p>
       <p class="footer-sub">Created with love by fans, for fans · Not affiliated with any official entity</p>
     </footer>
   </main>
 
-  <!-- Floating Astronaut -->
   <div class="floating-adashima">
     <img src="../../assets/Imagenes/astronauta.png" alt="Adashima Astronauta" loading="lazy" decoding="async" onerror="this.style.display='none'" />
   </div>
 
-  <!-- ===== READER MODAL ===== -->
   <div class="reader-overlay" id="readerOverlay">
     <div class="reader-modal">
-      <!-- Reader Header -->
       <div class="reader-header">
         <div class="reader-header-left">
           <button class="reader-close" id="readerClose" aria-label="Close reader">
@@ -156,19 +135,15 @@
         </div>
       </div>
 
-      <!-- Reader Progress -->
       <div class="reader-progress-wrap">
         <div class="reader-progress-fill" id="readerProgress" style="width:0%"></div>
       </div>
 
-      <!-- Reader Body -->
       <div class="reader-body" id="readerBody">
         <div class="reader-content" id="readerContent">
-          <!-- Rendered by JS -->
         </div>
       </div>
 
-      <!-- Settings Panel -->
       <div class="reader-settings-panel" id="readerSettingsPanel">
         <div class="settings-header">
           <span class="settings-title">Reading Settings</span>
@@ -177,7 +152,6 @@
           </button>
         </div>
         <div class="settings-body">
-          <!-- Theme -->
           <div class="settings-group">
             <label class="settings-label">Theme</label>
             <div class="settings-theme-options">
@@ -196,7 +170,6 @@
             </div>
           </div>
 
-          <!-- Font Size -->
           <div class="settings-group">
             <label class="settings-label">Font Size</label>
             <div class="settings-font-size">
@@ -210,7 +183,6 @@
             </div>
           </div>
 
-          <!-- Font Family -->
           <div class="settings-group">
             <label class="settings-label">Font Family</label>
             <div class="settings-font-family">
@@ -225,7 +197,6 @@
             </div>
           </div>
 
-          <!-- Line Height -->
           <div class="settings-group">
             <label class="settings-label">Line Height</label>
             <div class="settings-line-height">
@@ -235,7 +206,6 @@
             </div>
           </div>
 
-          <!-- Reading Width -->
           <div class="settings-group">
             <label class="settings-label">Reading Width</label>
             <div class="settings-width">
@@ -252,10 +222,6 @@
   <div id="toast-message" class="toast-message"></div>
 
   <script>
-    // ========================================
-    // EXTRA STORIES - MAIN LOGIC
-    // ========================================
-
     let currentLang = localStorage.getItem('lang') || 'es';
     let translations = null;
     let stories = [];
@@ -264,9 +230,6 @@
     let isSwitching = false;
     let sourcesData = null;
 
-    // ========================================
-    // READER SETTINGS
-    // ========================================
     const READER_SETTINGS_KEY = 'adashima_reader_settings';
     
     const defaultSettings = {
@@ -298,7 +261,6 @@
       try {
         localStorage.setItem(READER_SETTINGS_KEY, JSON.stringify(readerSettings));
       } catch (e) {
-        // Ignore
       }
     }
 
@@ -308,39 +270,32 @@
       const content = document.getElementById('readerContent');
       if (!content) return;
 
-      // Apply theme
       const overlay = document.getElementById('readerOverlay');
       const modal = document.querySelector('.reader-modal');
       const body = document.querySelector('.reader-body');
       
-      // Remove existing theme classes
       overlay.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
       modal.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
       body.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
       
-      // Add current theme
       overlay.classList.add(`theme-${readerSettings.theme}`);
       modal.classList.add(`theme-${readerSettings.theme}`);
       body.classList.add(`theme-${readerSettings.theme}`);
 
-      // Apply font size to text
       const textEl = content.querySelector('.reader-text');
       if (textEl) {
         textEl.style.fontSize = `${readerSettings.fontSize}px`;
       }
 
-      // Apply font family to text
       if (textEl) {
         textEl.style.fontFamily = readerSettings.fontFamily;
       }
 
-      // Apply line height to paragraphs
       const paragraphs = content.querySelectorAll('.reader-text p');
       paragraphs.forEach(p => {
         p.style.lineHeight = readerSettings.lineHeight;
       });
 
-      // Apply reading width
       if (content) {
         content.style.maxWidth = `${readerSettings.readingWidth}px`;
       }
@@ -349,23 +304,17 @@
     function updateSettingsUI() {
       if (!readerSettings) return;
 
-      // Theme buttons
       document.querySelectorAll('.settings-theme-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.theme === readerSettings.theme);
       });
 
-      // Font size
       document.getElementById('fontSizeValue').textContent = `${readerSettings.fontSize}px`;
-
-      // Font family
       document.getElementById('fontFamilySelect').value = readerSettings.fontFamily;
 
-      // Line height
       document.querySelectorAll('.settings-lh-btn').forEach(btn => {
         btn.classList.toggle('active', parseFloat(btn.dataset.lh) === readerSettings.lineHeight);
       });
 
-      // Reading width
       document.querySelectorAll('.settings-width-btn').forEach(btn => {
         btn.classList.toggle('active', parseInt(btn.dataset.width) === readerSettings.readingWidth);
       });
@@ -384,9 +333,6 @@
       }
     }
 
-    // ========================================
-    // FALLBACK TRANSLATIONS
-    // ========================================
     const FALLBACK_TRANSLATIONS = {
       es: {
         pageTitle: "Historias Extra",
@@ -424,9 +370,6 @@
       }
     };
 
-    // ========================================
-    // PARTICLES
-    // ========================================
     function createParticles() {
       const container = document.getElementById('particles');
       if (!container) return;
@@ -442,9 +385,6 @@
       }
     }
 
-    // ========================================
-    // TOAST MESSAGE
-    // ========================================
     function showMessage(msg) {
       const t = document.getElementById('toast-message');
       if (!t) return;
@@ -453,9 +393,6 @@
       setTimeout(() => t.style.display = 'none', 3000);
     }
 
-    // ========================================
-    // LANGUAGE DROPDOWN
-    // ========================================
     function updateLangDropdownLabel() {
       const selectedOption = document.querySelector(`.lang-option[data-lang="${currentLang}"]`);
       const labelEl = document.getElementById('langSelectedLabel');
@@ -477,9 +414,6 @@
       return value || key;
     }
 
-    // ========================================
-    // LOAD TRANSLATIONS
-    // ========================================
     async function loadTranslations(lang) {
       try {
         const response = await fetch(`../data/extras/${lang}.json?v=${Date.now()}`);
@@ -488,15 +422,11 @@
         translations = data;
         return data;
       } catch (e) {
-        console.warn('Failed to load translations, using fallback:', e);
         translations = FALLBACK_TRANSLATIONS[lang] || FALLBACK_TRANSLATIONS.es;
         return translations;
       }
     }
 
-    // ========================================
-    // LOAD STORIES
-    // ========================================
     async function loadStories(lang) {
       try {
         const response = await fetch(`../data/extras/${lang}/index.json?v=${Date.now()}`);
@@ -506,30 +436,22 @@
         filteredStoriesCache = stories;
         return stories;
       } catch (e) {
-        console.warn('Failed to load stories:', e.message);
         stories = [];
         filteredStoriesCache = [];
         return [];
       }
     }
 
-    // ========================================
-    // LOAD STORY CONTENT
-    // ========================================
     async function loadStoryContent(lang, storyId) {
       try {
         const response = await fetch(`../data/extras/${lang}/${storyId}.json?v=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to load story content');
         return await response.json();
       } catch (e) {
-        console.warn('Failed to load story content:', e.message);
         return null;
       }
     }
 
-    // ========================================
-    // LOAD SOURCES DATA
-    // ========================================
     async function loadSources() {
       try {
         const response = await fetch(`../data/extras/sources.json?v=${Date.now()}`);
@@ -538,14 +460,10 @@
         sourcesData = data.sources;
         return sourcesData;
       } catch (e) {
-        console.warn('Failed to load sources:', e.message);
         return null;
       }
     }
 
-    // ========================================
-    // RENDER SOURCES FROM JSON
-    // ========================================
     function renderSources(filter = 'all') {
       if (!sourcesData) return;
       
@@ -664,9 +582,6 @@
       container.innerHTML = html || '<p class="sources-empty">No sources found for this filter.</p>';
     }
 
-    // ========================================
-    // SOURCES TOGGLE
-    // ========================================
     function initSourcesToggle() {
       const toggleBtn = document.getElementById('sourcesToggleBtn');
       const sourcesBody = document.getElementById('sourcesBody');
@@ -703,9 +618,6 @@
       });
     }
 
-    // ========================================
-    // UPDATE STATISTICS
-    // ========================================
     function updateStats(storyList) {
       const total = storyList.length;
       const volumes = new Set(storyList.map(s => s.volume || 'Uncategorized'));
@@ -720,16 +632,38 @@
       document.getElementById('statsTranslated').textContent = getText('statsTranslated');
     }
 
-    // ========================================
-    // RENDER STORY GRID - GROUPED BY VOLUME
-    // ========================================
     function renderStories(filter = '') {
       const grid = document.getElementById('storyGrid');
+      const statsBar = document.getElementById('statsBar');
+      const extraControls = document.querySelector('.extra-controls');
+      const sourcesSection = document.getElementById('sourcesSection');
+
       if (!grid) return;
+
+      if (currentLang === 'es') {
+        if (statsBar) statsBar.style.display = 'none';
+        if (extraControls) extraControls.style.display = 'none';
+        if (sourcesSection) sourcesSection.style.display = 'none';
+
+        grid.innerHTML = `
+          <div class="es-coming-soon">
+            <div class="es-coming-soon-icon">
+              <i class="fas fa-book-reader"></i>
+              <i class="fas fa-pencil-alt construction-icon"></i>
+            </div>
+            <h2 class="es-coming-soon-title">Traducciones en progreso</h2>
+            <p class="es-coming-soon-text">Estamos trabajando arduamente para traer todas las historias extra al español. ¡El contenido estará disponible próximamente!</p>
+          </div>
+        `;
+        return;
+      } else {
+        if (statsBar) statsBar.style.display = '';
+        if (extraControls) extraControls.style.display = '';
+        if (sourcesSection) sourcesSection.style.display = '';
+      }
 
       const searchTerm = filter.toLowerCase().trim();
 
-      // Filter stories and store in cache
       if (searchTerm) {
         filteredStoriesCache = stories.filter(story => {
           const title = (story.title || '').toLowerCase();
@@ -758,7 +692,6 @@
         return;
       }
 
-      // Group filtered stories by volume
       const groupedStories = {};
       filteredStoriesCache.forEach(story => {
         const volumeKey = story.volume || 'Uncategorized';
@@ -795,7 +728,6 @@
         `;
 
         storiesInVolume.forEach((story) => {
-          // Find the index in the filtered cache
           const actualIndex = filteredStoriesCache.indexOf(story);
           
           const typeBadge = story.type ? 
@@ -839,14 +771,9 @@
       });
     }
 
-    // ========================================
-    // READER
-    // ========================================
     async function openReader(index) {
-      // Use filteredStoriesCache instead of stories
       const story = filteredStoriesCache[index];
       if (!story) {
-        console.warn('Story not found at index:', index);
         return;
       }
 
@@ -949,9 +876,6 @@
       openReader(newIndex);
     }
 
-    // ========================================
-    // READER SETTINGS EVENT BINDING
-    // ========================================
     function initReaderSettings() {
       const settingsBtn = document.getElementById('readerSettingsBtn');
       const settingsClose = document.getElementById('settingsClose');
@@ -1033,9 +957,6 @@
       });
     }
 
-    // ========================================
-    // LANGUAGE SWITCHER
-    // ========================================
     async function switchLanguage(lang) {
       if (isSwitching || currentLang === lang) return;
       isSwitching = true;
@@ -1060,22 +981,35 @@
       document.getElementById('pageSubtitle').textContent = getText('pageSubtitle');
       document.getElementById('searchInput').placeholder = getText('searchPlaceholder');
       
-      const backLabel = document.getElementById('backLabel');
-      if (backLabel) backLabel.textContent = getText('back');
-      
       const readerBackLabel = document.getElementById('readerBackLabel');
       if (readerBackLabel) readerBackLabel.textContent = getText('back');
 
       document.getElementById('sourcesTitle').textContent = getText('sourcesTitle');
       document.getElementById('sourcesDescription').textContent = getText('sourcesDescription');
 
+      if (typeof window.translateMenu === 'function') {
+        try {
+          await window.translateMenu(lang);
+        } catch (e) {
+        }
+      } else {
+        let attempts = 0;
+        const maxAttempts = 20;
+        const menuCheck = setInterval(() => {
+          attempts++;
+          if (typeof window.translateMenu === 'function') {
+            window.translateMenu(lang);
+            clearInterval(menuCheck);
+          } else if (attempts >= maxAttempts) {
+            clearInterval(menuCheck);
+          }
+        }, 200);
+      }
+
       if (langToggle) langToggle.disabled = false;
       isSwitching = false;
     }
 
-    // ========================================
-    // INIT
-    // ========================================
     document.addEventListener('DOMContentLoaded', async function() {
       createParticles();
 
@@ -1086,9 +1020,6 @@
       document.getElementById('pageTitle').textContent = getText('pageTitle');
       document.getElementById('pageSubtitle').textContent = getText('pageSubtitle');
       document.getElementById('searchInput').placeholder = getText('searchPlaceholder');
-      
-      const backLabel = document.getElementById('backLabel');
-      if (backLabel) backLabel.textContent = getText('back');
       
       const readerBackLabel = document.getElementById('readerBackLabel');
       if (readerBackLabel) readerBackLabel.textContent = getText('back');
@@ -1156,6 +1087,37 @@
       }
 
       updateLangDropdownLabel();
+
+      const menuVer = Math.floor(Date.now() / 86400000);
+      fetch('../components/menu.html?v=' + menuVer)
+        .then(response => {
+          if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+          return response.text();
+        })
+        .then(data => {
+          data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+          const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+          if (!container) return;
+          container.innerHTML = data;
+
+          container.querySelectorAll('script').forEach(oldScript => {
+            const s = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(a => s.setAttribute(a.name, a.value));
+            s.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(s, oldScript);
+          });
+
+          setTimeout(() => {
+            document.dispatchEvent(new CustomEvent('menuLoaded'));
+          }, 100);
+        })
+        .catch(e => console.warn('menu.html no disponible:', e.message));
+
+      document.addEventListener('menuLoaded', function() {
+        if (typeof window.translateMenu === 'function') {
+          window.translateMenu(currentLang);
+        }
+      });
     });
   </script>
 </body>

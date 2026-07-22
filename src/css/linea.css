@@ -1,10 +1,5 @@
-/* ===== timeline-styles.css ===== */
-/* External CSS for Adashima Timeline page */
-
-/* ---------- imports ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
-/* ---------- reset & base ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -35,7 +30,6 @@ body {
   position: relative;
 }
 
-/* ---------- background layers ---------- */
 .page-bg {
   position: fixed;
   inset: 0;
@@ -110,7 +104,6 @@ body {
   100% { transform: translate(120px,-15px) scale(1.05) rotate(1deg); }
 }
 
-/* ---------- sakura petals ---------- */
 .sakura-container {
   position: fixed;
   top: 0;
@@ -152,12 +145,10 @@ body {
   50% { margin-left: var(--x-sway, 2.5vw); }
 }
 
-/* ---------- sidebar ---------- */
 #sidebar-container {
   display: contents;
 }
 
-/* ---------- main content ---------- */
 .main-content {
   flex: 1;
   position: relative;
@@ -170,7 +161,6 @@ body {
   width: calc(100% - 300px);
 }
 
-/* ---------- timeline header ---------- */
 .timeline-header {
   text-align: center;
   margin-bottom: 60px;
@@ -219,7 +209,6 @@ body {
   text-shadow: 0 0 8px #fff;
 }
 
-/* ---------- language controls ---------- */
 .lang-controls {
   position: absolute;
   top: 20px;
@@ -353,7 +342,6 @@ body {
   font-weight: 700;
 }
 
-/* ---------- year filters ---------- */
 .year-filters {
   display: flex;
   gap: 14px;
@@ -389,7 +377,6 @@ body {
   text-shadow: none;
 }
 
-/* ---------- timeline wrapper ---------- */
 .timeline-wrapper {
   width: 100%;
   max-width: 1050px;
@@ -426,7 +413,6 @@ body {
   will-change: transform;
 }
 
-/* ---------- year blocks ---------- */
 .year-block {
   display: flex;
   align-items: center;
@@ -456,7 +442,6 @@ body {
   transform: scale(1.05);
 }
 
-/* ---------- event rows ---------- */
 .event-row {
   display: grid;
   grid-template-columns: 1fr 40px 1fr;
@@ -485,7 +470,6 @@ body {
   justify-self: start;
 }
 
-/* ---------- event connector ---------- */
 .event-connector {
   position: absolute;
   top: 50%;
@@ -513,7 +497,6 @@ body {
   transform: translateY(-50%) scaleX(1);
 }
 
-/* ---------- event dot ---------- */
 .event-dot {
   position: relative;
   left: auto;
@@ -540,7 +523,6 @@ body {
   transform: scale(1);
 }
 
-/* ---------- expanded state ---------- */
 .timeline-wrapper.has-expanded .event-card {
   opacity: 0.4;
   filter: grayscale(30%) blur(3px);
@@ -548,7 +530,6 @@ body {
   pointer-events: none;
 }
 
-/* ---------- event card (bubble) ---------- */
 .event-card {
   width: var(--bubble-size);
   height: var(--bubble-size);
@@ -595,8 +576,6 @@ body {
   inset: 0;
   border-radius: 50%;
   overflow: hidden;
-  mask-image: radial-gradient(white, black);
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .bubble-cover img {
@@ -604,25 +583,22 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.72;
+  opacity: 0.9;
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
-  will-change: transform, opacity;
   backface-visibility: hidden;
-  transform: translateZ(0) scale(1.01);
+  transform: translateZ(0) scale(1);
   image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
 }
 
 .event-card:hover .bubble-cover img {
-  transform: translateZ(0) scale(1.12);
-  opacity: 0.95;
+  transform: translateZ(0) scale(1.06);
+  opacity: 1;
 }
 
 .bubble-content {
   display: none;
 }
 
-/* ---------- bubble overlay & modal ---------- */
 .bubble-overlay {
   display: none;
   position: fixed;
@@ -713,6 +689,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .event-season {
@@ -784,7 +761,6 @@ body {
   margin-bottom: 12px;
 }
 
-/* ---------- footer ---------- */
 .footer {
   text-align: center;
   margin-top: 80px;
@@ -801,7 +777,6 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-/* ---------- floating adashima ---------- */
 .floating-adashima {
   position: fixed;
   bottom: 30px;
@@ -824,7 +799,6 @@ body {
   100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* ---------- responsive ---------- */
 @media (max-width: 960px) {
   .main-content {
     width: 100%;

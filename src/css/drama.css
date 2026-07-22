@@ -1069,6 +1069,22 @@ h1.update-title {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(92,58,107,0.45);
 }
+.download-btn-tv.downloading {
+  animation: downloadPulse 0.5s ease;
+}
+.download-btn-tv.downloading i {
+  animation: downloadBounce 0.5s ease;
+}
+@keyframes downloadPulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.92); box-shadow: 0 2px 8px rgba(92,58,107,0.5); }
+  100% { transform: scale(1); }
+}
+@keyframes downloadBounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
 
 .fullscreen-btn {
   width: 44px;

@@ -26,32 +26,12 @@
     {
       "id": 0,
       "label": "CH 1",
-      "title": "CD DRAMA — 2nd YEAR",
-      "desc": "Enjoy this audio story that expands the character interactions during their second year, with the original cast voices.",
-      "badge": "Channel 1 · Drama",
-      "sub": "2nd YEAR",
-      "src": "https://media.adashimaverse.com/CD%20DRAMAS/CD%20DRAMA%202%C2%B0%20A%C3%91O.mp4",
-      "download": "CD DRAMA 2nd YEAR.mp4"
-    },
-    {
-      "id": 1,
-      "label": "CH 2",
-      "title": "SHIMAMURA SWORD",
-      "desc": "The most awkward moment in history. Listen to the iconic \"Shimamura Sword\".",
-      "badge": "Channel 2 · Extra",
-      "sub": "SHIMAMURA SWORD",
-      "src": "https://media.adashimaverse.com/CD%20DRAMAS/SHIMAMURA%20SWORD.mp4",
-      "download": "SHIMAMURA SWORD.mp4"
-    },
-    {
-      "id": 2,
-      "label": "CH 3",
       "title": "CD DRAMA — VOLUME 13",
-      "desc": "Exclusive audio content accompanying Volume 13 of the light novels. An unmissable moment in the story of Adachi and Shimamura.",
-      "badge": "Channel 3 · Vol. 13",
+      "desc": "Exclusive audio content accompanying Volume 13 of the light novels in English. An unmissable moment in the story of Adachi and Shimamura.",
+      "badge": "Channel 1 · Vol. 13",
       "sub": "VOLUME 13",
-      "src": "https://media.adashimaverse.com/CD%20DRAMAS/CD%20DRAMA%20VOL%2013.mp4",
-      "download": "CD DRAMA VOL 13.mp4"
+      "src": "https://media.adashimaverse.com/CD%20DRAMAS/ingles/Adachi%20and%20Shimamura%2013%20DRAMA%20CD.mp4",
+      "download": "Adachi and Shimamura 13 DRAMA CD.mp4"
     }
   ]
 }

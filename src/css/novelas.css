@@ -995,6 +995,19 @@ details[open] summary.novel-summary .chevron-icon,
     }
 }
 
+@media (max-width: 900px) {
+    #menu-component-wrapper .mobile-toggle {
+        left: 15px !important;
+        right: auto !important;
+    }
+
+    #menu-component-wrapper .sidebar {
+        max-height: none !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+}
+
 @media (max-width: 768px) {
     body { flex-direction: column; }
     

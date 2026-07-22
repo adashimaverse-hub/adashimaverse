@@ -6,23 +6,21 @@
   <meta name="theme-color" content="#1a1425" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="version" content="v4.0.0" />
+  <meta name="version" content="v4.1.0" />
   <title>Adashimaverse · Music</title>
   
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
   
-  <!-- External CSS -->
   <link rel="stylesheet" href="../components/styles/scrollbar.css" />
   <link rel="stylesheet" href="../css/music.css" />
+  <link rel="stylesheet" href="../components/styles/menu.css">
 </head>
 <body>
 
-  <!-- background layers -->
   <div class="stars-bg"></div>
   <div class="sparkle-container">
     <div class="sparkle"></div><div class="sparkle"></div>
@@ -51,13 +49,10 @@
   <div class="orb orb-blue-large"></div>
   <div class="orb orb-pink-top"></div>
 
-  <!-- Menu Container -->
   <div id="menu-container" style="display: contents;"></div>
 
-  <!-- Main Content - Full Width -->
   <div class="main-content" id="mainContent">
 
-    <!-- language selector -->
     <div class="lang-controls">
       <div class="lang-wrapper">
         <span class="iconify" data-icon="mdi:globe" data-inline="false"></span>
@@ -74,10 +69,8 @@
       </div>
     </div>
 
-    <!-- ===== MUSIC PAGE ===== -->
     <div class="music-page-container">
       
-      <!-- MUSIC LIBRARY VIEW -->
       <div class="music-library-view" id="musicLibraryView">
         <div class="music-header">
           <h1 class="music-page-title">
@@ -87,19 +80,11 @@
           <p class="music-page-subtitle" id="musicPageSubtitle">Original Soundtracks</p>
         </div>
         
-        <!-- Album Grid -->
         <div class="album-grid" id="albumGrid"></div>
       </div>
       
-      <!-- ALBUM DETAIL VIEW -->
       <div class="album-detail-view" id="albumDetailView" style="display:none;">
         <div class="album-detail-header">
-          <button class="back-to-library-btn" id="backToLibraryBtn" aria-label="Back to library">
-            <span class="iconify" data-icon="mdi:arrow-left" data-inline="false"></span>
-            <span id="backToLibraryLabel">Back to Music</span>
-          </button>
-          
-          <!-- Album Hero - Full Width -->
           <div class="album-hero">
             <div class="album-hero-artwork">
               <div class="album-artwork-glow"></div>
@@ -135,8 +120,12 @@
               </div>
             </div>
           </div>
+
+          <button class="back-to-library-btn" id="backToLibraryBtn" aria-label="Back to library">
+            <span class="iconify" data-icon="mdi:keyboard-backspace" data-inline="false"></span>
+            <span id="backToLibraryLabel">Back to Music</span>
+          </button>
           
-          <!-- Tracklist toolbar -->
           <div class="tracklist-toolbar">
             <div class="tracklist-toolbar-left">
               <h3>
@@ -161,7 +150,6 @@
           </div>
         </div>
         
-        <!-- Album track table - Standard View -->
         <div class="track-table-wrapper" id="trackTableWrapper">
           <div class="track-table">
             <div class="track-table-header" id="trackTableHeader">
@@ -170,13 +158,13 @@
               <span class="th-time">
                 <span class="iconify" data-icon="mdi:clock-outline" data-inline="false"></span>
               </span>
+              <span class="th-dl"></span>
               <span class="th-fav"></span>
             </div>
             <div class="track-table-body" id="albumTrackTable"></div>
           </div>
         </div>
         
-        <!-- Compact view -->
         <div class="compact-view-container" id="compactViewContainer" style="display:none;">
           <div class="compact-table-header">
             <span class="ch-number">#</span>
@@ -186,11 +174,11 @@
             <span class="ch-time">
               <span class="iconify" data-icon="mdi:clock-outline" data-inline="false"></span>
             </span>
+            <span class="ch-dl"></span>
           </div>
           <div class="compact-track-table" id="compactTrackTable"></div>
         </div>
         
-        <!-- Empty state -->
         <div class="empty-state" id="albumEmptyState" style="display:none;">
           <div class="empty-state-icon">
             <span class="iconify" data-icon="mdi:music-off" data-inline="false"></span>
@@ -199,7 +187,6 @@
           <p id="albumEmptyDesc">Try adjusting your search.</p>
         </div>
         
-        <!-- Album Credits Footer -->
         <div class="album-credits-footer" id="albumCreditsFooter">
           <div class="acf-release-date" id="acfReleaseDate"></div>
           <div class="acf-copyright" id="acfCopyright"></div>
@@ -209,7 +196,6 @@
       
     </div>
 
-    <!-- footer -->
     <footer class="footer" id="footer">
       <div class="footer-content">
         <div class="footer-text" id="footerText">
@@ -219,13 +205,11 @@
     </footer>
   </div>
 
-  <!-- ===== PLAYER BAR - Full Width ===== -->
   <div class="player-bar" id="playerBar" role="toolbar" aria-label="Music player">
     <div class="player-bar-inner">
-      <!-- Left: Artwork + Info -->
       <div class="player-bar-left">
         <div class="player-bar-thumb" id="playerThumb">
-          <img src="https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg" alt="Now playing" id="playerThumbImage" onerror="this.style.display='none'; this.parentElement.textContent='🌸';" />
+          <img src="../../assets/Imagenes/Adashima ost1.jpg" alt="Now playing" id="playerThumbImage" onerror="this.style.display='none'; this.parentElement.textContent='🌸';" />
         </div>
         <div class="player-bar-info">
           <div class="player-bar-title" id="playerTitle">Select a track</div>
@@ -233,7 +217,6 @@
         </div>
       </div>
 
-      <!-- Center: Controls -->
       <div class="player-bar-center">
         <div class="player-bar-controls">
           <button class="ctrl-btn ctrl-shift" id="shuffleBtn" aria-label="Shuffle" data-mobile-hide>
@@ -259,7 +242,6 @@
         </div>
       </div>
 
-      <!-- Right: Utility controls -->
       <div class="player-bar-right">
         <button class="ctrl-btn ctrl-fav" id="favBtn" aria-label="Toggle favorite" data-mobile-hide>
           <span class="iconify" data-icon="mdi:heart-outline" data-inline="false"></span>
@@ -280,26 +262,24 @@
     </div>
   </div>
 
-  <!-- ===== QUEUE DRAWER ===== -->
   <div class="queue-overlay" id="queueOverlay"></div>
   <div class="queue-drawer" id="queueDrawer" role="dialog" aria-label="Queue">
     <div class="queue-header">
-      <h4>Queue</h4>
+      <h4 id="queueDrawerTitle">Queue</h4>
       <button class="queue-close" id="queueClose" aria-label="Close queue">
         <span class="iconify" data-icon="mdi:close" data-inline="false"></span>
       </button>
     </div>
     <div class="queue-current" id="queueCurrent">
-      <span class="queue-current-label">Now Playing</span>
+      <span class="queue-current-label" id="queueNowPlayingLabel">Now Playing</span>
       <div id="queueCurrentTrack"></div>
     </div>
     <div class="queue-list-wrap">
-      <span class="queue-next-label">Next Up</span>
+      <span class="queue-next-label" id="queueNextUpLabel">Next Up</span>
       <div id="queueList"></div>
     </div>
   </div>
 
-  <!-- ===== EXPANDED PLAYER - FULLSCREEN ===== -->
   <div class="expanded-player-overlay" id="expandedPlayerOverlay">
     <div class="expanded-player-bg" id="expandedPlayerBg"></div>
     <div class="expanded-player-container">
@@ -308,12 +288,11 @@
       </button>
       
       <div class="expanded-player-grid">
-        <!-- Left Column: Artwork + Info + Controls -->
         <div class="expanded-player-left">
           <div class="expanded-artwork-wrapper">
             <div class="expanded-artwork-glow"></div>
             <div class="expanded-artwork">
-              <img src="https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg" alt="Now playing" id="expandedArtwork" />
+              <img src="../../assets/Imagenes/Adashima ost2.jpg" alt="Now playing" id="expandedArtwork" />
             </div>
           </div>
           
@@ -350,15 +329,13 @@
           </div>
         </div>
         
-        <!-- Right Column: Queue -->
         <div class="expanded-player-right">
           <div class="expanded-queue-panel">
             <div class="expanded-queue-header">
-              <span class="expanded-queue-title">Up Next</span>
+              <span class="expanded-queue-title" id="expandedQueueTitle">Up Next</span>
               <span class="expanded-queue-count" id="expandedQueueCount">0 songs</span>
             </div>
             <div class="expanded-queue-list" id="expandedQueueList">
-              <!-- Queue items rendered here -->
             </div>
           </div>
         </div>
@@ -366,31 +343,65 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- SCRIPTS -->
-  <!-- ============================================================ -->
   <script>
-    // ============================================================
-    // R2 CONFIGURATION - Cloudflare R2 Storage
-    // ============================================================
-    
     const R2_CONFIG = {
-        // Your Cloudflare R2 public bucket URL
         baseUrl: 'https://pub-669d8b8b8b7c4f8d92985f2a8392663d.r2.dev',
         musicPath: 'music'
     };
 
-    // ============================================================
-    // URL GENERATOR - Builds full R2 URLs from album folder + filename
-    // ============================================================
-    
     function getTrackUrl(albumFolder, filename) {
         return `${R2_CONFIG.baseUrl}/${R2_CONFIG.musicPath}/${albumFolder}/${encodeURIComponent(filename)}`;
     }
 
-    // ============================================================
-    // LANGUAGE & CONTENT
-    // ============================================================
+    async function triggerDirectDownload(url, filename) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Download request failed');
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+            window.URL.revokeObjectURL(blobUrl);
+            link.remove();
+        }, 200);
+    }
+
+    async function downloadSingleTrack(url, filename, btnElement) {
+        const icon = btnElement ? btnElement.querySelector('.iconify') : null;
+        try {
+            if (btnElement) btnElement.disabled = true;
+            if (icon) {
+                icon.classList.remove('dl-success', 'dl-error');
+                icon.setAttribute('data-icon', 'mdi:loading');
+                icon.classList.add('spin-anim');
+            }
+            await triggerDirectDownload(url, filename);
+            if (icon) {
+                icon.classList.remove('spin-anim');
+                icon.setAttribute('data-icon', 'mdi:check-circle');
+                icon.classList.add('dl-success', 'dl-pop');
+            }
+        } catch (error) {
+            if (icon) {
+                icon.classList.remove('spin-anim');
+                icon.setAttribute('data-icon', 'mdi:alert-circle');
+                icon.classList.add('dl-error', 'dl-pop');
+            }
+        } finally {
+            setTimeout(() => {
+                if (btnElement) btnElement.disabled = false;
+                if (icon) {
+                    icon.classList.remove('dl-success', 'dl-error', 'dl-pop');
+                    icon.setAttribute('data-icon', 'mdi:download');
+                }
+            }, 1400);
+        }
+    }
+
     let currentLang = localStorage.getItem('lang') || 'es';
     let musicData = null;
     let currentAlbumId = null;
@@ -409,7 +420,6 @@
       }
     }
 
-    // Language dropdown
     const langDropdown = document.getElementById('langDropdown');
     const langToggle = document.getElementById('langToggle');
     if (langDropdown && langToggle) {
@@ -430,6 +440,9 @@
           if (typeof loadMusicData === 'function') {
             loadMusicData();
           }
+          if (typeof window.translateMenu === 'function') {
+            window.translateMenu(lang);
+          }
         });
       });
       document.addEventListener('click', (e) => {
@@ -446,11 +459,7 @@
       });
     }
 
-    // ============================================================
-    // MUSIC PLAYER - ALBUM-BASED
-    // ============================================================
     (function() {
-      // ----- STATE -----
       let albums = [];
       let currentAlbum = null;
       let currentTrackId = null;
@@ -465,7 +474,6 @@
       let isQueueOpen = false;
       let viewMode = 'library';
 
-      // Load favorites from localStorage
       try {
         const saved = localStorage.getItem('adashima_music_favorites');
         if (saved) {
@@ -474,7 +482,6 @@
         }
       } catch (e) {}
 
-      // Load view preference
       try {
         const savedView = localStorage.getItem('adashima_music_view');
         if (savedView === 'compact' || savedView === 'standard') {
@@ -482,7 +489,6 @@
         }
       } catch (e) {}
 
-      // DOM refs
       const audio = new Audio();
       const musicLibraryView = document.getElementById('musicLibraryView');
       const albumDetailView = document.getElementById('albumDetailView');
@@ -541,7 +547,6 @@
       const expandedQueueList = document.getElementById('expandedQueueList');
       const expandedQueueCount = document.getElementById('expandedQueueCount');
       
-      // Album detail refs
       const albumDetailCover = document.getElementById('albumDetailCover');
       const albumDetailCoverFallback = document.getElementById('albumDetailCoverFallback');
       const albumDetailBadge = document.getElementById('albumDetailBadge');
@@ -563,7 +568,6 @@
       const backToLibraryLabel = document.getElementById('backToLibraryLabel');
       const playAlbumLabel = document.getElementById('playAlbumLabel');
 
-      // ----- PLAYER VISIBILITY -----
       function showPlayer() {
         if (!playerVisible) {
           playerVisible = true;
@@ -580,7 +584,6 @@
         }
       }
 
-      // ----- LOAD MUSIC DATA -----
       async function loadMusicData() {
         try {
           const jsonPath = currentLang === 'es' 
@@ -604,12 +607,19 @@
           albumTracksHeading.textContent = data.ost?.tracksHeading || 'Tracks';
           albumEmptyTitle.textContent = data.ost?.noTracksFound || 'No tracks found';
           albumEmptyDesc.textContent = data.ost?.noTracksDesc || 'Try adjusting your search.';
+
+          const queueDrawerTitle = document.getElementById('queueDrawerTitle');
+          const queueNowPlayingLabel = document.getElementById('queueNowPlayingLabel');
+          const queueNextUpLabel = document.getElementById('queueNextUpLabel');
+          const expandedQueueTitle = document.getElementById('expandedQueueTitle');
+
+          if (queueDrawerTitle) queueDrawerTitle.textContent = data.player?.queueTitle || 'Queue';
+          if (queueNowPlayingLabel) queueNowPlayingLabel.textContent = data.player?.nowPlaying || 'Now Playing';
+          if (queueNextUpLabel) queueNextUpLabel.textContent = data.player?.nextUp || 'Next Up';
+          if (expandedQueueTitle) expandedQueueTitle.textContent = data.player?.nextUp || 'Up Next';
           
           renderAlbumGrid();
-          
-          console.log(`[Music] Loaded ${albums.length} albums`);
         } catch (error) {
-          console.error('[Music] Failed to load music data:', error);
           albumGrid.innerHTML = `
             <div class="error-state">
               <span class="iconify" data-icon="mdi:alert-circle" data-inline="false"></span>
@@ -619,7 +629,6 @@
         }
       }
 
-      // ----- RENDER ALBUM GRID -----
       function renderAlbumGrid() {
         albumGrid.innerHTML = '';
         
@@ -632,7 +641,7 @@
           card.setAttribute('aria-label', `Open album: ${album.title}`);
           
           const trackCount = album.tracks ? album.tracks.length : 0;
-          const coverImage = album.coverImage || 'https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg';
+          const coverImage = album.coverImage || '../../assets/Imagenes/Adashima ost3.webp';
           
           card.innerHTML = `
             <div class="album-card-artwork">
@@ -649,7 +658,7 @@
             <div class="album-card-info">
               <div class="album-card-title">${album.title}</div>
               ${album.title_jp ? `<div class="album-card-title-jp">${album.title_jp}</div>` : ''}
-              <div class="album-card-meta">${trackCount} ${trackCount === 1 ? 'track' : 'tracks'}</div>
+              <div class="album-card-meta">${trackCount} ${trackCount === 1 ? (musicData?.trackList?.track || 'track') : (musicData?.trackList?.tracks || 'tracks')}</div>
             </div>
           `;
           
@@ -678,7 +687,6 @@
         }
       }
 
-      // ----- OPEN ALBUM -----
       function openAlbum(albumId) {
         albumScrollPosition = window.scrollY;
         
@@ -689,7 +697,7 @@
         currentAlbumId = albumId;
         viewMode = 'album';
         
-        albumDetailCover.src = album.coverImage || 'https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg';
+        albumDetailCover.src = album.coverImage || '../../assets/Imagenes/Adashima ost3.webp';
         albumDetailCover.onerror = function() {
           this.style.display = 'none';
           albumDetailCoverFallback.style.display = 'flex';
@@ -705,7 +713,7 @@
         albumDetailYear.textContent = album.year || '2020';
         
         const trackCount = album.tracks ? album.tracks.length : 0;
-        albumDetailTrackCount.textContent = `${trackCount} ${trackCount === 1 ? 'track' : 'tracks'}`;
+        albumDetailTrackCount.textContent = `${trackCount} ${trackCount === 1 ? (musicData?.trackList?.track || 'track') : (musicData?.trackList?.tracks || 'tracks')}`;
         
         let totalSec = 0;
         if (album.tracks) {
@@ -755,7 +763,6 @@
         applyViewMode();
       }
 
-      // ----- APPLY VIEW MODE -----
       function applyViewMode() {
         const standardWrapper = document.getElementById('trackTableWrapper');
         const compactContainer = document.getElementById('compactViewContainer');
@@ -777,7 +784,6 @@
         renderAlbumTracks(albumSearchInput.value);
       }
 
-      // ----- TOGGLE VIEW -----
       function toggleView(view) {
         if (currentView === view) return;
         currentView = view;
@@ -787,7 +793,6 @@
         applyViewMode();
       }
 
-      // ----- RENDER ALBUM TRACKS -----
       function renderAlbumTracks(query = '') {
         if (!currentAlbum || !currentAlbum.tracks) {
           albumTrackTable.innerHTML = '';
@@ -809,7 +814,7 @@
           });
         }
         
-        albumResultCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'track' : 'tracks'}`;
+        albumResultCount.textContent = `${filtered.length} ${filtered.length === 1 ? (musicData?.trackList?.track || 'track') : (musicData?.trackList?.tracks || 'tracks')}`;
         
         if (filtered.length === 0) {
           albumTrackTable.innerHTML = '';
@@ -820,7 +825,6 @@
         
         albumEmptyState.style.display = 'none';
         
-        // ---- Standard View ----
         albumTrackTable.innerHTML = '';
         filtered.forEach((t, index) => {
           const row = document.createElement('div');
@@ -860,6 +864,11 @@
             <div class="col-duration-col">
               <span class="track-duration">${t.duration}</span>
             </div>
+            <div class="col-dl-col">
+              <button class="track-dl-btn" data-filename="${t.filename}" aria-label="Download ${primaryTitle}">
+                <span class="iconify" data-icon="mdi:download" data-inline="false"></span>
+              </button>
+            </div>
             <div class="col-fav-col">
               <button class="track-fav-btn ${isFav ? 'faved' : ''}" data-id="${t.id}" aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
                 <span class="iconify" data-icon="${isFav ? 'mdi:heart' : 'mdi:heart-outline'}" data-inline="false"></span>
@@ -870,6 +879,7 @@
           row.addEventListener('click', (e) => {
             if (e.target.closest('.col-play-btn')) return;
             if (e.target.closest('.track-fav-btn')) return;
+            if (e.target.closest('.track-dl-btn')) return;
             playTrack(t.id);
           });
           
@@ -878,6 +888,13 @@
             playTrack(t.id);
           });
           
+          row.querySelector('.track-dl-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const albumFolder = currentAlbum?.folder || currentAlbum?.id;
+            const trackUrl = getTrackUrl(albumFolder, t.filename);
+            downloadSingleTrack(trackUrl, t.filename, e.currentTarget);
+          });
+
           row.querySelector('.track-fav-btn').addEventListener('click', (e) => {
             e.stopPropagation();
             toggleFavorite(t.id);
@@ -887,7 +904,6 @@
           albumTrackTable.appendChild(row);
         });
         
-        // ---- Compact View ----
         compactTrackTable.innerHTML = '';
         filtered.forEach((t, index) => {
           const row = document.createElement('div');
@@ -909,12 +925,25 @@
             <span class="cr-artist">${t.artist}</span>
             <span class="cr-album">${currentAlbum.title}</span>
             <span class="cr-duration">${t.duration}</span>
+            <span class="cr-dl">
+              <button class="track-dl-btn compact-dl-btn" data-filename="${t.filename}" aria-label="Download ${primaryTitle}">
+                <span class="iconify" data-icon="mdi:download" data-inline="false"></span>
+              </button>
+            </span>
           `;
           
-          row.addEventListener('click', () => {
+          row.addEventListener('click', (e) => {
+            if (e.target.closest('.track-dl-btn')) return;
             playTrack(t.id);
           });
           
+          row.querySelector('.track-dl-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const albumFolder = currentAlbum?.folder || currentAlbum?.id;
+            const trackUrl = getTrackUrl(albumFolder, t.filename);
+            downloadSingleTrack(trackUrl, t.filename, e.currentTarget);
+          });
+
           compactTrackTable.appendChild(row);
         });
         
@@ -924,7 +953,6 @@
         }
       }
 
-      // ----- HELPERS -----
       function formatTime(sec) {
         if (!sec || isNaN(sec)) return '0:00';
         const m = Math.floor(sec / 60);
@@ -943,7 +971,6 @@
         } catch (e) {}
       }
 
-      // ----- PLAY TRACK - UPDATED WITH R2 -----
       function playTrack(id) {
         const track = getTrack(id);
         if (!track) return;
@@ -955,11 +982,9 @@
           return;
         }
         
-        // Get the album folder from the album data
         const album = albums.find(a => a.id === currentAlbumId);
         const albumFolder = album?.folder || currentAlbumId;
         
-        // CONSTRUCT URL AUTOMATICALLY from R2 base + folder + filename
         audio.src = getTrackUrl(albumFolder, track.filename);
         currentTrackId = id;
         audio.load();
@@ -968,8 +993,7 @@
           updateUI();
           renderAlbumTracks(albumSearchInput.value);
           updateExpandedQueue();
-        }).catch((err) => {
-          console.warn('Playback failed:', err);
+        }).catch(() => {
           isPlaying = false;
           updateUI();
           showPlaybackError(track.title_jp || track.title);
@@ -978,7 +1002,6 @@
         updateQueue(id);
       }
 
-      // ----- TOGGLE PLAY/PAUSE -----
       function togglePlay() {
         if (!currentTrackId) {
           if (currentAlbum && currentAlbum.tracks && currentAlbum.tracks.length) {
@@ -994,8 +1017,7 @@
             isPlaying = true;
             updateUI();
             renderAlbumTracks(albumSearchInput.value);
-          }).catch((err) => {
-            console.warn('Playback failed:', err);
+          }).catch(() => {
             isPlaying = false;
             updateUI();
           });
@@ -1004,7 +1026,6 @@
         renderAlbumTracks(albumSearchInput.value);
       }
 
-      // ----- NAVIGATION -----
       function prevTrack() {
         if (!currentTrackId || !currentAlbum || !currentAlbum.tracks) return;
         const idx = queue.indexOf(currentTrackId);
@@ -1020,7 +1041,6 @@
         else if (repeatMode === 2) { audio.currentTime = 0; audio.play(); }
       }
 
-      // ----- FAVORITES -----
       function toggleFavorite(id) {
         if (favorites.has(id)) favorites.delete(id);
         else favorites.add(id);
@@ -1029,7 +1049,6 @@
         renderAlbumTracks(albumSearchInput.value);
       }
 
-      // ----- QUEUE -----
       function updateQueue(id) {
         if (!queue.includes(id)) queue.push(id);
         renderQueue();
@@ -1083,10 +1102,9 @@
         });
         
         if (expandedQueueCount) {
-          expandedQueueCount.textContent = `${queue.length} songs`;
+          expandedQueueCount.textContent = `${queue.length} ${queue.length === 1 ? (musicData?.trackList?.track || 'song') : (musicData?.trackList?.tracks || 'songs')}`;
         }
         
-        // Scroll to current track
         if (currentIndex >= 0) {
           const items = expandedQueueList.querySelectorAll('.expanded-queue-item');
           if (items[currentIndex]) {
@@ -1106,7 +1124,7 @@
             `;
           }
         } else {
-          queueCurrentTrack.innerHTML = `<span class="qct-empty">No track playing</span>`;
+          queueCurrentTrack.innerHTML = `<span class="qct-empty">${musicData?.player?.noTrackPlaying || 'No track playing'}</span>`;
         }
       }
 
@@ -1131,7 +1149,6 @@
         updateQueueUI();
       }
 
-      // ----- EXPANDED PLAYER -----
       function toggleExpandedPlayer() {
         isExpandedPlayerOpen = !isExpandedPlayerOpen;
         if (isExpandedPlayerOpen) {
@@ -1152,7 +1169,7 @@
           expandedTitle.textContent = displayTitle;
           expandedArtist.textContent = track.artist;
           expandedAlbum.textContent = currentAlbum?.title || '';
-          expandedArtwork.src = currentAlbum?.coverImage || 'https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg';
+          expandedArtwork.src = currentAlbum?.coverImage || '../../assets/Imagenes/Adashima ost2.jpg';
           
           if (currentAlbum?.coverImage) {
             expandedPlayerBg.style.background = `
@@ -1170,7 +1187,6 @@
         expandedPlay.querySelector('.iconify')?.setAttribute('data-icon', icon);
       }
 
-      // ----- UI UPDATE -----
       function updateUI() {
         const track = getTrack(currentTrackId);
         if (track) {
@@ -1179,7 +1195,7 @@
           playerArtist.textContent = track.artist;
           const thumbImg = playerThumb.querySelector('img');
           if (thumbImg && currentAlbum) {
-            thumbImg.src = currentAlbum.coverImage || 'https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg';
+            thumbImg.src = currentAlbum.coverImage || '../../assets/Imagenes/Adashima ost1.jpg';
             thumbImg.onerror = function() {
               this.style.display = 'none';
               this.parentElement.textContent = '🌸';
@@ -1191,7 +1207,7 @@
           const thumbImg = playerThumb.querySelector('img');
           if (thumbImg) {
             thumbImg.style.display = 'block';
-            thumbImg.src = currentAlbum?.coverImage || 'https://m.media-amazon.com/images/I/918-hilJBgL._SX425_.jpg';
+            thumbImg.src = currentAlbum?.coverImage || '../../assets/Imagenes/Adashima ost1.jpg';
           }
         }
         const icon = isPlaying ? 'mdi:pause' : 'mdi:play';
@@ -1213,9 +1229,11 @@
           favBtn.classList.remove('faved');
         }
         
-        const saveIcon = saveAlbumBtn.querySelector('.iconify');
-        if (saveIcon) {
-          saveIcon.setAttribute('data-icon', isFav ? 'mdi:heart' : 'mdi:heart-outline');
+        if (saveAlbumBtn) {
+            const saveIcon = saveAlbumBtn.querySelector('.iconify');
+            if (saveIcon) {
+              saveIcon.setAttribute('data-icon', isFav ? 'mdi:heart' : 'mdi:heart-outline');
+            }
         }
       }
 
@@ -1230,7 +1248,6 @@
         }, 4000);
       }
 
-      // ----- BACK TO LIBRARY -----
       function goBackToLibrary() {
         viewMode = 'library';
         currentAlbum = null;
@@ -1250,23 +1267,27 @@
         hidePlayer();
       }
 
-      // ============================================================
-      // AUDIO EVENTS
-      // ============================================================
       audio.addEventListener('loadedmetadata', () => {
-        duration = audio.duration;
+        duration = Number(audio.duration) || 0;
         totalTimeLabel.textContent = formatTime(duration);
-        progressSlider.max = duration || 1000;
-        expandedProgressSlider.max = duration || 1000;
+        progressSlider.max = duration > 0 ? 1000 : 1000;
+        expandedProgressSlider.max = duration > 0 ? 1000 : 1000;
         expandedTotalTime.textContent = formatTime(duration);
+        if (duration > 0 && currentTrackId) {
+          const currentTime = Number(audio.currentTime) || 0;
+          const pct = (currentTime / duration) * 1000;
+          progressSlider.value = pct;
+          expandedProgressSlider.value = pct;
+        }
       });
 
       audio.addEventListener('timeupdate', () => {
-        const currentTime = audio.currentTime;
+        const currentTime = Number(audio.currentTime) || 0;
+        const trackDuration = Number(audio.duration) || 0;
         currentTimeLabel.textContent = formatTime(currentTime);
         expandedCurrentTime.textContent = formatTime(currentTime);
-        if (duration) {
-          const pct = (currentTime / duration) * 1000;
+        if (trackDuration > 0) {
+          const pct = (currentTime / trackDuration) * 1000;
           progressSlider.value = pct;
           expandedProgressSlider.value = pct;
         }
@@ -1280,16 +1301,12 @@
       audio.addEventListener('play', () => { isPlaying = true; updateUI(); });
       audio.addEventListener('pause', () => { isPlaying = false; updateUI(); });
       audio.addEventListener('error', () => {
-        console.warn('Audio error');
         if (currentTrackId) {
           const track = getTrack(currentTrackId);
           if (track) showPlaybackError(track.title_jp || track.title);
         }
       });
 
-      // ============================================================
-      // CONTROL EVENT LISTENERS
-      // ============================================================
       playBtn.addEventListener('click', togglePlay);
       prevBtn.addEventListener('click', prevTrack);
       nextBtn.addEventListener('click', nextTrack);
@@ -1297,9 +1314,18 @@
       shuffleBtn.addEventListener('click', () => {
         shuffle = !shuffle;
         shuffleBtn.classList.toggle('active', shuffle);
-        if (shuffle && currentAlbum && currentAlbum.tracks) {
+        expandedShuffle.classList.toggle('active', shuffle);
+        if (!currentAlbum || !currentAlbum.tracks || !currentAlbum.tracks.length) return;
+        if (shuffle) {
           queue = [...currentAlbum.tracks].sort(() => Math.random() - 0.5).map(t => t.id);
-        } else if (currentAlbum && currentAlbum.tracks) {
+          if (currentTrackId) {
+            const others = queue.filter(id => id !== currentTrackId);
+            if (others.length) {
+              const randomId = others[Math.floor(Math.random() * others.length)];
+              playTrack(randomId);
+            }
+          }
+        } else {
           queue = currentAlbum.tracks.map(t => t.id);
         }
         renderQueue();
@@ -1315,11 +1341,21 @@
       });
 
       progressSlider.addEventListener('input', (e) => {
-        if (duration) { audio.currentTime = (e.target.value / 1000) * duration; }
+        if (duration > 0) {
+          const seekTime = (Number(e.target.value) / 1000) * duration;
+          audio.currentTime = seekTime;
+          currentTimeLabel.textContent = formatTime(seekTime);
+          expandedCurrentTime.textContent = formatTime(seekTime);
+        }
       });
 
       expandedProgressSlider.addEventListener('input', (e) => {
-        if (duration) { audio.currentTime = (e.target.value / 1000) * duration; }
+        if (duration > 0) {
+          const seekTime = (Number(e.target.value) / 1000) * duration;
+          audio.currentTime = seekTime;
+          currentTimeLabel.textContent = formatTime(seekTime);
+          expandedCurrentTime.textContent = formatTime(seekTime);
+        }
       });
 
       volumeSlider.addEventListener('input', (e) => {
@@ -1383,11 +1419,21 @@
         }
       });
 
-      shuffleAlbumBtn.addEventListener('click', () => { shuffleBtn.click(); });
-
-      saveAlbumBtn.addEventListener('click', () => {
-        if (currentTrackId) { toggleFavorite(currentTrackId); updateFavUI(); }
+      shuffleAlbumBtn.addEventListener('click', () => {
+        if (!currentAlbum || !currentAlbum.tracks || !currentAlbum.tracks.length) return;
+        shuffle = true;
+        shuffleBtn.classList.add('active');
+        queue = [...currentAlbum.tracks].sort(() => Math.random() - 0.5).map(t => t.id);
+        renderQueue();
+        updateExpandedQueue();
+        playTrack(queue[0]);
       });
+
+      if (saveAlbumBtn) {
+          saveAlbumBtn.addEventListener('click', () => {
+            if (currentTrackId) { toggleFavorite(currentTrackId); updateFavUI(); }
+          });
+      }
 
       document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT') return;
@@ -1421,9 +1467,38 @@
       window.loadMusicData = loadMusicData;
       window.toggleView = toggleView;
 
-      console.log('[Music] Album-based player initialized with R2 storage');
     })();
-    
+
+    const menuVer = Math.floor(Date.now() / 86400000);
+    fetch('../components/menu.html?v=' + menuVer)
+        .then(response => {
+            if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+            return response.text();
+        })
+        .then(data => {
+            data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+            const container = document.getElementById('menu-container') || document.getElementById('sidebar-container');
+            if (!container) return;
+            container.innerHTML = data;
+
+            container.querySelectorAll('script').forEach(oldScript => {
+                const s = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(a => s.setAttribute(a.name, a.value));
+                s.appendChild(document.createTextNode(oldScript.innerHTML));
+                oldScript.parentNode.replaceChild(s, oldScript);
+            });
+
+            setTimeout(() => {
+                document.dispatchEvent(new CustomEvent('menuLoaded'));
+            }, 100);
+        })
+        .catch(e => console.warn('menu.html no disponible:', e.message));
+
+    document.addEventListener('menuLoaded', function() {
+        if (typeof window.translateMenu === 'function') {
+            window.translateMenu(currentLang);
+        }
+    });
   </script>
 
 </body>

@@ -272,7 +272,11 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-    #menu-component-wrapper .mobile-toggle { display: flex !important; }
+    #menu-component-wrapper .mobile-toggle {
+        display: flex !important;
+        left: auto !important;
+        right: 15px !important;
+    }
 
     #menu-component-wrapper .sidebar {
         position: fixed;
@@ -292,7 +296,9 @@
         width: 56px;
         height: 56px;
         font-size: 1.4rem;
-        left: 12px; top: 12px;
+        right: 12px;
+        left: auto;
+        top: 12px;
     }
 
     #menu-component-wrapper .sidebar {
@@ -337,7 +343,7 @@
 }
 
 @media (max-width: 420px) {
-    #menu-component-wrapper .mobile-toggle { width: 62px; height: 62px; font-size: 1.5rem; }
+    #menu-component-wrapper .mobile-toggle { width: 62px; height: 62px; font-size: 1.5rem; right: 12px; left: auto; }
     #menu-component-wrapper .sidebar-inner { padding: 18px; gap: 14px; }
     
     #menu-component-wrapper .sidebar-box img {

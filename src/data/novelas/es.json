@@ -26,6 +26,7 @@
     "goTo": "Ir a página",
     "fullscreen": "Pantalla completa (F)",
     "downloadPDF": "Descargar PDF",
+    "downloadEPUB": "Descargar EPUB",
     "thumbnails": "Miniaturas",
     "loadingDocument": "Cargando documento..."
   },
@@ -150,28 +151,28 @@
       "id": "E1",
       "title": "Adachi to Shimamura Especial 1 Español",
       "desc": "Publicado en 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/3/31/LN99CL3.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164641",
+      "thumbnail": "../../assets/Imagenes/Especial1.webp",
       "file": "Adachi to Shimamura Especial 1 Español (1).pdf"
     },
     {
       "id": "E2",
       "title": "Adachi to Shimamura Especial 2 Español",
       "desc": "Publicado en 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/7/75/LN99CL4.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164726",
+      "thumbnail": "../../assets/Imagenes/Especial2.webp",
       "file": "Adachi to Shimamura Especial 2 Español (2).pdf"
     },
     {
       "id": "E3",
       "title": "Adachi to Shimamura Especial 3 Español",
       "desc": "Publicado en 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/c/cd/LN99CL5.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164826",
+      "thumbnail": "../../assets/Imagenes/Especial3.webp",
       "file": "Adachi to Shimamura Especial 3 Español (1).pdf"
     },
     {
       "id": "E4",
       "title": "Adachi to Shimamura Especial 4 Español",
       "desc": "Publicado en 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/a/a7/LN99CL6.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164902",
+      "thumbnail": "../../assets/Imagenes/Especial4.webp",
       "file": "Adachi to Shimamura Especial 4 Español (2).pdf"
     },
     {
@@ -194,14 +195,6 @@
       "desc": "Publicado el 8 de noviembre del 2024. Ilustrado por Raemz.",
       "thumbnail": "https://sevenseasentertainment.com/wp-content/uploads/2025/08/adachiShimamuraLNSS2_site.jpg",
       "file": "Adachi to Shimamura Volumen SS2 Español.pdf"
-    },
-    {
-      "id": "ESC",
-      "title": "Extra Stories Collection",
-      "desc": "Colección de historias extras.",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_G_2P7mtYJGqau2ZqkzFnlaK7cW23Xgdga-i3i-ZvuQQpKq13hDdOZH9M&s=10",
-      "file": "_Adachi and Shimamura- Extra Stories Collection.pdf",
-      "isExtra": true
     }
   ]
 }

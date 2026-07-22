@@ -6,32 +6,49 @@
     <title>Adashima - Statistics</title>
     <link rel="preconnect" href="https://media.adashimaverse.com" crossorigin>
     <link rel="dns-prefetch" href="https://media.adashimaverse.com">
-    <!-- Iconify -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="../css/stats.css">
     <link rel="stylesheet" href="./src/components/styles/scrollbar.css" />
+    <link rel="stylesheet" href="../components/styles/menu.css">
+    <style>
+        body {
+            display: flex;
+            align-items: flex-start;
+        }
+        main.stats-main {
+            flex: 1 1 auto;
+            min-width: 0;
+            margin: 0;
+        }
+        body {
+            padding-top: 0;
+        }
+        .sidebar {
+            top: 0;
+        }
+        @media (max-width: 900px) {
+            body {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Particles (from otros.css) -->
+    <div id="sidebar-container" style="display: contents;"></div>
+
     <div class="particles" id="particles"></div>
 
-    <!-- Floating Decorations (from otros.css) -->
     <div class="floating-decor decor-1"><iconify-icon icon="fa6-regular:star"></iconify-icon></div>
     <div class="floating-decor decor-2"><iconify-icon icon="fa6-regular:moon"></iconify-icon></div>
     <div class="floating-decor decor-3"><iconify-icon icon="fa6-regular:snowflake"></iconify-icon></div>
 
-    <main class="stats-main">
-        <!-- Sticky Back Button -->
-        <div class="back-button-sticky" onclick="history.back()">
-            <iconify-icon icon="fa6-solid:arrow-left"></iconify-icon> Back
-        </div>
-
+    <main class="stats-main main-content">
         <div class="stats-header">
             <h1 class="stats-title"><iconify-icon icon="fa6-regular:heart"></iconify-icon> Adachi &amp; Shimamura <iconify-icon icon="fa6-regular:heart"></iconify-icon></h1>
             <p class="stats-subtitle">An interactive archive exploring the publication history, translation timeline, and structure of the entire series.</p>
         </div>
 
-        <!-- Navigation -->
         <nav class="stats-nav" id="statsNav">
             <button class="stats-nav-item active" data-section="overview">Overview</button>
             <button class="stats-nav-item" data-section="dashboard">Dashboard</button>
@@ -43,35 +60,26 @@
             <button class="stats-nav-item" data-section="achievements">Achievements</button>
         </nav>
 
-        <!-- Loading State -->
         <div id="statsLoading" class="stats-loading">
             <div class="stats-spinner"></div>
             <p>Loading statistics...</p>
         </div>
 
-        <!-- Content -->
         <div id="statsContent" class="stats-content" style="display:none;"></div>
 
-        <!-- Footer -->
         <div class="stats-footer">
             <p>Adachi and Shimamura Statistics · Built with care</p>
             <p class="stats-footer-sub">Data sourced from the light novel series</p>
         </div>
     </main>
 
-    <!-- Floating Astronaut (from otros) -->
     <div class="floating-adashima">
         <img src="../../assets/Imagenes/astronauta.png" alt="Adashima Astronauta" loading="lazy" decoding="async" onerror="this.style.display='none'">
     </div>
 
-    <!-- Toast Message -->
     <div id="toastMessage" class="toast-message"></div>
 
     <script>
-    // ========================================
-    // ADA SHIMA STATISTICS - MAIN LOGIC
-    // ========================================
-
     let volumes = [];
     let statsSummary = {};
     let achievements = [];
@@ -90,10 +98,6 @@
     let scrollTimeout = null;
     let navListenersAttached = false;
 
-    // ========================================
-    // PARTICLES
-    // ========================================
-
     function createParticles() {
         const container = document.getElementById('particles');
         if (!container) return;
@@ -109,10 +113,6 @@
         }
     }
 
-    // ========================================
-    // TOAST
-    // ========================================
-
     function showToast(message) {
         const toast = document.getElementById('toastMessage');
         if (!toast) return;
@@ -123,10 +123,6 @@
             toast.style.display = 'none';
         }, 2500);
     }
-
-    // ========================================
-    // HELPERS
-    // ========================================
 
     function formatDate(dateStr) {
         if (!dateStr) return '—';
@@ -241,10 +237,6 @@
             }));
     }
 
-    // ========================================
-    // CALCULATE STATS
-    // ========================================
-
     function calculateStats(data) {
         const activeVolumes = data.filter(v => !v.is_upcoming && v.page_count > 0);
         const totalVolumes = data.length;
@@ -268,7 +260,6 @@
         const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
         const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
 
-        // Calculate publication gaps
         const sortedByDate = [...activeVolumes].sort((a, b) => 
             new Date(a.jp_release).getTime() - new Date(b.jp_release).getTime()
         );
@@ -320,7 +311,6 @@
             publicationEnd: maxDate.getFullYear().toString(),
         };
 
-        // Calculate achievements
         const sortedByChapters = [...activeVolumes].sort((a, b) => b.chapters - a.chapters);
 
         achievements = [
@@ -382,7 +372,6 @@
             },
         ];
 
-        // Calculate fun facts
         funFacts = [
             {
                 icon: 'fa6-solid:percent',
@@ -434,10 +423,6 @@
         ];
     }
 
-    // ========================================
-    // FETCH DATA
-    // ========================================
-
     async function fetchStats() {
         try {
             const response = await fetch('../data/stats/en.json');
@@ -460,10 +445,6 @@
         }
     }
 
-    // ========================================
-    // RENDER FUNCTIONS
-    // ========================================
-
     function renderAll() {
         const container = document.getElementById('statsContent');
         container.innerHTML = `
@@ -477,7 +458,6 @@
             ${renderAchievements()}
             ${renderFunFacts()}
         `;
-        // Re-attach event listeners after render
         attachVolumeClickListeners();
         attachFilterListeners();
     }
@@ -774,7 +754,6 @@
         const category = getCategoryBreakdown();
         const total = volumes.length;
 
-        // Pages per volume bars
         let pagesBars = '';
         volumes.filter(v => v.page_count > 0).forEach(volume => {
             const percentage = (volume.page_count / maxPages) * 100;
@@ -791,7 +770,6 @@
             `;
         });
 
-        // Chapters per volume bars
         let chaptersBars = '';
         volumes.filter(v => v.page_count > 0).forEach(volume => {
             const percentage = (volume.chapters / maxChapters) * 100;
@@ -806,7 +784,6 @@
             `;
         });
 
-        // Cumulative pages
         let cumulativeBars = '';
         cumulative.forEach(item => {
             const percentage = (item.pages / maxCumulative) * 100;
@@ -820,7 +797,6 @@
             `;
         });
 
-        // Translation delay trend
         let trendBars = '';
         trendData.forEach(item => {
             const percentage = (item.delay / maxTrendDelay) * 100;
@@ -840,7 +816,6 @@
             `;
         });
 
-        // Scatter plot
         let scatterPoints = '';
         scatter.forEach(item => {
             const xPercent = (item.pages / maxScatterPages) * 100;
@@ -852,7 +827,6 @@
             `;
         });
 
-        // Category breakdown
         let categoryItems = '';
         const categoryConfigs = [
             { key: 'main', label: 'Main Volumes', color: '#6366f1' },
@@ -877,7 +851,6 @@
             `;
         });
 
-        // Publication gaps
         let gapItems = '';
         publicationGaps.forEach(gap => {
             const maxGap = Math.max(...publicationGaps.map(g => g.days));
@@ -991,7 +964,6 @@
             `;
         }
 
-        // Build volume options
         const vol1Options = volumes.filter(v => v.id !== compareVolume2).map(v => `
             <option value="${v.id}" ${v.id === compareVolume1 ? 'selected' : ''}>#${v.volume_number} - ${v.title}</option>
         `).join('');
@@ -1295,10 +1267,6 @@
         `;
     }
 
-    // ========================================
-    // EVENT LISTENERS
-    // ========================================
-
     function attachVolumeClickListeners() {
         document.querySelectorAll('.volume-card').forEach(card => {
             card.removeEventListener('click', handleVolumeClick);
@@ -1369,10 +1337,6 @@
         if (sort) setSortDelay(sort);
     }
 
-    // ========================================
-    // INTERACTIONS
-    // ========================================
-
     function setSortDelay(value) {
         sortDelay = value;
         renderAll();
@@ -1434,10 +1398,6 @@
         });
     }
 
-    // ========================================
-    // SCROLL SPY (for active navigation)
-    // ========================================
-
     function initScrollSpy() {
         const sections = document.querySelectorAll('.section-reveal');
 
@@ -1458,7 +1418,6 @@
             }
         }
 
-        // Throttled scroll handler
         let ticking = false;
         window.addEventListener('scroll', function() {
             if (!ticking) {
@@ -1470,13 +1429,8 @@
             }
         });
 
-        // Also update on resize
         window.addEventListener('resize', updateActiveSection);
     }
-
-    // ========================================
-    // INTERSECTION OBSERVER (for animations)
-    // ========================================
 
     let sectionObserver = null;
     let cardObserver = null;
@@ -1525,16 +1479,11 @@
         });
     }
 
-    // ========================================
-    // INIT
-    // ========================================
-
     document.addEventListener('DOMContentLoaded', () => {
         createParticles();
         fetchStats();
     });
 
-    // Expose functions globally
     window.setSortDelay = setSortDelay;
     window.setSearchQuery = setSearchQuery;
     window.setFilterType = setFilterType;
@@ -1542,6 +1491,40 @@
     window.setCompareVolume2 = setCompareVolume2;
     window.toggleVolume = toggleVolume;
     window.scrollToSection = scrollToSection;
+
+    let currentLang = localStorage.getItem('lang') || 'es';
+
+    const menuVer = Math.floor(Date.now() / 86400000);
+    fetch('../components/menu.html?v=' + menuVer)
+        .then(response => {
+            if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al cargar el menú');
+            return response.text();
+        })
+        .then(data => {
+            data = data.replace(/src="\.\/(assets\/)/g, 'src="../../$1').replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="../../../index.html"');
+            const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
+            if (!container) return;
+            container.innerHTML = data;
+
+            container.querySelectorAll('script').forEach(oldScript => {
+                const s = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(a => s.setAttribute(a.name, a.value));
+                s.appendChild(document.createTextNode(oldScript.innerHTML));
+                oldScript.parentNode.replaceChild(s, oldScript);
+            });
+
+            setTimeout(() => {
+                document.dispatchEvent(new CustomEvent('menuLoaded'));
+            }, 100);
+        })
+        .catch(e => console.warn('menu.html no disponible:', e.message));
+
+    document.addEventListener('menuLoaded', function() {
+        if (typeof window.translateMenu === 'function') {
+            window.translateMenu(currentLang);
+            console.log('Menu auto-translated to:', currentLang);
+        }
+    });
     </script>
 </body>
 </html>

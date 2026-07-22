@@ -12,18 +12,15 @@
   "emptyStateDesc": "Try a different search term",
   "emptyStateSuggestion": "Try searching by chapter number or volume",
   "footer": "Unofficial Adachi to Shimamura fan site.<br>Created by fans, non-profit.<br>Adachi to Shimamura and all rights belong to Hitoma Iruma.",
-  
   "chapterLabels": {
     "antologia": "Anthology",
     "chapter": "Chapter",
     "volume": "Volume"
   },
-  
   "modal": {
     "reading": "Reading:",
     "closeReader": "Close reader"
   },
-  
   "pdfControls": {
     "zoomOut": "Zoom out (-)",
     "zoomIn": "Zoom in (+)",
@@ -35,14 +32,14 @@
     "fullscreen": "Fullscreen (F)",
     "downloadPDF": "Download PDF",
     "thumbnails": "Thumbnails",
-    "loadingDocument": "Loading document..."
+    "loadingDocument": "Loading document...",
+    "modeSingle": "Page mode",
+    "modeCascade": "Cascade reading"
   },
-  
   "reader": {
     "pages": "pg.",
     "pagesLabel": "pgs."
   },
-  
   "toastMessages": {
     "fileNotAvailable": "File not available.",
     "documentNotAvailable": "Document not available.",
@@ -50,7 +47,6 @@
     "errorOnPage": "Error on pg.",
     "retry": "Retry"
   },
-  
   "volumeThumbnails": {
     "volume_1": "https://images.yenpress.com/imgs/9781975320034.jpg?w=285&h=422&type=books&s=cd0fb4b0bf42f4c348d4a8e60746ac13",
     "volume_2": "https://images.yenpress.com/imgs/9781975336172.jpg?w=408&h=612&type=books&s=8c223df875c16415275d5901bd8b12ed",
@@ -62,7 +58,6 @@
     "volume_8": "https://m.media-amazon.com/images/I/71NkarzvZcL._SY425_.jpg",
     "volume_9": "https://media.adashimaverse.com/Manga/thumbnails/volume9.jpg"
   },
-  
   "chapterThumbnails": {
     "1": "https://media.adashimaverse.com/Manga/thumbnails/chapter1.jpg",
     "2": "https://media.adashimaverse.com/Manga/thumbnails/chapter2.jpg",
@@ -142,7 +137,6 @@
     "56": "https://media.adashimaverse.com/Manga/thumbnails/chapter56.jpg",
     "57": "https://media.adashimaverse.com/Manga/thumbnails/chapter57.jpg"
   },
-  
   "chapterPages": {
     "1": 26,
     "2": 24,
@@ -222,7 +216,6 @@
     "56": 30,
     "57": 30
   },
-  
   "chapterDescriptions": {
     "1": "Adachi and Shimamura",
     "2": "Adachi Question",
@@ -302,7 +295,6 @@
     "56": "Sakura Christmas Scrolls 2",
     "57": "Sakura's Ark"
   },
-  
   "chapterPdfMap": {
     "1": "Ch.1.pdf",
     "2": "Ch.2.pdf",

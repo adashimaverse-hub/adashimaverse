@@ -29,6 +29,7 @@
     "goTo": "Go to page",
     "fullscreen": "Fullscreen (F)",
     "downloadPDF": "Download PDF",
+    "downloadEPUB": "Download EPUB",
     "thumbnails": "Thumbnails",
     "loadingDocument": "Loading document..."
   },
@@ -158,7 +159,7 @@
       "id": "E1",
       "title": "Special 1",
       "desc": "Published in 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/3/31/LN99CL3.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164641",
+      "thumbnail": "../../assets/Imagenes/Especial1.webp",
       "filePdf": "Adachi and Shimamura - Anime Special Novel 1.pdf",
       "fileEpub": "Adachi and Shimamura - Anime Special Novel 1.epub",
       "translator": "Sneikki"
@@ -167,7 +168,7 @@
       "id": "E2",
       "title": "Special 2",
       "desc": "Published in 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/7/75/LN99CL4.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164726",
+      "thumbnail": "../../assets/Imagenes/Especial2.webp",
       "filePdf": "Adachi and Shimamura BD Extra 2.pdf",
       "fileEpub": "Adachi and Shimamura - Anime Special Novel 2.epub",
       "translator": "Sneikki"
@@ -176,7 +177,7 @@
       "id": "E3",
       "title": "Special 3",
       "desc": "Published in 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/c/cd/LN99CL5.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164826",
+      "thumbnail": "../../assets/Imagenes/Especial3.webp",
       "filePdf": "Adachi and Shimamura BD Extra 3.pdf",
       "fileEpub": "Adachi and Shimamura - Anime Special Novel 3.epub",
       "translator": "Sneikki"
@@ -185,7 +186,7 @@
       "id": "E4",
       "title": "Special 4",
       "desc": "Published in 2020.",
-      "thumbnail": "https://static.wikia.nocookie.net/adachi-to-shimamura/images/a/a7/LN99CL6.jpg/revision/latest/scale-to-width-down/1000?cb=20250811164902",
+      "thumbnail": "../../assets/Imagenes/Especial4.webp",
       "filePdf": "Adachi and Shimamura BD Extra 4.pdf",
       "fileEpub": "Adachi and Shimamura - Anime Special Novel 4.epub",
       "translator": "Sneikki"
