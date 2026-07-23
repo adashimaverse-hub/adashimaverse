@@ -1,19 +1,19 @@
 {
-  "publishDate": "2026-07-05",
+  "publishDate": "2026-07-22",
   "es": {
     "title": "¡Nueva actualización disponible!",
     "messages": [
-      "¡Ho-ho-ho! Hola, soy Yashiro. Actualmente estamos trabajando en una versión en inglés del sitio para que más personas puedan disfrutar del contenido.",
-      "Esta adaptación aún se encuentra en desarrollo. Poco a poco iremos incorporando más contenido y mejorando la experiencia en ambos idiomas.",
-      "La actualización estará disponible pronto. ¡Gracias por tu paciencia y por seguir apoyando el proyecto!"
+      "¡Ho-ho-ho! Hola, soy Yashiro. Por fin llegó la actualización de contenido en inglés, permitiendo que más personas puedan disfrutar del sitio y su contenido.",
+      "También se agregó la nueva sección de OST, junto con otras mejoras y ajustes generales para seguir ampliando la experiencia del sitio.",
+      "El contenido de la sección de bonus en español será traducido próximamente. ¡Gracias por tu paciencia y por seguir apoyando el proyecto!"
     ]
   },
   "en": {
     "title": "New update available!",
     "messages": [
-      "Ho-ho-ho! Hello, I'm Yashiro. We're currently working on an English version of the website so that more people can enjoy its content.",
-      "This version is still under development. We'll gradually add more content and continue improving the experience in both languages.",
-      "The update will be available very soon. Thank you for your patience and for supporting the project!"
+      "Ho-ho-ho! Hello, I'm Yashiro. The English content update has finally arrived, allowing more people to enjoy the website and its content.",
+      "The new OST section has also been added, along with other improvements and general adjustments to continue expanding the website experience.",
+      "Thank you for your patience and for continuing to support the project!"
     ]
   }
 }
