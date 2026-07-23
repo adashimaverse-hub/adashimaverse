@@ -451,6 +451,8 @@
       }
     }
 
+    updateLangLabel();
+
     const langDropdown = document.getElementById('langDropdown');
     const langToggle = document.getElementById('langToggle');
     if (langDropdown && langToggle) {
@@ -648,7 +650,10 @@
           if (queueNowPlayingLabel) queueNowPlayingLabel.textContent = data.player?.nowPlaying || 'Now Playing';
           if (queueNextUpLabel) queueNextUpLabel.textContent = data.player?.nextUp || 'Next Up';
           if (expandedQueueTitle) expandedQueueTitle.textContent = data.player?.nextUp || 'Up Next';
-          
+
+          const footerText = document.getElementById('footerText');
+          if (footerText && data.footer?.text) footerText.innerHTML = data.footer.text;
+
           renderAlbumGrid();
         } catch (error) {
           albumGrid.innerHTML = `
