@@ -1068,9 +1068,9 @@
       const hintEl = document.getElementById('newsHint');
       if (!hintEl) return;
       if (newsDialogState.currentMessageIndex < NEWS_CONTENT.messages.length - 1) {
-        hintEl.textContent = contentData?.news?.hintNext || "Haz clic para continuar...";
+        hintEl.textContent = contentData?.news?.hintNext || (currentLang === 'en' ? "Click to continue..." : "Haz clic para continuar...");
       } else {
-        hintEl.textContent = contentData?.news?.hintClose || "Haz clic para cerrar";
+        hintEl.textContent = contentData?.news?.hintClose || (currentLang === 'en' ? "Click to close" : "Haz clic para cerrar");
       }
     }
 
@@ -1080,7 +1080,7 @@
       const hintEl = document.getElementById('newsHint');
       if (hintEl) {
         hintEl.style.opacity = '1';
-        hintEl.textContent = contentData?.news?.hintClose || "Haz clic para cerrar";
+        hintEl.textContent = contentData?.news?.hintClose || (currentLang === 'en' ? "Click to close" : "Haz clic para cerrar");
       }
     }
 
