@@ -86,25 +86,17 @@
         window.menuToggle = menuToggle;
         window.toggleMenu = menuToggle;
 
-        function getSiteRootPath() {
-            const pathname = window.location.pathname.replace(/\/+$/, '');
-            const segments = pathname.split('/').filter(Boolean);
-            if (segments.length === 0) return '/';
-            if (segments[segments.length - 1].includes('.')) {
-                segments.pop();
-            }
-            const srcIndex = segments.indexOf('src');
-            if (srcIndex >= 0) {
-                segments.splice(srcIndex);
-            }
-            return '/' + segments.join('/');
-        }
-
+        // Corrección del botón Volver al Inicio
         document.getElementById('menu-back-home').addEventListener('click', function(e) {
             e.preventDefault();
             const route = this.getAttribute('data-route');
-            const homeRoute = route && route !== '#' ? route : `${getSiteRootPath()}/index.html`;
-            window.location.href = homeRoute;
+            
+            if (route && route !== '#') {
+                window.location.href = route;
+            } else {
+                // Redirige directamente a la raíz del dominio actual de forma segura
+                window.location.href = window.location.origin + '/index.html';
+            }
         });
 
         // Close menu when clicking outside
@@ -122,17 +114,14 @@
         // Translation function with relative paths
         window.translateMenu = async function(lang) {
             try {
-                // Build the path based on language using relative path
                 const jsonPath = `../data/menu/${lang}.json?v=${Date.now()}`;
                 
-                // Fetch the JSON file
                 const response = await fetch(jsonPath);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const t = await response.json();
                 
-                // Apply translations to DOM elements
                 const logoSub = document.getElementById('menu-logo-sub');
                 if (logoSub) logoSub.textContent = t.logoSub;
                 
@@ -160,17 +149,14 @@
                 const backText = document.getElementById('menu-back-text');
                 if (backText) backText.textContent = t.backText;
 
-                // Store current language
                 window.currentMenuLang = lang;
                 
             } catch (error) {
                 console.warn('Error loading menu translations, using fallback:', error);
-                // Fallback to embedded translations
                 fallbackTranslate(lang);
             }
         };
 
-        // Fallback translations in case JSON fails to load
         function fallbackTranslate(lang) {
             const translations = {
                 es: {
