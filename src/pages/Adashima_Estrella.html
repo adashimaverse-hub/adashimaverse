@@ -220,6 +220,10 @@
                 <button class="btn-download-profile" onclick="downloadProfile('adachiModal')" id="profile-download-btn">
                     <i class="fas fa-download"></i> <span id="profile-download-label"></span>
                 </button>
+                <br>
+                <button class="btn-close-profile" onclick="closeModal('adachiModal')" id="profile-close-btn">
+                    <i class="fas fa-times"></i> <span id="profile-close-label"></span>
+                </button>
             </div>
         </div>
     </div>
@@ -259,6 +263,10 @@
             <div style="text-align:center;">
                 <button class="btn-download-profile" onclick="downloadProfile('shimamuraModal')" id="profile-download-btn2">
                     <i class="fas fa-download"></i> <span id="profile-download-label2"></span>
+                </button>
+                <br>
+                <button class="btn-close-profile" onclick="closeModal('shimamuraModal')" id="profile-close-btn2">
+                    <i class="fas fa-times"></i> <span id="profile-close-label2"></span>
                 </button>
             </div>
         </div>
@@ -502,6 +510,9 @@ function renderUI() {
     document.querySelectorAll('#profile-download-label, #profile-download-label2').forEach(el => {
         el.textContent = getString('downloadProfile');
     });
+    document.querySelectorAll('#profile-close-label, #profile-close-label2').forEach(el => {
+        el.textContent = getString('closeButton');
+    });
     
     document.documentElement.lang = currentLang;
 }
@@ -583,6 +594,9 @@ function updateProfileContent() {
     
     document.querySelectorAll('#profile-download-label, #profile-download-label2').forEach(el => {
         el.textContent = getString('downloadProfile');
+    });
+    document.querySelectorAll('#profile-close-label, #profile-close-label2').forEach(el => {
+        el.textContent = getString('closeButton');
     });
 }
 
@@ -1462,17 +1476,77 @@ function openProfileModal(id) {
 
 function showInstructions() { openModal('instructionsModal'); }
 
-document.addEventListener('DOMContentLoaded', () => {
-    ['adachiModal','shimamuraModal','rewardModal','instructionsModal'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('click', e => { if (e.target === el) closeModal(id); });
-    });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            ['adachiModal','shimamuraModal','rewardModal','instructionsModal'].forEach(id => closeModal(id));
-        }
-    });
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        ['adachiModal','shimamuraModal','rewardModal','instructionsModal'].forEach(id => closeModal(id));
+    }
 });
+
+['rewardModal','instructionsModal'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', e => { if (e.target === el) closeModal(id); });
+});
+
+(function setupProfileModalOutsideClose() {
+    const PROFILE_MODAL_IDS = ['adachiModal', 'shimamuraModal'];
+
+    function getOpenProfileModal() {
+        for (const id of PROFILE_MODAL_IDS) {
+            const el = document.getElementById(id);
+            if (el && el.classList.contains('show')) return el;
+        }
+        return null;
+    }
+
+    function isInsideDialog(modalEl, x, y) {
+        const dialog = modalEl.querySelector('.modal-dialog');
+        if (!dialog) return false;
+        const r = dialog.getBoundingClientRect();
+        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    }
+
+    document.addEventListener('click', e => {
+        const modalEl = getOpenProfileModal();
+        if (!modalEl) return;
+        if (e.target === modalEl) closeModal(modalEl.id);
+    }, true);
+
+    let touchStartPoint = null;
+    document.addEventListener('touchstart', e => {
+        const modalEl = getOpenProfileModal();
+        if (!modalEl || !e.touches[0]) { touchStartPoint = null; return; }
+        touchStartPoint = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+        const modalEl = getOpenProfileModal();
+        if (!modalEl || !touchStartPoint || !e.changedTouches[0]) { touchStartPoint = null; return; }
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const dx = Math.abs(endX - touchStartPoint.x);
+        const dy = Math.abs(endY - touchStartPoint.y);
+        const wasTap = dx < 12 && dy < 12;
+        if (wasTap && !isInsideDialog(modalEl, touchStartPoint.x, touchStartPoint.y) && !isInsideDialog(modalEl, endX, endY)) {
+            closeModal(modalEl.id);
+        }
+        touchStartPoint = null;
+    }, { passive: true });
+
+    if (window.PointerEvent) {
+        let pointerDownWasOutside = false;
+        document.addEventListener('pointerdown', e => {
+            const modalEl = getOpenProfileModal();
+            pointerDownWasOutside = !!modalEl && !isInsideDialog(modalEl, e.clientX, e.clientY);
+        });
+        document.addEventListener('pointerup', e => {
+            if (e.pointerType === 'mouse') return;
+            const modalEl = getOpenProfileModal();
+            if (!modalEl || !pointerDownWasOutside) return;
+            if (!isInsideDialog(modalEl, e.clientX, e.clientY)) closeModal(modalEl.id);
+            pointerDownWasOutside = false;
+        });
+    }
+})();
 
 function updateMenuButtonState(isOpen) {
     var btn = document.getElementById('menu-button');

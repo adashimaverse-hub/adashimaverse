@@ -1139,6 +1139,32 @@ body.menu-open .sidebar-box {
 }
 .btn-download-profile:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(240,98,146,0.4); }
 
+.btn-close-profile {
+  display: none;
+  align-items: center; gap: 8px;
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(252,228,236,0.9), rgba(227,242,253,0.9));
+  color: var(--sakura-dark); border: 2px solid transparent;
+  background-clip: padding-box;
+  padding: 11px 26px;
+  border-radius: 30px; font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 0.9rem; letter-spacing: 0.3px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(240,98,146,0.18), inset 0 0 0 1px rgba(240,98,146,0.25);
+  transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+  position: relative; overflow: hidden;
+}
+.btn-close-profile i {
+  transition: transform 0.35s ease;
+}
+.btn-close-profile:hover {
+  background: linear-gradient(135deg, var(--sakura-dark), var(--hougetsu-dark));
+  color: white;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(240,98,146,0.35);
+}
+.btn-close-profile:hover i { transform: rotate(90deg); }
+.btn-close-profile:active { transform: translateY(0) scale(0.97); }
+
 .btn-pdf-download {
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 12px;
@@ -1284,6 +1310,9 @@ body.menu-open .sidebar-box {
   .binder-page .grid-2 { grid-template-columns: 1fr; }
   .binder-page h2.section-title { font-size: 1.4rem; }
   .binder-page .qa-answer { font-size: 1.2rem; }
+  .btn-close-profile { display: inline-flex; }
+  #adachiModal .btn-close-modal,
+  #shimamuraModal .btn-close-modal { display: none !important; }
   .hud { position: fixed !important; top: 70px; right: 8px; display: flex !important; z-index: 9000; }
   .hud-btn { font-size: 0.65rem; padding: 7px 9px; }
   .final-message {
@@ -1304,11 +1333,22 @@ body.menu-open .sidebar-box {
   .final-download-text { display: none; }
   .final-girls { bottom: 20px; gap: 15px; }
   .final-girl-img { width: 80px; }
-  .btn-close-modal { display: none !important; }
+  .btn-close-modal {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    top: 12px;
+    right: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
 }
 
 @media (max-width: 480px) {
-  .btn-close-modal { display: none !important; }
+  .btn-close-modal {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
