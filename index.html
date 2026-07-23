@@ -1159,6 +1159,8 @@ html = html.replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="/index
       if (typeof window.translateMenu === 'function') {
         window.translateMenu(currentLang);
       }
+      const backBtn = document.getElementById('menu-back-home');
+      if (backBtn) backBtn.style.display = 'none';
     });
 
     if ('serviceWorker' in navigator) {
