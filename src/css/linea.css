@@ -651,7 +651,7 @@ body {
 .modal-close {
   position: absolute;
   top: 16px;
-  right: 18px;
+  left: 18px;
   background: rgba(209,135,162,0.15);
   border: 1px solid rgba(209,135,162,0.5);
   border-radius: 50%;

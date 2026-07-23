@@ -434,6 +434,32 @@
         // ----- HELPERS -----
         function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+        async function forceDownload(url, fileName, onProgress) {
+            const response = await fetch(url);
+            if (!response.ok || !response.body) throw new Error('Network response was not ok');
+            const total = Number(response.headers.get('Content-Length')) || 0;
+            const reader = response.body.getReader();
+            const chunks = [];
+            let received = 0;
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                received += value.length;
+                if (onProgress) onProgress(total ? Math.round((received / total) * 100) : null);
+            }
+            const blob = new Blob(chunks);
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+        }
+
         function showChannelIndicator(text) {
             channelIndicator.textContent = text;
             channelIndicator.classList.add('show');
@@ -663,22 +689,24 @@
             crtVideo.classList.remove('channel-switching');
             setStaticIntensity(0.06);
 
-            downloadBtn.onclick = async (e) => {
+            downloadBtn.onclick = (e) => {
                 e.preventDefault();
+                if (downloadBtn.disabled) return;
+                const originalLabel = downloadLabel.textContent;
+                downloadBtn.disabled = true;
                 downloadBtn.classList.add('downloading');
 
-                const resp = await fetch(ch.src, { cache: 'no-store' });
-                const blob = await resp.blob();
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = ch.download || '';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                URL.revokeObjectURL(url);
-
-                downloadBtn.classList.remove('downloading');
+                forceDownload(ch.src, ch.download || '', (pct) => {
+                    downloadLabel.textContent = pct !== null && pct !== undefined
+                        ? `${pct}%`
+                        : getString('downloadingLabel');
+                }).catch((error) => {
+                    console.error('Error forzando la descarga:', error);
+                }).finally(() => {
+                    downloadLabel.textContent = originalLabel;
+                    downloadBtn.classList.remove('downloading');
+                    downloadBtn.disabled = false;
+                });
             };
 
             updateInfoCard(ch);

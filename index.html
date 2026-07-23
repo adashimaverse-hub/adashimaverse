@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="version" content="v1.5.0" />
-  <title>Adashimaverse</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="./src/css/index.css" />
-  <link rel="stylesheet" href="./src/components/styles/menu.css" />
-  <link rel="stylesheet" href="./src/components/styles/scrollbar.css" />
-  <link rel="stylesheet" href="./src/components/styles/scr.css" />
-  <link rel="stylesheet" href="./src/components/styles/feedback.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="version" content="v1.5.0">
+  <title>AdashimaVerse</title>
+  <meta name="description" content="The most complete site about Adachi and Shimamura. Read the novels, explore the manga, anime, characters, short stories, official material, and much more.">
+  <link rel="canonical" href="https://adashimaverse.com/">
+  <meta name="theme-color" content="#000000">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AdashimaVerse">
+  <meta property="og:title" content="AdashimaVerse">
+  <meta property="og:description" content="The most complete site about Adachi and Shimamura. Read the novels, explore the manga, anime, characters, short stories, official material, and much more.">
+  <meta property="og:url" content="https://adashimaverse.com/">
+  <meta property="og:image" content="https://adashimaverse.com/Imagenes/Social_Card.png">
+  <meta property="og:image:secure_url" content="https://adashimaverse.com/Imagenes/Social_Card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AdashimaVerse - A website dedicated to Adachi and Shimamura">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AdashimaVerse">
+  <meta name="twitter:description" content="The most complete site about Adachi and Shimamura. Read the novels, explore the manga, anime, characters, short stories, official material, and much more.">
+  <meta name="twitter:image" content="https://adashimaverse.com/Imagenes/Social_Card.png">
+  <meta name="twitter:image:alt" content="AdashimaVerse - A website dedicated to Adachi and Shimamura">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./src/css/index.css">
+  <link rel="stylesheet" href="./src/components/styles/menu.css">
+  <link rel="stylesheet" href="./src/components/styles/scrollbar.css">
+  <link rel="stylesheet" href="./src/components/styles/scr.css">
+  <link rel="stylesheet" href="./src/components/styles/feedback.css">
 </head>
 <body>
 
@@ -732,7 +754,12 @@
       const grid = document.getElementById('navGrid');
       if (!grid) return;
       
-      const navItems = data.nav.items || FALLBACK_CONTENT[currentLang].nav.items;
+      let navItems = data.nav.items || FALLBACK_CONTENT[currentLang].nav.items;
+      
+      if (currentLang === 'es') {
+        navItems = navItems.filter(item => item.key !== 'stats');
+      }
+      
       grid.innerHTML = '';
       
       navItems.forEach(item => {

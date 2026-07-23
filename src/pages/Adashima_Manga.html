@@ -795,41 +795,38 @@
 
         document.getElementById('pdfDownloadModal').addEventListener('click', async () => {
             if (!modalCurrentUrl) return;
-            const btn = document.getElementById('pdfDownloadModal');
-            if (btn.classList.contains('downloading')) return;
-            const icon = btn.querySelector('i');
-            const originalClass = icon.className;
-            btn.classList.add('downloading');
-            btn.disabled = true;
-            icon.className = 'fas fa-spinner fa-spin';
+            const filename = decodeURIComponent(modalCurrentUrl.split('/').pop()) || 'document.pdf';
             try {
                 const response = await fetch(modalCurrentUrl);
-                if (!response.ok) throw new Error('Network error');
-                const blob = await response.blob();
-                const blobUrl = URL.createObjectURL(blob);
+                if (!response.ok || !response.body) throw new Error('Download request failed');
+                const reader = response.body.getReader();
+                const chunks = [];
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    chunks.push(value);
+                }
+                const blob = new Blob(chunks);
+                const blobUrl = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
+                a.style.display = 'none';
                 a.href = blobUrl;
-                a.download = modalCurrentUrl.split('/').pop() || 'document.pdf';
+                a.download = filename;
                 document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(blobUrl);
-                icon.className = 'fas fa-check';
-                btn.classList.add('download-success');
-                setTimeout(() => {
-                    icon.className = originalClass;
-                    btn.classList.remove('downloading', 'download-success');
-                    btn.disabled = false;
-                }, 1200);
-            } catch (error) {
-                icon.className = 'fas fa-exclamation-triangle';
-                btn.classList.add('download-error');
-                showToast(getPdfText('toastMessages.documentNotAvailable') || 'Documento no disponible.');
-                setTimeout(() => {
-                    icon.className = originalClass;
-                    btn.classList.remove('downloading', 'download-error');
-                    btn.disabled = false;
-                }, 1500);
+                window.URL.revokeObjectURL(blobUrl);
+                a.remove();
+            } catch (err) {
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = modalCurrentUrl;
+                a.download = filename;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                showToast('⚠️ Tu navegador o bloqueador de anuncios impidió la descarga directa. Se abrió el archivo en una nueva pestaña; guárdalo desde ahí.');
             }
         });
 
@@ -998,14 +995,13 @@
         
         getPdfUrl(chapter) {
             const lang = currentLang || 'es';
-            const pdfMap = translations?.chapterPdfMap || {};
             const chapterKey = String(chapter);
-            
+
             if (lang === 'en') {
-                const fileName = pdfMap[chapterKey] || `Ch.${chapter}.pdf`;
-                return `${R2_BASE_URL_EN}${fileName}`;
+                return `${R2_BASE_URL_EN}Ch.%20${chapterKey}.pdf`;
             }
-            
+
+            const pdfMap = translations?.chapterPdfMap || {};
             const fileName = pdfMap[chapterKey] || `Capitulo_${chapter}.pdf`;
             return `${R2_BASE_URL_ES}${fileName}`;
         },
@@ -1371,6 +1367,7 @@
         
         const downloadBtn = document.querySelector('.download-all-btn');
         if (downloadBtn) {
+            downloadBtn.style.display = currentLang === 'en' ? 'none' : '';
             const icon = downloadBtn.querySelector('i');
             downloadBtn.innerHTML = '';
             if (icon) {
@@ -1457,6 +1454,7 @@
         
         const downloadBtn = document.querySelector('.download-all-btn');
         if (downloadBtn) {
+            downloadBtn.style.display = currentLang === 'en' ? 'none' : '';
             const icon = downloadBtn.querySelector('i');
             downloadBtn.innerHTML = '';
             if (icon) {

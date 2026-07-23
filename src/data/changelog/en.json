@@ -1,4 +1,33 @@
 [
+    {
+    "version": "2.1.1",
+    "build": "20260722",
+    "date": "July 22, 2026",
+    "subtitle": "General Adjustments & Content Expansion",
+    "changes": {
+      "new": [
+        "Added download functionality to the Spanish Manga section.",
+        "Added the English CD Drama section with available content.",
+        "Added new English content to the Constellation section.",
+        "Integrated the navigation menu into the Anime section and other pages for a more consistent experience."
+      ],
+      "improvements": [
+        "Performed general adjustments across the website, including menus, styles, and download functionality.",
+        "Improved download handling across multiple sections for a more reliable user experience.",
+        "Adjusted the Anime section styling to reduce the dark appearance and provide a brighter, more balanced visual design.",
+        "Improved overall navigation consistency by expanding the shared menu system across additional sections.",
+        "Refined various interface elements and visual details throughout the website."
+      ],
+      "fixes": [
+        "Fixed the OST section by adding functional download buttons for available music releases.",
+        "Resolved various issues related to content downloads and resource access.",
+        "Fixed layout and usability inconsistencies across several pages."
+      ],
+      "notes": [
+        "This update focuses on general improvements, download functionality fixes, navigation consistency, visual refinements, and the expansion of available content across multiple sections."
+      ]
+    }
+  },
   {
     "version": "2.1.0",
     "build": "20260717",

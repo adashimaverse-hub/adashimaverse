@@ -393,7 +393,14 @@ function renderUI() {
     document.getElementById('page-title').textContent = getString('pageTitle');
     document.getElementById('page-subtitle').textContent = getString('pageSubtitle');
     
-    document.getElementById('sidebar-logo-sub').textContent = getString('sidebarLogo');
+    const logoSubEl = document.getElementById('sidebar-logo-sub');
+    if (contentData.sidebarLogo) {
+        logoSubEl.textContent = contentData.sidebarLogo;
+        logoSubEl.style.display = '';
+    } else {
+        logoSubEl.textContent = '';
+        logoSubEl.style.display = 'none';
+    }
     document.getElementById('sidebar-fb-text').textContent = getString('sidebarFacebook');
     document.getElementById('sidebar-constellations-label').textContent = getString('sidebarConstellations');
     document.getElementById('sidebar-unlocks-label').textContent = getString('sidebarUnlocks');
@@ -1581,8 +1588,8 @@ const MINI_STORIES_DOWNLOADS = {
         archiveFileName: 'Mini historias completas.pdf'
     },
     en: {
-        archiveUrl: 'https://placeholder.invalid/adashimaverse/en/Mini%20stories/Complete%20mini%20stories.pdf',
-        archiveFileName: 'Complete mini stories.pdf'
+        archiveUrl: 'https://media.adashimaverse.com/Mini%20historias/ingles/Mini%20Stories%20Archive%20(Work%20in%20Progress).pdf',
+        archiveFileName: 'Mini Stories Archive (Work in Progress).pdf'
     }
 };
 

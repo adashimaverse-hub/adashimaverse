@@ -80,9 +80,9 @@
   },
   "versionTitle": "Version Information",
   "versionItems": [
-    { "label": "Website Version", "value": "v2.5.0" },
-    { "label": "Build Number", "value": "#20260710" },
-    { "label": "Last Updated", "value": "July 10, 2026" },
+    { "label": "Website Version", "value": "v2.1.1" },
+    { "label": "Build Number", "value": "#20260722" },
+    { "label": "Last Updated", "value": "July 22, 2026" },
     { "label": "Translation Progress", "value": "92%" }
   ],
   "changelogBtn": "View Changelog",
