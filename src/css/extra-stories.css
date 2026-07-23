@@ -931,10 +931,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.6rem 1.5rem;
+    padding: 0 0 1rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #e8e4de;
     flex-shrink: 0;
-    background: #f8f6f2;
+    background: transparent;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
@@ -1397,7 +1398,26 @@ body {
         line-height: 1.9;
     }
     .reader-header {
-        padding: 0.5rem 1rem;
+        padding: 0 0 0.8rem;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+    }
+    .reader-header-left,
+    .reader-header-right {
+        display: contents;
+    }
+    .reader-close {
+        order: 1;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    .reader-settings-btn {
+        order: 2;
+        flex-shrink: 0;
+    }
+    .reader-nav {
+        order: 3;
+        flex-shrink: 0;
     }
     .reader-content {
         max-width: 100%;
@@ -1567,7 +1587,17 @@ body {
     }
     
     .reader-header {
-        padding: 0.4rem 0.8rem;
+        padding: 0 0 0.6rem;
+        gap: 0.3rem;
+    }
+    .reader-close span {
+        display: none;
+    }
+    .reader-close {
+        padding: 0.3rem;
+    }
+    .reader-settings-btn {
+        padding: 0.3rem;
     }
 }
 
