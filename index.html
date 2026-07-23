@@ -1142,8 +1142,7 @@
         .then(html => {
           const container = document.getElementById('sidebar-container') || document.getElementById('menu-container');
           if (!container) return;
-          html = html.replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="./index.html"');
-          container.innerHTML = html;
+html = html.replace(/data-route="\.\.\/\.\.\/index\.html"/g, 'data-route="/index.html"');          container.innerHTML = html;
           const scripts = container.querySelectorAll('script');
           scripts.forEach(old => {
             const neu = document.createElement('script');
